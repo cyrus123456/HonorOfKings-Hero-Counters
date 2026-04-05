@@ -511,7 +511,7 @@ const [isMapCopied, setIsMapCopied] = useState(false);
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center flex-shrink-0 shadow-lg shadow-gray-300/50 overflow-hidden">
                     <img
-                      src="/王者荣耀logo_new-Vertical_gold.svg"
+                      src="/kog-logo-gold.svg"
                       alt="Honor of Kings"
                       className="w-8 h-8 object-contain"
                     />
