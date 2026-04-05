@@ -7,7 +7,10 @@
 
 ## 在线演示
 
-[**点击查看已部署的 GitHub Pages**](https://cyrus123456.github.io/HonorOfKings-Hero-Counters/)
+## 在线演示
+
+- **GitHub Pages**: [点击查看](https://cyrus123456.github.io/HonorOfKings-Hero-Counters/)
+- **Cloudflare Workers**: [点击查看](https://honorofkingsherocounters.b8c72dzp5t.workers.dev/)
 
 直接访问上方链接即可体验完整功能！
 
