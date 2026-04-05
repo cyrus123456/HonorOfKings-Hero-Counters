@@ -1,0 +1,14 @@
+# Robots.txt for Honor of Kings Hero Counters
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://cyrus123456.github.io/HonorOfKings-Hero-Counters/sitemap.xml
+
+# Language alternatives
+User-agent: *
+Allow: /
+
+# Prefer Chinese version for Chinese users
+User-agent: *
+Allow: /zh/
