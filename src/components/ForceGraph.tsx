@@ -121,7 +121,10 @@ const ForceGraph = ({
 }: ForceGraphProps) => {
   const isTouchDevice = useMemo(() =>
     window.matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window,
-  []);
+    []);
+
+  /** 移动端画布初始缩放比例，统一管理 */
+  const MOBILE_INITIAL_SCALE = 0.4;
 
   const selectedMapData = useMemo(() => selectedMap ? maps.find(m => m.id === selectedMap) : null, [selectedMap]);
   const mapRecommendedHeroes = useMemo(() => {
@@ -908,7 +911,7 @@ const ForceGraph = ({
         role: h.role as 'toplane' | 'mage' | 'jungle' | 'adc' | 'support',
         color: h.role === 'toplane' ? '#ef4444' : h.role === 'mage' ? '#a855f7' : h.role === 'jungle' ? '#f97316' : h.role === 'adc' ? '#3b82f6' : '#22c55e',
         image: h.image,
-        radius: (h.role === 'toplane' || h.role === 'jungle' ? 32 : 28) * (isTouchDevice ? 0.5 : 1),
+        radius: h.role === 'toplane' || h.role === 'jungle' ? 32 : 28,
       }));
   }, [selectedRole, isTouchDevice]);
 
@@ -1022,8 +1025,11 @@ const ForceGraph = ({
       })
       .on('zoom', (event) => g.attr('transform', event.transform));
     svg.call(zoom);
-    // 初始化时设置 transform 为 identity，确保 D3 内部状态与 DOM 一致，避免首次拖拽时画布跳跃
-    svg.call(zoom.transform, d3.zoomIdentity);
+    // 初始化时设置 transform：移动端等比缩小整个画布，桌面端保持原始大小
+    const initialTransform = isTouchDevice
+      ? d3.zoomIdentity.scale(MOBILE_INITIAL_SCALE)   // 移动端：整体缩放，使全部节点可见
+      : d3.zoomIdentity;              // 桌面端：原始大小（scale=1）
+    svg.call(zoom.transform, initialTransform);
     zoomRef.current = zoom;
 
     const { nodes, links } = prepareData();
@@ -1575,9 +1581,13 @@ const ForceGraph = ({
     updateGraphVisuals();
   }, [selectedHeroes, activeCounterTab, isMultiSelect, commonRelatedIds, matchedHeroIds, updateGraphVisuals]);
 
+  const getInitialZoomTransform = useCallback(() =>
+    isTouchDevice ? d3.zoomIdentity.scale(MOBILE_INITIAL_SCALE) : d3.zoomIdentity,
+    [isTouchDevice]
+  );
   const handleZoomIn = () => svgRef.current && d3.select(svgRef.current).transition().duration(300).call(zoomRef.current!.scaleBy, 1.3);
   const handleZoomOut = () => svgRef.current && d3.select(svgRef.current).transition().duration(300).call(zoomRef.current!.scaleBy, 0.7);
-  const handleReset = () => { if (svgRef.current) d3.select(svgRef.current).transition().duration(500).call(zoomRef.current!.transform, d3.zoomIdentity); onHeroSelect([]); };
+  const handleReset = () => { if (svgRef.current) d3.select(svgRef.current).transition().duration(500).call(zoomRef.current!.transform, getInitialZoomTransform()); onHeroSelect([]); };
 
   return (
     <div ref={containerRef} className="relative w-full h-full">
