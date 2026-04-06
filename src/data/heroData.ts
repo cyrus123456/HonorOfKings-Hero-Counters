@@ -600,6 +600,26 @@ export const counterRelations: CounterRelation[] = [
   { source: 'zhangfei', target: 'mozi', strength: 1 },               // B: 张飞
   // 原因：怕技能命中率被位移和解控拆掉
 
+  // --- 元流之子(辅助) ---
+  { source: 'donghuangtaiyi', target: 'yuanliuzhizi_support', strength: 3 },    // S: 东皇太一（强克制）
+  { source: 'zhangfei', target: 'yuanliuzhizi_support', strength: 2 },          // A: 张飞（中强克制）
+  { source: 'mozi', target: 'yuanliuzhizi_support', strength: 2 },             // A: 墨子（中克制）
+  // 原因：怕进来就锁、怕正面硬碰硬压制拉扯空间、怕远程消耗封路
+
+  // --- 刘禅 ---
+  { source: 'zhuangzhou', target: 'liushan', strength: 2 },           // A: 庄周（中强克制）
+  { source: 'sunbin', target: 'liushan', strength: 2 },               // A: 孙膑（中强克制）
+  { source: 'makeboluo', target: 'liushan', strength: 2 },            // A: 马可波罗（中克制）
+  { source: 'gongsunli', target: 'liushan', strength: 2 },            // A: 公孙离（中克制）
+  // 原因：怕解控断控制链、怕加速拉扯不接团、怕灵活长手C位打不满控制
+
+  // --- 孙膑 ---
+  { source: 'dunshan', target: 'sunbin', strength: 3 },               // S: 盾山（强克制）
+  { source: 'guiguzi', target: 'sunbin', strength: 2 },               // A: 鬼谷子（中强克制）
+  { source: 'zhongkui', target: 'sunbin', strength: 2 },              // A: 钟馗（中克制）
+  { source: 'nezha', target: 'sunbin', strength: 2 },                 // A: 哪吒（中克制）
+  // 原因：怕飞行物被挡/前压节奏被压制、怕突然一波开穿、怕被先手点名失误、怕无脑锁后排破阵型
+
 
   // ==================== 三、法师（中路）====================
 
@@ -917,6 +937,13 @@ export const counterRelations: CounterRelation[] = [
   { source: 'dianwei', target: 'zhaoyun', strength: 1 },              // B: 典韦
   // 原因：怕真伤、怕持续拉扯、怕大招进场后被反控
 
+  // --- 阿轲 ---
+  { source: 'lanlingwang', target: 'ake', strength: 2 },              // A: 兰陵王（中强克制）
+  { source: 'donghuangtaiyi', target: 'ake', strength: 3 },           // S: 东皇太一（强克制）
+  { source: 'zhangliang', target: 'ake', strength: 3 },               // S: 张良（强克制）
+  { source: 'yuji', target: 'ake', strength: 2 },                     // A: 虞姬（中强克制）
+  // 原因：怕视野反蹲、怕进场被稳定锁头、怕切不死被化解爆发
+
 
   // ==================== 五、对抗路（边路）====================
 
@@ -1103,6 +1130,13 @@ export const counterRelations: CounterRelation[] = [
   { source: 'miyue', target: 'liubang', strength: 2 },                // A: 芈月
   { source: 'makeboluo', target: 'liubang', strength: 2 },            // A: 马可波罗
   { source: 'bianque', target: 'liubang', strength: 1 },              // B: 扁鹊
+
+  // --- 白起 ---
+  { source: 'lvbu', target: 'baiqi', strength: 3 },                   // S: 吕布（强克制）
+  { source: 'makeboluo', target: 'baiqi', strength: 3 },               // S: 马可波罗（强克制）
+  { source: 'diaochan', target: 'baiqi', strength: 2 },                // A: 貂蝉（中强克制）
+  { source: 'miyue', target: 'baiqi', strength: 2 },                   // A: 芈月（中克制）
+  // 原因：怕真伤让坦度缩水、怕高频真伤+风筝摸不到、怕持续真伤+灵活位移、怕拉扯笨重前排拖到没开团价值
 ];
 
 
