@@ -127,13 +127,33 @@ useEffect(() => {
 
 - Use `cn()` from `@/lib/utils` for conditional classes
 - Follow custom colors in `tailwind.config.js`
+- **Unit preference**: Use `rem`-based values, avoid `px` in arbitrary values
+
+### Spacing & Sizing (Tailwind class names)
+- Use **numeric values** (auto-converts to rem): `left-4`, `w-64`, `mt-8`, `p-2`
+- **Avoid** arbitrary pixel values: `left-[410px]`, `w-[256px]` — use rem equivalent instead
+- For non-standard sizes, use explicit rem: `left-[25.625rem]`, `w-[16rem]`
 
 ```typescript
-<div className={cn(
-  "base-classes",
-  isActive && "active-classes",
-  className
-)} />
+// ✅ Good - numeric value → auto rem (4 = 1rem = 16px)
+<div className="left-4 w-64 mt-8 p-2" />
+
+// ✅ Good - arbitrary rem for non-standard values
+<div className="left-[25.625rem] w-[16rem]" />
+
+// ❌ Bad - avoid px in arbitrary values
+<div className="left-[410px] w-[256px]" />
+```
+
+### CSS Files
+- Always prefer `rem` over `px` for font-size, spacing, margins, padding
+- Only use `px` when dealing with border widths or properties where pixels are semantically required
+
+```css
+/* ✅ Good */
+.card { padding: 1rem; margin-bottom: 0.5rem; font-size: 1.125rem; }
+/* ❌ Avoid */
+.card { padding: 16px; margin-bottom: 8px; font-size: 18px; }
 ```
 
 ## Error Handling
