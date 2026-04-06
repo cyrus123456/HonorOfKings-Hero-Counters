@@ -1025,10 +1025,12 @@ const ForceGraph = ({
       })
       .on('zoom', (event) => g.attr('transform', event.transform));
     svg.call(zoom);
-    // 初始化时设置 transform：移动端等比缩小整个画布，桌面端保持原始大小
+    // 初始化时设置 transform：移动端以视口中心为原点等比缩小，桌面端保持原始大小
     const initialTransform = isTouchDevice
-      ? d3.zoomIdentity.scale(MOBILE_INITIAL_SCALE)   // 移动端：整体缩放，使全部节点可见
-      : d3.zoomIdentity;              // 桌面端：原始大小（scale=1）
+      ? d3.zoomIdentity
+          .translate(width * (1 - MOBILE_INITIAL_SCALE) / 2, height * (1 - MOBILE_INITIAL_SCALE) / 2)
+          .scale(MOBILE_INITIAL_SCALE)
+      : d3.zoomIdentity;
     svg.call(zoom.transform, initialTransform);
     zoomRef.current = zoom;
 
@@ -1073,11 +1075,11 @@ const ForceGraph = ({
         if (d.role === 'jungle') return centerX;
         if (d.role === 'adc') return centerX + 200;
         return centerX + 400;
-      }).strength(0.1))
+      }).strength(0.2))
       .force('y', d3.forceY<NodeDatum>().y(() => {
         if (selectedRole && selectedRole !== 'all') return height / 2;
         return height / 2;
-      }).strength(0.2));
+      }).strength(0.1));
     simulationRef.current = simulation;
 
     const link = g.append('g').attr('class', 'links').selectAll('line').data(links).enter().append('line').attr('stroke-width', 1.5);
@@ -1581,10 +1583,13 @@ const ForceGraph = ({
     updateGraphVisuals();
   }, [selectedHeroes, activeCounterTab, isMultiSelect, commonRelatedIds, matchedHeroIds, updateGraphVisuals]);
 
-  const getInitialZoomTransform = useCallback(() =>
-    isTouchDevice ? d3.zoomIdentity.scale(MOBILE_INITIAL_SCALE) : d3.zoomIdentity,
-    [isTouchDevice]
-  );
+  const getInitialZoomTransform = useCallback(() => {
+    if (!isTouchDevice) return d3.zoomIdentity;
+    const { width: w, height: h } = containerRef.current!.getBoundingClientRect();
+    return d3.zoomIdentity
+      .translate(w * (1 - MOBILE_INITIAL_SCALE) / 2, h * (1 - MOBILE_INITIAL_SCALE) / 2)
+      .scale(MOBILE_INITIAL_SCALE);
+  }, [isTouchDevice]);
   const handleZoomIn = () => svgRef.current && d3.select(svgRef.current).transition().duration(300).call(zoomRef.current!.scaleBy, 1.3);
   const handleZoomOut = () => svgRef.current && d3.select(svgRef.current).transition().duration(300).call(zoomRef.current!.scaleBy, 0.7);
   const handleReset = () => { if (svgRef.current) d3.select(svgRef.current).transition().duration(500).call(zoomRef.current!.transform, getInitialZoomTransform()); onHeroSelect([]); };
