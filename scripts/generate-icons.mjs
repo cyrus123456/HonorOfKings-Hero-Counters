@@ -11,7 +11,7 @@ const sizes = [
 ];
 
 async function generateIcons() {
-  const srcBuffer = readFileSync(join(publicDir, '王者荣耀logo_new-Vertical_gold.png'));
+  const srcBuffer = readFileSync(join(publicDir, 'kog-logo-gold.png'));
   
   for (const { name, size } of sizes) {
     await sharp(srcBuffer)

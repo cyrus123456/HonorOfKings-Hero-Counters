@@ -1,3 +1,4 @@
+import kogLogoGold from '/kog-logo-gold.svg';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -511,7 +512,7 @@ const [isMapCopied, setIsMapCopied] = useState(false);
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center flex-shrink-0 shadow-lg shadow-gray-300/50 overflow-hidden">
                     <img
-                      src="/kog-logo-gold.svg"
+                      src={kogLogoGold}
                       alt="Honor of Kings"
                       className="w-8 h-8 object-contain"
                     />
