@@ -1,4 +1,3 @@
-import kogLogoGold from '/kog-logo-gold.svg';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -35,9 +34,10 @@ import {
   X
 } from 'lucide-react';
 import React, { Suspense, lazy, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import kogLogoGold from '/kog-logo-gold.svg';
 
 import { getMapName, getMapTypeColor, getMapTypeName, maps } from '@/data/mapData';
-import { useMemoizedHeroes, sortByRole } from '@/hooks/useMemoizedHeroes';
+import { sortByRole, useMemoizedHeroes } from '@/hooks/useMemoizedHeroes';
 
 import type { Language } from '@/i18n';
 import { useI18n } from '@/i18n';
@@ -574,8 +574,7 @@ const [isMapCopied, setIsMapCopied] = useState(false);
 {/* 左侧地图卡片面板 - 抽屉 */}
           {/* TODO: 左侧地图抽屉面板，暂时隐藏，保留代码以备后用 */}
           {false && <div className={`absolute top-4 bottom-4 left-4 z-10 flex flex-col w-96 pointer-events-none transition-transform duration-300 ease-in-out ${isDrawerOpen ? 'translate-x-0' : '-translate-x-80'}`}>
-            {/* TODO: 抽屉Toggle按钮，暂时隐藏，保留代码以备后用 */}
-            {false && <Tooltip>
+            <Tooltip>
               <TooltipTrigger asChild>
                 <button
                   onClick={() => setIsDrawerOpen(!isDrawerOpen)}
@@ -587,10 +586,9 @@ const [isMapCopied, setIsMapCopied] = useState(false);
               <TooltipContent>
                 <p>{isDrawerOpen ? '收起面板' : '展开面板'}</p>
               </TooltipContent>
-            </Tooltip>}
+            </Tooltip>
             <div className="flex-1 overflow-hidden pointer-events-auto h-full relative">
-              {/* TODO: 地图推荐面板暂时隐藏，保留代码以备后用 */}
-              {false && <Card className="p-3 bg-slate-800/60 border-slate-700 backdrop-blur-md shadow-xl h-full flex flex-col gap-1 rounded-xl border">
+              <Card className="p-3 bg-slate-800/60 border-slate-700 backdrop-blur-md shadow-xl h-full flex flex-col gap-1 rounded-xl border">
                 <div className="flex items-center justify-between flex-shrink-0 gap-2">
                   <div className="flex items-center gap-3 min-w-0">
                     <MapPin className="w-6 h-6 text-cyan-400 flex-shrink-0" />
@@ -983,7 +981,7 @@ const [isMapCopied, setIsMapCopied] = useState(false);
                       </div>
                     ))}
                 </div>
-              </Card>}
+              </Card>
             </div>
           </div>}
 
