@@ -1717,7 +1717,7 @@ const ForceGraph = ({
                 )}
               </h3>
               <a
-                href="https://wj.qq.com/s2/25853153/9804/"
+                href="https://wj.qq.com/s2/26246812/74f2/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="ml-auto text-xs text-cyan-400 hover:text-cyan-300 underline decoration-cyan-400/50 hover:decoration-cyan-400 underline-offset-2 transition-all"
