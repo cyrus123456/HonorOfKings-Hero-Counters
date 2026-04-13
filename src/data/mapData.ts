@@ -1,3 +1,5 @@
+import type { OwHeroId } from './heroData';
+
 export type MapLanguage = 'zh' | 'en' | 'ja' | 'ko' | 'zh-TW' | 'es' | 'fr' | 'de' | 'pt' | 'ru' | 'it';
 
 export interface Map {
@@ -5,8 +7,8 @@ export interface Map {
   name: string;
   nameEn: string;
   type: 'control' | 'hybrid' | 'escort' | 'push' | 'flashpoint';
-  recommendedHeroes: string[];
-  heroReasons: Record<string, Partial<Record<MapLanguage, string>>>;
+  recommendedHeroes: OwHeroId[];
+  heroReasons: Partial<Record<OwHeroId, Partial<Record<MapLanguage, string>>>>;
   description?: Partial<Record<MapLanguage, string>>;
 }
 

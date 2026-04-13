@@ -36,6 +36,7 @@ import {
 import React, { Suspense, lazy, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import kogLogoGold from '/kog-logo-gold.svg';
 
+import type { HeroId, OwHeroId } from '@/data/heroData';
 import { getMapName, getMapTypeColor, getMapTypeName, maps } from '@/data/mapData';
 import { sortByRole, useMemoizedHeroes } from '@/hooks/useMemoizedHeroes';
 
@@ -47,7 +48,7 @@ import './App.css';
 const ForceGraph = lazy(() => import('@/components/ForceGraph').then(m => ({ default: m.default })));
 
 interface CustomMapHero {
-  heroId: string;
+  heroId: OwHeroId;
   reason: string;
 }
 
@@ -58,7 +59,7 @@ function loadCustomMapHeroes(): Record<string, CustomMapHero[]> {
   try {
     const stored = localStorage.getItem(CUSTOM_MAP_HEROES_KEY);
     if (stored) {
-      return JSON.parse(stored);
+      return JSON.parse(stored) as Record<string, CustomMapHero[]>;
     }
   } catch {
     console.error('Failed to load custom map heroes from localStorage');
@@ -74,11 +75,11 @@ function saveCustomMapHeroes(data: Record<string, CustomMapHero[]>): void {
   }
 }
 
-function loadDeletedDefaultHeroes(): Record<string, string[]> {
+function loadDeletedDefaultHeroes(): Record<string, OwHeroId[]> {
   try {
     const stored = localStorage.getItem(DELETED_DEFAULT_HEROES_KEY);
     if (stored) {
-      return JSON.parse(stored);
+      return JSON.parse(stored) as Record<string, OwHeroId[]>;
     }
   } catch {
     console.error('Failed to load deleted default heroes from localStorage');
@@ -86,7 +87,7 @@ function loadDeletedDefaultHeroes(): Record<string, string[]> {
   return {};
 }
 
-function saveDeletedDefaultHeroes(data: Record<string, string[]>): void {
+function saveDeletedDefaultHeroes(data: Record<string, OwHeroId[]>): void {
   try {
     localStorage.setItem(DELETED_DEFAULT_HEROES_KEY, JSON.stringify(data));
   } catch {
@@ -248,7 +249,7 @@ function AppContent() {
   };
 
   const [selectedRole, setSelectedRole] = useState<string | null>(null);
-  const [selectedHeroes, setSelectedHeroes] = useState<string[]>([]);
+  const [selectedHeroes, setSelectedHeroes] = useState<HeroId[]>([]);
   const [selectedMap, setSelectedMap] = useState<string | null>(null);
   const [mapSearch, setMapSearch] = useState('');
   const [activeMapType, setActiveMapType] = useState<string>('all');
@@ -257,8 +258,8 @@ const [isMapCopied, setIsMapCopied] = useState(false);
   const [hoverTimer, setHoverTimer] = useState<ReturnType<typeof setTimeout> | null>(null);
 
   const [customMapHeroes, setCustomMapHeroes] = useState<Record<string, CustomMapHero[]>>({});
-  const [deletedDefaultHeroes, setDeletedDefaultHeroes] = useState<Record<string, string[]>>({});
-  const [newHeroId, setNewHeroId] = useState<string>('');
+  const [deletedDefaultHeroes, setDeletedDefaultHeroes] = useState<Record<string, OwHeroId[]>>({});
+  const [newHeroId, setNewHeroId] = useState<OwHeroId | ''>('');
   const [newHeroReason, setNewHeroReason] = useState<string>('');
   const [addingHeroMapId, setAddingHeroMapId] = useState<string | null>(null);
   const addHeroFormRef = useRef<HTMLDivElement>(null);
@@ -284,10 +285,10 @@ const [isMapCopied, setIsMapCopied] = useState(false);
 
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
 
-  const addCustomHero = (mapId: string, heroId: string, reason: string) => {
+  const addCustomHero = (mapId: string, heroId: OwHeroId, reason: string) => {
     if (!heroId.trim()) return;
     setCustomMapHeroes(prev => {
-      const updated = {
+      const updated: Record<string, CustomMapHero[]> = {
         ...prev,
         [mapId]: [...(prev[mapId] || []), { heroId, reason }],
       };
@@ -313,9 +314,9 @@ const [isMapCopied, setIsMapCopied] = useState(false);
     setHasUnsavedChanges(true);
   };
 
-  const deleteDefaultHero = (mapId: string, heroId: string) => {
+  const deleteDefaultHero = (mapId: string, heroId: OwHeroId) => {
     setDeletedDefaultHeroes(prev => {
-      const updated = {
+      const updated: Record<string, OwHeroId[]> = {
         ...prev,
         [mapId]: [...(prev[mapId] || []), heroId],
       };
@@ -396,7 +397,7 @@ const [isMapCopied, setIsMapCopied] = useState(false);
     }
   };
 
-  const sortHeroesByRole = useCallback((heroIds: string[]): string[] => {
+  const sortHeroesByRole = useCallback((heroIds: OwHeroId[]): OwHeroId[] => {
     return sortByRole(heroIds.map(id => getHero(id)).filter((h): h is Exclude<typeof h, undefined> => h !== undefined)).map(h => h.id);
   }, [getHero]);
   
@@ -755,7 +756,7 @@ const [isMapCopied, setIsMapCopied] = useState(false);
                                          
                                          const reasons = sortedHeroes.map(heroId => {
                                            const hero = getHero(heroId);
-                                           const reason = map.heroReasons[heroId];
+                                           const reason = (map.heroReasons as Record<string, Partial<Record<string, string>>>)[heroId];
                                            if (!hero || !reason) return '';
                                            const heroName = language === 'zh' ? hero.name : hero.nameEn;
                                            const reasonText = reason[language] || reason.en || reason.zh || '';
@@ -790,13 +791,13 @@ const [isMapCopied, setIsMapCopied] = useState(false);
                                            }).filter(Boolean);
                                             
                                            const reasons = sortedHeroes.map(heroId => {
-                                             const hero = getHero(heroId);
-                                             const reason = map.heroReasons[heroId];
-                                             if (!hero || !reason) return '';
-                                             const heroName = language === 'zh' ? hero.name : hero.nameEn;
-                                             const reasonText = reason[language] || reason.en || reason.zh || '';
-                                             return `${heroName}: ${sanitizeMapTextChinese(reasonText)}`;
-                                           }).filter(Boolean);
+                                            const hero = getHero(heroId);
+                                            const reason = (map.heroReasons as Record<string, Partial<Record<string, string>>>)[heroId];
+                                            if (!hero || !reason) return '';
+                                            const heroName = language === 'zh' ? hero.name : hero.nameEn;
+                                            const reasonText = reason[language] || reason.en || reason.zh || '';
+                                            return `${heroName}: ${sanitizeMapTextChinese(reasonText)}`;
+                                          }).filter(Boolean);
                                             
                                              const mapName = getMapName(map, language);
                                              const mapDesc = map.description?.[language] || map.description?.en || '';
@@ -831,7 +832,7 @@ const [isMapCopied, setIsMapCopied] = useState(false);
                                   <div 
                                     key={heroId} 
                                     className="flex items-start gap-4 p-3 rounded-lg bg-slate-700/30 hover:bg-slate-700/50 cursor-pointer transition-all border border-slate-600/30 hover:border-slate-500/50" 
-                                    onClick={(e) => { e.stopPropagation(); setSelectedHeroes([heroId]); }}
+                                    onClick={(e) => { e.stopPropagation(); setSelectedHeroes([heroId as HeroId]); }}
                                   >
                                     <div className="w-8 h-8 rounded-full overflow-hidden border border-slate-700 shadow-md flex-shrink-0 ring-1 ring-cyan-500/30">
                                       <img src={hero.image} alt="" className="w-full h-full object-cover" />
@@ -843,7 +844,7 @@ const [isMapCopied, setIsMapCopied] = useState(false);
                                           {roleNames[hero.role]}
                                         </span>
                                       </div>
-                                      <p className="text-[0.6875rem] text-slate-300 leading-relaxed mt-1">{map.heroReasons[heroId]?.[language] || map.heroReasons[heroId]?.en || ''}</p>
+                                      <p className="text-[0.6875rem] text-slate-300 leading-relaxed mt-1">{(map.heroReasons as Record<string, Partial<Record<string, string>>>)[heroId]?.[language] || (map.heroReasons as Record<string, Partial<Record<string, string>>>)[heroId]?.en || ''}</p>
                                     </div>
                                     <Button
                                       variant="ghost"
@@ -880,7 +881,7 @@ const [isMapCopied, setIsMapCopied] = useState(false);
                                   <div
                                     key={`custom-${heroId}`}
                                     className="flex items-start gap-4 p-3 rounded-lg bg-slate-700/30 hover:bg-slate-700/50 cursor-pointer transition-all border border-cyan-600/30 hover:border-cyan-500/50"
-                                    onClick={(e) => { e.stopPropagation(); setSelectedHeroes([heroId]); }}
+                                    onClick={(e) => { e.stopPropagation(); setSelectedHeroes([heroId as HeroId]); }}
                                   >
                                     <div className="w-8 h-8 rounded-full overflow-hidden border border-slate-700 shadow-md flex-shrink-0 ring-1 ring-cyan-500/30">
                                       <img src={hero.image} alt="" className="w-full h-full object-cover" />
@@ -909,7 +910,7 @@ const [isMapCopied, setIsMapCopied] = useState(false);
                               })}
                               {addingHeroMapId === map.id ? (
                                 <div ref={addHeroFormRef} data-prevent-map-toggle className="flex flex-col gap-2 p-3 rounded-lg bg-slate-700/50 border border-cyan-500/30">
-                                  <Select value={newHeroId} onValueChange={setNewHeroId}>
+                                  <Select value={newHeroId} onValueChange={(v) => setNewHeroId(v as OwHeroId)}>
                                     <SelectTrigger className="h-8 bg-slate-800 border-slate-600 text-sm w-full">
                                       <span className={newHeroId ? 'text-white' : 'text-slate-400'}>
                                         {newHeroId ? (language === 'zh' ? getHero(newHeroId)!.name : getHero(newHeroId)!.nameEn) : t('selectHero')}
@@ -951,7 +952,7 @@ const [isMapCopied, setIsMapCopied] = useState(false);
                                     <Button
                                       size="sm"
                                       className="h-7 px-2 text-xs bg-cyan-600 hover:bg-cyan-700"
-                                      onClick={(e) => { e.stopPropagation(); addCustomHero(map.id, newHeroId, newHeroReason); }}
+                                      onClick={(e) => { e.stopPropagation(); if (newHeroId) addCustomHero(map.id, newHeroId, newHeroReason); }}
                                       disabled={!newHeroId}
                                     >
                                       <Plus className="w-3 h-3 mr-1" />

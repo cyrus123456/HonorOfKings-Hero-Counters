@@ -3,25 +3,25 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from "@/components/ui/input";
 import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
 } from "@/components/ui/popover";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
 } from '@/components/ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
+    Tooltip,
+    TooltipContent,
+    TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { getCounterReason } from '@/data/counterReasons';
-import { counterRelations, getHeroName, getRoleName, heroes, type Hero } from '@/data/heroData';
+import { counterRelations, getHeroName, getRoleName, heroes, type Hero, type HeroId } from '@/data/heroData';
 import { maps } from '@/data/mapData';
 import { getSynergyReason } from '@/data/synergyReasons';
 import { synergyRelations } from '@/data/synergyRelations';
@@ -31,30 +31,30 @@ import { useRelationMaps } from '@/hooks/useRelationMaps';
 import { useI18n } from '@/i18n';
 import * as d3 from 'd3';
 import {
-  Check,
-  ChevronRight,
-  Copy,
-  FileText,
-  HelpCircle,
-  History,
-  Info,
-  MonitorDown,
-  Plus,
-  RotateCcw,
-  Save,
-  Search,
-  ShieldAlert,
-  Swords,
-  Trash2,
-  Users,
-  X,
-  ZoomIn,
-  ZoomOut
+    Check,
+    ChevronRight,
+    Copy,
+    FileText,
+    HelpCircle,
+    History,
+    Info,
+    MonitorDown,
+    Plus,
+    RotateCcw,
+    Save,
+    Search,
+    ShieldAlert,
+    Swords,
+    Trash2,
+    Users,
+    X,
+    ZoomIn,
+    ZoomOut
 } from 'lucide-react';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 interface NodeDatum extends d3.SimulationNodeDatum {
-  id: string;
+  id: HeroId;
   name: string;
   nameEn: string;
   role: 'toplane' | 'mage' | 'jungle' | 'adc' | 'support';
@@ -68,8 +68,8 @@ interface NodeDatum extends d3.SimulationNodeDatum {
 }
 
 interface LinkDatum extends d3.SimulationLinkDatum<NodeDatum> {
-  source: string | NodeDatum;
-  target: string | NodeDatum;
+  source: HeroId | NodeDatum;
+  target: HeroId | NodeDatum;
 }
 
 interface CustomMapHero {
@@ -79,24 +79,24 @@ interface CustomMapHero {
 
 // 自定义克制关系数据结构
 interface CustomCounterRelation {
-  source: string; // 克制方英雄ID
-  target: string; // 被克制方英雄ID
-  strength: number; // 1-3
-  isCustom: boolean; // 标记是否为自定义添加
+  source: HeroId;
+  target: HeroId;
+  strength: number;
+  isCustom: boolean;
 }
 
 // 自定义协同关系数据结构
 interface CustomSynergyRelation {
-  source: string; // 协同方英雄ID
-  target: string; // 被协同方英雄ID
-  strength: number; // 1-3
-  isCustom: boolean; // 标记是否为自定义添加
+  source: HeroId;
+  target: HeroId;
+  strength: number;
+  isCustom: boolean;
 }
 
 interface ForceGraphProps {
   selectedRole: string | null;
-  selectedHeroes: string[];
-  onHeroSelect: (heroIds: string[]) => void;
+  selectedHeroes: HeroId[];
+  onHeroSelect: (heroIds: HeroId[]) => void;
   isDrawerOpen?: boolean;
   selectedMap?: string | null;
   customMapHeroes?: Record<string, CustomMapHero[]>;
@@ -151,21 +151,21 @@ const ForceGraph = ({
   const simulationRef = useRef<d3.Simulation<NodeDatum, LinkDatum> | null>(null);
   const zoomRef = useRef<d3.ZoomBehavior<SVGSVGElement, unknown> | null>(null);
   const animationRef = useRef<number | null>(null);
-  const nodePositionsRef = useRef<Map<string, {x: number, y: number}>>(new Map());
+  const nodePositionsRef = useRef<Map<HeroId, {x: number, y: number}>>(new Map());
   const savePositionTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const selectedHeroesRef = useRef<string[]>(selectedHeroes);
+  const selectedHeroesRef = useRef<HeroId[]>(selectedHeroes);
   const onHeroSelectRef = useRef(onHeroSelect);
 
   // D3 selection refs for incremental updates (avoid full DOM rebuild)
   const nodeGroupRef = useRef<d3.Selection<SVGGElement, NodeDatum, SVGGElement, unknown> | null>(null);
   const linkSelectionRef = useRef<d3.Selection<SVGLineElement, LinkDatum, SVGGElement, unknown> | null>(null);
-  const currentSelectedHeroesRef = useRef<string[]>([]);
+  const currentSelectedHeroesRef = useRef<HeroId[]>([]);
   const currentActiveCounterTabRef = useRef<string>('counteredBy');
-  const currentCommonRelatedIdsRef = useRef<Set<string>>(new Set());
-  const currentMatchedHeroIdsRef = useRef<Set<string>>(new Set());
+  const currentCommonRelatedIdsRef = useRef<Set<HeroId>>(new Set());
+  const currentMatchedHeroIdsRef = useRef<Set<HeroId>>(new Set());
   const currentIsMultiSelectRef = useRef(false);
   const currentMapRecommendedHeroesRef = useRef<string[]>([]);
-  const currentSelectedHeroRef = useRef<string | null>(null);
+  const currentSelectedHeroRef = useRef<HeroId | null>(null);
   const currentMergedCounterRef = useRef<typeof mergedCounterRelations>([]);
   const currentMergedSynergyRef = useRef<typeof mergedSynergyRelations>([]);
   
@@ -207,7 +207,7 @@ const ForceGraph = ({
   const [customCounterRelations, setCustomCounterRelations] = useState<CustomCounterRelation[]>([]);
   const [deletedDefaultRelations, setDeletedDefaultRelations] = useState<string[]>([]); // 存储被删除的默认关系ID (source-target)
   const [isAddingCustomRelation, setIsAddingCustomRelation] = useState(false);
-  const [newRelationTarget, setNewRelationTarget] = useState<string>('');
+  const [newRelationTarget, setNewRelationTarget] = useState<HeroId | ''>('');
   const [newRelationStrength, setNewRelationStrength] = useState<number>(2);
   const addRelationFormRef = useRef<HTMLDivElement>(null);
 
@@ -215,7 +215,7 @@ const ForceGraph = ({
   const [customSynergyRelations, setCustomSynergyRelations] = useState<CustomSynergyRelation[]>([]);
   const [deletedDefaultSynergyRelations, setDeletedDefaultSynergyRelations] = useState<string[]>([]);
   const [isAddingCustomSynergy, setIsAddingCustomSynergy] = useState(false);
-  const [newSynergyTarget, setNewSynergyTarget] = useState<string>('');
+  const [newSynergyTarget, setNewSynergyTarget] = useState<HeroId | ''>('');
   const [newSynergyStrength, setNewSynergyStrength] = useState<number>(2);
   const addSynergyFormRef = useRef<HTMLDivElement>(null);
 
@@ -334,7 +334,7 @@ const ForceGraph = ({
           source: r.source,
           target: r.target
         }))
-        .filter((item): item is { hero: Hero; strength: number; isCustom: boolean; source: string; target: string } => item.hero !== undefined)
+        .filter((item): item is { hero: Hero; strength: number; isCustom: boolean; source: HeroId; target: HeroId } => item.hero !== undefined)
         .sort((a, b) => b.strength - a.strength);
     }
     return getCommonCounters(selectedHeroes);
@@ -352,13 +352,13 @@ const ForceGraph = ({
           source: r.source,
           target: r.target
         }))
-        .filter((item): item is { hero: Hero; strength: number; isCustom: boolean; source: string; target: string } => item.hero !== undefined)
+        .filter((item): item is { hero: Hero; strength: number; isCustom: boolean; source: HeroId; target: HeroId } => item.hero !== undefined)
         .sort((a, b) => b.strength - a.strength);
     }
     return getCommonCounted(selectedHeroes);
   }, [selectedHeroes, getCommonCounted, mergedCounterRelations, getHero]);
 
-  const getCommonSynergies = useCallback((heroIds: string[]) => {
+  const getCommonSynergies = useCallback((heroIds: HeroId[]) => {
     if (heroIds.length === 0) return [];
 
     // O(1) Map.get 替代 O(R) .find()
@@ -391,7 +391,7 @@ const ForceGraph = ({
           source: r.source,
           target: r.target
         }))
-        .filter((item): item is { hero: Hero; strength: number; isCustom: boolean; source: string; target: string } => item.hero !== undefined)
+        .filter((item): item is { hero: Hero; strength: number; isCustom: boolean; source: HeroId; target: HeroId } => item.hero !== undefined)
         .sort((a, b) => b.strength - a.strength);
     }
     return getCommonSynergies(selectedHeroes);
@@ -419,7 +419,7 @@ const ForceGraph = ({
   currentMergedCounterRef.current = mergedCounterRelations;
   currentMergedSynergyRef.current = mergedSynergyRelations;
 
-  const handleHeroClick = useCallback((heroId: string, event: any) => {
+  const handleHeroClick = useCallback((heroId: HeroId, event: any) => {
     event.stopPropagation();
     const currentSelected = selectedHeroesRef.current;
     if (event.shiftKey || event.ctrlKey || event.metaKey) {
@@ -541,7 +541,7 @@ const ForceGraph = ({
   };
 
   // 删除默认克制关系
-  const deleteDefaultCounterRelation = (source: string, target: string) => {
+  const deleteDefaultCounterRelation = (source: HeroId, target: HeroId) => {
     const relationId = `${source}-${target}`;
     const updated = [...deletedDefaultRelations, relationId];
     setDeletedDefaultRelations(updated);
@@ -578,7 +578,7 @@ const ForceGraph = ({
   };
 
   // 删除默认协同关系
-  const deleteDefaultSynergyRelation = (source: string, target: string) => {
+  const deleteDefaultSynergyRelation = (source: HeroId, target: HeroId) => {
     const relationId = `${source}-${target}`;
     const updated = [...deletedDefaultSynergyRelations, relationId];
     setDeletedDefaultSynergyRelations(updated);
@@ -684,7 +684,7 @@ const ForceGraph = ({
     customCounterRelations.length > 0 || deletedDefaultRelations.length > 0 || customSynergyRelations.length > 0 || deletedDefaultSynergyRelations.length > 0
   );
 
-  const renderHeroList = (items: typeof counteredBy, strength: number, colorClass: string, targetHeroIds: string[], swapSourceTarget = false) => {
+  const renderHeroList = (items: typeof counteredBy, strength: number, colorClass: string, targetHeroIds: HeroId[], swapSourceTarget = false) => {
     const filtered = items.filter(i => i.strength === strength);
     const sorted = sortByRole(filtered);
     const isMulti = targetHeroIds.length > 1;
@@ -697,8 +697,8 @@ const ForceGraph = ({
       const { hero, strength: s } = item;
       // 使用类型断言获取可选属性
       const isCustom = (item as { isCustom?: boolean }).isCustom ?? false;
-      const source = (item as { source?: string }).source;
-      const target = (item as { target?: string }).target;
+      const source = (item as { source?: HeroId }).source;
+      const target = (item as { target?: HeroId }).target;
 
       let formattedReason = '';
       const heroName = getHeroName(hero, language);
@@ -758,7 +758,7 @@ const ForceGraph = ({
                 </div>
               </div>
               <div className="flex items-center gap-1.5 flex-shrink-0">
-                {selectedMap && mapRecommendedHeroes.includes(hero.id) && (
+                {selectedMap && mapRecommendedHeroes.includes(hero.id as string) && (
                   <Badge variant="secondary" className="text-[0.5625rem] px-1 py-0 font-bold bg-cyan-400">
                     {t('mapRecommended')}
                   </Badge>
@@ -829,7 +829,7 @@ const ForceGraph = ({
       const savedPositions = localStorage.getItem('nodePositions');
       if (savedPositions) {
         const positions = JSON.parse(savedPositions);
-        nodePositionsRef.current = new Map(Object.entries(positions));
+        nodePositionsRef.current = new Map(Object.entries(positions)) as Map<HeroId, { x: number; y: number }>;
       }
     } catch (e) {
       console.error('Failed to load node positions:', e);
@@ -915,11 +915,11 @@ const ForceGraph = ({
       }));
   }, [selectedRole, isTouchDevice]);
 
-  const prepareLinks = useCallback((nodeIds: Set<string>): LinkDatum[] => {
+  const prepareLinks = useCallback((nodeIds: Set<HeroId>): LinkDatum[] => {
     if (selectedHeroes.length === 0) {
       return mergedCounterRelations
         .filter(l => nodeIds.has(l.source) && nodeIds.has(l.target))
-        .map(l => ({ source: l.source, target: l.target }));
+        .map((l): LinkDatum => ({ source: l.source, target: l.target }));
     }
     
     const visibleSelectedHeroes = selectedHeroes.filter(id => nodeIds.has(id));
@@ -927,29 +927,30 @@ const ForceGraph = ({
     if (isMultiSelect && visibleSelectedHeroes.length > 1) {
       const visibleCommonIds = commonRelatedIds.filter(id => nodeIds.has(id));
       if (activeCounterTab === 'synergy' || activeCounterTab === 'counteredBy') {
-        return (activeCounterTab === 'synergy' ? mergedSynergyRelations : mergedCounterRelations)
-          .filter(r => visibleSelectedHeroes.includes(r.target) && visibleCommonIds.includes(r.source) && nodeIds.has(r.source) && nodeIds.has(r.target))
-          .map(r => ({ source: r.source, target: r.target }));
+        const relations = activeCounterTab === 'synergy' ? mergedSynergyRelations : mergedCounterRelations;
+        return relations
+          .filter(r => visibleSelectedHeroes.includes(r.target as HeroId) && visibleCommonIds.includes(r.source as HeroId) && nodeIds.has(r.source as HeroId) && nodeIds.has(r.target as HeroId))
+          .map((r): LinkDatum => ({ source: r.source as HeroId, target: r.target as HeroId }));
       } else {
         return mergedCounterRelations
-          .filter(r => visibleSelectedHeroes.includes(r.source) && visibleCommonIds.includes(r.target) && nodeIds.has(r.source) && nodeIds.has(r.target))
-          .map(r => ({ source: r.source, target: r.target }));
+          .filter(r => visibleSelectedHeroes.includes(r.source as HeroId) && visibleCommonIds.includes(r.target as HeroId) && nodeIds.has(r.source as HeroId) && nodeIds.has(r.target as HeroId))
+          .map((r): LinkDatum => ({ source: r.source as HeroId, target: r.target as HeroId }));
       }
     } else if (selectedHeroes.length === 1) {
       const selectedHeroId = selectedHeroes[0];
       if (!nodeIds.has(selectedHeroId)) return [];
       if (activeCounterTab === 'synergy') {
         return mergedSynergyRelations
-          .filter(r => r.target === selectedHeroId && nodeIds.has(r.source))
-          .map(r => ({ source: r.source, target: r.target }));
+          .filter(r => r.target === selectedHeroId && nodeIds.has(r.source as HeroId))
+          .map((r): LinkDatum => ({ source: r.source as HeroId, target: r.target as HeroId }));
       } else if (activeCounterTab === 'counteredBy') {
         return mergedCounterRelations
-          .filter(r => r.target === selectedHeroId && nodeIds.has(r.source))
-          .map(r => ({ source: r.source, target: r.target }));
+          .filter(r => r.target === selectedHeroId && nodeIds.has(r.source as HeroId))
+          .map((r): LinkDatum => ({ source: r.source as HeroId, target: r.target as HeroId }));
       } else {
         return mergedCounterRelations
-          .filter(r => r.source === selectedHeroId && nodeIds.has(r.target))
-          .map(r => ({ source: r.source, target: r.target }));
+          .filter(r => r.source === selectedHeroId && nodeIds.has(r.target as HeroId))
+          .map((r): LinkDatum => ({ source: r.source as HeroId, target: r.target as HeroId }));
       }
     }
     return [];
@@ -1222,7 +1223,7 @@ const ForceGraph = ({
     links.forEach((link, i) => linkIndexMap.set(link, i));
     
     // computeIsRelevant reads from refs so it always uses the latest state
-    const computeIsRelevant = (sourceId: string, targetId: string): boolean => {
+    const computeIsRelevant = (sourceId: HeroId, targetId: HeroId): boolean => {
       const currentSelectedHeroes = currentSelectedHeroesRef.current;
       const currentCommonRelatedIds = currentCommonRelatedIdsRef.current;
       const currentActiveCounterTab = currentActiveCounterTabRef.current;
@@ -1858,7 +1859,7 @@ const ForceGraph = ({
                               </button>
                             ) : (
                               <div ref={addRelationFormRef} data-prevent-map-toggle className="flex flex-col gap-2 p-3 rounded-lg bg-slate-700/50 border border-red-500/30">
-                                <Select value={newRelationTarget} onValueChange={setNewRelationTarget}>
+                                <Select value={newRelationTarget} onValueChange={(value) => { setNewRelationTarget(value as HeroId); }}>
                                   <SelectTrigger className="h-8 bg-slate-800 border-slate-600 text-sm w-full">
                                     <span className={newRelationTarget ? 'text-white' : 'text-slate-400'}>
                                       {newRelationTarget ? getHeroName(heroes.find(h => h.id === newRelationTarget), language) : t('selectTargetHero')}
@@ -1941,7 +1942,7 @@ const ForceGraph = ({
                               </button>
                             ) : (
                               <div ref={addRelationFormRef} data-prevent-map-toggle className="flex flex-col gap-2 p-3 rounded-lg bg-slate-700/50 border border-green-500/30">
-                                <Select value={newRelationTarget} onValueChange={setNewRelationTarget}>
+                                <Select value={newRelationTarget} onValueChange={(value) => { setNewRelationTarget(value as HeroId); }}>
                                   <SelectTrigger className="h-8 bg-slate-800 border-slate-600 text-sm w-full">
                                     <span className={newRelationTarget ? 'text-white' : 'text-slate-400'}>
                                       {newRelationTarget ? getHeroName(heroes.find(h => h.id === newRelationTarget), language) : t('selectTargetHero')}
@@ -2010,8 +2011,8 @@ const ForceGraph = ({
                               if (!hero) return null;
                               // 使用类型断言获取可选属性
                               const isCustom = (partner as { isCustom?: boolean }).isCustom ?? false;
-                              const source = (partner as { source?: string }).source;
-                              const target = (partner as { target?: string }).target;
+                              const source = (partner as { source?: HeroId }).source;
+                              const target = (partner as { target?: HeroId }).target;
                               const relationSource = source || hero.id;
                               const relationTarget = target || selectedHeroes[0];
                               return (
@@ -2108,7 +2109,7 @@ const ForceGraph = ({
                                   </button>
                                 ) : (
                                   <div ref={addSynergyFormRef} data-prevent-map-toggle className="flex flex-col gap-2 p-3 rounded-lg bg-slate-700/50 border border-purple-500/30">
-                                    <Select value={newSynergyTarget} onValueChange={setNewSynergyTarget}>
+                                    <Select value={newSynergyTarget} onValueChange={(value) => { setNewSynergyTarget(value as HeroId); }}>
                                       <SelectTrigger className="h-8 bg-slate-800 border-slate-600 text-sm w-full">
                                         <span className={newSynergyTarget ? 'text-white' : 'text-slate-400'}>
                                           {newSynergyTarget ? getHeroName(heroes.find(h => h.id === newSynergyTarget), language) : t('selectTargetHero')}
@@ -2624,7 +2625,7 @@ const ForceGraph = ({
                           key={snapshot.id}
                           className="group flex items-center justify-between p-2 rounded-md bg-slate-700/30 hover:bg-slate-700/50 transition-colors cursor-pointer"
                           onClick={() => {
-                            onHeroSelect(snapshot.heroIds);
+                            onHeroSelect(snapshot.heroIds as HeroId[]);
                             setIsHistoryOpen(false);
                           }}
                         >

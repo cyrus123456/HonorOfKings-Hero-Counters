@@ -1,10 +1,45 @@
-﻿// 王者荣耀英雄数据 - 基于被克制关系数据库 v1 整理
+﻿﻿﻿﻿﻿﻿﻿﻿// 王者荣耀英雄数据 - 基于被克制关系数据库 v1 整理
 
 /** 王者荣耀5路分路类型 */
 export type HeroRole = 'toplane' | 'mage' | 'jungle' | 'adc' | 'support';
 
+/** 王者荣耀英雄ID */
+export type HeroId =
+  | 'houyi' | 'luban7' | 'sunshangxiang' | 'makeboluo' | 'direnjie' | 'yuji'
+  | 'liyuanfang' | 'gongsunli' | 'jailuo' | 'bailishouyue' | 'huangzhong' | 'ailin'
+  | 'mengya' | 'gaya' | 'aoyin' | 'agudo' | 'cang' | 'sunquan' | 'laixiao' | 'yuanliuzhizi_archer'
+  | 'zhuangzhou' | 'niumo' | 'zhangfei' | 'donghuangtaiyi' | 'caiwenji' | 'mingshiyin'
+  | 'yao' | 'lianpin' | 'sulie' | 'guiguzi' | 'dunshan' | 'zhongkui' | 'baiqi' | 'liushan'
+  | 'sunbin' | 'taiyizhenren' | 'daqiao' | 'sunce' | 'lubandashi' | 'zhubajie' | 'sangqi'
+  | 'duoliya' | 'shaosiyuan' | 'kongkonger' | 'yuanliuzhizi_support' | 'dayu' | 'mozi'
+  | 'daji' | 'wuzetian' | 'zhenji' | 'anqila' | 'wangzhaojun' | 'zhangliang' | 'gaojianli'
+  | 'bianque' | 'zhugeliang' | 'nuwa' | 'diaochan' | 'buzhihuowu' | 'yixing' | 'milady'
+  | 'ganjiangmoye' | 'shenmengxi' | 'xishi' | 'shangguwaner' | 'yingzheng' | 'zhouyu'
+  | 'yangyuhuan' | 'jiangziya' | 'change' | 'jinchan' | 'haiyue' | 'hainuo'
+  | 'yuanliuzhizi_magic' | 'xiaoqiao'
+  | 'yase_jg' | 'sunwukong' | 'hanxin' | 'luna' | 'libai' | 'liubei' | 'dianwei'
+  | 'ake' | 'lanlingwang' | 'nakelulu' | 'gongben' | 'miyue' | 'kai_jg' | 'bailixuance'
+  | 'peiqinhu' | 'simayi' | 'yunzhongjun' | 'lan' | 'pangu' | 'jing' | 'mengqi_jg'
+  | 'fei' | 'yuanliuzhizi_assassin' | 'yao2' | 'zhaoyun' | 'juyoujing_jg'
+  | 'lvbu' | 'machao' | 'guanyu' | 'huamulan' | 'laofuzi' | 'kuangtie' | 'xiahoudun'
+  | 'xialuote' | 'mengtian' | 'yuange' | 'juyoujing_bl' | 'jixiaoman' | 'alian'
+  | 'sikongzhen' | 'damo' | 'xiangyu' | 'chengyaojin' | 'yangjian' | 'yadianna'
+  | 'nezha' | 'caocao' | 'zhongwuyan' | 'lixin' | 'zhaohuaizhen' | 'chicha'
+  | 'dasiming' | 'ying2' | 'yunying' | 'yuanliuzhizi' | 'liubang';
+
+/** 守望先锋英雄ID（包含王者荣耀） */
+export type OwHeroId = HeroId
+  | 'winston' | 'dva' | 'orisa' | 'wrecking_ball' | 'doomfist' | 'ramattra'
+  | 'junkrat' | 'pharah' | 'genji' | 'hanzo' | 'soldier76' | 'venture'
+  | 'lucio' | 'kiriko' | 'zenyatta' | 'baptiste' | 'illari' | 'junker_queen'
+  | 'sigma' | 'zarya' | 'hazard' | 'mauga' | 'reaper' | 'tracer' | 'echo'
+  | 'ashe' | 'cassidy' | 'bastion' | 'mei' | 'symmetra' | 'torbjorn' | 'widowmaker'
+  | 'sombra' | 'mercy' | 'moira' | 'brigitte' | 'ana' | 'lifeweaver'
+  | 'freja' | 'sojourn' | 'feitianmao' | 'juno' | 'domina' | 'jinyu' | 'vendetta' | 'anran' | 'emrey' | 'wuyang' | 'ruixi' | 'mizuki'
+  | 'reinhardt' | 'roadhog';
+
 export interface Hero {
-  id: string;
+  id: HeroId;
   name: string;
   nameEn: string;
   nickname?: string;
@@ -14,15 +49,15 @@ export interface Hero {
 }
 
 export interface CounterRelation {
-  source: string; // 克制方英雄ID
-  target: string; // 被克制方英雄ID
-  strength?: number; // 3=S级(强克制), 2=A级(一般克制), 1=弱克制
+  source: HeroId;
+  target: HeroId;
+  strength?: number;
 }
 
 // 英雄图片URL - 使用王者荣耀官方CDN资源
 // 来源: https://pvp.qq.com/web201605/herolist.shtml
 // 格式: https://game.gtimg.cn/images/yxzj/img201606/heroimg/{英雄数字ID}/{英雄数字ID}.jpg
-const heroImages: Record<string, string> = {
+const heroImages: Record<HeroId, string> = {
   // ========== 射手（发育路）- ADC ==========
   makeboluo: `https://game.gtimg.cn/images/yxzj/img201606/heroimg/132/132.jpg`,       // 马可波罗 132
   gongsunli: `https://game.gtimg.cn/images/yxzj/img201606/heroimg/199/199.jpg`,        // 公孙离 199
