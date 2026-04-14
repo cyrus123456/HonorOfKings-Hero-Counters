@@ -1,19 +1,26 @@
 import type { OwHeroId } from './heroData';
 
 export type MapLanguage = 'zh' | 'en' | 'ja' | 'ko' | 'zh-TW' | 'es' | 'fr' | 'de' | 'pt' | 'ru' | 'it';
+export type MapType = 'control' | 'hybrid' | 'escort' | 'push' | 'flashpoint';
+
+export type MapId = 'antarctic_peninsula' | 'aatlis' | 'blizzard_world' | 'busan' | 'circuit_royal'
+  | 'colosseo' | 'dorado' | 'eichenwalde' | 'esperanca' | 'gibraltar' | 'havana' | 'hollywood'
+  | 'ilios' | 'junkertown' | 'kings_row' | 'lijiang' | 'midtown' | 'nepal' | 'new_junk_city'
+  | 'new_queen_street' | 'numbani' | 'oasis' | 'paraiso' | 'paris' | 'rialto' | 'route_66'
+  | 'runasapi' | 'samoa' | 'shambali_monastery' | 'suravasa';
 
 export interface Map {
-  id: string;
+  id: MapId;
   name: string;
   nameEn: string;
-  type: 'control' | 'hybrid' | 'escort' | 'push' | 'flashpoint';
+  type: MapType;
   recommendedHeroes: OwHeroId[];
   heroReasons: Partial<Record<OwHeroId, Partial<Record<MapLanguage, string>>>>;
   description?: Partial<Record<MapLanguage, string>>;
 }
 
-export const getMapTypeName = (type: string, language: MapLanguage = 'zh'): string => {
-  const typeNames: Record<string, Partial<Record<MapLanguage, string>>> = {
+export const getMapTypeName = (type: MapType, language: MapLanguage = 'zh'): string => {
+  const typeNames: Record<MapType, Partial<Record<MapLanguage, string>>> = {
     control: { zh: '占领要点', en: 'Control', ja: 'コントロール', ko: '점령', 'zh-TW': '佔領要點', es: 'Control', fr: 'Contrôle', de: 'Kontrolle', pt: 'Controle', ru: 'Контроль', it: 'Controllo' },
     hybrid: { zh: '混合模式', en: 'Hybrid', ja: 'ハイブリッド', ko: '혼합', 'zh-TW': '混合模式', es: 'Híbrido', fr: 'Hybride', de: 'Hybrid', pt: 'Híbrido', ru: 'Гибрид', it: 'Ibrido' },
     escort: { zh: '运载目标', en: 'Escort', ja: 'エスコート', ko: '호위', 'zh-TW': '運載目標', es: 'Escorta', fr: 'Escorte', de: 'Begleitschutz', pt: 'Escolta', ru: 'Сопровождение', it: 'Scorta' },
@@ -912,13 +919,13 @@ export const getMapName = (map: Map | undefined | null, language: MapLanguage = 
 ];
 
 // 获取地图类型颜色
-export const getMapTypeColor = (type: string): string => {
-  const colors: Record<string, string> = {
-    control: '#3b82f6',    // 蓝色
-    hybrid: '#8b5cf6',     // 紫色
-    escort: '#f59e0b',     // 橙色
-    push: '#10b981',       // 绿色
-    flashpoint: '#ec4899', // 粉色
+export const getMapTypeColor = (type: MapType): string => {
+  const colors: Record<MapType, string> = {
+    control: '#3b82f6',
+    hybrid: '#8b5cf6',
+    escort: '#f59e0b',
+    push: '#10b981',
+    flashpoint: '#ec4899',
   };
   return colors[type] || '#6b7280';
 };

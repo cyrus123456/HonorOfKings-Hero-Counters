@@ -1,3 +1,4 @@
+import type { CounterStrength } from '@/data/heroData';
 import { useMemo } from 'react';
 
 /**
@@ -6,7 +7,7 @@ import { useMemo } from 'react';
 interface RelationData {
   source: string;
   target: string;
-  strength: number;
+  strength: CounterStrength;
   isCustom: boolean;
 }
 
@@ -14,7 +15,7 @@ interface RelationData {
 export type RelationInput = {
   source: string;
   target: string;
-  strength?: number;
+  strength?: CounterStrength;
   isCustom?: boolean;
 };
 
@@ -54,7 +55,7 @@ export function useRelationMaps(
   /**
    * O(1) 查找克制关系强度，返回 undefined 表示不存在
    */
-  const getCounterStrength = (sourceId: string, targetId: string): number | undefined => {
+  const getCounterStrength = (sourceId: string, targetId: string): CounterStrength | undefined => {
     return counterMap.get(`${sourceId}-${targetId}`)?.strength;
   };
 
@@ -68,7 +69,7 @@ export function useRelationMaps(
   /**
    * O(1) 查找协同关系强度
    */
-  const getSynergyStrength = (sourceId: string, targetId: string): number | undefined => {
+  const getSynergyStrength = (sourceId: string, targetId: string): CounterStrength | undefined => {
     return synergyMap.get(`${sourceId}-${targetId}`)?.strength;
   };
 

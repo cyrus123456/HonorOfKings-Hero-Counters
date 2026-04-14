@@ -2,10 +2,12 @@
 // 配合强度: strength = 3 (核心搭档/Must Pick), 2 (优秀配合/Good Synergy), 1 (良好配合/Decent)
 // 数据来源: overpicker.com synergy chart + 2025-2026 meta
 
+import type { CounterStrength, OwHeroId } from './heroData';
+
 export interface SynergyRelation {
-  source: string; // 拍档方英雄ID
-  target: string; // 被配对方英雄ID (即当前查看的英雄)
-  strength?: number; // 3=核心搭档, 2=优秀配合, 1=良好配合
+  source: OwHeroId;
+  target: OwHeroId;
+  strength?: CounterStrength;
 }
 
 // 最佳拍档关系数据 - 根据实际配合效果设置，非固定数量

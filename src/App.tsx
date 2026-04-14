@@ -36,7 +36,8 @@ import {
 import React, { Suspense, lazy, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import kogLogoGold from '/kog-logo-gold.svg';
 
-import type { HeroId, OwHeroId } from '@/data/heroData';
+import type { HeroId, HeroRole, OwHeroId } from '@/data/heroData';
+import { getRoleNames } from '@/data/heroData';
 import { getMapName, getMapTypeColor, getMapTypeName, maps } from '@/data/mapData';
 import { sortByRole, useMemoizedHeroes } from '@/hooks/useMemoizedHeroes';
 
@@ -480,11 +481,12 @@ const [isMapCopied, setIsMapCopied] = useState(false);
     return result;
   }, [mapSearch, activeMapType]);
 
-  const roles = [
-    { id: 'toplane', name: t('toplane'), nameEn: 'Top Lane', icon: Shield, color: '#ef4444' },
+  const roles: { id: HeroRole; name: string; nameEn: string; icon: typeof Shield; color: string }[] = [
+    { id: 'tank', name: t('tank'), nameEn: 'Tank', icon: Shield, color: '#eab308' },
+    { id: 'fighter', name: t('fighter'), nameEn: 'Fighter', icon: Shield, color: '#ef4444' },
+    { id: 'assassin', name: t('assassin'), nameEn: 'Assassin', icon: Crosshair, color: '#f97316' },
     { id: 'mage', name: t('mage'), nameEn: 'Mage', icon: Crosshair, color: '#a855f7' },
-    { id: 'jungle', name: t('jungle'), nameEn: 'Jungle', icon: Crosshair, color: '#f97316' },
-    { id: 'adc', name: t('adc'), nameEn: 'ADC', icon: Crosshair, color: '#3b82f6' },
+    { id: 'marksman', name: t('marksman'), nameEn: 'Marksman', icon: Crosshair, color: '#3b82f6' },
     { id: 'support', name: t('support'), nameEn: 'Support', icon: Heart, color: '#22c55e' },
   ];
 
@@ -815,18 +817,12 @@ const [isMapCopied, setIsMapCopied] = useState(false);
                                 if (!hero) return null;
                                 if (!hero) return null;
                                 const roleColors = {
-                                  toplane: 'bg-amber-500/20 text-amber-400 border-amber-500/30',
+                                  tank: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30',
+                                  fighter: 'bg-amber-500/20 text-amber-400 border-amber-500/30',
                                   mage: 'bg-purple-500/20 text-purple-400 border-purple-500/30',
-                                  jungle: 'bg-orange-500/20 text-orange-400 border-orange-500/30',
-                                  adc: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
+                                  assassin: 'bg-orange-500/20 text-orange-400 border-orange-500/30',
+                                  marksman: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
                                   support: 'bg-green-500/20 text-green-400 border-green-500/30',
-                                };
-                                const roleNames = {
-                                  toplane: t('toplane'),
-                                  mage: t('mage'),
-                                  jungle: t('jungle'),
-                                  adc: t('adc'),
-                                  support: t('support'),
                                 };
                                 return (
                                   <div 
@@ -840,8 +836,8 @@ const [isMapCopied, setIsMapCopied] = useState(false);
                                     <div className="flex-1 min-w-0">
                                       <div className="flex items-center gap-2 flex-wrap">
                                         <p className="text-sm font-black text-slate-200 tracking-tight">{language === 'zh' ? hero.name : hero.nameEn}</p>
-                                        <span className={`text-[0.625rem] px-1.5 py-0.5 rounded border font-medium ${roleColors[hero.role]}`}>
-                                          {roleNames[hero.role]}
+                                        <span className={`text-[0.625rem] px-1.5 py-0.5 rounded border font-medium ${roleColors[hero.role[0]]}`}>
+                                          {getRoleNames(hero.role, language)}
                                         </span>
                                       </div>
                                       <p className="text-[0.6875rem] text-slate-300 leading-relaxed mt-1">{(map.heroReasons as Record<string, Partial<Record<string, string>>>)[heroId]?.[language] || (map.heroReasons as Record<string, Partial<Record<string, string>>>)[heroId]?.en || ''}</p>
@@ -864,18 +860,12 @@ const [isMapCopied, setIsMapCopied] = useState(false);
                                 if (!hero) return null;
                                 const originalIndex = (customMapHeroes[map.id] || []).findIndex(ch => ch.heroId === heroId);
                                 const roleColors = {
-                                  toplane: 'bg-amber-500/20 text-amber-400 border-amber-500/30',
+                                  tank: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30',
+                                  fighter: 'bg-amber-500/20 text-amber-400 border-amber-500/30',
                                   mage: 'bg-purple-500/20 text-purple-400 border-purple-500/30',
-                                  jungle: 'bg-orange-500/20 text-orange-400 border-orange-500/30',
-                                  adc: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
+                                  assassin: 'bg-orange-500/20 text-orange-400 border-orange-500/30',
+                                  marksman: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
                                   support: 'bg-green-500/20 text-green-400 border-green-500/30',
-                                };
-                                const roleNames = {
-                                  toplane: t('toplane'),
-                                  mage: t('mage'),
-                                  jungle: t('jungle'),
-                                  adc: t('adc'),
-                                  support: t('support'),
                                 };
                                 return (
                                   <div
@@ -889,8 +879,8 @@ const [isMapCopied, setIsMapCopied] = useState(false);
                                     <div className="flex-1 min-w-0">
                                       <div className="flex items-center gap-2 flex-wrap">
                                         <p className="text-sm font-black text-slate-200 tracking-tight">{language === 'zh' ? hero.name : hero.nameEn}</p>
-                                        <span className={`text-[0.625rem] px-1.5 py-0.5 rounded border font-medium ${roleColors[hero.role]}`}>
-                                          {roleNames[hero.role]}
+                                        <span className={`text-[0.625rem] px-1.5 py-0.5 rounded border font-medium ${roleColors[hero.role[0]]}`}>
+                                          {getRoleNames(hero.role, language)}
                                         </span>
                                         <Badge variant="outline" className="text-[0.5625rem] px-1 py-0 text-white border-white/50 bg-white/10">
                                         </Badge>
@@ -1025,7 +1015,7 @@ const [isMapCopied, setIsMapCopied] = useState(false);
                       selectedRole === role.id ? 'bg-white/20 text-white border-transparent' : 'bg-slate-900 text-white border-slate-800'
                     }`}
                   >
-                    {heroes.filter(h => h.role === role.id).length}
+                    {heroes.filter(h => h.role.includes(role.id as HeroRole)).length}
                   </Badge>
                 </Button>
               ))}
