@@ -995,30 +995,37 @@ const [isMapCopied, setIsMapCopied] = useState(false);
                 <span className="text-[0.6875rem] font-black uppercase tracking-widest">{t('allHeroes')}</span>
               </Button>
               <div className="w-px h-4 bg-slate-800 mx-1" />
-              {roles.map(role => (
-                <Button 
-                  key={role.id} 
-                  variant={selectedRole === role.id ? 'default' : 'ghost'} 
-                  size="sm" 
-                  className={`rounded-full px-5 gap-2 transition-all duration-300 h-9 ${
-                    selectedRole === role.id 
-                      ? 'bg-red-600 hover:bg-red-700 text-white shadow-lg shadow-red-900/40 scale-105' 
-                      : 'text-white hover:text-white hover:bg-slate-800'
-                  }`} 
-                  onClick={() => setSelectedRole(role.id)}
-                >
-                  <role.icon className="w-4 h-4" style={{ color: selectedRole === role.id ? '#fff' : role.color }} />
-                  <span className="text-[0.6875rem] font-black uppercase tracking-widest">{role.name}</span>
-                  <Badge 
-                    variant="secondary" 
-                    className={`ml-1 text-[0.625rem] h-4.5 px-2 font-mono font-black ${
-                      selectedRole === role.id ? 'bg-white/20 text-white border-transparent' : 'bg-slate-900 text-white border-slate-800'
+              {roles.map(role => {
+                const isSelected = selectedRole === role.id;
+                return (
+                  <Button 
+                    key={role.id} 
+                    variant={isSelected ? 'default' : 'ghost'} 
+                    size="sm" 
+                    className={`rounded-full px-5 gap-2 transition-all duration-300 h-9 ${
+                      isSelected 
+                        ? 'text-white shadow-lg scale-105' 
+                        : 'text-white hover:text-white hover:bg-slate-800'
                     }`}
+                    style={isSelected ? { 
+                      backgroundColor: role.color,
+                      boxShadow: `0 10px 15px -3px ${role.color}40, 0 4px 6px -4px ${role.color}40`
+                    } : {}}
+                    onClick={() => setSelectedRole(role.id)}
                   >
-                    {heroes.filter(h => h.role.includes(role.id as HeroRole)).length}
-                  </Badge>
-                </Button>
-              ))}
+                    <role.icon className="w-4 h-4" style={{ color: isSelected ? '#fff' : role.color }} />
+                    <span className="text-[0.6875rem] font-black uppercase tracking-widest">{role.name}</span>
+                    <Badge 
+                      variant="secondary" 
+                      className={`ml-1 text-[0.625rem] h-4.5 px-2 font-mono font-black ${
+                        isSelected ? 'bg-white/20 text-white border-transparent' : 'bg-slate-900 text-white border-slate-800'
+                      }`}
+                    >
+                      {heroes.filter(h => h.role.includes(role.id as HeroRole)).length}
+                    </Badge>
+                  </Button>
+                );
+              })}
             </div>
             <Suspense fallback={
               <div className="absolute inset-0 flex items-center justify-center">
