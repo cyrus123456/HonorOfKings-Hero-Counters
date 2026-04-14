@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿// 王者荣耀英雄数据 - 基于被克制关系数据库 v1 整理
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿// 王者荣耀英雄数据 - 基于被克制关系数据库 v1 整理
 
 
 /** 王者荣耀英雄职业类型 - 官方六种职业 */
@@ -326,7 +326,7 @@ export const heroes: Hero[] = [
   // 周瑜: 战士+法师
   { id: 'zhouyu', name: '周瑜', nameEn: 'Zhou Yu', role: ['fighter', 'mage'], color: '#ef4444', image: heroImages.zhouyu },
   // 杨玉环: 法师+辅助
-  { id: 'yangyuhuan', name: '杨玉环', nameEn: 'Yang Yuhuan', role: ['mage', 'support'], color: '#a855f7', image: heroImages.yangyuhuan },
+  { id: 'yangyuhuan', name: '杨玉环', nameEn: 'Yang Yuhuan', role: ['mage'], color: '#a855f7', image: heroImages.yangyuhuan },
   { id: 'jiangziya', name: '姜子牙', nameEn: 'Jiang Ziya', role: ['mage'], color: '#a855f7', image: heroImages.jiangziya },
   // 嫦娥: 战士+法师
   { id: 'change', name: '嫦娥', nameEn: "Chang'e", role: ['fighter', 'mage'], color: '#ef4444', image: heroImages.change },
@@ -336,7 +336,6 @@ export const heroes: Hero[] = [
   { id: 'yuanliuzhizi_magic', name: '元流之子(法师)', nameEn: 'Source Child (Mage)', role: ['mage'], color: '#a855f7', image: heroImages.yuanliuzhizi_magic },
   { id: 'xiaoqiao', name: '小乔', nameEn: 'Xiao Qiao', nickname: '恋之微风', role: ['mage'], color: '#a855f7', image: heroImages.xiaoqiao },
   { id: 'yase', name: '亚瑟', nameEn: 'Arthur', role: ['tank', 'fighter'], color: '#ef4444', image: heroImages.yase },
-  { id: 'sunwukong', name: '孙悟空', nameEn: 'Sun Wukong', role: ['assassin'], color: '#ef4444', image: heroImages.sunwukong },
   { id: 'hanxin', name: '韩信', nameEn: 'Han Xin', role: ['assassin'], color: '#f97316', image: heroImages.hanxin },
   // 露娜: 刺客+法师
   { id: 'luna', name: '露娜', nameEn: 'Luna', role: ['assassin', 'mage'], color: '#f97316', image: heroImages.luna },
@@ -346,11 +345,8 @@ export const heroes: Hero[] = [
   { id: 'ake', name: '阿轲', nameEn: "A Ke", role: ['assassin'], color: '#f97316', image: heroImages.ake },
   { id: 'lanlingwang', name: '兰陵王', nameEn: 'Lanling Wang', role: ['assassin'], color: '#f97316', image: heroImages.lanlingwang },
   { id: 'nakelulu', name: '娜可露露', nameEn: 'Nakoruru', role: ['assassin'], color: '#f97316', image: heroImages.nakelulu },
-  // 宫本武藏: 战士+刺客
-  { id: 'gongbenwuzang', name: '宫本武藏', nameEn: 'Miyamoto Musashi', role: ['fighter', 'assassin'], color: '#ef4444', image: heroImages.gongbenwuzang },
   // 芈月: 战士+法师
   { id: 'miyue', name: '芈月', nameEn: 'Mi Yue', role: ['mage'], color: '#ef4444', image: heroImages.miyue },
-  { id: 'kai', name: '铠', nameEn: 'Kai', role: ['tank', 'fighter'], color: '#ef4444', image: heroImages.kai },
   { id: 'bailixuance', name: '百里玄策', nameEn: 'Baili Xuance', role: ['assassin'], color: '#f97316', image: heroImages.bailixuance },
   { id: 'peiqinhu', name: '裴擒虎', nameEn: 'Pei Qinhu', role: ['assassin'], color: '#f97316', image: heroImages.peiqinhu },
   // 司马懿: 刺客+法师
