@@ -904,15 +904,21 @@ const ForceGraph = ({
   const prepareBaseNodes = useCallback((): NodeDatum[] => {
     return heroes
       .filter(h => !selectedRole || selectedRole === 'all' || h.role.includes(selectedRole as HeroRole))
-      .map(h => ({
-        id: h.id,
-        name: h.name,
-        nameEn: h.nameEn,
-        role: h.role[0],
-        color: h.role.includes('tank') ? '#eab308' : h.role.includes('fighter') ? '#ef4444' : h.role.includes('assassin') ? '#f97316' : h.role.includes('mage') ? '#a855f7' : h.role.includes('marksman') ? '#3b82f6' : '#22c55e',
-        image: h.image,
-        radius: h.role.includes('fighter') || h.role.includes('assassin') ? 18 : 15,
-      }));
+      .map(h => {
+        let nodeColor = h.color[h.role[0]];
+        if (selectedRole && selectedRole !== 'all' && h.role.includes(selectedRole as HeroRole)) {
+          nodeColor = h.color[selectedRole as HeroRole];
+        }
+        return {
+          id: h.id,
+          name: h.name,
+          nameEn: h.nameEn,
+          role: h.role[0],
+          color: nodeColor,
+          image: h.image,
+          radius: h.role.includes('fighter') || h.role.includes('assassin') ? 18 : 15,
+        };
+      });
   }, [selectedRole, isTouchDevice]);
 
   const prepareLinks = useCallback((nodeIds: Set<HeroId>): LinkDatum[] => {
@@ -1732,13 +1738,13 @@ const ForceGraph = ({
                 <div className="flex items-center gap-4 mb-4 flex-shrink-0" onMouseDown={handlePanelDragStart}>
                   {displayedHero ? (
                     <>
-                      <div className="w-14 h-14 rounded-full overflow-hidden flex-shrink-0 flex items-center justify-center" style={{ border: `0.1875rem solid ${displayedHero.color}`, backgroundColor: '#1a1a2e' }}>
+                      <div className="w-14 h-14 rounded-full overflow-hidden flex-shrink-0 flex items-center justify-center" style={{ border: `0.1875rem solid ${selectedRole && selectedRole !== 'all' && displayedHero.role.includes(selectedRole as HeroRole) ? displayedHero.color[selectedRole as HeroRole] : displayedHero.color[displayedHero.role[0]]}`, backgroundColor: '#1a1a2e' }}>
                         <img src={displayedHero.image} alt="" className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLElement).style.display = 'none'; }} />
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center gap-2">
                           <h3 className="text-base font-bold text-slate-100 leading-tight">{getHeroName(displayedHero, language)}</h3>
-                          <Badge variant="outline" className="text-xs px-2 py-0" style={{ borderColor: displayedHero.color, color: displayedHero.color }}>{getRoleNames(displayedHero.role, language)}</Badge>
+                          <Badge variant="outline" className="text-xs px-2 py-0" style={{ borderColor: displayedHero.color[displayedHero.role[0]], color: displayedHero.color[displayedHero.role[0]] }}>{getRoleNames(displayedHero.role, language)}</Badge>
                           {selectedMap && mapRecommendedHeroes.includes(displayedHero.id) && (
                             <Badge variant="outline" className="text-xs px-2 py-0 text-cyan-400 border-cyan-400/50 bg-cyan-400/10">
                               {t('mapRecommended')}
@@ -1776,13 +1782,13 @@ const ForceGraph = ({
                           if (!hero) return null;
                           return (
                             <div key={heroId} className="flex items-center gap-2 bg-slate-800/40 p-2 rounded-lg border border-slate-700/50 min-w-0 flex-shrink-0">
-                              <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0 flex items-center justify-center" style={{ border: `0.125rem solid ${hero.color}`, backgroundColor: '#1a1a2e' }}>
+                              <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0 flex items-center justify-center" style={{ border: `0.125rem solid ${hero.color[hero.role[0]]}`, backgroundColor: '#1a1a2e' }}>
                                 <img src={hero.image} alt="" className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLElement).style.display = 'none'; }} />
                               </div>
                               <div className="min-w-0">
                                 <div className="flex items-center gap-1">
                                   <span className="text-xs font-bold text-slate-100 truncate">{getHeroName(hero, language)}</span>
-                                  <span className="text-[0.625rem] px-1 py-0.5 rounded border font-medium" style={{ borderColor: hero.color, color: hero.color }}>
+                                  <span className="text-[0.625rem] px-1 py-0.5 rounded border font-medium" style={{ borderColor: hero.color[hero.role[0]], color: hero.color[hero.role[0]] }}>
                                     {getRoleNames(hero.role, language)}
                                   </span>
                                 </div>
