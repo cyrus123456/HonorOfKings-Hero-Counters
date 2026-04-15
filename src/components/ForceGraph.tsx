@@ -911,7 +911,7 @@ const ForceGraph = ({
         role: h.role[0],
         color: h.role.includes('tank') ? '#eab308' : h.role.includes('fighter') ? '#ef4444' : h.role.includes('assassin') ? '#f97316' : h.role.includes('mage') ? '#a855f7' : h.role.includes('marksman') ? '#3b82f6' : '#22c55e',
         image: h.image,
-        radius: h.role.includes('fighter') || h.role.includes('assassin') ? 32 : 28,
+        radius: h.role.includes('fighter') || h.role.includes('assassin') ? 18 : 15,
       }));
   }, [selectedRole, isTouchDevice]);
 
@@ -1076,11 +1076,11 @@ const ForceGraph = ({
         if (d.role === 'assassin') return centerX;
         if (d.role === 'marksman') return centerX + 200;
         return centerX + 400;
-      }).strength(0.2))
+      }).strength(0.5))
       .force('y', d3.forceY<NodeDatum>().y(() => {
         if (selectedRole && selectedRole !== 'all') return height / 2;
         return height / 2;
-      }).strength(0.1));
+      }).strength(0.4));
     simulationRef.current = simulation;
 
     const link = g.append('g').attr('class', 'links').selectAll('line').data(links).enter().append('line').attr('stroke-width', 1.5);
