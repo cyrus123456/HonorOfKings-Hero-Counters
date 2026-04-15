@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿// 王者荣耀英雄数据 - 基于被克制关系数据库 v1 整理
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿// 王者荣耀英雄数据 - 基于被克制关系数据库 v1 整理
 
 
 /** 王者荣耀英雄职业类型 - 官方六种职业 */
@@ -43,16 +43,7 @@ export type HeroId =
   | 'yangyuhuan' | 'mingshiyin' | 'nvwa' | 'zhouyu' | 'miyue' | 'shenmengxi' | 'simayi'
   | 'ganjiangmoye' | 'liubang' | 'donghuangtaiyi' | 'daqiao' | 'zhugeliang'
   | 'buzhihuowu' | 'wangzhaojun' | 'luna' | 'anqila' | 'diaochan' | 'wuzetian'
-  | 'zhenji' | 'bianque' | 'sunbin' | 'gaojianli' | 'yingzheng' | 'daji' | 'mozi' | 'xiaoqiao'
-  // 守望先锋英雄ID（包含王者荣耀）
-  | 'winston' | 'dva' | 'orisa' | 'wrecking_ball' | 'doomfist' | 'ramattra'
-  | 'junkrat' | 'pharah' | 'genji' | 'hanzo' | 'soldier76' | 'venture'
-  | 'lucio' | 'kiriko' | 'zenyatta' | 'baptiste' | 'illari' | 'junker_queen'
-  | 'sigma' | 'zarya' | 'hazard' | 'mauga' | 'reaper' | 'tracer' | 'echo'
-  | 'ashe' | 'cassidy' | 'bastion' | 'mei' | 'symmetra' | 'torbjorn' | 'widowmaker'
-  | 'sombra' | 'mercy' | 'moira' | 'brigitte' | 'ana' | 'lifeweaver'
-  | 'freja' | 'sojourn' | 'feitianmao' | 'juno' | 'domina' | 'jinyu' | 'vendetta' | 'anran' | 'emrey' | 'wuyang' | 'ruixi' | 'mizuki'
-  | 'reinhardt' | 'roadhog';
+  | 'zhenji' | 'bianque' | 'sunbin' | 'gaojianli' | 'yingzheng' | 'daji' | 'mozi' | 'xiaoqiao';
 
 /** 守望先锋英雄ID（包含王者荣耀） */
 export type OwHeroId = HeroId
@@ -84,7 +75,7 @@ export interface CounterRelation {
 // 英雄图片URL - 使用王者荣耀官方CDN资源
 // 来源: https://pvp.qq.com/web201605/herolist.shtml
 // 格式: https://game.gtimg.cn/images/yxzj/img201606/heroimg/{英雄数字ID}/{英雄数字ID}.jpg
-const heroImages: Record<HeroId, string> = {
+const heroImages: Record<OwHeroId, string> = {
   // ========== 射手（发育路）- ADC ==========
   makeboluo: `https://game.gtimg.cn/images/yxzj/img201606/heroimg/132/132.jpg`,       // 马可波罗 132
   gongsunli: `https://game.gtimg.cn/images/yxzj/img201606/heroimg/199/199.jpg`,        // 公孙离 199
