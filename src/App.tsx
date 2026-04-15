@@ -34,7 +34,7 @@ import {
   X
 } from 'lucide-react';
 import React, { Suspense, lazy, useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import kogLogoGold from '/kog-logo-gold.svg';
+import kogLogoGold from '/ico.jpg';
 
 import type { HeroId, HeroRole, OwHeroId } from '@/data/heroData';
 import { getRoleNames } from '@/data/heroData';
