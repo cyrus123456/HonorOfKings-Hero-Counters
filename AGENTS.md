@@ -145,7 +145,8 @@ useEffect(() => {
 <div className="left-[410px] w-[256px]" />
 ```
 
-### CSS Files
+### CSS Files 【跨项目通用】
+
 - Always prefer `rem` over `px` for font-size, spacing, margins, padding
 - Only use `px` when dealing with border widths or properties where pixels are semantically required
 
@@ -175,6 +176,34 @@ const heroName = hero ? (language === 'zh' ? hero.name : hero.nameEn) : 'Unknown
 - **NEVER** leave empty catch blocks `catch(e) {}`
 - **NEVER** delete failing tests to "pass" (no test framework exists)
 - **NEVER** commit unless explicitly requested
+
+## Dependency Management
+
+### Temporary Tool Dependencies 【跨项目通用】
+
+**临时工具依赖包（如 potrace、puppeteer 等）不要安装到项目，要安装到全局。**
+
+- 这些包仅用于一次性任务（如图片转换、爬虫、构建工具等）
+- 使用 `npm install -g <package>` 进行全局安装
+- 不要在 `package.json` 的 `dependencies` 或 `devDependencies` 中添加这些包
+- 使用完后可以卸载全局包：`npm uninstall -g <package>`
+
+### Examples of Temporary Tools
+
+- `potrace` - 图片矢量化
+- `puppeteer` - 浏览器自动化
+- `sharp` - 图片处理（如果仅用于一次性转换）
+- `imagemin` - 图片压缩
+- `svgo` - SVG 优化
+
+### Temporary Script Files 【跨项目通用】
+
+**临时性脚本文件（如数据抓取脚本、数据转换脚本等）都要放在 scripts/ 目录下。**
+
+- 这些脚本仅用于一次性任务（如数据抓取、格式转换、临时修复等）
+- 所有临时脚本文件都应该放在 `scripts/` 目录中
+- 不要将临时脚本直接放在项目根目录
+- 临时数据文件（如临时JSON数据）也应该放在 `scripts/` 目录中
 
 ## Project Structure
 

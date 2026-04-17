@@ -1,1685 +1,2052 @@
-export type CounterLanguage = 'zh' | 'en' | 'ja' | 'ko' | 'zh-TW' | 'es' | 'fr' | 'de' | 'pt' | 'ru' | 'it';
+// 被克制理由数据 - 基于王者荣耀官网数据生成
+import type { Language } from '@/i18n';
 
-export interface CounterAbilityData {
-  abilityZh: string;
-  abilityEn: string;
-  abilityJa?: string;
-  abilityKo?: string;
-  abilityZhTW?: string;
-  abilityEs?: string;
-  abilityFr?: string;
-  abilityDe?: string;
-  abilityPt?: string;
-  abilityRu?: string;
-  abilityIt?: string;
+// 克制原因数据 - key 为 "source-target" 格式
+export interface CounterReasonData {
+  reasonZh: string;
+  reasonEn: string;
 }
 
-export interface WeaknessData {
-  weaknessZh: string;
-  weaknessEn: string;
-  weaknessJa?: string;
-  weaknessKo?: string;
-  weaknessZhTW?: string;
-  weaknessEs?: string;
-  weaknessFr?: string;
-  weaknessDe?: string;
-  weaknessPt?: string;
-  weaknessRu?: string;
-  weaknessIt?: string;
-}
-
-export const heroCounterAbilities: Record<string, CounterAbilityData> = {
-  // ================================================================
-  // 一、射手（发育路）- ADC
-  // ================================================================
-
-  // --- 后羿 ---
-  houyi: {
-    abilityZh: '站撸输出极强、持续伤害稳定、容错率高，开大可先手控制或封走位',
-    abilityEn: 'Extremely strong sustained DPS with high fault tolerance, ult provides initiation or zoning control'
-  },
-
-  // --- 鲁班七号 ---
-  luban7: {
-    abilityZh: '打坦顶级伤害、范围压制能力强，被动扫射对前排威胁极大',
-    abilityEn: 'Top-tier tank-busting damage with excellent area pressure, passive sweep devastates frontlines'
-  },
-
-  // --- 狄仁杰 ---
-  direnjie: {
-    abilityZh: '二技能解控净化、输出稳定可靠，克依赖挂印记和控制的射手与刺客',
-    abilityEn: 'Skill 2 cleanse removes CC with stable output, counters mark-dependent and CC-reliant heroes'
-  },
-
-  // --- 李元芳 ---
-  liyuanfang: {
-    abilityZh: '前期压制力强、滚雪球速度快，被动叠印记爆发高且控龙能力强',
-    abilityEn: 'Strong early-game pressure with fast snowballing, passive mark stacking offers burst and objective control'
-  },
-
-  // --- 虞姬 ---
-  yuji: {
-    abilityZh: '二技能物理免疫克物理爆发射手与刺客，自保能力在射手中出类拔萃',
-    abilityEn: 'Skill 2 physical immunity counters physical burst assassins and marksman, exceptional self-peel among ADCs'
-  },
-
-  // --- 孙尚香 ---
-  sunshangxiang: {
-    abilityZh: '一技能翻滚爆发极高、滚雪球能力强，秒脆皮速度顶尖',
-    abilityEn: 'Skill 1 roll offers extreme burst with strong snowballing, top-tier squishy elimination speed'
-  },
-
-  // --- 伽罗 ---
-  jailuo: {
-    abilityZh: '超长射程压制、开弓后减速粘人，打团舒适度和持续输出环境极佳',
-    abilityEn: 'Ultra-long range suppression with slow on critical hits, excellent teamfight comfort and sustained output'
-  },
-
-  // --- 公孙离 ---
-  gongsunli: {
-    abilityZh: '多段位移拉扯顶级、二技能格挡飞行物，操作上限高难以被锁定',
-    abilityEn: 'Multi-dash kite is best-in-class, Skill 2 parries projectiles, high skill ceiling makes her hard to lock down'
-  },
-
-  // --- 马可波罗 ---
-  makeboluo: {
-    abilityZh: '真伤打坦克效率高、机动性出众，一技能消耗和大招进场收割能力强',
-    abilityEn: 'True damage shreds tanks efficiently with outstanding mobility, Skill 1 pokes and ult excels at diving cleanup'
-  },
-
-  // --- 黄忠 ---
-  huangzhong: {
-    abilityZh: '开大后阵地战火力覆盖极强、守塔和反打能力顶尖',
-    abilityEn: 'Ult form provides unmatched positional firepower coverage, exceptional tower defense and counter-engage capability'
-  },
-
-  // --- 蒙犽 ---
-  mengya: {
-    abilityZh: '持续扫射火力强、团战AOE压制能力优秀，一技能可移动输出',
-    abilityEn: 'Sustained spray fire with excellent teamfight AOE pressure, Skill 1 allows mobile output'
-  },
-
-  // --- 戈娅 ---
-  gaya: {
-    abilityZh: '拉扯风筝能力强、起步加速快，灵活走A让近战难以贴近',
-    abilityEn: 'Strong kiting ability with fast acceleration, flexible hit-and-run makes it hard for melee to approach'
-  },
-
-  // --- 敖隐 ---
-  aoyin: {
-    abilityZh: '空投爆发伤害高、打团威胁大，三形态切换兼顾输出、生存和控制',
-    abilityEn: 'High aerial drop burst damage with major teamfight threat, three-form switching balances DPS, survival and CC'
-  },
-
-  // --- 百里守约 ---
-  bailishouyue: {
-    abilityZh: '超远狙击消耗、视野压制能力强，二技能精准狙击可极限压血线',
-    abilityEn: 'Ultra-long sniper poke with vision domination, Skill 2 precision sniping can extremize HP pressure'
-  },
-
-  // --- 艾琳 ---
-  ailin: {
-    abilityZh: '法术伤害克虞姬物免、机动性不错，普攻法伤穿透效果持续叠加',
-    abilityEn: 'Magic damage counters Yu Ji\'s physical immunity with good mobility, AA magic pen stacks over time'
-  },
-
-  // --- 莱西奥 ---
-  laixiao: {
-    abilityZh: '爆发和收割线优秀、大招升空不可选取，团战AOE输出稳定',
-    abilityEn: 'Excellent burst and cleanup lines, ult aerial untargetable state, stable teamfight AOE output'
-  },
-
-  // --- 成吉思汗（当前无独立ID，暂用已有英雄补充）---
-
-  // --- 孙权 ---
-  sunquan: {
-    abilityZh: '强化普攻贯穿+位移+浮空，兼具输出控制和机动性的全能射手',
-    abilityEn: 'Enhanced AA pierce + dash + knockup, versatile marksman combining DPS, CC and mobility'
-  },
-
-  // --- 苍 ---
-  cang: {
-    abilityZh: '远程消耗+控制+收割能力兼备，技能连招容错空间大',
-    abilityEn: 'Balanced range poke + control + cleanup kit, skill combo allows large error margin'
-  },
-
-  // --- 元流之子(射手) ---
-  yuanliuzhizi_archer: {
-    abilityZh: '强化普攻贯穿+位移+浮空，核心是持续输出和灵活进场的结合',
-    abilityEn: 'Enhanced AA pierce + dash + knockup, core strength lies in combining sustained output with flexible engagement'
-  },
-
-  // ================================================================
-  // 二、辅助（游走）- Support
-  // ================================================================
-
-  // --- 盾山 ---
-  dunshan: {
-    abilityZh: '举盾格挡飞行技能天敌，克弹道型法师和射手体系，四技能过载军拳强制控制',
-    abilityEn: 'Shield blocks projectile-based abilities, hard-counters mage/marksman projectile comps, Skill 4 overloaded punch forces CC'
-  },
-
-  // --- 钟馗 ---
-  zhongkui: {
-    abilityZh: '二技能钩中即致命级控制，一钩定乾坤改变战场局势，命中收益极高',
-    abilityEn: 'Skill 2 hook is lethal-level CC when landed, single hook can turn the tide, extremely high reward on hit'
-  },
-
-  // --- 牛魔 ---
-  niumo: {
-    abilityZh: '硬辅模板保人开团两用，双控制技能配合护盾保护能力稳定',
-    abilityEn: 'Hard support template for both peel and engage, dual-CC skills with shield provide reliable protection'
-  },
-
-  // --- 庄周 ---
-  zhuangzhou: {
-    abilityZh: '群体解控克硬控开团体系，免伤承伤一体自保能力强，解控节奏破坏力一流',
-    abilityEn: 'Group cleanse counters hard-CC engage comps, damage reduction plus tankiness offers strong survival, top-tier disruption'
-  },
-
-  // --- 明世隐 ---
-  mingshiyin: {
-    abilityZh: '单人核增幅强度顶尖，连线增加攻击力和移速，保单核推进效率极高',
-    abilityEn: 'Single-target amplification is best-in-class, link boosts AD and MS, extremely efficient at enabling solo-carry pushes'
-  },
-
-  // --- 蔡文姬 ---
-  caiwenji: {
-    abilityZh: '奶量和拉扯治疗量充足，双控制自保能力不错，加血加速团队续航拉满',
-    abilityEn: 'Healing volume and kiting sustain are ample, dual-CC offers decent self-peel, heal + speed max out team sustainability'
-  },
-
-  // --- 鬼谷子 ---
-  guiguzi: {
-    abilityZh: '隐身加速带队友开团顶级，拉人多段控制配合爆发秒C能力强',
-    abilityEn: 'Invisibility speed boost enables best-in-class team engages, multi-pull CC paired with burst eliminates carries'
-  },
-
-  // --- 廉颇（辅）---
-  lianpin: {
-    abilityZh: '霸体免控克鬼谷子马超关羽等需要空间的英雄，连续控制开团能力强',
-    abilityEn: 'Body-block CC immunity counters space-dependent heroes like Guiguzi/Ma Chao/Guan Yu, chain-CC engage is powerful'
-  },
-
-  // --- 东皇太一 ---
-  donghuangtaiyi: {
-    abilityZh: '全峡谷最稳定的锁头点控，以命换命强行按住一人，克一切花哨机动英雄',
-    abilityEn: 'Most stable point-and-click lockdown in the game, trade-for-trade forced pin, counters all fancy mobility heroes'
-  },
-
-  // --- 苏烈 ---
-  sulie: {
-    abilityZh: '复活机制保底反开能力强，击退控制打断敌方进场节奏',
-    abilityEn: 'Revive mechanic guarantees safety net, knockback CC interrupts enemy dive tempo'
-  },
-
-  // --- 张飞 ---
-  zhangfei: {
-    abilityZh: '保人反打开团都极强，变身吼大提供超大范围击退和护盾',
-    abilityEn: 'Exceptional at peel, counter-engage and initiate, transformed ult offers massive AOE knockback and shield'
-  },
-
-  // --- 瑶 ---
-  yao: {
-    abilityZh: '附身保核能力强，实时护盾和控制技能保护C位，自动跟随解放操作',
-    abilityEn: 'Strong bodyguard carry-protection, real-time shield and CC protect the carry, auto-follow reduces micro burden'
-  },
-
-  // --- 大乔 ---
-  daqiao: {
-    abilityZh: '电梯体系转线支援最强之一，召唤传送改变战场人数差，克带线流英雄',
-    abilityEn: 'Teleport system offers best rotation support, summon warp creates number advantages, counters split-push strategies'
-  },
-
-  // --- 太乙真人 ---
-  taiyizhenren: {
-    abilityZh: '保核和前期节奏都强，复活机制提升队伍容错率，控制链配合抓人稳定',
-    abilityEn: 'Strong carry-protection and early tempo, resurrection raises team error margin, stable CC chain for ganks'
-  },
-
-  // --- 鲁班大师 ---
-  lubandashi: {
-    abilityZh: '开团和保人兼具，链子拉回敌人或推开友军，功能全面吃配合',
-    abilityEn: 'Balances engage and protection, links pull enemies or push allies, versatile but coordination-dependent'
-  },
-
-  // --- 孙膑 ---
-  sunbin: {
-    abilityZh: '拉扯抬血团战功能顶级，二技能时光倒流回复大量血量并加速，克制站桩阵容',
-    abilityEn: 'Top-tier kiting/heal teamfight utility, Skill 2 time reverse restores massive HP + speed, counters stationary comps'
-  },
-
-  // --- 刘禅 ---
-  liushan: {
-    abilityZh: '拆塔机制独特+连续控制强，对敌方防御塔造成额外伤害，团战中多段打断能力出色',
-    abilityEn: 'Unique tower-destroy mechanic + strong chain CC, deals bonus damage to enemy turrets, excellent multi-interrupt capability in teamfights'
-  },
-
-  // --- 墨子（辅）---
-  mozi: {
-    abilityZh: '远程控制先手好用，炮击远程消耗+眩晕控制，全距离干扰能力强',
-    abilityEn: 'Long-range initiation is effective, cannon poke + stun CC, excellent all-range harassment capability'
-  },
-
-  // --- 桑启 ---
-  sangqi: {
-    abilityZh: '拉扯和持续保人好，草丛机动治疗兼顾，多段回复维持战线',
-    abilityEn: 'Good kiting and sustained protection, grass mobility + healing combined, multi-tick recovery maintains frontlines'
-  },
-
-  // --- 朵莉亚 ---
-  duoliya: {
-    abilityZh: '刷新队友大招联动上限高，体系价值强但依赖配合目标',
-    abilityEn: 'Refreshes ally ultimate for high combo potential, strong system value but depends on coordination target'
-  },
-
-  // --- 少司缘 ---
-  shaosiyuan: {
-    abilityZh: '多段控制+治疗+伤害一体，灵活的技能组合适应多种团战场景',
-    abilityEn: 'Integrated multi-CC + heal + damage, flexible skill combos adapt to multiple teamfight scenarios'
-  },
-
-  // --- 空空儿 ---
-  kongkonger: {
-    abilityZh: '高机动多段突进+隐身机制，花活型辅助切后排和骚扰能力强',
-    abilityEn: 'High mobility multi-dash + stealth, trickster support excels at backline assassination and harassment'
-  },
-
-  // --- 元流之子(辅助) ---
-  yuanliuzhizi_support: {
-    abilityZh: '护盾+控制+增益一体，全能型辅助适配多种阵容搭配',
-    abilityEn: 'Integrated shield + CC + buff, versatile support fits various comp compositions'
-  },
-
-  // --- 大禹 ---
-  dayu: {
-    abilityZh: '重装站场+控制能力兼备，抗伤和保护队友能力均衡',
-    abilityEn: 'Balances heavy positioning + control capability, well-rounded damage-taking and ally protection'
-  },
-
-  // --- 猪八戒 ---
-  zhubajie: {
-    abilityZh: '团战和赖线能力强，大范围控制+高回复保证持续站场',
-    abilityEn: 'Strong teamfight and lane sustain, wide AOE CC + high recovery ensures sustained battlefield presence'
-  },
-
-  // ================================================================
-  // 三、法师（中路）- Mage
-  // ================================================================
-
-  // --- 张良 ---
-  zhangliang: {
-    abilityZh: '全峡谷最稳定的定点压制，大招按住一人无法操作克制一切高机动英雄（露娜李白韩信镜等）',
-    abilityEn: 'Most stable point-lockdown in the game, ult pins one target unable to act countering all high-mobility heroes (Luna/Li Bai/Han Xin/Jing etc.)'
-  },
-
-  // --- 妲己 ---
-  daji: {
-    abilityZh: '稳定单体抓人秒后排强，一套技能连招简单有效，蹲草丛威慑力大',
-    abilityEn: 'Reliable single-target pick-off with simple but effective combo, bush ambush threat is significant'
-  },
-
-  // --- 安琪拉 ---
-  anqila: {
-    abilityZh: '爆发极高草丛秒人能力强，火盾提供生存保障，大招全图追踪输出',
-    abilityEn: 'Extreme burst with strong bush-ambush kill power, fire shield ensures survival, ult tracks globally'
-  },
-
-  // --- 王昭君 ---
-  wangzhaojun: {
-    abilityZh: '封路分割战场能力强，大招冰冻大范围控场，打团和守塔都优秀',
-    abilityEn: 'Strong zone denial and battlefield splitting, ult freeze offers huge AOE control, great in both teamfights and tower defense'
-  },
-
-  // --- 小乔 ---
-  xiaoqiao: {
-    abilityZh: '爆发稳定打团能力强，二技能吹飞自保一手，输出环境好时毁伤极高',
-    abilityEn: 'Stable burst with strong teamfight damage, Skill 2 blowaway provides self-peel, devastating when given space'
-  },
-
-  // --- 甄姬 ---
-  zhenji: {
-    abilityZh: '团战冰冻控场能力强，弹弹球混战伤害爆炸，自保依赖冰冻留人',
-    abilityEn: 'Teamfight freeze control is strong, bouncing balls deal explosive chaos damage, survival relies on freezing retention'
-  },
-
-  // --- 周瑜 ---
-  zhouyu: {
-    abilityZh: '线权强推塔快，火区持续伤害+风向控制分割战场，阵地战压制力一流',
-    abilityEn: 'Strong lane priority with fast tower push, fire zone DoT + wind control splits battlefield, top-tier positional suppression'
-  },
-
-  // --- 嬴政 ---
-  yingzheng: {
-    abilityZh: '超远消耗压线能力强，飞剑全覆盖清兵推塔，中期节奏推进压迫感强',
-    abilityEn: 'Ultra-long range poke with strong line pressure, sword rain covers all for wave clear and tower push, midgame tempo feels oppressive'
-  },
-
-  // --- 姜子牙 ---
-  jiangziya: {
-    abilityZh: '减速消耗斩杀线高，经验机制帮助团队抢等级，大招封路分割能力强',
-    abilityEn: 'Slow-poke with high execute threshold, XP mechanic helps team level-gate, ult zone-denial splits battlefield effectively'
-  },
-
-  // --- 杨玉环 ---
-  yangyuhuan: {
-    abilityZh: '回复拉扯团战功能强，控制+奶+伤害一体，适配多种阵容体系',
-    abilityEn: 'Recovery-kiting teamfight utility is strong, integrated CC + heal + damage, adapts to various comp archetypes'
-  },
-
-  // --- 貂蝉 ---
-  diaochan: {
-    abilityZh: '持续作战能力顶级的法刺，真伤叠加打肉效率高，花舞旋转规避伤害',
-    abilityEn: 'Top-tier sustained combat assassin mage, true damage stacks shred tanks efficiently, dance spin dodges damage'
-  },
-
-  // --- 诸葛亮 ---
-  zhugeliang: {
-    abilityZh: '收割切后排能力强，大招远程狙击触发被动刷钱，支援速度和滚雪球快',
-    abilityEn: 'Strong cleanup and backline elimination, long-range snipe triggers passive gold generation, fast roams and snowballing'
-  },
-
-  // --- 不知火舞 ---
-  buzhihuowu: {
-    abilityZh: '消耗先手切后排都强，多段位移灵活切入，扇子伤害高冷却短',
-    abilityEn: 'Strong poke, initiation and backline elimination, multi-dash flexible engagement, fan damage is high with short CDs'
-  },
-
-  // --- 上官婉儿 ---
-  shangguwaner: {
-    abilityZh: '越塔斩C切后排顶级，飞天期间无敌无法选中，爆发刺客中的佼佼者',
-    abilityEn: 'Best-in-class tower-dive carry elimination, untargetable during flight phase, standout among burst assassins'
-  },
-
-  // --- 海月 ---
-  haiyue: {
-    abilityZh: '单点拉人幻境孤立打击，打刺客和法刺很强，强制1v1环境公平对决',
-    abilityEn: 'Single-target pull into isolation dimension, very strong vs assassin mages, forces fair 1v1 environment'
-  },
-
-  // --- 女娲 ---
-  nuwa: {
-    abilityZh: '分割地形守线能力强，矩阵方块封路+远程支援，全局视野和信息优势',
-    abilityEn: 'Terrain-splitting and line-holding are strong, matrix block + long-range support, global vision and information advantage'
-  },
-
-  // --- 沈梦溪 ---
-  shenmengxi: {
-    abilityZh: '线权消耗支援强，炸弹大范围AOE清兵推进，游走gank节奏快速',
-    abilityEn: 'Lane priority, poke and roams are strong, bombs offer large AOE wave-clear and push, fast gank tempo'
-  },
-
-  // --- 扁鹊 ---
-  bianque: {
-    abilityZh: '回复持续输出能力强，毒药叠加克消耗流法师，奶人+毒人双重身份',
-    abilityEn: 'Recovery and sustained output are strong, poison stacks counter poke mages, dual identity as healer and poisoner'
-  },
-
-  // --- 西施 ---
-  xishi: {
-    abilityZh: '先手拉人配合强，牵引强制位移帮队友留人，开团工具人中顶级',
-    abilityEn: 'Strong initiation pull synergy, forced displacement helps allies lock targets, top-tier among engagement tools'
-  },
-
-  // --- 干将莫邪 ---
-  ganjiangmoye: {
-    abilityZh: '远程爆发顶级，剑气远近双模式输出，精准预判时秒杀能力极强',
-    abilityEn: 'Top-tier long-range burst, dual-mode near/far sword damage, one-shot potential is extreme when accurate'
-  },
-
-  // --- 海诺 ---
-  hainuo: {
-    abilityZh: '长手+回血+位移三合一，近远双形态灵活切换，生存和输出兼顾',
-    abilityEn: 'Long range + heal + dash triple combo, near/far dual-form flexible switch, balances survival and output'
-  },
-
-  // --- 弈星 ---
-  yixing: {
-    abilityZh: '分割战场打团强，棋阵大范围限制+控制，自保能力不错',
-    abilityEn: 'Battlefield split and teamfight focus,棋阵 large-area restriction + CC, decent self-survival'
-  },
-
-  // --- 金蝉 ---
-  jinchan: {
-    abilityZh: '紧箍咒限制突进英雄位移，克冲阵体系和多段位移英雄',
-    abilityEn: 'Headband restricts dash-based heroes, counters dive compositions and multi-dash characters'
-  },
-
-  // --- 高渐离 ---
-  gaojianli: {
-    abilityZh: '团战AOE爆发强，大招免伤进场输出，持续范围伤害切割后排',
-    abilityEn: 'Strong teamfight AOE burst, ult damage reduction enables diving, sustained range damage cuts backlines'
-  },
-
-  // --- 米莱狄 ---
-  milady: {
-    abilityZh: '推塔和单抓强，机器人军团拆塔牵制，带线牵制打乱敌方节奏',
-    abilityEn: 'Tower pushing and single-target focus strong, robot army dismantles towers and disrupts enemy tempo'
-  },
-
-  // --- 武则天 ---
-  wuzetian: {
-    abilityZh: '全图支援团战先手强，大招击飞大范围控制，女帝威严压制力持久',
-    abilityEn: 'Global support with strong teamfight initation, ult offers massive AOE knockup, empress pressure is persistent'
-  },
-
-  // --- 嫦娥 ---
-  change: {
-    abilityZh: '前中期强爆发和坦度兼具，蓝量转化护盾机制独特，法坦刺客混合体',
-    abilityEn: 'Strong early-mid game with balanced burst and tankiness, unique mana-to-shield conversion, mage-tank-assassin hybrid'
-  },
-
-  // --- 元流之子(法师) ---
-  yuanliuzhizi_magic: {
-    abilityZh: '控制+伤害+机动性平衡，多段技能衔接流畅，适合多种打法风格',
-    abilityEn: 'Balanced CC + damage + mobility, smooth multi-skill chaining, suits various playstyles'
-  },
-
-  // ================================================================
-  // 四、打野 - Jungle
-  // ================================================================
-
-  // --- 露娜 ---
-  luna: {
-    abilityZh: '月光剑舞天花板级收割能力，无限连招机制上限极高，标记刷新持续输出恐怖',
-    abilityEn: 'Moonlight Dance offers ceiling-tier cleanup, infinite combo has extremely high mechanical cap, mark-refresh sustained damage is terrifying'
-  },
-
-  // --- 李白 ---
-  libai: {
-    abilityZh: '拉扯消耗切后排强，无法选中外加多段位移，十步杀一人千里不留行',
-    abilityEn: 'Kiting poke and backline elimination strong, untargetable plus multi-dash, elusive assassin playstyle'
-  },
-
-  // --- 韩信 ---
-  hanxin: {
-    abilityZh: '节奏反野带线强，三段位移机动性拉满，挑兵线偷野区牵制力顶级',
-    abilityEn: 'Tempo, counter-jungle and split-push strong, triple-dash maximizes mobility, wave/steal harassment is top-tier'
-  },
-
-  // --- 孙悟空 ---
-  sunwukong: {
-    abilityZh: '爆发秒C能力强，护身棍挡伤害+强控制，身法猴暴击伤害极高',
-    abilityEn: 'Strong burst elimination of carries, defensive staff blocks damage + hard CC, trickster monkey crit damage is extreme'
-  },
-
-  // --- 刘备 ---
-  liubei: {
-    abilityZh: '近身爆发前期强，盾厚吸血持续作战，野区对拼压制力出色',
-    abilityEn: 'Close-range burst strong early game, thick shield + lifesteal for sustain, jungle duel suppression is excellent'
-  },
-
-  // --- 铠（野）---
-  kai_jg: {
-    abilityZh: '单挑强切后排狠，变身魔神后双刀切割伤害爆表，一刀一个脆皮',
-    abilityEn: 'Strong 1v1 with devastating backline cut, transformed Demon God form deals insane double-blade damage, one-shot squishes'
-  },
-
-  // --- 典韦 ---
-  dianwei: {
-    abilityZh: '反打硬拼真实伤害高，怒气叠加攻速移速拉满，疯狗模式下谁都不怕',
-    abilityEn: 'Counter-attack brute-force true damage is high, rage stacks maximize AS/MS, berserk mode fears nothing'
-  },
-
-  // --- 澜 ---
-  lan: {
-    abilityZh: '切后排收割顶级，被动狩猎标记多段伤害，下水道潜水绕后能力强',
-    abilityEn: 'Top-tier backline elimination and cleanup, passive hunt mark multi-hit damage, submarine dive flanking is strong'
-  },
-
-  // --- 盘古 ---
-  pangu: {
-    abilityZh: '机制级克普攻核英雄，缴械让平A英雄废掉，拳头形态霸体+高爆发',
-    abilityEn: 'Mechanically counters AA-centric heroes, disarm renders auto-attackers useless, fist form grants superarmor + high burst'
-  },
-
-  // --- 镜 ---
-  jing: {
-    abilityZh: '镜像换位操作上限高，大招本体镜像同步输出爆发恐怖，入场出场自如',
-    abilityEn: 'Mirror-swap has extremely high skill ceiling, ult sync-mirror output offers terrifying burst, free entry and exit'
-  },
-
-  // --- 娜可露露 ---
-  nakelulu: {
-    abilityZh: '切脆皮强一击必杀，大招腾空落地爆发，百分比伤害对坦克也有威胁',
-    abilityEn: 'Strong squishy elimination with guaranteed kills, ult airborne-drop burst, % damage threatens even tanks'
-  },
-
-  // --- 裴擒虎 ---
-  peiqinhu: {
-    abilityZh: '前期节奏王双形态切换，人形态POKE虎形态近战，入侵反野压制力极强',
-    abilityEn: "Early-game tempo king with dual-form switch, human form pokes tiger form melee, invasion suppression is extremely strong"
-  },
-
-  // --- 云中君 ---
-  yunzhongjun: {
-    abilityZh: '无视地形越墙飞行突进，空中无法选中持续输出，前中期抓人和反野强',
-    abilityEn: 'Terrain-ignoring wall-crossing flight dive, airborne untargetable sustained output, strong early ganking and counter-jungling'
-  },
-
-  // --- 暃 ---
-  fei: {
-    abilityZh: '墙体机动性强上下翻飞，多段位移切入逃脱自如，地形复杂地图发挥空间大',
-    abilityEn: 'Strong wall-based mobility with vertical traversal, multi-dash enables free entry/escape, excels on complex terrain maps'
-  },
-
-  // --- 曜 ---
-  yao2: {
-    abilityZh: '拉扯和容错高，星屑归巢回血+免伤，能量条管理好的情况下极难被击杀',
-    abilityEn: 'Strong kiting with high fault tolerance, star return heals + damage reduction, nearly unkillable when energy managed well'
-  },
-
-  // --- 赵云 ---
-  zhaoyun: {
-    abilityZh: '稳定开团容错高，七进七出多段位移+击飞，打野中的六边形战士',
-    abilityEn: 'Reliable initiation with high fault tolerance, seven-entry multi-dash + knockup, jungle\'s well-rounded fighter'
-  },
-
-  // --- 司马懿（野）---
-  simayi: {
-    abilityZh: '切后排法伤突进强，沉默+高移速隐身切入，爆发刺客中少有的法系代表',
-    abilityEn: 'Backline-eliminating magic-damage dive strong, silence + high-speed stealth infiltration, rare magic representative among burst assassins'
-  },
-
-  // --- 阿轲 ---
-  ake: {
-    abilityZh: '背后暴击收割爆炸，隐身绕后爆发高，击杀刷新滚雪球能力极强',
-    abilityEn: 'Backstab crit cleanup is explosive, stealth flanking burst is high, kill-refresh snowballing is extremely strong'
-  },
-
-  // --- 兰陵王 ---
-  lanlingwang: {
-    abilityZh: '前中期抓人顶级隐身接近，瞬间爆发控制连招稳定，视野压力给足对手',
-    abilityEn: 'Best-in-class early-mid ganking with stealth approach, instant burst-CC combo is consistent, applies maximum vision pressure'
-  },
-
-  // --- 阿古朵 ---
-  agudo: {
-    abilityZh: '节奏控图能力强，球球替伤+放牧机制独特，推塔转线牵制力出色',
-    abilityEn: 'Strong tempo and map control, Ball-Ball substitute + shepherd mechanic is unique, tower-push rotation harassment is excellent'
-  },
-
-  // --- 橘右京 ---
-  juyoujing_bl: {
-    abilityZh: '技能型爆发换血强，居合拔刀位移+控制，克缴械类英雄',
-    abilityEn: 'Skill-based burst trade is strong, iaijutsu slash dash + CC, counters disarm-type heroes'
-  },
-
-  // --- 宫本武藏 ---
-  gongben: {
-    abilityZh: '二段跳锁定C位强，重做后多段空中控制+免伤，针对射手和法师效果好',
-    abilityEn: 'Two-stage jump locks onto carries, reworked multi-airborne CC + damage reduction, effective against marksman and mages'
-  },
-
-  // --- 梦奇（野）---
-  mengqi_jg: {
-    abilityZh: '前期站场和带线强，质量叠加高坦度高伤，胖胖消耗让人头疼',
-    abilityEn: 'Early game presence and split-push strong, mass stacking gives high tankiness and damage, chonky sustain is annoying to face'
-  },
-
-  // --- 元流之子(刺客) ---
-  yuanliuzhizi_assassin: {
-    abilityZh: '多段突进切后排强，灵活位移+爆发连招，进场时机选择多样',
-    abilityEn: 'Multi-dash backline assassination strong, flexible movement + burst combo, diverse engagement timing options'
-  },
-
-  // --- 亚瑟（野）---
-  yase_jg: {
-    abilityZh: '沉默+加速+真伤多合一，抓人稳定追击能力强，新手友好但强度不低',
-    abilityEn: 'Silence + speed + true damage all-in-one, reliable catching with strong chase, beginner-friendly but potent'
-  },
-
-  // --- 百里玄策 ---
-  bailixuance: {
-    abilityZh: '钩中就起飞收割能力强，勾镰控制链+位移爆发，节奏型打野代表',
-    abilityEn: 'Once hooked the snowball starts, hook-chain CC + dash burst, represents tempo-oriented junglers'
-  },
-
-  // --- 云缨 ---
-  yunying: {
-    abilityZh: '节奏和团战都不错，枪意叠加多段控制+伤害，持续作战能力较强',
-    abilityEn: 'Decent tempo and teamfight, gun-intent stacks give multi-CC + damage, sustained combat capability is solid'
-  },
-
-  // ================================================================
-  // 五、对抗路（边路）- Toplane
-  // ================================================================
-
-  // --- 马超 ---
-  machao: {
-    abilityZh: '拉扯收割支援顶级，冷晖之枪多段突进移速极快，捡枪机制让机动性拉满',
-    abilityEn: 'Top-tier kiting cleanup and support, multi-dash spear with extreme speed pickup, gun-collecting mechanic maximizes mobility'
-  },
-
-  // --- 夏洛特 ---
-  xialuote: {
-    abilityZh: '七星光芒剑黏人强，多段减伤+霸体持续输出，单挑和抗压能力俱佳',
-    abilityEn: 'Seven-Star Radiant Sword sticks to targets, multi-stack damage reduction + superarmor sustained output, excellent at both 1v1 and tanking pressure'
-  },
-
-  // --- 蒙恬 ---
-  mengtian: {
-    abilityZh: '站场抗压团战顶级，方阵形态正面硬度极高，群体伤害+控制+减伤一体',
-    abilityEn: 'Top-tier positional tanking and teamfight, phalanx form has extreme frontal hardness, integrated group damage + CC + DR'
-  },
-
-  // --- 狂铁 ---
-  kuangtie: {
-    abilityZh: '对线压制力强，充能后高爆发+高回复，武器切换电刀重击伤害爆表',
-    abilityEn: 'Strong lane suppression, charged high burst + high recovery, weapon-switch electro-smite damage is off the charts'
-  },
-
-  // --- 老夫子 ---
-  laofuzi: {
-    abilityZh: '单挑锁人顶级，捆绑+免伤让对面无法还手，栈道机制单挑几乎无敌',
-    abilityEn: 'Top-tier 1v1 lockdown, bind + damage reduction leaves opponent helpless, stack mechanic is nearly invincible in duels'
-  },
-
-  // --- 花木兰 ---
-  huamulan: {
-    abilityZh: '操作上限高切C强，轻重剑双形态灵活切换，轻剑灵活重剑爆发',
-    abilityEn: 'High skill ceiling carry elimination, light/heavy sword dual-form switch, light form flexibility + heavy form burst'
-  },
-
-  // --- 夏侯惇 ---
-  xiahoudun: {
-    abilityZh: '六边形战坦容错高，真盾+控制+续航一体，抗压和打团都靠谱',
-    abilityEn: 'Well-rounded battle-tank with high fault tolerance, true-shield + CC + sustain integrated, reliable at both tanking and teamfights'
-  },
-
-  // --- 芈月 ---
-  miyue: {
-    abilityZh: '拉扯单带打战坦强，暗影之力持续法伤+吸血+减速，黏人流打法让对手难受',
-    abilityEn: 'Kiting split-push anti-battle-tank strong, shadow force sustained magic damage + lifesteal + slow, sticky playstyle frustrates opponents'
-  },
-
-  // --- 元歌 ---
-  yuange: {
-    abilityZh: '消耗和单抓顶级傀儡操控复杂多变，傀儡探路+本体现身爆发连招',
-    abilityEn: 'Top-tier poke and single-target elimination, puppet manipulation complex and variable, puppet scout +本体 appearance burst combo'
-  },
-
-  // --- 关羽 ---
-  guanyu: {
-    abilityZh: '支援团战分割战场顶级，冲锋状态下高移速+群控，骑马绕后切入威胁大',
-    abilityEn: 'Top-tier support teamfight and battlefield splitting, mounted high-speed + group-CC, horseback flanking threat is major'
-  },
-
-  // --- 吕布 ---
-  lvbu: {
-    abilityZh: '真伤克一切厚前排和护盾战边，方天画斩附魔真伤，跳大团控进场能力强',
-    abilityEn: 'True damage counters all bulky frontlines and shield fighters, Sky Piercer true damage on attachment, ult jump-AOE engage is strong'
-  },
-
-  // 注：橘右京共用上方 juyoujing_bl 条目
-
-  // --- 姬小满 ---
-  jixiaoman: {
-    abilityZh: '多段抓取打拉扯强，一/二技能组合变化多端，控制链衔接紧密难躲避',
-    abilityEn: 'Multi-grab kiting is strong, Skill 1/2 combo variations are numerous, tight CC chain is hard to dodge'
-  },
-
-  // --- 亚连 ---
-  alian: {
-    abilityZh: '硬顶控制进场强，防御姿态减伤+混伤输出，半肉半C定位让对面不知道怎么防',
-    abilityEn: 'Hard-tanking CC engagement strong, defensive stance DR + mixed damage, semi-tank semi-carry confuses enemy itemization'
-  },
-
-  // --- 司空震（边）---
-  sikongzhen: {
-    abilityZh: '风筝持续输出强，雷电法王多段位移+护盾，拉扯战中持续积累雷击伤害',
-    abilityEn: 'Kiting sustained output strong, lightning lord multi-dash + shield, sustained lightning damage accumulation during kite-fights'
-  },
-
-  // --- 达摩 ---
-  damo: {
-    abilityZh: '墙体斩杀和开团强，上墙拳控制+爆发伤害，地形利用好的时候强度翻倍',
-    abilityEn: 'Wall-slam execution and engage strong, wall-punch CC + burst damage, strength doubles with good terrain usage'
-  },
-
-  // --- 项羽 ---
-  xiangyu: {
-    abilityZh: '抗压保护团战功能强，霸体冲撞+群体控制+免伤，团队守护者定位明确',
-    abilityEn: 'Strong抗压 protection and teamfight utility, superarmor charge + group-CC + DR, clearly defined team guardian role'
-  },
-
-  // --- 程咬金 ---
-  chengyaojin: {
-    abilityZh: '单带和回复强力不讲理回血机制，血越低越猛让对面不想跟他打',
-    abilityEn: 'Strong split-push and regeneration, unreasonable low-HP healing mechanic, gets stronger at lower HP making opponents avoid him'
-  },
-
-  // --- 杨戬 ---
-  yangjian: {
-    abilityZh: '中期节奏强，哮天犬标记+斩杀+续航，狗咬标记让残血英雄无所遁形',
-    abilityEn: 'Strong mid-game tempo, celestial dog mark + execute + sustain, dog-mark reveal leaves no place for low-HP heroes to hide'
-  },
-
-  // --- 雅典娜（边）---
-  yadianna: {
-    abilityZh: '前中期强贴脸爆发高，枪矛突进+护盾+CD刷新，献祭流玩法牵制力极强',
-    abilityEn: 'Strong early-mid game with high close-range burst, spear thrust + shield + CD refresh, sacrifice-style play has extreme map pressure'
-  },
-
-  // --- 哪吒（边）---
-  nezha: {
-    abilityZh: '全球支援和切C强，火焰大招锁定飞向敌方C位，无法躲避的必中突进',
-    abilityEn: 'Global support and carry elimination strong, fire ult locks onto and flies toward enemy carry, undodgeable homing dive'
-  },
-
-  // --- 曹操 ---
-  caocao: {
-    abilityZh: '续航和追击强，霸气大开大合+高吸血+高移压，开启大招后战斗力暴涨',
-    abilityEn: 'Sustain and pursuit strong, domineering big-play + high lifesteal + high pressure, combat power skyrockets after ult activation'
-  },
-
-  // --- 钟无艳 ---
-  zhongwuyan: {
-    abilityZh: '爆发和控制上限高，锤石化石控制+高伤害，运气好时一锤定音',
-    abilityEn: 'Burst and CC ceiling high, hammer petrification + high damage, lucky strikes can decide fights instantly'
-  },
-
-  // --- 李信 ---
-  lixin: {
-    abilityZh: '双形态灵活光信远程+暗信近战，形态切换应对不同局面',
-    abilityEn: 'Flexible dual-form: Light form ranged + Dark form melee, form switch adapts to different situations'
-  },
-
-  // --- 赵怀真 ---
-  zhaohuaizhen: {
-    abilityZh: '反制飞行物和持续站场强，化劲吸收伤害+控制+回复，四两拨千斤以柔克刚',
-    abilityEn: 'Projectile counter and sustained presence strong, absorb damage + CC + recover, gentle-deflects-heavy martial arts philosophy'
-  },
-
-  // 注：云缨共用上方 yunying 条目
-
-  // --- 刘邦 ---
-  liubang: {
-    abilityZh: '支援体系核心，大招全图传送护盾支援，带线牵制+即时参团能力独一无二',
-    abilityEn: 'Support system core, ult global teleport-shield support, unique split-push + instant teamfight participation'
-  },
-
-  // 注：廉颇对抗路与辅助共用 lianpin 条目，见上方辅助部分
-
-  // --- 白起 ---
-  baiqi: {
-    abilityZh: '强开和留人能力强，嘲讽大范围控制+回血反击，血量越高威胁越大',
-    abilityEn: 'Strong initiation and retention, taunt AOE control + lifesteal counter-attack, higher HP means greater threat'
-  },
-
-  // --- 孙策（边）---
-  sunce: {
-    abilityZh: '支援开团顶级，驾船撞击+群体控制+支援速度极快，开船进场气势磅礴',
-    abilityEn: 'Top-tier support engage, ship ram + group-CC + extremely fast arrival, ship-enter engagement is majestic'
-  },
-
-  // --- 源流之子（边）---
-  yuanliuzhizi: {
-    abilityZh: '连续控制打关羽很强，多段控制链+稳定站场，功能性战士定位清晰',
-    abilityEn: 'Multi-CC chain counters Guan Yu strongly, multi-CC chain + stable positioning, clearly defined functional fighter role'
-  },
-
-  // --- 大司命 ---
-  dasiming: {
-    abilityZh: '进场和残局能力强，魂链连接+高伤害+生存能力，阴阳师风格的收割刺客',
-    abilityEn: 'Strong entry and cleanup, soul-chain connection + high damage + survival, onmyoji-style cleanup assassin'
-  },
-
-  // --- 影 ---
-  ying2: {
-    abilityZh: '高机动和收割能力强，影分身+多段位移+爆发，来去如影难以捉摸',
-    abilityEn: 'High mobility and cleanup strong, shadow clone + multi-dash + burst, comes and goes like a shadow, elusive'
-  },
-
-  // --- 蚩奼 ---
-  chicha: {
-    abilityZh: '新战边通常进场/面板强势，多段控制+高爆发+生存能力，综合战斗能力强',
-    abilityEn: 'New fighter usually strong entry/base stats, multi-CC + high burst + survival, comprehensive combat capability'
-  },
-};
-
-// 被克制英雄的弱点描述 - 基于王者荣耀130英雄克制数据库
-export const heroWeaknesses: Record<string, WeaknessData> = {
-  // ================================================================
-  // 一、射手（发育路）- ADC
-  // ================================================================
-
-  // --- 后羿 ---
-  houyi: {
-    weaknessZh: '怕突脸、怕封走位、怕超远消耗，无位移被迫走位就掉伤害，被贴身后极其脆弱',
-    weaknessEn: 'Fears dive, zoning and ultra-long poke, no dashes mean losing position loses damage, extremely fragile when dove'
-  },
-
-  // --- 鲁班七号 ---
-  luban7: {
-    weaknessZh: '无位移怕贴脸爆发和强开，很吃保人辅助，一旦被近身几乎没有自保手段',
-    weaknessEn: 'No dashes fears close-range burst and hard engage, heavily dependent on peel supports, nearly zero self-defense when approached'
-  },
-
-  // --- 狄仁杰 ---
-  direnjie: {
-    weaknessZh: '怕超长手压制和先手爆发，虽然解控稳定但极限上限不如高机动射手，被拉扯时输出受限',
-    weaknessEn: 'Fears long-range suppression and first-strike burst, while cleanse is reliable ceiling is below mobile marksman, output limited when kited'
-  },
-
-  // --- 李元芳 ---
-  liyuanfang: {
-    weaknessZh: '怕解印记的英雄（狄仁杰），一套打不死就容易进入真空期，后期上限依赖节奏滚雪球',
-    weaknessEn: 'Fears mark-cleanse heroes (Di Renjie), struggles if initial combo doesn\'t kill, late-game ceiling relies on tempo snowball'
-  },
-
-  // --- 虞姬 ---
-  yuji: {
-    weaknessZh: '怕法伤和持续拉扯，物免只挡物理对法伤无效，面对艾琳法伤和高机动拉扯体系吃力',
-    weaknessEn: 'Fears magic damage and sustained kiting, physical immune only blocks physical, struggles vs Ailin magic damage and high-mobility kite comps'
-  },
-
-  // --- 孙尚香 ---
-  sunshangxiang: {
-    weaknessZh: '怕物免和贴脸反打，一技能翻滚CD期脆弱，滚空后伤害断档非常尴尬',
-    weaknessEn: 'Fears physical immunity and close-range counter, vulnerable during Skill 1 roll CD, very awkward if roll misses'
-  },
-
-  // --- 伽罗 ---
-  jailuo: {
-    weaknessZh: '怕强突脸和爆发切入，开弓后自身也减速不好撤退，被近身后基本没有反抗能力',
-    weaknessEn: 'Fears strong dive and burst entry, self-slow during bow mode hurts retreat, basically helpless when approached'
-  },
-
-  // --- 公孙离 ---
-  gongsunli: {
-    weaknessZh: '容错低失误就暴毙，怕高持续站撸和稳定锁定伤害，伞的位置被判断后就容易被抓到',
-    weaknessEn: 'Low fault tolerance means death on mistake, fears high sustained stand-and-fight and stable locked-on damage, predictable umbrella positions get exploited'
-  },
-
-  // --- 马可波罗 ---
-  makeboluo: {
-    weaknessZh: '怕格挡弹道和解控反打，真伤成型需要时间进场环境要求高，半肉版本爆发不够',
-    weaknessEn: 'Fears parry projectiles and cleanse counter-attack, true damage needs time to scale and requires good entry environment, bruiser version lacks burst'
-  },
-
-  // --- 黄忠 ---
-  huangzhong: {
-    weaknessZh: '一开大就暴露弱点成为靶子，怕超远消耗和持续AOE拆阵地，被绕后或强开时难以应对',
-    weaknessEn: 'Reveals weakness as sitting duck during ult, fears ultra-long poke and AOE position-breaking, struggles when flanked or hard-engaged'
-  },
-
-  // --- 蒙犽 ---
-  mengya: {
-    weaknessZh: '怕高机动拉扯打不到人就很尴尬，自身较笨重容易被风筝，遇到灵活英雄时输出效率大幅下降',
-    weaknessEn: 'Fears high-mobility kiting, very awkward when can\'t hit targets, clumsy and easily kited, output efficiency drops sharply vs mobile heroes'
-  },
-
-  // --- 戈娅 ---
-  gaya: {
-    weaknessZh: '怕更高爆发和更强远程压制，自身输出需要持续累积，被更高维度的输出压制时难以发挥',
-    weaknessEn: 'Fears higher burst and stronger range suppression, output requires accumulation, struggles when suppressed by higher-dimensional damage'
-  },
-
-  // --- 敖隐 ---
-  aoyin: {
-    weaknessZh: '怕超远定点狙杀，进场前被打残就废了，三形态切换有真空期可以被抓住',
-    weaknessEn: 'Fears ultra-long precision sniping, becomes useless if damaged before engagement, form-switch windows can be exploited'
-  },
-
-  // --- 百里守约 ---
-  bailishouyue: {
-    weaknessZh: '怕高机动贴脸和强突进，吃命中率二技能空了就损失巨大，理论克制强但操作门槛最高',
-    weaknessEn: 'Fears high-mobility close-range and strong dives, accuracy-dependent with huge cost on missed Skill 2 shots, theoretically strong but highest skill floor'
-  },
-
-  // --- 艾琳 ---
-  ailin: {
-    weaknessZh: '怕高抗站桩阵地坦射体系，法伤虽好但怕被纯肉装吸收，面对黄忠这类高抗站场英雄吃力',
-    weaknessEn: 'Fears high-resistance stationary tank-shooter comps, magic damage gets absorbed by pure tank builds, struggles vs Huang Zhong type high-resistance positions'
-  },
-
-  // --- 莱西奥 ---
-  laixiao: {
-    weaknessZh: '怕高机动绕技能规避爆发，升空期间虽不可被选但仍可能被打到，怕稳定长手压住输出窗',
-    weaknessEn: 'Fears high-mobility dodge of skills, aerial untargetable but still vulnerable to AoE, fears stable long-range suppressing output windows'
-  },
-
-  // --- 成吉思汗（暂无ID） ---
-
-  // --- 孙权 ---
-  sunquan: {
-    weaknessZh: '如果输出依赖持续平A和中近距离换血，就怕物免、格挡和解控反打，核心被限制后价值骤降',
-    weaknessEn: 'If output relies on sustained AA and mid-range trades, fears physical immunity, parry and cleanse counter, value drops sharply when core is restricted'
-  },
-
-  // --- 苍 ---
-  cang: {
-    weaknessZh: '怕超射程压制和高爆发抢先手，站位被封锁时难以发挥，容错空间中等偏上',
-    weaknessEn: 'Fears outrange suppression and burst first-strike, struggles when positioning restricted, moderate-to-high error margin'
-  },
-
-  // --- 元流之子(射手) ---
-  yuanliuzhizi_archer: {
-    weaknessZh: '核心是强化普攻贯穿+位移+浮空，怕高机动贴身规避、稳定长手狙杀和解控反打，进场时机要求高',
-    weaknessEn: 'Core is enhanced AA pierce + dash + knockup, fears mobile close-range evasion, long-range sniping and cleanse counter, demands precise timing'
-  },
-
-  // ================================================================
-  // 二、辅助（游走）- Support
-  // ================================================================
-
-  // --- 盾山 ---
-  dunshan: {
-    weaknessZh: '举盾姿态怕被绕盾和钩，背对方向是死角，举盾移速慢容易被开',
-    weaknessEn: 'Shield stance fears being hooked or circled, backside is blind spot, slow move speed during shield makes it engage-vulnerable'
-  },
-
-  // --- 钟馗 ---
-  zhongkui: {
-    weaknessZh: '空钩后白给容易送节奏，怕反开和解控，钩到前排送对面机会',
-    weaknessEn: 'Missed hook throws away tempo, fears counter-engage and cleanse, hooking frontline gifts enemy opportunities'
-  },
-
-  // --- 牛魔 ---
-  niumo: {
-    weaknessZh: '怕群体解控后价值骤降，二技能冲上去后如果没有后续控制就很尴尬',
-    weaknessEn: 'Value plummets after group cleanse, awkward if Skill 2 charge lacks follow-up CC'
-  },
-
-  // --- 庄周 ---
-  zhuangzhou: {
-    weaknessZh: '怕非传统控制链和数值压制，硬开能力差不能主动开团，单挑能力一般',
-    weaknessEn: 'Fears non-traditional CC chains and stat-checks, poor hard-engage cannot initiate actively, mediocre 1v1 ability'
-  },
-
-  // --- 明世隐 ---
-  mingshiyin: {
-    weaknessZh: '功能单一怕体系被拆，连线对象被秒就失去价值，怕强开和分散阵容',
-    weaknessEn: 'Single-function fears system being broken, loses value if linked ally gets eliminated, fears hard engage and spread formations'
-  },
-
-  // --- 蔡文姬 ---
-  caiwenji: {
-    weaknessZh: '怕先手秒人来不及奶，本身较脆怕被集火，大招读条怕被打断',
-    weaknessEn: 'Fears instant elimination before healing, relatively squishy and fears focus fire, ult channel fears interruption'
-  },
-
-  // --- 鬼谷子 ---
-  guiguzi: {
-    weaknessZh: '怕霸体和解控和硬反手，路人局吃配合节奏价值虽长期公认但不稳定',
-    weaknessEn: 'Fears superarmor cleanse and hard counterplay, coordination-dependent in ranked, tempo value is well-established but inconsistent'
-  },
-
-  // --- 廉颇（辅）---
-  lianpin: {
-    weaknessZh: '怕无视霸体的点名控制（东皇张良）和真伤，霸体不是无敌仍有弱点',
-    weaknessEn: 'Fears point-and-click CC ignoring superarmor (Dong Huang/Zhang Liang) and true damage, superarmor is not invincible with weaknesses'
-  },
-
-  // --- 东皇太一 ---
-  donghuangtaiyi: {
-    weaknessZh: '吸进去后被反打很伤，怕被拉扯和集火，很吃队友跟伤害不然就是一换一甚至亏',
-    weaknessEn: 'Hurt badly by counter-attack after absorption, fears kiting and focus-fire, highly dependent on ally follow-up damage else trade is even negative'
-  },
-
-  // --- 苏烈 ---
-  sulie: {
-    weaknessZh: '怕击退打断和解控，复活期间如果没人跟就很孤立无援，吃进场时机',
-    weaknessEn: 'Fears knockback interruption and cleanse, isolated during revival if no allies follow, timing-dependent engagement'
-  },
-
-  // --- 张飞 ---
-  zhangfei: {
-    weaknessZh: '怕无视威慑的附体和拉扯体系（瑶），功能全面但单点极致性不如专职辅助',
-    weaknessEn: 'Fears ignore-threat attach systems (Yao) and kiting comps, versatile but lacks specialized single-point excellence'
-  },
-
-  // --- 瑶 ---
-  yao: {
-    weaknessZh: '怕点名秒杀和强开，附体目标被秒自己也危险，正面开团能力弱',
-    weaknessEn: 'Fears targeted elimination and hard engage, dangerous if attached ally gets killed, weak frontal engagement'
-  },
-
-  // --- 大乔 ---
-  daqiao: {
-    weaknessZh: '怕强开拆体系和飞行技能被挡（盾山），单排收益下降，公开攻略认为其极克带线流但也怕被针对',
-    weaknessEn: 'Fears hard-engaged system breaking and blocked flight skills (Dun Shan), ranked value drops, guides say she counters split-push but also vulnerable to targeting'
-  },
-
-  // --- 太乙真人 ---
-  taiyizhenren: {
-    weaknessZh: '怕先手点控和强开压复活收益，复活价值打不出来就很亏，公开教学视为高节奏保核型',
-    weaknessEn: 'Fears point-click CC and hard engage suppressing revive value, big loss if revive doesn\'t trigger, publicly recognized as high-tempo protect-carry type'
-  },
-
-  // --- 鲁班大师 ---
-  lubandashi: {
-    weaknessZh: '怕解控反开和拉到前排，吃配合路人局不稳定，链子收益被化解时无力',
-    weaknessEn: 'Fears cleanse counter-engage and pulling frontline, coordination-dependent and unstable in solo queue, powerless when link value gets neutralized'
-  },
-
-  // --- 孙膑 ---
-  sunbin: {
-    weaknessZh: '怕被盾山挡飞行技能和强突脸，公开攻略提到其克站桩但也怕被硬开打断节奏',
-    weaknessEn: 'Fears Dun Shan blocking flight skills and hard dives, public guides note he counters stationaries but also fears hard-engage tempo disruption'
-  },
-
-  // --- 墨子（辅）---
-  mozi: {
-    weaknessZh: '怕位移和解控降低命中率，技能全是非指向性需要预判，命中率决定上下限',
-    weaknessEn: 'Fears dashes and cleanse reducing accuracy, all skills are skillshot requiring prediction, hit-rate determines performance ceiling'
-  },
-
-  // --- 桑启 ---
-  sangqi: {
-    weaknessZh: '怕先手秒和钩子类控制，奶量和拉扯来不及展开就被控死，怕被瞬间开死',
-    weaknessEn: 'Fears instant elimination and hook-type CC, heal and kiting can\'t deploy before being CC-locked, fears instant death on open'
-  },
-
-  // --- 朵莉亚 ---
-  duoliya: {
-    weaknessZh: '怕锁头强开和先手点控，刷新体系吃不到完整收益就浪费，怕被优先处理',
-    weaknessEn: 'Fears point-click hard engage and initiation CC, refresh system wastes if full value not obtained, prioritized as target'
-  },
-
-  // --- 少司缘 ---
-  shaosiyuan: {
-    weaknessZh: '怕锁头强开和先手控制，技能链被打断就价值大跌，作为新功能辅怕被针对性处理',
-    weaknessEn: 'Fears lockdown hard engage and initiation CC, value drops massively when skill chain interrupted, as new functional support fears targeted handling'
-  },
-
-  // --- 空空儿 ---
-  kongkonger: {
-    weaknessZh: '怕定点控制和硬控反打，高机动花活型怕被按住动不了，容错较低',
-    weaknessEn: 'Fears pinpoint CC and hard counter-control, high-mobile trickster type suffers when pinned down, lower fault tolerance'
-  },
-
-  // --- 元流之子(辅助) ---
-  yuanliuzhizi_support: {
-    weaknessZh: '怕被针对和强开体系拆散，万能型辅助但缺乏极端特长，在专精领域不如专职辅助',
-    weaknessEn: 'Fears targeting and engage-system dismantling, universal support lacking extreme specialization, outclassed by specialists in focused areas'
-  },
-
-  // --- 大禹 ---
-  dayu: {
-    weaknessZh: '如果是重前排持续站场逻辑就怕真伤风筝和持续消耗，回复体系怕被针对拆解',
-    weaknessEn: 'As heavy front-line sustained presence, fears true damage kiting and sustained consumption, recovery system vulnerable to targeted dismantle'
-  },
-
-  // --- 猪八戒 ---
-  zhubajie: {
-    weaknessZh: '怕真伤和持续百分比消耗，回血价值被吕布梦奇等拆掉时很难受，怕"回血变扣血"',
-    weaknessEn: 'Fears true damage and %HP sustained consumption, suffers when heal-value gets countered by Lu Bu/Meng Qi types, fears "healing becoming damage"'
-  },
-
-  // ================================================================
-  // 三、法师（中路）- Mage
-  // ================================================================
-
-  // --- 张良 ---
-  zhangliang: {
-    weaknessZh: '全峡谷最稳定的定点压制，大招按住一人无法操作克制一切高机动英雄（露娜李白韩信镜等）',
-    weaknessEn: 'Most stable point-lockdown in the game, ult pins one target unable to act countering all high-mobility heroes (Luna/Li Bai/Han Xin/Jing etc.)'
-  },
-
-  // --- 妲己 ---
-  daji: {
-    weaknessZh: '怕先手更远的英雄和技能规避，清线能力和持续作战差，一套打完真空期长',
-    weaknessEn: 'Fears longer-ranged initiators and skill dodging, weak waveclear and sustained combat, long cooldown after full combo'
-  },
-
-  // --- 安琪拉 ---
-  anqila: {
-    weaknessZh: '怕多位移绕技能的英雄，火球预判型技能空了就废，高爆发但高风险',
-    weaknessEn: 'Fears multi-dash skill-evading heroes, fireball predication skills leave her useless if missed, high burst but high risk'
-  },
-
-  // --- 王昭君 ---
-  wangzhaojun: {
-    weaknessZh: '怕高机动切入和贴脸，技能预判型怕被近身，冰冻前可以被规避',
-    weaknessEn: 'Fears high-mobility dives and close-range, prediction-type skills struggle when pressured, freeze can be dodged before landing'
-  },
-
-  // --- 小乔 ---
-  xiaoqiao: {
-    weaknessZh: '怕法刺贴脸和突脸爆发，自保只有一技能吹飞，被近身后生存压力大',
-    weaknessEn: 'Fears mage-assassin dives and burst, only Skill 2 blowaway for self-peel, high survival pressure when approached'
-  },
-
-  // --- 甄姬 ---
-  zhenji: {
-    weaknessZh: '怕突脸和位移切后，腿短怕被拉扯，冰冻需要预判和弹跳累积',
-    weaknessEn: 'Fears dive and dash backline-cutting, short legs fear kiting, freeze requires prediction and bounce stacking'
-  },
-
-  // --- 周瑜 ---
-  zhouyu: {
-    weaknessZh: '怕更长手和强突脸，被拉出火区就很难受，火区铺不开时输出大减',
-    weaknessEn: 'Fears longer range and strong dives, miserable when pulled out of fire zone, output drops significantly without fire zone setup'
-  },
-
-  // --- 嬴政 ---
-  yingzheng: {
-    weaknessZh: '怕法刺突脸和强切后排，"炮台法师怕法刺突进"是长期稳定规律，自保能力偏弱',
-    weaknessEn: 'Fears mage-assassin dives and backline cutting, "artillery mages fear assassin dives" is long-established pattern, weak self-defense'
-  },
-
-  // --- 姜子牙 ---
-  jiangziya: {
-    weaknessZh: '怕突脸和不给蓄力时间，被近身后大招蓄力被打断，需要队友保护',
-    weaknessEn: 'Fears dives and denied charging time, ult channel interrupted when approached, needs ally protection'
-  },
-
-  // --- 杨玉环 ---
-  yangyuhuan: {
-    weaknessZh: '怕锁头硬控和张良东皇这类定点控制，输出节奏慢需要时间铺垫，怕被控死',
-    weaknessEn: 'Fears point-click lockdown and Zhang Liang/Dong Huang type pinning controls, slow output pacing needs setup time, fears being controlled to death'
-  },
-
-  // --- 貂蝉 ---
-  diaochan: {
-    weaknessZh: '怕稳定强控和沉默，"强控克貂蝉"长期成立，被控住就一套被秒没法开花',
-    weaknessEn: 'Fears stable hard CC and silence, "hard CC counters Diao Chan" is long-established, controlled means instant death before flowering'
-  },
-
-  // --- 诸葛亮 ---
-  zhugeliang: {
-    weaknessZh: '怕先手瞬控瞬秒和埋伏，手短进场风险大，被动刷新被中断就伤害断档',
-    weaknessEn: 'Fears instant-CC instant-kill ambushes, short range means high entry risk, passive-refresh interruption causes damage gap'
-  },
-
-  // --- 不知火舞 ---
-  buzhihuowu: {
-    weaknessZh: '怕单点锁定控制如海月拉人，进场判断失误容易暴毙，扇子需要命中才有伤害',
-    weaknessEn: 'Fears single-target pin like Hai Yue pull, misjudged entry leads to instant death, fans need to land for damage'
-  },
-
-  // --- 上官婉儿 ---
-  shangguwaner: {
-    weaknessZh: '怕起飞前被控（张良），被控就飞天失败直接废掉，需要找到好的进场时机',
-    weaknessEn: 'Fears pre-flight CC (Zhang Liang), controlled means failed flight and total uselessness, needs good engagement timing'
-  },
-
-  // --- 海月 ---
-  haiyue: {
-    weaknessZh: '怕持续回复和稳定长手输出，拉进去杀不掉就很尴尬，幻境内并非完全无敌',
-    weaknessEn: 'Fears sustained recovery and stable long-range output, awkward if can\'t kill inside dimension, dimension is not fully invincible'
-  },
-
-  // --- 女娲 ---
-  nuwa: {
-    weaknessZh: '怕持续轰炸和更长手的法师，续航差怕被持续消耗，矩阵方块可以被打断',
-    weaknessEn: 'Fears sustained bombardment and longer-range mages, poor sustain vs sustained consumption, matrix blocks can be interrupted'
-  },
-
-  // --- 沈梦溪 ---
-  shenmengxi: {
-    weaknessZh: '怕回复型法师（扁鹊），炸弹消耗被回血抵消时就吃力，打持续回血体系效率低',
-    weaknessEn: 'Fears recovery mages (Bian Que), bomb poke gets negated by healing, inefficient vs sustained heal comps'
-  },
-
-  // --- 扁鹊 ---
-  bianque: {
-    weaknessZh: '怕牵引强开和爆发秒杀，需要时间叠毒层才能打出伤害，怕被瞬秒打不出叠毒',
-    weaknessEn: 'Fears pull-engages and burst elimination, needs time stacking poison layers for damage, fears instant death preventing stack buildup'
-  },
-
-  // --- 西施 ---
-  xishi: {
-    weaknessZh: '怕更长手消耗和压制，清线和正面压制一般，需要配合队友才能发挥最大价值',
-    weaknessEn: 'Fears longer-range poke and suppression, average waveclear and frontal pressure, needs ally coordination for maximum value'
-  },
-
-  // --- 干将莫邪 ---
-  ganjiangmoye: {
-    weaknessZh: '怕全面型长手法师和法刺贴脸，剑气预判需要准度，近身基本没有自保',
-    weaknessEn: 'Fears comprehensive long-range mages and mage-assassin dives, sword prediction requires accuracy, basically zero self-defense up-close'
-  },
-
-  // --- 海诺 ---
-  hainuo: {
-    weaknessZh: '怕稳定定点控制（张良东皇），最怕被按住无法切换形态发挥，控制链一到就危险',
-    weaknessEn: 'Fears stable point-click CC (Zhang Liang/Dong Huang), most fears being pinned unable to form-switch, dangerous once CC chain arrives'
-  },
-
-  // --- 弈星 ---
-  yixing: {
-    weaknessZh: '怕反手冰冻和自保型法师（甄姬），单杀能力一般需要打团发挥作用，怕被消耗',
-    weaknessEn: 'Fears counter-freeze and self-defense mages (Zhen Ji), mediocre 1v1 needs teamfights to shine, fears sustained poke'
-  },
-
-  // --- 金蝉 ---
-  jinchan: {
-    weaknessZh: '怕封路和手长压站位（王昭君嬴政），自身机动性一般怕被风筝，紧箍咒可以被净化',
-    weaknessEn: 'Fears zone denial and long-range pressure (Wang Zhaojun/Ying Zheng), average mobility fears kiting, headband can be cleansed'
-  },
-
-  // --- 高渐离 ---
-  gaojianli: {
-    weaknessZh: '怕禁锢封路和沉默（金蝉张良王昭君），进不了场就没用，大招开了进不去更伤',
-    weaknessEn: 'Fears imprison zone-denial and silence (Jin Chan/Zhang Liang/Wang Zhaojun), useless if can\'t enter, worse when ult active but can\'t engage'
-  },
-
-  // --- 米莱狄 ---
-  milady: {
-    weaknessZh: '怕近身团战法师和高渐离这种AOE清机器人快的，正面大团机器人容易被蒸发',
-    weaknessEn: 'Fears close-range teamfight mages and Gao Jianli type AOE robot-clearers, robots easily evaporated in direct teamfights'
-  },
-
-  // --- 武则天 ---
-  wuzetian: {
-    weaknessZh: '怕框控和点控压站位（弈星海月），正面持续压制不算顶级，需要大招配合才能打出完整控制',
-    weaknessEn: 'Fears box-CC and point-pressing (Yi Xing/Hai Yue), frontal sustained pressure isn\'t top-tier, needs ult for full CC combo'
-  },
-
-  // --- 嫦娥 ---
-  change: {
-    weaknessZh: '怕真伤拆蓝盾和持续拉扯（伽罗吕布），蓝量护盾体系怕被针对，法力值被抽空就脆',
-    weaknessEn: 'Fears true damage shield-break and sustained kiting (Jia Luo/Lu Bu), mana-shield system vulnerable to targeting, brittle when mana drained'
-  },
-
-  // --- 元流之子(法师) ---
-  yuanliuzhizi_magic: {
-    weaknessZh: '怕被先手控和被突脸，作为通用型法师缺乏极端特长，在专精领域不如专职法师',
-    weaknessEn: 'Fears initiation CC and dives, as general-purpose mage lacks extreme specialization, outclassed by specialists in focused areas'
-  },
-
-  // ================================================================
-  // 四、打野 - Jungle
-  // ================================================================
-
-  // --- 露娜 ---
-  luna: {
-    weaknessZh: '怕沉默锁头免伤（孙悟空亚瑟），断大后就废掉，"东皇张良克露娜李白韩信"长期成立',
-    weaknessEn: 'Fears silence lockdown immunity (Sun Wukong/Arthur), becomes useless after missing combo, "Dong Huang/Zhang Liang counters Luna/Li Bai/Han Xin" long-established'
-  },
-
-  // --- 李白 ---
-  libai: {
-    weaknessZh: '怕稳定点控和沉默（韩信亚瑟），刷大的进场点容易被卡，被控住一套打不出来',
-    weaknessEn: 'Fears stable point-control and silence (Han Xin/Arthur), entry points for ult farming easily blocked, can\'t execute combo when controlled'
-  },
-
-  // --- 韩信 ---
-  hanxin: {
-    weaknessZh: '怕反甲硬拼和稳定控制（典韦），容错低被抓到就容易死，身板较脆怕被集火',
-    weaknessEn: 'Fears Thornmail brute-force and stable CC (Dian Wei), low fault tolerance means easy death when caught, squishy and fears focus fire'
-  },
-
-  // --- 孙悟空 ---
-  sunwukong: {
-    weaknessZh: '怕野区硬碰硬（刘备典韦铠），逆风时很难发挥，身法再好也怕数值碾压',
-    weaknessEn: 'Fears jungle brute-force (Liu Bei/Dian Wei/Kai), struggles when behind, no amount of trickery beats stat-crushing'
-  },
-
-  // --- 刘备 ---
-  liubei: {
-    weaknessZh: '怕免伤拉扯（铠镜吕布），不跟你近战就没办法，盾被破后也很脆弱',
-    weaknessEn: 'Fears damage-reduction kiting (Kai/Jing/Lu Bu), can\'t do anything if enemy refuses melee, vulnerable after shield breaks'
-  },
-
-  // --- 铠（野）---
-  kai_jg: {
-    weaknessZh: '怕拉扯骗大（李白露娜貂蝉），大招空窗期明显，变身结束后战斗力骤降',
-    weaknessEn: 'Fears kiting baited ult (Li Bai/Luna/Diao Chan), obvious ult window weakness, combat power drops sharply post-transformation'
-  },
-
-  // --- 典韦 ---
-  dianwei: {
-    weaknessZh: '怕无控风筝和远程拉扯（露娜马可波罗公孙离），摸不到人就完全没用，疯狗模式也怕放风筝',
-    weaknessEn: 'Fears CC-less kiting and range poking (Luna/Marco Polo/Gongsun Li), completely useless if can\'t reach target, berserk mode also fears kiting'
-  },
-
-  // --- 澜 ---
-  lan: {
-    weaknessZh: '怕缴械和锁头控制（盘古东皇张良），依赖普攻被动循环被断就废掉，进场被控就死',
-    weaknessEn: 'Fears disarm and lockdown (Pan Gu/Dong Huang/Zhang Liang), useless when AA-passive cycle broken, dies if controlled on entry'
-  },
-
-  // --- 盘古 ---
-  pangu: {
-    weaknessZh: '怕不吃普攻的技能型打野（橘右京镜赵云），拳头形态伤害不够打不动法系，缴械对技能英雄无效',
-    weaknessEn: 'Fears non-AA skill junglers (Tachibana Ukyo/Jing/Zhao Yun), fist form damage insufficient vs magic types, disarm useless vs skill-based heroes'
-  },
-
-  // --- 镜 ---
-  jing: {
-    weaknessZh: '怕锁头控制和沉默（东皇张良亚瑟），进场被按死就无法输出，镜像换位也需要操作空间',
-    weaknessEn: 'Fears lockdown CC and silence (Dong Huang/Zhang Liang/Arthur), can\'t output if pinned on entry, mirror swap also needs operational space'
-  },
-
-  // --- 娜可露露 ---
-  nakelulu: {
-    weaknessZh: '怕锁头免伤和沉默（东皇张良铠亚瑟），一套秒不掉就很尴尬，进场时机要求高',
-    weaknessEn: 'Fears lockdown immunity and silence (Dong Huang/Zhang Liang/Kai/Arthur), awkward if full combo doesn\'t kill, demands precise entry timing'
-  },
-
-  // --- 裴擒虎 ---
-  peiqinhu: {
-    weaknessZh: '怕野区硬碰硬和点控（典韦铠刘备东皇），拖后期压力大，人形态较脆怕被切',
-    weaknessEn: 'Fears jungle brute-force and point-CC (Dian Wei/Kai/Liu Bei/Dong Huang), struggles in late game, human form squishy and fears dives'
-  },
-
-  // --- 司马懿（野）---
-  simayi: {
-    weaknessZh: '怕定点强控（张良东皇海月狄仁杰），进场即死的恐惧，隐身被识破后也很脆弱',
-    weaknessEn: 'Fears pinpoint hard CC (Zhang Liang/Dong Huang/Hai Yue/Di Renjie), instant-death on entry fear, fragile when stealth revealed'
-  },
-
-  // --- 云中君 ---
-  yunzhongjun: {
-    weaknessZh: '怕硬拼和稳定控制（盘古典韦铠东皇），被控落地就脆皮，飞行状态怕被强制降落',
-    weaknessEn: 'Fears brute-force and stable CC (Pan Gu/Dian Wei/Kai/Dong Huang), fragile when grounded by CC, flight status fears forced landing'
-  },
-
-  // --- 暃 ---
-  fei: {
-    weaknessZh: '怕落地被按和强控（东皇张良铠亚瑟），墙体机动再强也怕被稳定锁头，落地瞬间是最脆弱的',
-    weaknessEn: 'Fears ground-pin and hard CC (Dong Huang/Zhang Liang/Kai/A Lian), wall mobility still fears stable lockdown, landing moment is most vulnerable'
-  },
-
-  // --- 曜 ---
-  yao2: {
-    weaknessZh: '怕回星前被控死（东皇张良），星屑能量被打断就很伤，怕被强行站场拖入长线战',
-    weaknessEn: 'Fears pre-star-return CC-death (Dong Huang/Zhang Liang), star-energy interrupt is painful, fears forced prolonged engagement'
-  },
-
-  // --- 赵云 ---
-  zhaoyun: {
-    weaknessZh: '怕真伤和持续拉扯（吕布貂蝉），极限秒人能力一般，大招进场后被反控就危险',
-    weaknessEn: 'Fears true damage and sustained kiting (Lu Bu/Diao Chan), mediocre extreme-elimination ability, dangerous if countered after ult entry'
-  },
-
-  // --- 阿轲 ---
-  ake: {
-    weaknessZh: '怕视野和硬控及反手保护（东皇张良张飞太乙），开不到后排就很难受，背后暴击条件苛刻',
-    weaknessEn: 'Fears vision and hard CC & counter-peel (Dong Huang/Zhang Liang/Zhang Fei/Tai Yi), struggles when can\'t reach backline, strict backstab crit conditions'
-  },
-
-  // --- 兰陵王 ---
-  lanlingwang: {
-    weaknessZh: '怕视野和肉辅及反手控（太乙张飞东皇鲁班大师），后期隐身被发现后容错低，怕被提前察觉',
-    weaknessEn: 'Fears vision and tank-support & counter-CC (Tai Yi/Zhang Fei/Dong Huang/Luban Master), late-game low fault tolerance when revealed, fears early detection'
-  },
-
-  // --- 阿古朵 ---
-  agudo: {
-    weaknessZh: '怕收野和切宠物及反野（澜韩信裴擒虎），球球被杀后自身很弱，野区被针对就崩盘',
-    weaknessEn: 'Fears jungle-steal and pet-killing (Lan/Han Xin/Pei Qinhu), very weak without Ball-Ball, crumbles when jungle is targeted'
-  },
-
-  // --- 橘右京（野）---
-  juyoujing_jg: {
-    weaknessZh: '怕霸体硬压和位移镜像拉扯（宫本武藏镜），怕被硬顶近战，技能型怕被纯数值压制',
-    weaknessEn: 'Fears superarmor pressure and mirror-dash kiting (Miyamoto Musashi/Jing), fears brute-force melee, skill-type fears pure stat-crushing'
-  },
-
-  // --- 宫本武藏 ---
-  gongben: {
-    weaknessZh: '怕高护盾和真伤（梦奇吕布），打厚前排一般，需要找C位切才有效果',
-    weaknessEn: 'Fears high shields and true damage (Meng Qi/Lu Bu), mediocre vs thick frontlines, must find carries for effectiveness'
-  },
-
-  // --- 梦奇（野）---
-  mengqi_jg: {
-    weaknessZh: '怕真伤和风筝（镜吕布老夫子），"吕布老夫子克梦奇"长期稳定，胖胖被拉扯就很难受',
-    weaknessEn: 'Fears true damage and kiting (Jing/Lu Bu/Lao Fu Zi), "Lu Bu/Lao Fu Zi counters Meng Qi" long-established, chubby suffers when kited'
-  },
-
-  // --- 元流之子(刺客) ---
-  yuanliuzhizi_assassin: {
-    weaknessZh: '怕多段爆发被免伤和被锁头（铠东皇张良亚瑟），多段突进进场被定住就完蛋，怕进场被反制',
-    weaknessEn: 'Fears multi-burst nullified by DR and lockdown (Kai/Dong Huang/Zhang Liang/Arthur), pinned on multi-dash entry means death, fears entry counterplay'
-  },
-
-  // --- 亚瑟（野）---
-  yase_jg: {
-    weaknessZh: '怕持续吸血拉扯（芈月貂蝉），沉默虽然强但怕被风筝，后期单挑能力下降',
-    weaknessEn: 'Fears sustained lifesteal kiting (Mi Yue/Diao Chan), silence strong but fears kiting, late-game 1v1 declines'
-  },
-
-  // --- 百里玄策 ---
-  bailixuance: {
-    weaknessZh: '怕净化解控和强反开（狄仁杰庄周张飞太乙），钩空就很伤，钩到肉也没用',
-    weaknessEn: 'Fears cleanse and hard counter-engage (Di Renjie/Zhuang Zhou/Zhang Fei/Tai Yi), hurt badly on miss hook, useless hooking tanks'
-  },
-
-  // --- 云缨（野）---
-  yunying_jg: {
-    weaknessZh: '怕真伤硬控和站撸战坦（吕布夏侯惇老夫子），长线站撸一般，怕被拖进消耗战',
-    weaknessEn: 'Fears true damage hard-CC and stand-fight tanks (Lu Bu/Xiahou Dun/Lao Fu Zi), mediocre prolonged standing fight, fears dragged into war of attrition'
-  },
-
-  // ================================================================
-  // 五、对抗路（边路）- Toplane
-  // ================================================================
-
-  // --- 马超 ---
-  machao: {
-    weaknessZh: '怕减速霸体和断节奏（夏洛特廉颇蒙恬），"廉颇克马超"是长期经典关系，捡枪被卡就废',
-    weaknessEn: 'Fears slows superarmor and tempo-breaking (Xia Lote/Lian Pin/Meng Tian), "Lian Pin counters Ma Chao" is classic long-term, useless when gun-pickup denied'
-  },
-
-  // --- 夏洛特 ---
-  xialuote: {
-    weaknessZh: '怕霸体减伤和回复战（蒙恬狂铁），打更硬的霸体战边很吃亏，七星剑需要近身才能触发',
-    weaknessEn: 'Fears superarmor DR and sustain battles (Meng Tian/Kuang Tie), loses to harder superarmor fighters, Seven-Star Sword needs proximity to trigger'
-  },
-
-  // --- 蒙恬 ---
-  mengtian: {
-    weaknessZh: '怕多目标吸血和真伤（狂铁吕布），方阵怕被绕侧面，回复怪让他很难受',
-    weaknessEn: 'Fears multi-target lifesteal and true damage (Kuang Tie/Lu Bu), phalanx vulnerable to flanking, sustain monsters give him trouble'
-  },
-
-  // --- 狂铁 ---
-  kuangtie: {
-    weaknessZh: '怕免伤和拉长战线（老夫子花木兰），进场点容易被拿捏，能量条管理不好就弱',
-    weaknessEn: 'Fears DR and extended fights (Lao Fu Zi/Hua Mulan), entry points easily exploitable, weak with poor energy management'
-  },
-
-  // --- 老夫子 ---
-  laofuzi: {
-    weaknessZh: '怕霸体和真伤以及链子价值被化解（花木兰廉颇夏侯惇），"廉颇让老夫子难受"长期成立',
-    weaknessEn: 'Fears superarmor true damage and bind-value neutralization (Hua Mulan/Lian Pin/Xiahou Dun), "Lian Pin troubles Lao Fu Zi" long-established'
-  },
-
-  // --- 花木兰 ---
-  huamulan: {
-    weaknessZh: '怕六边形战坦稳定换血（夏侯惇吕布），重剑形态怕被拉扯，轻剑形态身板较脆',
-    weaknessEn: 'Fears well-rounded tank steady trading (Xiahou Dun/Lu Bu), heavy-sword form fears kiting, light-sword form is squishy'
-  },
-
-  // --- 夏侯惇 ---
-  xiahoudun: {
-    weaknessZh: '怕持续吸血拉扯和真伤（芈月吕布），被长线消耗就很难受，回复跟不上就崩盘',
-    weaknessEn: 'Fears sustained lifesteal kiting and true damage (Mi Yue/Lu Bu), suffers from long-line consumption, collapses if recovery falls behind'
-  },
-
-  // --- 芈月 ---
-  miyue: {
-    weaknessZh: '怕傀儡消耗和强清兵断链（元歌阿古朵关羽），怕高机动收割，暗影之力怕被沉默打断',
-    weaknessEn: 'Fears puppet poke and strong wave-clear chain-break (Yuan Ge/A Gu Duo/Guan Yu), fears high-mobility cleanup, Shadow Power fears silence interrupt'
-  },
-
-  // --- 元歌 ---
-  yuange: {
-    weaknessZh: '怕高速清傀儡和贴脸斩本体（关羽司空震），操作门槛高傀儡被清就很伤，怕被集火本体',
-    weaknessEn: 'Fears fast puppet clear and close-range body-slay (Guan Yu/Si Kong Zhen), high skill floor with painful puppet-loss, fears focus on body'
-  },
-
-  // --- 关羽 ---
-  guanyu: {
-    weaknessZh: '怕连续控制断马腿（源流之子廉颇夏洛特），跑不起来就只是个超级兵，最怕被"停马"',
-    weaknessEn: 'Fears chain-CC leg-break (Source Child/Lian Pin/Xia Lote), can\'t run means just a super minion, worst fear is "stopping the horse"'
-  },
-
-  // --- 吕布 ---
-  lvbu: {
-    weaknessZh: '怕高机动技能型拉扯（橘右京姬小满），怕空一技能没附魔就废了，怕被持续拉扯不打架',
-    weaknessEn: 'Fears high-mobility skill-kiting (Tachibana Ukyo/Ji Xiaoman), useless if Skill 1 misses enchantment, fears sustained refusal-to-engage kiting'
-  },
-
-  // 注：橘右京共用上方 juyoujing_bl 条目
-
-  // --- 姬小满 ---
-  jixiaoman: {
-    weaknessZh: '怕霸体和稳定换血（亚连夏侯惇），怕厚前排打不动，控制链被免伤化解就很亏',
-    weaknessEn: 'Fears superarmor and steady trading (A Lian/Xiahou Dun), struggles vs thick frontlines, loses when CC gets nullified by DR'
-  },
-
-  // --- 亚连 ---
-  alian: {
-    weaknessZh: '怕远程风筝和多段位移（司空震吕布），半肉定位怕被持续拉扯消耗，需要进场才有作用',
-    weaknessEn: 'Fears long-range kiting and multi-dashes (Si Kong Zhen/Lu Bu), semi-tank fears sustained poke kiting, needs engagement for effect'
-  },
-
-  // --- 司空震（边）---
-  sikongzhen: {
-    weaknessZh: '怕锁头硬控（张良东皇），被点名就动不了无法发挥风筝优势，怕被按住一套带走',
-    weaknessEn: 'Fears point-click lockdown (Zhang Liang/Dong Huang), can\'t move when pinned losing kiting advantage, fears being burst down when held'
-  },
-
-  // --- 达摩 ---
-  damo: {
-    weaknessZh: '怕真伤厚前排和被拉长战线（夏侯惇吕布芈月老夫子），很吃地形和切入点，上墙失败就亏',
-    weaknessEn: 'Fears true damage thick frontlines and extended fights (Xiahou Dun/Lu Bu/Mi Yue/Lao Fu Zi), terrain and entry-point dependent, fails if wall-slam misses'
-  },
-
-  // --- 项羽 ---
-  xiangyu: {
-    weaknessZh: '怕真伤和持续法伤及拉扯（吕布貂蝉马可波罗芈月），怕持续拆坦，霸体也不是完全无敌',
-    weaknessEn: 'Fears true damage magic DoT and kiting (Lu Bu/Diao Chan/Marco Polo/Mi Yue), fears sustained tank-breaking, superarmor isn\'t fully invincible'
-  },
-
-  // --- 程咬金 ---
-  chengyaojin: {
-    weaknessZh: '怕真伤和持续法伤及强留人（吕布梦奇貂蝉芈月），怕打不出带线价值，回血被克制就很惨',
-    weaknessEn: 'Fears true damage magic DoT and retention (Lu Bu/Meng Qi/Diao Chan/Mi Yue), fears failing split-push value, miserable when healing countered'
-  },
-
-  // --- 杨戬 ---
-  yangjian: {
-    weaknessZh: '怕更稳的六边形战坦和真伤（夏侯惇吕布），后期站场一般怕被持续消耗，狗咬标记可以被躲',
-    weaknessEn: 'Fears steadier well-rounded tanks and true damage (Xiahou Dun/Lu Bu), mediocre late-game presence vs sustained consumption, dog-mark can be dodged'
-  },
-
-  // --- 雅典娜（边）---
-  yadianna: {
-    weaknessZh: '怕真伤和锁头单挑（老夫吕布夏侯惇），逆风发育差怕被针对，献祭流也怕被多人包夹',
-    weaknessEn: 'Fears true damage lockdown duels (Lao Fu Zi/Lu Bu/Xiahou Dun), bad behind-development fears targeting, sacrifice style also fears ganks'
-  },
-
-  // --- 哪吒（边）---
-  nezha: {
-    weaknessZh: '怕落地被控死和真伤战边（张良东皇吕布夏侯惇），单线压制一般，飞过去回不来',
-    weaknessEn: 'Fears landing-cc-death and true-damage fighters (Zhang Liang/Dong Huang/Lu Bu/Xiahou Dun), mediocre lane pressure, can\'t return after flying'
-  },
-
-  // --- 曹操 ---
-  caocao: {
-    weaknessZh: '怕真伤和链子锁人及持续拉扯（吕布老夫子芈月貂蝉），怕被拉长且打不死，大招CD时较弱',
-    weaknessEn: 'Fears true damage bind-lock and sustained kiting (Lu Bu/Lao Fu Zi/Mi Yue/Diao Chan), fears extended unwinnable fights, weaker during ult CD'
-  },
-
-  // --- 钟无艳 ---
-  zhongwuyan: {
-    weaknessZh: '怕灵活拉扯和被动不稳定（芈月花木兰夏侯惇老夫子），吃脸吃先手机制，石化概率看脸',
-    weaknessEn: 'Fears flexible kiting and unstable passive (Mi Yue/Hua Mulan/Xiahou Dun/Lao Fu Zi), face-dependent initiation, petrification is RNG-based'
-  },
-
-  // --- 李信 ---
-  lixin: {
-    weaknessZh: '怕稳定换血和持续压制（夏侯惇芈月花木兰吕布），光信怕贴脸暗信怕被控，双形态都有明显弱点',
-    weaknessEn: 'Fears steady trading and sustained pressure (Xiahou Dun/Mi Yue/Hua Mulan/Lu Bu), Light form fears close-range Dark form fears CC, both forms have clear weaknesses'
-  },
-
-  // --- 赵怀真 ---
-  zhaohuaizhen: {
-    weaknessZh: '怕真伤和持续法伤（吕布貂蝉夏侯惇花木兰），化劲吸收有上限，怕真伤拆坦',
-    weaknessEn: 'Fears true damage and magic DoT (Lu Bu/Diao Chan/Xiahou Dun/Hua Mulan), absorption has upper limit, fears true damage tank-breaking'
-  },
-
-  // --- 蚩奼 ---
-  chicha: {
-    weaknessZh: '怕真伤和更厚站场（吕布夏侯惇老夫子芈月），新战边怕被拖入标准战边对线公式，怕被熟悉机制的反制',
-    weaknessEn: 'Fears true damage and thicker presence (Lu Bu/Xiahou Dun/Lao Fu Zi/Mi Yue), new fighter fears standard lane-match formula, fears counterplay from familiar mechanics'
-  },
-
-  // --- 大司命 ---
-  dasiming: {
-    weaknessZh: '怕锁头控制和真伤站场（东皇张良吕布夏侯惇），第一时间被按住就废，进场需要找好时机',
-    weaknessEn: 'Fears lockdown CC and true-damage presence (Dong Huang/Zhang Liang/Lu Bu/Xiahou Dun), useless if pinned immediately, needs good timing for engagement'
-  },
-
-  // --- 影 ---
-  ying2: {
-    weaknessZh: '怕真伤和定点控制（吕布东皇张良夏侯惇），高机动也怕硬控，容错不算特别高',
-    weaknessEn: 'Fears true damage and pinpoint CC (Lu Bu/Dong Huang/Zhang Liang/Xiahou Dun), high mobility still fears hard CC, not exceptionally high fault tolerance'
-  },
-
-  // 注：云缨共用上方 yunying 条目
-
-  // --- 刘邦 ---
-  liubang: {
-    weaknessZh: '怕真伤和持续法伤及拆坦（吕布貂蝉芈月马可波罗），单线压制弱怕被单抓，大招交了就回不来',
-    weaknessEn: 'Fears true damage magic DoT and tank-breaking (Lu Bu/Diao Chan/Mi Yue/Marco Polo), weak lane pressure and fears 1v1, can\'t return after ult used'
-  },
-
-  // --- 廉颇（边）---
-  // 注：共用上方 lianpin 条目
-
-  // --- 白起 ---
-  baiqi: {
-    weaknessZh: '怕持续拉扯和真伤（吕布貂蝉芈月），怕空大后真空期长，回血需要时间堆叠',
-    weaknessEn: 'Fears sustained kiting and true damage (Lu Bu/Diao Chan/Mi Yue), long vacuum after whiffed ult, heal needs time to stack'
-  },
-
-  // --- 孙策（边）---
-  sunce: {
-    weaknessZh: '怕解控和反手硬辅（庄周张飞廉颇东皇牛魔），船开空就很伤节奏，怕船被挡或被打下来',
-    weaknessEn: 'Fears cleanse and counter-hard-support (Zhuang Zhou/Zhang Fei/Lian Pin/Dong Huang/Niu Mo), missed ship hurts tempo, fears ship being blocked or shot down'
-  },
-
-  // --- 源流之子（边）---
-  yuanliuzhizi: {
-    weaknessZh: '怕真伤和更厚站场（吕布夏侯惇），打真伤战边会被拆，作为新英雄怕被研究透',
-    weaknessEn: 'Fears true damage and thicker presence (Lu Bu/Xiahou Dun), gets dismantled by true-damage fighters, as new hero fears being thoroughly studied'
-  },
-
-};
-
-export type SupportedLanguage = 'zh' | 'en' | 'ja' | 'ko' | 'zh-TW' | 'es' | 'fr' | 'de' | 'pt' | 'ru' | 'it';
-
-export const fallbackMessages: Record<SupportedLanguage, string> = {
-  zh: '存在克制关系',
-  en: 'Counter relationship exists',
-  ja: '相克関係があります',
-  ko: '상성이 있습니다',
-  'zh-TW': '存在剋制關係',
-  es: 'Relación de contra existe',
-  fr: 'Relation de contre existe',
-  de: 'Gegner-Beziehung existiert',
-  pt: 'Relação de contra existe',
-  ru: 'Отношение контра существует',
-  it: 'Relazione contro esiste',
-};
-
-export function getCounterReason(sourceId: string, targetId: string, language: SupportedLanguage): string {
-  const sourceAbility = heroCounterAbilities[sourceId];
-  const targetWeakness = heroWeaknesses[targetId];
-
-  if (!sourceAbility || !targetWeakness) {
-    return fallbackMessages[language];
+// 被克制理由数据 - 从官网英雄关系模块抓取
+export const counterReasons: Record<string, CounterReasonData> = {
+  'yuanliuzhizi_assassin-ganjiangmoye': {
+    reasonZh: '干将莫邪很难扎到元刺，元流之子-刺客的切入距离也在干将一技能射程之上',
+    reasonEn: '干将莫邪很难扎到元刺，元流之子-刺客的切入距离也在干将一技能射程之上'
+  },
+  'yuanliuzhizi_assassin-gaya': {
+    reasonZh: '元流之子-刺客的多段位移使戈娅的大招限制效果受限，也无法拉开距离，很容易被切',
+    reasonEn: '元流之子-刺客的多段位移使戈娅的大招限制效果受限，也无法拉开距离，很容易被切'
+  },
+  'jinchan-yuanliuzhizi_assassin': {
+    reasonZh: '金蝉的一技能对高机动性的刺客有很大威胁，被动也可以有效减免元流之子-刺客的多段伤害',
+    reasonEn: '金蝉的一技能对高机动性的刺客有很大威胁，被动也可以有效减免元流之子-刺客的多段伤害'
+  },
+  'kai-yuanliuzhizi_assassin': {
+    reasonZh: '元流之子-刺客的正面作战能力较差，在铠面前容易丢掉关键的资源点，导致发育受限节奏尽失',
+    reasonEn: '元流之子-刺客的正面作战能力较差，在铠面前容易丢掉关键的资源点，导致发育受限节奏尽失'
+  },
+  'dayu-yao': {
+    reasonZh: '大禹的鼎可以很轻易的破除瑶的被动 打团之前破除其被动 能够大大削弱瑶的战力',
+    reasonEn: '大禹的鼎可以很轻易的破除瑶的被动 打团之前破除其被动 能够大大削弱瑶的战力'
+  },
+  'dayu-shenmengxi': {
+    reasonZh: '大禹的高额回复能力克制沈梦溪的消耗 被沈梦溪消耗后能够很快回复状态',
+    reasonEn: '大禹的高额回复能力克制沈梦溪的消耗 被沈梦溪消耗后能够很快回复状态'
+  },
+  'sunbin-dayu': {
+    reasonZh: '孙膑的高额加速能够轻易躲避大禹的大招控制',
+    reasonEn: '孙膑的高额加速能够轻易躲避大禹的大招控制'
+  },
+  'zhuangzhou-dayu': {
+    reasonZh: '庄周大招解控能够规避大禹的乾鼎控制 和震荡波的范围减速',
+    reasonEn: '庄周大招解控能够规避大禹的乾鼎控制 和震荡波的范围减速'
+  },
+  'yuanliuzhizi_support-zhangfei': {
+    reasonZh: '没有变身的张飞没有强力的控制技能，元流之子-辅助可以很好的在线上利用护盾和大招移速消耗拉扯张飞。',
+    reasonEn: '没有变身的张飞没有强力的控制技能，元流之子-辅助可以很好的在线上利用护盾和大招移速消耗拉扯张飞。'
+  },
+  'yuanliuzhizi_support-zhuangzhou': {
+    reasonZh: '庄周没有控制和突进能力，元流之子-辅助可以很轻易消耗庄周的血量。',
+    reasonEn: '庄周没有控制和突进能力，元流之子-辅助可以很轻易消耗庄周的血量。'
+  },
+  'simayi-yuanliuzhizi_support': {
+    reasonZh: '元流之子-辅助无法很好应对多段突进的英雄，并且多段法术伤害被司马懿克制。',
+    reasonEn: '元流之子-辅助无法很好应对多段突进的英雄，并且多段法术伤害被司马懿克制。'
+  },
+  'guiguzi-yuanliuzhizi_support': {
+    reasonZh: '在面对鬼谷子的群体突进阵容时，因自身缺乏强力保命技能，没办法很好的保护自身和队友。',
+    reasonEn: '在面对鬼谷子的群体突进阵容时，因自身缺乏强力保命技能，没办法很好的保护自身和队友。'
+  },
+  'chicha-daji': {
+    reasonZh: '蚩奼开启大招获得的高额移速和攻速加成，可以对没有位移的妲己造成较大的威胁。',
+    reasonEn: '蚩奼开启大招获得的高额移速和攻速加成，可以对没有位移的妲己造成较大的威胁。'
+  },
+  'chicha-zhenji': {
+    reasonZh: '蚩奼可以用多形态技能和强化移速效果留住甄姬',
+    reasonEn: '蚩奼可以用多形态技能和强化移速效果留住甄姬'
+  },
+  'zhangliang-chicha': {
+    reasonZh: '张良的压制可以有效限制蚩奼的输出空间',
+    reasonEn: '张良的压制可以有效限制蚩奼的输出空间'
+  },
+  'dunshan-chicha': {
+    reasonZh: '盾山可以利用大招抵挡掉蚩奼的普攻',
+    reasonEn: '盾山可以利用大招抵挡掉蚩奼的普攻'
+  },
+  'sunquan-luban7': {
+    reasonZh: '孙权的灵活连射可以躲避鲁班七号的扫射，一技能也可以极大限制鲁班七号的走位',
+    reasonEn: '孙权的灵活连射可以躲避鲁班七号的扫射，一技能也可以极大限制鲁班七号的走位'
+  },
+  'sunquan-kongkonger': {
+    reasonZh: '孙权双目标连射和箭雨可以快速清理空空儿的分身，并可借助分身解锁三技能',
+    reasonEn: '孙权双目标连射和箭雨可以快速清理空空儿的分身，并可借助分身解锁三技能'
+  },
+  'yao-sunquan': {
+    reasonZh: '瑶的控制可以频繁打断孙权的二、三技能',
+    reasonEn: '瑶的控制可以频繁打断孙权的二、三技能'
+  },
+  'kai-sunquan': {
+    reasonZh: '铠的格挡效果可抵消孙权造成的大量伤害',
+    reasonEn: '铠的格挡效果可抵消孙权造成的大量伤害'
+  },
+  'yuanliuzhizi_archer-luban7': {
+    reasonZh: '二技能可以在对拼的同时躲过鲁班七号的各式攻击，且大招可以持续压制缺少位移的鲁班七号',
+    reasonEn: '二技能可以在对拼的同时躲过鲁班七号的各式攻击，且大招可以持续压制缺少位移的鲁班七号'
+  },
+  'yuanliuzhizi_archer-houyi': {
+    reasonZh: '面对后裔时可以更主动地出击，利用二技能位移或大招连放的浮空效果规避后裔的大招反扑',
+    reasonEn: '面对后裔时可以更主动地出击，利用二技能位移或大招连放的浮空效果规避后裔的大招反扑'
+  },
+  'dunshan-yuanliuzhizi_archer': {
+    reasonZh: '盾山可以抵挡掉元流射手的所有弹道',
+    reasonEn: '盾山可以抵挡掉元流射手的所有弹道'
+  },
+  'lan-yuanliuzhizi_archer': {
+    reasonZh: '元射的二技能位移需要锁定目标，面对澜的迅猛切入难以及时挣脱',
+    reasonEn: '元射的二技能位移需要锁定目标，面对澜的迅猛切入难以及时挣脱'
+  },
+  'kongkonger-lvbu': {
+    reasonZh: '吕布发育较慢且装备价值都偏高，装备被夺取会更加限制吕布的输出',
+    reasonEn: '吕布发育较慢且装备价值都偏高，装备被夺取会更加限制吕布的输出'
+  },
+  'kongkonger-sunce': {
+    reasonZh: '分身能够较为容易的抵挡的船，限制孙策的进场',
+    reasonEn: '分身能够较为容易的抵挡的船，限制孙策的进场'
+  },
+  'caiwenji-kongkonger': {
+    reasonZh: '蔡文姬的续航有效限制空空儿的骚扰',
+    reasonEn: '蔡文姬的续航有效限制空空儿的骚扰'
+  },
+  'guiguzi-kongkonger': {
+    reasonZh: '配合鬼谷子的进场瞬杀空空儿的队友让空空儿难以发挥作用',
+    reasonEn: '配合鬼谷子的进场瞬杀空空儿的队友让空空儿难以发挥作用'
+  },
+  'cang-liubei': {
+    reasonZh: '狼群可以挡住刘备的突进，更易拉扯',
+    reasonEn: '狼群可以挡住刘备的突进，更易拉扯'
+  },
+  'cang-bailishouyue': {
+    reasonZh: '百里守约清兵慢，苍的狼会让百里守约清兵更加痛苦',
+    reasonEn: '百里守约清兵慢，苍的狼会让百里守约清兵更加痛苦'
+  },
+  'jiangziya-cang': {
+    reasonZh: '苍的召唤物狼被姜子牙击杀可让姜子牙快速升级',
+    reasonEn: '苍的召唤物狼被姜子牙击杀可让姜子牙快速升级'
+  },
+  'buzhihuowu-cang': {
+    reasonZh: '高爆发英雄能快速解决苍',
+    reasonEn: '高爆发英雄能快速解决苍'
+  },
+  'ying-houyi': {
+    reasonZh: '影面对没有位移的英雄时，二技能有较高概率实现输出最大化',
+    reasonEn: '影面对没有位移的英雄时，二技能有较高概率实现输出最大化'
+  },
+  'ying-daji': {
+    reasonZh: '影的二技能在受到部分控制时不会被中断，面对主要以控制后打输出的英雄时可利用该技巧对敌方造成威胁',
+    reasonEn: '影的二技能在受到部分控制时不会被中断，面对主要以控制后打输出的英雄时可利用该技巧对敌方造成威胁'
+  },
+  'kai-ying': {
+    reasonZh: '铠的格挡效果可抵消影造成的大量伤害',
+    reasonEn: '铠的格挡效果可抵消影造成的大量伤害'
+  },
+  'diaochan-ying': {
+    reasonZh: '影的二技能会为本身锁定朝向，面对较为灵活的貂蝉时影很难触碰到目标',
+    reasonEn: '影的二技能会为本身锁定朝向，面对较为灵活的貂蝉时影很难触碰到目标'
+  },
+  'shaosiyuan-luban7': {
+    reasonZh: '少司缘可以利用二技能压制鲁班七号的发育，且灵活的位移能力有助于躲避鲁班七号的技能和连射',
+    reasonEn: '少司缘可以利用二技能压制鲁班七号的发育，且灵活的位移能力有助于躲避鲁班七号的技能和连射'
+  },
+  'shaosiyuan-gongsunli': {
+    reasonZh: '少司缘不怕被公孙离消耗状态，且可以稳定给公孙离附加二技能负面效果',
+    reasonEn: '少司缘不怕被公孙离消耗状态，且可以稳定给公孙离附加二技能负面效果'
+  },
+  'caiwenji-shaosiyuan': {
+    reasonZh: '蔡文姬的弹射控制效果可以有效打断少司缘的持续技能，并且不怕被消耗状态',
+    reasonEn: '蔡文姬的弹射控制效果可以有效打断少司缘的持续技能，并且不怕被消耗状态'
+  },
+  'gongbenwuzang-shaosiyuan': {
+    reasonZh: '宫本武藏的大招具有重伤效果，可以有效的限制少司缘的回复生命值能力',
+    reasonEn: '宫本武藏的大招具有重伤效果，可以有效的限制少司缘的回复生命值能力'
+  },
+  'yuanliuzhizi_tank-lvbu': {
+    reasonZh: '拥有更高生命值与防御的元流之子可以在面对吕布时轻松获得线权，对抗时打出的连环控制也可以让吕布无法及时释放保命技能',
+    reasonEn: '拥有更高生命值与防御的元流之子可以在面对吕布时轻松获得线权，对抗时打出的连环控制也可以让吕布无法及时释放保命技能'
+  },
+  'yuanliuzhizi_tank-kuangtie': {
+    reasonZh: '元流之子-坦克拥有不错的恢复能力，相较于狂铁更胜一筹',
+    reasonEn: '元流之子-坦克拥有不错的恢复能力，相较于狂铁更胜一筹'
+  },
+  'miyue-yuanliuzhizi_tank': {
+    reasonZh: '元流之子-坦克的输出能力一般，对线拥有高续航的英雄很难将其击杀',
+    reasonEn: '元流之子-坦克的输出能力一般，对线拥有高续航的英雄很难将其击杀'
+  },
+  'gongsunli-yuanliuzhizi_tank': {
+    reasonZh: '公孙离拥有较多的位移，需要近身作战的元流之子很容易被其拉扯',
+    reasonEn: '公孙离拥有较多的位移，需要近身作战的元流之子很容易被其拉扯'
+  },
+  'yuanliuzhizi_magic-dunshan': {
+    reasonZh: '元流之子-法师没有弹道技能，是一名不太惧怕盾山的法师英雄',
+    reasonEn: '元流之子-法师没有弹道技能，是一名不太惧怕盾山的法师英雄'
+  },
+  'yuanliuzhizi_magic-jinchan': {
+    reasonZh: '元流之子-法师的单次伤害较低，较为克制金蝉大招，金蝉也无法打断其输出',
+    reasonEn: '元流之子-法师的单次伤害较低，较为克制金蝉大招，金蝉也无法打断其输出'
+  },
+  'kai-yuanliuzhizi_magic': {
+    reasonZh: '元流之子-法师难以对开大的铠造成有效伤害，容易被铠开团',
+    reasonEn: '元流之子-法师难以对开大的铠造成有效伤害，容易被铠开团'
+  },
+  'mozi-yuanliuzhizi_magic': {
+    reasonZh: '墨子射程远、控制频繁，可以限制元流之子-法师的输出环境',
+    reasonEn: '墨子射程远、控制频繁，可以限制元流之子-法师的输出环境'
+  },
+  'aoyin-guanyu': {
+    reasonZh: '敖隐的小控制比较容易打断关羽的被动，大招还可以大量容错，是关羽较难针对的射手',
+    reasonEn: '敖隐的小控制比较容易打断关羽的被动，大招还可以大量容错，是关羽较难针对的射手'
+  },
+  'aoyin-gaya': {
+    reasonZh: '戈娅被敖隐控制后较会丧失大量机动性',
+    reasonEn: '戈娅被敖隐控制后较会丧失大量机动性'
+  },
+  'jailuo-aoyin': {
+    reasonZh: '伽罗在线上可以发挥手长优势，可以很好的压制敖隐',
+    reasonEn: '伽罗在线上可以发挥手长优势，可以很好的压制敖隐'
+  },
+  'dunshan-aoyin': {
+    reasonZh: '盾山举盾后敖隐对他毫无办法',
+    reasonEn: '盾山举盾后敖隐对他毫无办法'
+  },
+  'dasiming-buzhihuowu': {
+    reasonZh: '大司命凝聚出的灵体可以打出不知火舞的强化普攻，对敌方单位产生范围控制效果',
+    reasonEn: '大司命凝聚出的灵体可以打出不知火舞的强化普攻，对敌方单位产生范围控制效果'
+  },
+  'dasiming-nezha': {
+    reasonZh: '大司命凝聚出的灵体可以继承哪吒普攻的重伤效果',
+    reasonEn: '大司命凝聚出的灵体可以继承哪吒普攻的重伤效果'
+  },
+  'pangu-dasiming': {
+    reasonZh: '盘古的缴械效果可以有效限制依靠普攻输出的大司命',
+    reasonEn: '盘古的缴械效果可以有效限制依靠普攻输出的大司命'
+  },
+  'liubei-dasiming': {
+    reasonZh: '刘备具有高爆发的能力，使得需要近距离输出的大司命很难拥有较好的输出环境',
+    reasonEn: '刘备具有高爆发的能力，使得需要近距离输出的大司命很难拥有较好的输出环境'
+  },
+  'yunzhongjun-houyi': {
+    reasonZh: '无位移射手非常容易被云中君卷起带走',
+    reasonEn: '无位移射手非常容易被云中君卷起带走'
+  },
+  'yunzhongjun-xiaoqiao': {
+    reasonZh: '无位移法师容易被云中君卷起带走和秒掉',
+    reasonEn: '无位移法师容易被云中君卷起带走和秒掉'
+  },
+  'direnjie-yunzhongjun': {
+    reasonZh: '狄仁杰2技能可以净化云中君的大招，使得云中君无法卷走他',
+    reasonEn: '狄仁杰2技能可以净化云中君的大招，使得云中君无法卷走他'
+  },
+  'huamulan-yunzhongjun': {
+    reasonZh: '花木兰具有大量霸体技能，使得云中君大招很难对其有效控制',
+    reasonEn: '花木兰具有大量霸体技能，使得云中君大招很难对其有效控制'
+  },
+  'hainuo-mengtian': {
+    reasonZh: '蒙恬的小兵可以给海诺提供更多叠加印记的目标',
+    reasonEn: '蒙恬的小兵可以给海诺提供更多叠加印记的目标'
+  },
+  'hainuo-milaidi': {
+    reasonZh: '米莱迪的机器人给海诺提供更多叠加印记的目标，且米莱迪推塔被海诺大招克制',
+    reasonEn: '米莱迪的机器人给海诺提供更多叠加印记的目标，且米莱迪推塔被海诺大招克制'
+  },
+  'diaochan-hainuo': {
+    reasonZh: '貂蝉的2技能可以频繁躲避海诺的1技能，使海诺伤害无法叠上去',
+    reasonEn: '貂蝉的2技能可以频繁躲避海诺的1技能，使海诺伤害无法叠上去'
+  },
+  'dunshan-hainuo': {
+    reasonZh: '盾山可以挡掉海诺的1技能，使其丧失输出能力',
+    reasonEn: '盾山可以挡掉海诺的1技能，使其丧失输出能力'
+  },
+  'duoliya-xiahoudun': {
+    reasonZh: '只有一个突进技能的情况下，较难接近朵莉亚，在水中朵莉亚还可以克制他的减速效果',
+    reasonEn: '只有一个突进技能的情况下，较难接近朵莉亚，在水中朵莉亚还可以克制他的减速效果'
+  },
+  'duoliya-yao': {
+    reasonZh: '朵莉亚的1技能可以综合选择是否打出瑶的被动效果',
+    reasonEn: '朵莉亚的1技能可以综合选择是否打出瑶的被动效果'
+  },
+  'simayi-duoliya': {
+    reasonZh: '朵莉亚无法很好应对多段突进的英雄，此外朵莉亚的法术伤害被司马懿克制',
+    reasonEn: '朵莉亚无法很好应对多段突进的英雄，此外朵莉亚的法术伤害被司马懿克制'
+  },
+  'guiguzi-duoliya': {
+    reasonZh: '朵莉亚在面对鬼谷子的群体突进阵容时，无法很好的保护队友',
+    reasonEn: '朵莉亚在面对鬼谷子的群体突进阵容时，无法很好的保护队友'
+  },
+  'jixiaoman-machao': {
+    reasonZh: '马超的机动性优势在小满的组合技中较难发挥，同时小满的输出可以较轻松击败马超',
+    reasonEn: '马超的机动性优势在小满的组合技中较难发挥，同时小满的输出可以较轻松击败马超'
+  },
+  'jixiaoman-lvbu': {
+    reasonZh: '小满的灵活走位可以轻松躲过吕布的附魔，从而在对抗中获得优势',
+    reasonEn: '小满的灵活走位可以轻松躲过吕布的附魔，从而在对抗中获得优势'
+  },
+  'xiahoudun-jixiaoman': {
+    reasonZh: '夏侯惇的多段控制可以干扰小满的组合技，同时较高的坦度可以压制小满的输出',
+    reasonEn: '夏侯惇的多段控制可以干扰小满的组合技，同时较高的坦度可以压制小满的输出'
+  },
+  'liubei-jixiaoman': {
+    reasonZh: '刘备的近战能力让小满较难发挥',
+    reasonEn: '刘备的近战能力让小满较难发挥'
+  },
+  'kuangtie-xiahoudun': {
+    reasonZh: '当狂铁处于坦克肉搏战的情况下，凭借其强大的回复能力，往往能够轻松的成为最后的存活者',
+    reasonEn: '当狂铁处于坦克肉搏战的情况下，凭借其强大的回复能力，往往能够轻松的成为最后的存活者'
+  },
+  'kuangtie-sunwukong': {
+    reasonZh: '狂铁从来不会畏惧近身作战，在大招护盾和回复能力的帮助下，拥有了不错的反击刺客的能力',
+    reasonEn: '狂铁从来不会畏惧近身作战，在大招护盾和回复能力的帮助下，拥有了不错的反击刺客的能力'
+  },
+  'sunshangxiang-kuangtie': {
+    reasonZh: '狂铁对于肉搏战拥有无比自信，但是对于远程并且灵活的英雄时，会比较吃力',
+    reasonEn: '狂铁对于肉搏战拥有无比自信，但是对于远程并且灵活的英雄时，会比较吃力'
+  },
+  'sunbin-kuangtie': {
+    reasonZh: '狂铁非常喜爱绝地反击，当对手是孙膑，狂铁需要更加小心维持自己的血线以免被孙膑沉默杀',
+    reasonEn: '狂铁非常喜爱绝地反击，当对手是孙膑，狂铁需要更加小心维持自己的血线以免被孙膑沉默杀'
+  },
+  'yuange-kuangtie': {
+    reasonZh: '狂铁的爆发力十分有规律，而元歌灵活的战斗方式会让狂铁有力无处使',
+    reasonEn: '狂铁的爆发力十分有规律，而元歌灵活的战斗方式会让狂铁有力无处使'
+  },
+  'laixiao-buzhihuowu': {
+    reasonZh: '导弹可以锁定灵活的英雄',
+    reasonEn: '导弹可以锁定灵活的英雄'
+  },
+  'laixiao-lianpo': {
+    reasonZh: '对笨重的单位有克制作用',
+    reasonEn: '对笨重的单位有克制作用'
+  },
+  'ake-laixiao': {
+    reasonZh: '高爆发英雄能快速解决莱西奥',
+    reasonEn: '高爆发英雄能快速解决莱西奥'
+  },
+  'sunshangxiang-laixiao': {
+    reasonZh: '',
+    reasonEn: ''
+  },
+  'zhaohuaizhen-xiahoudun': {
+    reasonZh: '夏侯惇的固定朝向技能容易被赵怀真转向化解。',
+    reasonEn: '夏侯惇的固定朝向技能容易被赵怀真转向化解。'
+  },
+  'zhaohuaizhen-diaochan': {
+    reasonZh: '张良的硬控很容易控住貂蝉',
+    reasonEn: '张良的硬控很容易控住貂蝉'
+  },
+  'lvbu-zhaohuaizhen': {
+    reasonZh: '吕布的真实伤害能有效突破赵怀真二技能的防守。',
+    reasonEn: '吕布的真实伤害能有效突破赵怀真二技能的防守。'
+  },
+  'jailuo-zhaohuaizhen': {
+    reasonZh: '伽罗的超远射程可以安全的消耗赵怀真。',
+    reasonEn: '伽罗的超远射程可以安全的消耗赵怀真。'
+  },
+  'haiyue-liubang': {
+    reasonZh: '海月可以远距离poke和风筝刘邦，且幻境可以隔绝刘邦大招的支援效果。',
+    reasonEn: '海月可以远距离poke和风筝刘邦，且幻境可以隔绝刘邦大招的支援效果。'
+  },
+  'haiyue-daji': {
+    reasonZh: '海月进入幻境的护盾以及2技能的护盾可以抵挡妲己的部分爆发伤害。',
+    reasonEn: '海月进入幻境的护盾以及2技能的护盾可以抵挡妲己的部分爆发伤害。'
+  },
+  'jailuo-haiyue': {
+    reasonZh: '伽罗的破盾效果让海月的生存大幅降低，且幻境内伽罗的长射程会覆盖整个幻境。',
+    reasonEn: '伽罗的破盾效果让海月的生存大幅降低，且幻境内伽罗的长射程会覆盖整个幻境。'
+  },
+  'simayi-haiyue': {
+    reasonZh: '司马懿的沉默和对法术伤害的克制会对海月造成极大的威胁。',
+    reasonEn: '司马懿的沉默和对法术伤害的克制会对海月造成极大的威胁。'
+  },
+  'gaya-makeboluo': {
+    reasonZh: '马可波罗瞬间爆发输出不足，且1技能较难命中',
+    reasonEn: '马可波罗瞬间爆发输出不足，且1技能较难命中'
+  },
+  'gaya-zhongwuyan': {
+    reasonZh: '钟无艳的位移能力较弱，除蹲草外难以接近戈娅',
+    reasonEn: '钟无艳的位移能力较弱，除蹲草外难以接近戈娅'
+  },
+  'zhangliang-gaya': {
+    reasonZh: '点控压制，可以轻松控制住戈娅',
+    reasonEn: '点控压制，可以轻松控制住戈娅'
+  },
+  'lan-gaya': {
+    reasonZh: '强爆发强突进，易击败戈娅',
+    reasonEn: '强爆发强突进，易击败戈娅'
+  },
+  'gongbenwuzang-caocao': {
+    reasonZh: '宫本的大招可以针对恢复型英雄，曹操面对他最大的长板被无限缩小',
+    reasonEn: '宫本的大招可以针对恢复型英雄，曹操面对他最大的长板被无限缩小'
+  },
+  'gongbenwuzang-machao': {
+    reasonZh: '强化普攻的持续追击和减速会让马超非常难受',
+    reasonEn: '强化普攻的持续追击和减速会让马超非常难受'
+  },
+  'jinchan-gongbenwuzang': {
+    reasonZh: '宫本大招的前摇时间较久，金蝉可以通过自己的1技能进行快速限制使宫本无法突进到敌人脸上',
+    reasonEn: '宫本大招的前摇时间较久，金蝉可以通过自己的1技能进行快速限制使宫本无法突进到敌人脸上'
+  },
+  'niumo-gongbenwuzang': {
+    reasonZh: '宫本需要持续的作战通过不断刷新护盾来提供生存能力，牛魔频繁的控制会让宫本非常难受',
+    reasonEn: '宫本需要持续的作战通过不断刷新护盾来提供生存能力，牛魔频繁的控制会让宫本非常难受'
+  },
+  'simayi-gongbenwuzang': {
+    reasonZh: '宫本的大招命中后，司马懿只需使用1技能即可轻松摆脱其锁定',
+    reasonEn: '宫本的大招命中后，司马懿只需使用1技能即可轻松摆脱其锁定'
+  },
+  'liubei-gongbenwuzang': {
+    reasonZh: '宫本武藏：宫本武藏唯一的强控就是3技能落地击飞和开3技能后的1技能减速，双反对拼时，刘备可先逼出宫本3技能，随后开3免控并获得高额互动，随手站桩输出就可以轻松将其击杀。',
+    reasonEn: '宫本武藏：宫本武藏唯一的强控就是3技能落地击飞和开3技能后的1技能减速，双反对拼时，刘备可先逼出宫本3技能，随后开3免控并获得高额互动，随手站桩输出就可以轻松将其击杀。'
+  },
+  'liubang-gongbenwuzang': {
+    reasonZh: '宫本武藏：对于拥有较少位移的宫本来说，中后期面对刘邦单带很难有反制手段。由于刘邦的坦克能力比较强，宫本可以对刘邦造成的伤害有限，而刘邦却能依靠被动和护盾伤害正面压制宫本，一旦被黏住很难脱身，同时刘邦可以使用大招轻松支援队友。',
+    reasonEn: '宫本武藏：对于拥有较少位移的宫本来说，中后期面对刘邦单带很难有反制手段。由于刘邦的坦克能力比较强，宫本可以对刘邦造成的伤害有限，而刘邦却能依靠被动和护盾伤害正面压制宫本，一旦被黏住很难脱身，同时刘邦可以使用大招轻松支援队友。'
+  },
+  'xiangyu-gongbenwuzang': {
+    reasonZh: '宫本武藏：宫本武藏最具威胁力的就是开大招切脆皮了，但是由于宫本武藏的大招有一定的延迟，所以我方项羽可以利用这个机会，将宫本武藏推离我方的射手或者法师，让他无法进行输出。',
+    reasonEn: '宫本武藏：宫本武藏最具威胁力的就是开大招切脆皮了，但是由于宫本武藏的大招有一定的延迟，所以我方项羽可以利用这个机会，将宫本武藏推离我方的射手或者法师，让他无法进行输出。'
+  },
+  'dianwei-gongbenwuzang': {
+    reasonZh: '宫本：典韦是一个中后期英雄，与宫本前期对线因为半肉坦装关系几乎不需，不用担心被强杀，前期可以轻松过度，后期有核心装反甲火甲成型后，近战开大招与宫本正面刚，即使经济略微落后也可以轻松击败宫本，针对攻击频率比较高，特别是近战的英雄，典韦开大招配合火甲反甲的伤害可以轻松战胜对手。',
+    reasonEn: '宫本：典韦是一个中后期英雄，与宫本前期对线因为半肉坦装关系几乎不需，不用担心被强杀，前期可以轻松过度，后期有核心装反甲火甲成型后，近战开大招与宫本正面刚，即使经济略微落后也可以轻松击败宫本，针对攻击频率比较高，特别是近战的英雄，典韦开大招配合火甲反甲的伤害可以轻松战胜对手。'
+  },
+  'sangqi-bailishouyue': {
+    reasonZh: '持续治疗减少POKE带来的伤害',
+    reasonEn: '持续治疗减少POKE带来的伤害'
+  },
+  'sangqi-shenmengxi': {
+    reasonZh: '持续治疗减少POKE带来的伤害',
+    reasonEn: '持续治疗减少POKE带来的伤害'
+  },
+  'nezha-sangqi': {
+    reasonZh: '',
+    reasonEn: ''
+  },
+  'sunshangxiang-sangqi': {
+    reasonZh: '',
+    reasonEn: ''
+  },
+  'fei-bailishouyue': {
+    reasonZh: '暃十分容易接近靠近墙体的百里守约',
+    reasonEn: '暃十分容易接近靠近墙体的百里守约'
+  },
+  'fei-xiaoqiao': {
+    reasonZh: '对于自保能力较差的小乔，暃可以找机会切入进行收割',
+    reasonEn: '对于自保能力较差的小乔，暃可以找机会切入进行收割'
+  },
+  'jinchan-fei': {
+    reasonZh: '金蝉可以利用1技能对暃的机动性进行较大程度的限制',
+    reasonEn: '金蝉可以利用1技能对暃的机动性进行较大程度的限制'
+  },
+  'zhangfei-fei': {
+    reasonZh: '张飞给队友套上护盾，避免队友的血线被迅速压到斩杀线。大招也可以把暃从墙上吹落',
+    reasonEn: '张飞给队友套上护盾，避免队友的血线被迅速压到斩杀线。大招也可以把暃从墙上吹落'
+  },
+  'jinchan-niumo': {
+    reasonZh: '牛魔的技能前摇较长，在其蓄力冲锋的准备阶段直接给其套上紧箍咒可以让他进不了场',
+    reasonEn: '牛魔的技能前摇较长，在其蓄力冲锋的准备阶段直接给其套上紧箍咒可以让他进不了场'
+  },
+  'jinchan-libai': {
+    reasonZh: '李白进场后直接对其释放紧箍之咒可以让他回不去',
+    reasonEn: '李白进场后直接对其释放紧箍之咒可以让他回不去'
+  },
+  'zhuangzhou-jinchan': {
+    reasonZh: '庄周大招可以解除紧箍之咒，极大弱化金蝉的作战能力',
+    reasonEn: '庄周大招可以解除紧箍之咒，极大弱化金蝉的作战能力'
+  },
+  'ganjiangmoye-jinchan': {
+    reasonZh: '干将莫邪虽然是高爆发英雄，但是大招为多段攻击，金蝉的被动无法防御他的超高伤害。',
+    reasonEn: '干将莫邪虽然是高爆发英雄，但是大招为多段攻击，金蝉的被动无法防御他的超高伤害。'
+  },
+  'jiangziya-houyi': {
+    reasonZh: '后羿较为笨重，容易被姜子牙一套技能控制和击败',
+    reasonEn: '后羿较为笨重，容易被姜子牙一套技能控制和击败'
+  },
+  'jiangziya-daji': {
+    reasonZh: '妲己的施法距离较短，容易被姜子牙先手控制',
+    reasonEn: '妲己的施法距离较短，容易被姜子牙先手控制'
+  },
+  'nakelulu-jiangziya': {
+    reasonZh: '娜可露露的切入能力极强，姜子牙容易被接近和击败。',
+    reasonEn: '娜可露露的切入能力极强，姜子牙容易被接近和击败。'
+  },
+  'ganjiangmoye-jiangziya': {
+    reasonZh: '干将莫邪的施法距离更长，姜子牙容易被其消耗和击败',
+    reasonEn: '干将莫邪的施法距离更长，姜子牙容易被其消耗和击败'
+  },
+  'yixing-xiahoudun': {
+    reasonZh: '弈星的施法距离和生存性能，可以持续远距离消耗较难切入的战士、坦克',
+    reasonEn: '弈星的施法距离和生存性能，可以持续远距离消耗较难切入的战士、坦克'
+  },
+  'yixing-jailuo': {
+    reasonZh: '弈星的大招对于缺乏位移的射手，命中率较高，关住后容易配合队友进行击杀',
+    reasonEn: '弈星的大招对于缺乏位移的射手，命中率较高，关住后容易配合队友进行击杀'
+  },
+  'lan-yixing': {
+    reasonZh: '弈星惧怕强突进刺客类英雄，对于贴近的敌人较难去拉开距离，容易被快速击杀',
+    reasonEn: '弈星惧怕强突进刺客类英雄，对于贴近的敌人较难去拉开距离，容易被快速击杀'
+  },
+  'ganjiangmoye-yixing': {
+    reasonZh: '干将莫邪的射程较远，可以压制弈星并比较轻松地躲避弈星的技能和控制',
+    reasonEn: '干将莫邪的射程较远，可以压制弈星并比较轻松地躲避弈星的技能和控制'
+  },
+  'mengqi-mozi': {
+    reasonZh: '对于缺乏爆发和离场能力的英雄，梦奇的泡泡具有较好的处理空间',
+    reasonEn: '对于缺乏爆发和离场能力的英雄，梦奇的泡泡具有较好的处理空间'
+  },
+  'lvbu-mengqi': {
+    reasonZh: '梦奇的生存比较依赖一技能频繁的护盾，这在吕布真伤面前将被化解',
+    reasonEn: '梦奇的生存比较依赖一技能频繁的护盾，这在吕布真伤面前将被化解'
+  },
+  'daji-mengqi': {
+    reasonZh: '妲己的锁定控制让梦奇大招的躲避能力大打折扣',
+    reasonEn: '妲己的锁定控制让梦奇大招的躲避能力大打折扣'
+  },
+  'yunying-guanyu': {
+    reasonZh: '云缨的控制频率较高，关羽的被动容易被中断',
+    reasonEn: '云缨的控制频率较高，关羽的被动容易被中断'
+  },
+  'yunying-houyi': {
+    reasonZh: '不太灵活的射手面对云缨的大招较难躲避，容易被连招击杀',
+    reasonEn: '不太灵活的射手面对云缨的大招较难躲避，容易被连招击杀'
+  },
+  'buzhihuowu-yunying': {
+    reasonZh: '不知火舞的高爆发和持续控制让云缨容易被快速击杀，无法打出连招',
+    reasonEn: '不知火舞的高爆发和持续控制让云缨容易被快速击杀，无法打出连招'
+  },
+  'makeboluo-yunying': {
+    reasonZh: '马可波罗的灵活性让云缨的技能很难命中',
+    reasonEn: '马可波罗的灵活性让云缨的技能很难命中'
+  },
+  'sikongzhen-machao': {
+    reasonZh: '司空震可以用2技能阻止马超的接近，而马超较低的坦度让他很难承受住司空震的雷霆万钧。',
+    reasonEn: '司空震可以用2技能阻止马超的接近，而马超较低的坦度让他很难承受住司空震的雷霆万钧。'
+  },
+  'sikongzhen-zhongwuyan': {
+    reasonZh: '司空震可以轻松与钟无艳拉开距离，让钟无艳的高伤害无法发挥。',
+    reasonEn: '司空震可以轻松与钟无艳拉开距离，让钟无艳的高伤害无法发挥。'
+  },
+  'baiqi-sikongzhen': {
+    reasonZh: '司空震对坦克的输出能力较弱，且射程较短，容易被白起控制。',
+    reasonEn: '司空震对坦克的输出能力较弱，且射程较短，容易被白起控制。'
+  },
+  'jailuo-sikongzhen': {
+    reasonZh: '伽罗的长射程会让司空震贴近之前就受到大量伤害，且可以轻易击破司空震的护盾。',
+    reasonEn: '伽罗的长射程会让司空震贴近之前就受到大量伤害，且可以轻易击破司空震的护盾。'
+  },
+  'lan-jailuo': {
+    reasonZh: '无位移英雄，很容易被澜突脸输出，难以逃脱。',
+    reasonEn: '无位移英雄，很容易被澜突脸输出，难以逃脱。'
+  },
+  'lan-jing': {
+    reasonZh: '澜的大招可强行将镜“拖出”大招范围内。',
+    reasonEn: '澜的大招可强行将镜“拖出”大招范围内。'
+  },
+  'zhaoyun-lan': {
+    reasonZh: '赵云这种既有坦度，又有爆发输出的英雄，澜不仅打不动，而且容易被秒。',
+    reasonEn: '赵云这种既有坦度，又有爆发输出的英雄，澜不仅打不动，而且容易被秒。'
+  },
+  'diaochan-lan': {
+    reasonZh: '澜需近身打输出，而貂蝉可以通过二技能拉扯距离，有效规避掉澜的攻击。',
+    reasonEn: '澜需近身打输出，而貂蝉可以通过二技能拉扯距离，有效规避掉澜的攻击。'
+  },
+  'xialuote-laofuzi': {
+    reasonZh: '缺乏爆发性输出，攻速下降对于依赖普攻的老夫子来说也非常致命',
+    reasonEn: '缺乏爆发性输出，攻速下降对于依赖普攻的老夫子来说也非常致命'
+  },
+  'xialuote-houyi': {
+    reasonZh: '攻速对于后裔输出的影响较大，缺乏位移也让夏洛特的命中机会得以增大',
+    reasonEn: '攻速对于后裔输出的影响较大，缺乏位移也让夏洛特的命中机会得以增大'
+  },
+  'gongsunli-xialuote': {
+    reasonZh: '灵活性极佳的公孙离可以极大的降低夏洛特技能的命中率，削弱她在战场上的能力',
+    reasonEn: '灵活性极佳的公孙离可以极大的降低夏洛特技能的命中率，削弱她在战场上的能力'
+  },
+  'kai-xialuote': {
+    reasonZh: '开启大招后的铠具有格挡状态，能够有效克制夏洛特的多段伤害',
+    reasonEn: '开启大招后的铠具有格挡状态，能够有效克制夏洛特的多段伤害'
+  },
+  'agudo-zhugeliang': {
+    reasonZh: '身板脆弱的英雄很难抗住阿古朵动物军团的追击',
+    reasonEn: '身板脆弱的英雄很难抗住阿古朵动物军团的追击'
+  },
+  'agudo-daji': {
+    reasonZh: '阿古朵能抗能打的特性让法师很难占得便宜',
+    reasonEn: '阿古朵能抗能打的特性让法师很难占得便宜'
+  },
+  'sulie-agudo': {
+    reasonZh: '苏烈的AOE能力可以快速清掉阿古朵的召唤物',
+    reasonEn: '苏烈的AOE能力可以快速清掉阿古朵的召唤物'
+  },
+  'hanxin-agudo': {
+    reasonZh: '韩信的骚扰能力则可以限制阿古朵在野区的发育',
+    reasonEn: '韩信的骚扰能力则可以限制阿古朵在野区的发育'
+  },
+  'mengtian-caocao': {
+    reasonZh: '缺乏位移的站边英雄很难在蒙恬身上占得便宜',
+    reasonEn: '缺乏位移的站边英雄很难在蒙恬身上占得便宜'
+  },
+  'mengtian-kai': {
+    reasonZh: '',
+    reasonEn: ''
+  },
+  'zhenji-mengtian': {
+    reasonZh: '开大后的蒙恬会因为士兵的影响，即使单独一人也会吃下甄姬的多段控制伤害',
+    reasonEn: '开大后的蒙恬会因为士兵的影响，即使单独一人也会吃下甄姬的多段控制伤害'
+  },
+  'wangzhaojun-mengtian': {
+    reasonZh: '拥有充足AOE的王昭君可以无差别打击蒙恬及他的士兵，极大程度上削减蒙恬的团战能力',
+    reasonEn: '拥有充足AOE的王昭君可以无差别打击蒙恬及他的士兵，极大程度上削减蒙恬的团战能力'
+  },
+  'lianpo-zhangliang': {
+    reasonZh: '张良：张良作为一个比较依赖控制效果的法师，1技能的控制和大招的控制，对拥有免伤的廉颇来说效果甚微，而且廉颇的1技能和3技能都可以很好的打断张良的大招技能对己方进行保护，为队友提供良好的生存环境。',
+    reasonEn: '张良：张良作为一个比较依赖控制效果的法师，1技能的控制和大招的控制，对拥有免伤的廉颇来说效果甚微，而且廉颇的1技能和3技能都可以很好的打断张良的大招技能对己方进行保护，为队友提供良好的生存环境。'
+  },
+  'lianpo-wangzhaojun': {
+    reasonZh: '王昭君：作为一个比较依赖2技能控制效果的英雄，面对廉颇时会很尴尬，因为廉颇本身拥有比较强的坦克能力，即使被王昭君大到也很难一套秒杀，王昭君开大后廉颇1技能和3技能都可以轻松打断，进攻时利用控制技能也配合队友黏住王昭君轻松将其击杀。',
+    reasonEn: '王昭君：作为一个比较依赖2技能控制效果的英雄，面对廉颇时会很尴尬，因为廉颇本身拥有比较强的坦克能力，即使被王昭君大到也很难一套秒杀，王昭君开大后廉颇1技能和3技能都可以轻松打断，进攻时利用控制技能也配合队友黏住王昭君轻松将其击杀。'
+  },
+  'houyi-lianpo': {
+    reasonZh: '后羿普攻有减速效果，很容易风筝廉颇',
+    reasonEn: '后羿普攻有减速效果，很容易风筝廉颇'
+  },
+  'diaochan-lianpo': {
+    reasonZh: '廉颇不能很容易控制到灵活的貂蝉',
+    reasonEn: '廉颇不能很容易控制到灵活的貂蝉'
+  },
+  'jing-jailuo': {
+    reasonZh: '镜快速的接近能力，让远程站桩射手很难反抗',
+    reasonEn: '镜快速的接近能力，让远程站桩射手很难反抗'
+  },
+  'jing-xishi': {
+    reasonZh: '西施的技能命中难度较高，而灵活的镜可以使用技能从容的躲避',
+    reasonEn: '西施的技能命中难度较高，而灵活的镜可以使用技能从容的躲避'
+  },
+  'xiangyu-jing': {
+    reasonZh: '克制镜最好的办法就是将其推出大招范围，同时项羽的硬度也能保证自身的安全',
+    reasonEn: '克制镜最好的办法就是将其推出大招范围，同时项羽的硬度也能保证自身的安全'
+  },
+  'wangzhaojun-jing': {
+    reasonZh: '王昭君反手的大招，让镜在释放大招后无法继续在范围内继续活动被迫离开',
+    reasonEn: '王昭君反手的大招，让镜在释放大招后无法继续在范围内继续活动被迫离开'
+  },
+  'baiqi-ake': {
+    reasonZh: '阿轲：白起3技能的控制能够瞬间化解阿轲对后排输出的刺杀',
+    reasonEn: '阿轲：白起3技能的控制能够瞬间化解阿轲对后排输出的刺杀'
+  },
+  'baiqi-jailuo': {
+    reasonZh: '伽罗：射程较近且没有位移技能，面对白起的3技能难以挣脱',
+    reasonEn: '伽罗：射程较近且没有位移技能，面对白起的3技能难以挣脱'
+  },
+  'zhuangzhou-baiqi': {
+    reasonZh: '庄周：团战中依赖3技能先手的白起非常不喜欢面对庄周',
+    reasonEn: '庄周：团战中依赖3技能先手的白起非常不喜欢面对庄周'
+  },
+  'yingzheng-baiqi': {
+    reasonZh: '嬴政：嬴政几乎不会进入白起的攻击范围，使得白起在面对嬴政时只能从他的队友着手',
+    reasonEn: '嬴政：嬴政几乎不会进入白起的攻击范围，使得白起在面对嬴政时只能从他的队友着手'
+  },
+  'mengya-luban7': {
+    reasonZh: '比起完全放弃了自保的蒙犽来说，鲁班七号在火力上还是相对的处于下风的',
+    reasonEn: '比起完全放弃了自保的蒙犽来说，鲁班七号在火力上还是相对的处于下风的'
+  },
+  'mengya-dunshan': {
+    reasonZh: '改版后的盾山无法承受蒙犽输出的高频火力会被快速的消耗掉能量',
+    reasonEn: '改版后的盾山无法承受蒙犽输出的高频火力会被快速的消耗掉能量'
+  },
+  'lanlingwang-mengya': {
+    reasonZh: '蒙犽没有位移也没有反打的技能，面对爆发力高的刺客几乎只能依靠队友保护',
+    reasonEn: '蒙犽没有位移也没有反打的技能，面对爆发力高的刺客几乎只能依靠队友保护'
+  },
+  'kai-mengya': {
+    reasonZh: '多段的技能伤害会被铠大招格挡掉大部分，无法利用伤害压制这位峡谷刀王',
+    reasonEn: '多段的技能伤害会被铠大招格挡掉大部分，无法利用伤害压制这位峡谷刀王'
+  },
+  'lubandashi-ake': {
+    reasonZh: '对于没有硬控技能的刺客，鲁班大师的一三技能可以很好的牵制他们，保护己方后排',
+    reasonEn: '对于没有硬控技能的刺客，鲁班大师的一三技能可以很好的牵制他们，保护己方后排'
+  },
+  'lubandashi-houyi': {
+    reasonZh: '缺乏硬控和灵活性的脆皮，走位不慎时容易被鲁班大师先手控制',
+    reasonEn: '缺乏硬控和灵活性的脆皮，走位不慎时容易被鲁班大师先手控制'
+  },
+  'mozi-lubandashi': {
+    reasonZh: '鲁班大师有2个持续引导技能，被多控制的英雄打断后收益影响较大',
+    reasonEn: '鲁班大师有2个持续引导技能，被多控制的英雄打断后收益影响较大'
+  },
+  'jailuo-lubandashi': {
+    reasonZh: '手短并且没有位移技能的鲁班大师，面对长手英雄会进退两难',
+    reasonEn: '手短并且没有位移技能的鲁班大师，面对长手英雄会进退两难'
+  },
+  'xishi-niumo': {
+    reasonZh: '释放技能比较僵硬的牛魔会在做出动作时，被西施的控制打断',
+    reasonEn: '释放技能比较僵硬的牛魔会在做出动作时，被西施的控制打断'
+  },
+  'xishi-gaojianli': {
+    reasonZh: '需要走进战场中心的高渐离遇见以Poke见长的西施时，非常难以找到入场空间，他甚至会被控制走出战场中心',
+    reasonEn: '需要走进战场中心的高渐离遇见以Poke见长的西施时，非常难以找到入场空间，他甚至会被控制走出战场中心'
+  },
+  'lianpo-xishi': {
+    reasonZh: '释放技能过程中，全程霸体的廉颇可以轻易抵挡住西施的魅力',
+    reasonEn: '释放技能过程中，全程霸体的廉颇可以轻易抵挡住西施的魅力'
+  },
+  'ake-xishi': {
+    reasonZh: '不仅可以静悄悄靠近西施，还在近身后凭借灵活身手降低西施技能的命中几率',
+    reasonEn: '不仅可以静悄悄靠近西施，还在近身后凭借灵活身手降低西施技能的命中几率'
+  },
+  'machao-luban7': {
+    reasonZh: '鲁班自保的击退能力，完全无法阻止马超的突袭',
+    reasonEn: '鲁班自保的击退能力，完全无法阻止马超的突袭'
+  },
+  'machao-anqila': {
+    reasonZh: '安琪拉拥有足够的火力来消灭对手，不过比较笨重，马超可以利用灵活的身手绕至身后躲避其大招的伤害',
+    reasonEn: '安琪拉拥有足够的火力来消灭对手，不过比较笨重，马超可以利用灵活的身手绕至身后躲避其大招的伤害'
+  },
+  'wangzhaojun-machao': {
+    reasonZh: '大范围的减速，让马超可以活动的范围大幅减少',
+    reasonEn: '大范围的减速，让马超可以活动的范围大幅减少'
+  },
+  'kai-machao': {
+    reasonZh: '同时拥有高额减速与定向爆发力的铠，可以让更偏刺客能力的马超非常难受',
+    reasonEn: '同时拥有高额减速与定向爆发力的铠，可以让更偏刺客能力的马超非常难受'
+  },
+  'pangu-machao': {
+    reasonZh: '被缴械和减速使得马超的机动性大幅降低，很难逃走',
+    reasonEn: '被缴械和减速使得马超的机动性大幅降低，很难逃走'
+  },
+  'yao_fighter-ake': {
+    reasonZh: '阿轲的爆发力十足，但只要曜有所准备就能够将大部分伤害避免掉',
+    reasonEn: '阿轲的爆发力十足，但只要曜有所准备就能够将大部分伤害避免掉'
+  },
+  'yao_fighter-sunwukong': {
+    reasonZh: '固定的伤害节奏，给予了曜非常大的操作空间，频繁的位移能力也可躲开控制范围',
+    reasonEn: '固定的伤害节奏，给予了曜非常大的操作空间，频繁的位移能力也可躲开控制范围'
+  },
+  'sunshangxiang-yao_fighter': {
+    reasonZh: '灵活的身手让其很难被曜接近，且能非常轻松的将曜消耗',
+    reasonEn: '灵活的身手让其很难被曜接近，且能非常轻松的将曜消耗'
+  },
+  'wangzhaojun-yao_fighter': {
+    reasonZh: '大范围的持续伤害，让曜无法通过大招避免太多伤害，自身的硬度也能够避免被秒杀',
+    reasonEn: '大范围的持续伤害，让曜无法通过大招避免太多伤害，自身的硬度也能够避免被秒杀'
+  },
+  'yao-lvbu': {
+    reasonZh: '吕布笨重的移动和真实伤害能力都被瑶克制',
+    reasonEn: '吕布笨重的移动和真实伤害能力都被瑶克制'
+  },
+  'yao-lanlingwang': {
+    reasonZh: '在瑶的帮助下兰陵王很难秒杀瑶的队友，而优先针对瑶也会被其被动化解',
+    reasonEn: '在瑶的帮助下兰陵王很难秒杀瑶的队友，而优先针对瑶也会被其被动化解'
+  },
+  'ganjiangmoye-yao': {
+    reasonZh: '干将超高的爆发伤害，往往能直接造成击杀或直接将瑶给予队友的护盾击破，让其无法频繁的附灵队友吸收伤害',
+    reasonEn: '干将超高的爆发伤害，往往能直接造成击杀或直接将瑶给予队友的护盾击破，让其无法频繁的附灵队友吸收伤害'
+  },
+  'jailuo-yao': {
+    reasonZh: '伽罗频繁的暴击减速软控制，让瑶的解控能力无法被触动，在加上破盾和超远距离输出能力，让瑶附灵后的价值大减',
+    reasonEn: '伽罗频繁的暴击减速软控制，让瑶的解控能力无法被触动，在加上破盾和超远距离输出能力，让瑶附灵后的价值大减'
+  },
+  'pangu-bailixuance': {
+    reasonZh: '输出过于依赖普攻，同时自身又较脆，容易被盘古缴械后迅速击杀',
+    reasonEn: '输出过于依赖普攻，同时自身又较脆，容易被盘古缴械后迅速击杀'
+  },
+  'mengya-pangu': {
+    reasonZh: '刘备大招能移除缴械效果，同时贴脸输出容易被高爆发迅速击杀',
+    reasonEn: '刘备大招能移除缴械效果，同时贴脸输出容易被高爆发迅速击杀'
+  },
+  'liubei-pangu': {
+    reasonZh: '',
+    reasonEn: ''
+  },
+  'zhubajie-laofuzi': {
+    reasonZh: '较低的伤害能力，让其在与猪八戒对抗的时候，几乎无法将猪八戒的血线打入危险的境地',
+    reasonEn: '较低的伤害能力，让其在与猪八戒对抗的时候，几乎无法将猪八戒的血线打入危险的境地'
+  },
+  'zhubajie-houyi': {
+    reasonZh: '猪八戒出色的开团能力，会让后排英雄十分危险，常常会被强行控制开启团战',
+    reasonEn: '猪八戒出色的开团能力，会让后排英雄十分危险，常常会被强行控制开启团战'
+  },
+  'libai-zhubajie': {
+    reasonZh: '来去无踪的李白能让猪八戒无法与其缠斗恢复自身血量',
+    reasonEn: '来去无踪的李白能让猪八戒无法与其缠斗恢复自身血量'
+  },
+  'bailishouyue-zhubajie': {
+    reasonZh: '超远的距离和出色的爆发能力，让其是为数不多可以克制猪八戒的射手英雄',
+    reasonEn: '超远的距离和出色的爆发能力，让其是为数不多可以克制猪八戒的射手英雄'
+  },
+  'change-shangguanwaner': {
+    reasonZh: '上官婉儿的大招移动路径比较容易预判，嫦娥的1技能即使再缓慢还是能够逼退',
+    reasonEn: '上官婉儿的大招移动路径比较容易预判，嫦娥的1技能即使再缓慢还是能够逼退'
+  },
+  'change-libai': {
+    reasonZh: '李白可以给予后排法师极大的压力，嫦娥虽然也是法师，但具有坦克的属性，不会被李白的刺杀轻易的压制',
+    reasonEn: '李白可以给予后排法师极大的压力，嫦娥虽然也是法师，但具有坦克的属性，不会被李白的刺杀轻易的压制'
+  },
+  'jailuo-change': {
+    reasonZh: '伽罗拥有超远的射程和强势减速能力，这让嫦娥入场十分困难，并且在进入战斗前就会把嫦娥的蓝量削减至可以承受的范围内',
+    reasonEn: '伽罗拥有超远的射程和强势减速能力，这让嫦娥入场十分困难，并且在进入战斗前就会把嫦娥的蓝量削减至可以承受的范围内'
+  },
+  'lvbu-change': {
+    reasonZh: '吕布真实伤害可以越过嫦娥的护盾直接削减嫦娥的血量，非常克制依赖护盾减伤的嫦娥',
+    reasonEn: '吕布真实伤害可以越过嫦娥的护盾直接削减嫦娥的血量，非常克制依赖护盾减伤的嫦娥'
+  },
+  'guiguzi-wangzhaojun': {
+    reasonZh: '王昭君：鬼谷子1技能加移速特别快，很容易躲掉王昭君最核心的2技能，鬼谷子也可以利用2技能控制破解王昭君的大招，所以鬼谷子相对克制王昭君，只要避免不被王昭君2技能大招秒掉可以轻松和王昭君对线，鬼谷子的持续输出能力也比较强，可以轻松应对王昭君。',
+    reasonEn: '王昭君：鬼谷子1技能加移速特别快，很容易躲掉王昭君最核心的2技能，鬼谷子也可以利用2技能控制破解王昭君的大招，所以鬼谷子相对克制王昭君，只要避免不被王昭君2技能大招秒掉可以轻松和王昭君对线，鬼谷子的持续输出能力也比较强，可以轻松应对王昭君。'
+  },
+  'guiguzi-lanlingwang': {
+    reasonZh: '兰陵王：兰陵王的核心玩法是隐身靠近敌方核心输出位，寻找时机切死敌方后排，而鬼谷子大招开启时会触发反隐效果，可以轻松发现兰陵王的身位，配合队友利用2技能控制1技能的减少抗性轻松秒掉兰陵王。',
+    reasonEn: '兰陵王：兰陵王的核心玩法是隐身靠近敌方核心输出位，寻找时机切死敌方后排，而鬼谷子大招开启时会触发反隐效果，可以轻松发现兰陵王的身位，配合队友利用2技能控制1技能的减少抗性轻松秒掉兰陵王。'
+  },
+  'makeboluo-guiguzi': {
+    reasonZh: '机动性高的英雄不太容易被鬼谷子抓住',
+    reasonEn: '机动性高的英雄不太容易被鬼谷子抓住'
+  },
+  'liyuanfang-guiguzi': {
+    reasonZh: '李元芳能侦测到鬼谷子的大概位置',
+    reasonEn: '李元芳能侦测到鬼谷子的大概位置'
+  },
+  'lixin-luna': {
+    reasonZh: '露娜的技能需要冲进战团释放，虽然灵活，但李信范围伤害能让其无处可躲，非常难以找到空隙入场',
+    reasonEn: '露娜的技能需要冲进战团释放，虽然灵活，但李信范围伤害能让其无处可躲，非常难以找到空隙入场'
+  },
+  'lixin-zhenji': {
+    reasonZh: '突进中免疫控制的李信可以无视大部分控制接近位移能力不行的甄姬展开近战',
+    reasonEn: '突进中免疫控制的李信可以无视大部分控制接近位移能力不行的甄姬展开近战'
+  },
+  'shenmengxi-lixin': {
+    reasonZh: '虽然比较笨重，但近身爆发力使得李信并不太过畏惧刺客，但是面对伤害覆盖范围更远的法师时，就会有点被动',
+    reasonEn: '虽然比较笨重，但近身爆发力使得李信并不太过畏惧刺客，但是面对伤害覆盖范围更远的法师时，就会有点被动'
+  },
+  'makeboluo-lixin': {
+    reasonZh: '灵活的射手始终占据着主动，并且突进主要靠双腿的李信容易完整的将马可波罗的技能全盘接受',
+    reasonEn: '灵活的射手始终占据着主动，并且突进主要靠双腿的李信容易完整的将马可波罗的技能全盘接受'
+  },
+  'shangguanwaner-gaojianli': {
+    reasonZh: '婉儿在对线期十分克制短手法师，并且当高渐离找到机会近身开启爆发时，婉儿可以通过大招躲避伤害',
+    reasonEn: '婉儿在对线期十分克制短手法师，并且当高渐离找到机会近身开启爆发时，婉儿可以通过大招躲避伤害'
+  },
+  'shangguanwaner-houyi': {
+    reasonZh: '上官婉儿能在远处开始累积冲刺次数，同时快速逼近射手，随后释放大招，后羿靠自身几乎无法阻止',
+    reasonEn: '上官婉儿能在远处开始累积冲刺次数，同时快速逼近射手，随后释放大招，后羿靠自身几乎无法阻止'
+  },
+  'zhangliang-shangguanwaner': {
+    reasonZh: '面对有2个强势控制技能的张良，上官婉儿的灵动性会受到较大限制',
+    reasonEn: '面对有2个强势控制技能的张良，上官婉儿的灵动性会受到较大限制'
+  },
+  'huamulan-shangguanwaner': {
+    reasonZh: '花木兰不仅仅拥有同样灵活的身手，还拥有另大部分法师畏惧的沉默，上官婉儿很难找到空隙突入战场',
+    reasonEn: '花木兰不仅仅拥有同样灵活的身手，还拥有另大部分法师畏惧的沉默，上官婉儿很难找到空隙突入战场'
+  },
+  'yuange-luban7': {
+    reasonZh: '元歌强有力的控制伤害能力，对于没有位移的射手来说是无法单独处理的',
+    reasonEn: '元歌强有力的控制伤害能力，对于没有位移的射手来说是无法单独处理的'
+  },
+  'lanlingwang-yuange': {
+    reasonZh: '元歌本体还是惧怕爆发袭击，兰陵王凭借隐身能力能逼迫元歌放弃操作傀儡，轻松击杀',
+    reasonEn: '元歌本体还是惧怕爆发袭击，兰陵王凭借隐身能力能逼迫元歌放弃操作傀儡，轻松击杀'
+  },
+  'ake-yuange': {
+    reasonZh: '同样具有隐身能力的阿轲也会限制元歌的发挥',
+    reasonEn: '同样具有隐身能力的阿轲也会限制元歌的发挥'
+  },
+  'milaidi-hanxin': {
+    reasonZh: '米莱狄优秀的推进能力比韩信更加容易推到防御塔迫使其无法分带',
+    reasonEn: '米莱狄优秀的推进能力比韩信更加容易推到防御塔迫使其无法分带'
+  },
+  'milaidi-luna': {
+    reasonZh: '米莱狄指定控制技能能够有效控制集火露娜将其击杀',
+    reasonEn: '米莱狄指定控制技能能够有效控制集火露娜将其击杀'
+  },
+  'sulie-milaidi': {
+    reasonZh: '苏烈释放大招时，敌人越多，站位越密集，伤害越高。 可以专门用来克制米莱狄的机械大军',
+    reasonEn: '苏烈释放大招时，敌人越多，站位越密集，伤害越高。 可以专门用来克制米莱狄的机械大军'
+  },
+  'huamulan-milaidi': {
+    reasonZh: '米莱狄逃脱能力较差，大招有飞行轨迹，一旦被花木兰霸体抵消掉控制，就会被花木兰近身击杀',
+    reasonEn: '米莱狄逃脱能力较差，大招有飞行轨迹，一旦被花木兰霸体抵消掉控制，就会被花木兰近身击杀'
+  },
+  'makeboluo-lvbu': {
+    reasonZh: '吕布：马可波罗是十分飘逸的射手，吕布就算抓住马可波罗的走位失误，也很难为自己的武器附魔',
+    reasonEn: '吕布：马可波罗是十分飘逸的射手，吕布就算抓住马可波罗的走位失误，也很难为自己的武器附魔'
+  },
+  'makeboluo-donghuangtaiyi': {
+    reasonZh: '东皇太一：东皇比较克制灵活的英雄，马可波罗不仅仅是灵活，还有拥射程优势，可以在东皇控制范围外进行攻击',
+    reasonEn: '东皇太一：东皇比较克制灵活的英雄，马可波罗不仅仅是灵活，还有拥射程优势，可以在东皇控制范围外进行攻击'
+  },
+  'ganjiangmoye-makeboluo': {
+    reasonZh: '干将莫邪的作战距离远超马可波罗，作为射手，在团战时比较容易被飞来横剑命中',
+    reasonEn: '干将莫邪的作战距离远超马可波罗，作为射手，在团战时比较容易被飞来横剑命中'
+  },
+  'huamulan-makeboluo': {
+    reasonZh: '花木兰和马可波罗一样，属于十分灵活的英雄，马可波罗十分难以摆脱其追杀',
+    reasonEn: '花木兰和马可波罗一样，属于十分灵活的英雄，马可波罗十分难以摆脱其追杀'
+  },
+  'dunshan-makeboluo': {
+    reasonZh: '虽然马可波罗比较灵活，但是其技能子弹方向比较固定，盾山比较容易阻挡其射击',
+    reasonEn: '虽然马可波罗比较灵活，但是其技能子弹方向比较固定，盾山比较容易阻挡其射击'
+  },
+  'yuji-makeboluo': {
+    reasonZh: '马可波罗：马可波罗的一技能不能穿过小兵或者敌方英雄，而虞姬可以，所以无论是对线消耗，还是清兵线能力，都是虞姬更胜一筹。而且由于虞姬的二技能免受物理伤害，大招的指向性更是能让马可的灵活无处可施。高爆发的虞姬也意味着一套下来能让马可波罗被瞬间击杀。',
+    reasonEn: '马可波罗：马可波罗的一技能不能穿过小兵或者敌方英雄，而虞姬可以，所以无论是对线消耗，还是清兵线能力，都是虞姬更胜一筹。而且由于虞姬的二技能免受物理伤害，大招的指向性更是能让马可的灵活无处可施。高爆发的虞姬也意味着一套下来能让马可波罗被瞬间击杀。'
+  },
+  'dianwei-makeboluo': {
+    reasonZh: '马可波罗：马可波罗的攻击频率比较高，不仅仅体现在普攻，1技能9段伤害和2技能后的普攻都会被典韦大招以及反甲反弹，在中后期经常会出现一技能或者大招打完典韦自己半血的现象，针对马可波罗用典韦有奇效。',
+    reasonEn: '马可波罗：马可波罗的攻击频率比较高，不仅仅体现在普攻，1技能9段伤害和2技能后的普攻都会被典韦大招以及反甲反弹，在中后期经常会出现一技能或者大招打完典韦自己半血的现象，针对马可波罗用典韦有奇效。'
+  },
+  'ailin-makeboluo': {
+    reasonZh: '艾琳的灵活性使马可的技能很难命中',
+    reasonEn: '艾琳的灵活性使马可的技能很难命中'
+  },
+  'zhangliang-lvbu': {
+    reasonZh: '张良面对无位移的持续输出型战士时，自身“拖住敌人”的优势特质容易发挥出来',
+    reasonEn: '张良面对无位移的持续输出型战士时，自身“拖住敌人”的优势特质容易发挥出来'
+  },
+  'zhangliang-wangzhaojun': {
+    reasonZh: '张良手握两个硬控技能，对阵有长时间引导技能敌人时，可以轻易将其施法打断',
+    reasonEn: '张良手握两个硬控技能，对阵有长时间引导技能敌人时，可以轻易将其施法打断'
+  },
+  'ganjiangmoye-zhangliang': {
+    reasonZh: '张良缺乏远程爆发，也没有位移，面对手长爆发高的对手无论在消耗还是躲避上都比较吃亏',
+    reasonEn: '张良缺乏远程爆发，也没有位移，面对手长爆发高的对手无论在消耗还是躲避上都比较吃亏'
+  },
+  'zhugeliang-zhangliang': {
+    reasonZh: '具有瞬移能力的对手，可以轻易避开张良1、2技能的法术场',
+    reasonEn: '具有瞬移能力的对手，可以轻易避开张良1、2技能的法术场'
+  },
+  'houyi-zhangliang': {
+    reasonZh: '当张良释放大招控制住队友的时候，立即释放大招攻击张良，可以打断张良大招保护队友。',
+    reasonEn: '当张良释放大招控制住队友的时候，立即释放大招攻击张良，可以打断张良大招保护队友。'
+  },
+  'peiqinhu-sunwukong': {
+    reasonZh: '虽然后期的孙悟空能够打出巨额伤害，但前期的较弱的对抗力，会让裴擒虎在其野区为所欲为。进而压制其发育',
+    reasonEn: '虽然后期的孙悟空能够打出巨额伤害，但前期的较弱的对抗力，会让裴擒虎在其野区为所欲为。进而压制其发育'
+  },
+  'peiqinhu-luban7': {
+    reasonZh: '裴擒虎的爆发能力，只要接近了无位移能力的英雄时，很容易将其秒杀',
+    reasonEn: '裴擒虎的爆发能力，只要接近了无位移能力的英雄时，很容易将其秒杀'
+  },
+  'diaochan-peiqinhu': {
+    reasonZh: '貂蝉可及时的调整自身位置避免被裴擒虎折返跳跃命中，失去了爆发机会的裴擒虎，很难和貂蝉进行对拼',
+    reasonEn: '貂蝉可及时的调整自身位置避免被裴擒虎折返跳跃命中，失去了爆发机会的裴擒虎，很难和貂蝉进行对拼'
+  },
+  'sunbin-peiqinhu': {
+    reasonZh: '裴擒虎虽然有两种形态，但主要爆发还是得依靠虎形入场，孙膑可以用大招反制，打断裴擒虎的爆发节奏',
+    reasonEn: '裴擒虎虽然有两种形态，但主要爆发还是得依靠虎形入场，孙膑可以用大招反制，打断裴擒虎的爆发节奏'
+  },
+  'yangyuhuan-ake': {
+    reasonZh: '杨玉环的大招可以躲避阿轲的爆发，让其无法在短时间内秒杀自身，再配合队友对其反制',
+    reasonEn: '杨玉环的大招可以躲避阿轲的爆发，让其无法在短时间内秒杀自身，再配合队友对其反制'
+  },
+  'yangyuhuan-nvwa': {
+    reasonZh: '以消耗为主的女娲，面对杨玉环时，无法发挥其长处，杨玉环可以一直保持队友的作战能力',
+    reasonEn: '以消耗为主的女娲，面对杨玉环时，无法发挥其长处，杨玉环可以一直保持队友的作战能力'
+  },
+  'huamulan-yangyuhuan': {
+    reasonZh: '沉默和强势的突进，让杨玉环十分难以摆脱和反制，高额的爆发也不会给杨玉环慢慢回复的机会',
+    reasonEn: '沉默和强势的突进，让杨玉环十分难以摆脱和反制，高额的爆发也不会给杨玉环慢慢回复的机会'
+  },
+  'nezha-yangyuhuan': {
+    reasonZh: '对于基本处于后排的治疗型辅助，哪吒可以轻易的开启近身作战，其自带的降低治疗，也会让杨玉环的技能效果大打折扣',
+    reasonEn: '对于基本处于后排的治疗型辅助，哪吒可以轻易的开启近身作战，其自带的降低治疗，也会让杨玉环的技能效果大打折扣'
+  },
+  'gongsunli-kai': {
+    reasonZh: '',
+    reasonEn: ''
+  },
+  'gongsunli-anqila': {
+    reasonZh: '公孙离最擅长的就是灵活的身法，无法命中，即便法术威力再大也会对公孙离无可奈何',
+    reasonEn: '公孙离最擅长的就是灵活的身法，无法命中，即便法术威力再大也会对公孙离无可奈何'
+  },
+  'donghuangtaiyi-gongsunli': {
+    reasonZh: '阿离面对强控时，会很难进场输出，较短的输出距离会被东皇太一大招克制',
+    reasonEn: '阿离面对强控时，会很难进场输出，较短的输出距离会被东皇太一大招克制'
+  },
+  'daji-gongsunli': {
+    reasonZh: '阿离的本质还是脆弱的射手，妲己的硬控和爆发，可以瞬间将其秒杀',
+    reasonEn: '阿离的本质还是脆弱的射手，妲己的硬控和爆发，可以瞬间将其秒杀'
+  },
+  'mingshiyin-libai': {
+    reasonZh: '大招的回血避免队友被李白大招击杀',
+    reasonEn: '大招的回血避免队友被李白大招击杀'
+  },
+  'mingshiyin-shenmengxi': {
+    reasonZh: '持续治疗减少POKE带来的伤害',
+    reasonEn: '持续治疗减少POKE带来的伤害'
+  },
+  'nakelulu-mingshiyin': {
+    reasonZh: '明世隐不擅长开视野，容易被爆发型英雄埋伏一波输出',
+    reasonEn: '明世隐不擅长开视野，容易被爆发型英雄埋伏一波输出'
+  },
+  'zhenji-mingshiyin': {
+    reasonZh: '明世隐和连着的队友走得比较近，容易被甄姬二技能多次弹射',
+    reasonEn: '明世隐和连着的队友走得比较近，容易被甄姬二技能多次弹射'
+  },
+  'houyi-bailishouyue': {
+    reasonZh: '百里守约释放2技能蓄力阶段是不会移动的，利用这个时机对他释放大招，然后集火攻击他。',
+    reasonEn: '百里守约释放2技能蓄力阶段是不会移动的，利用这个时机对他释放大招，然后集火攻击他。'
+  },
+  'daji-houyi': {
+    reasonZh: '后羿自身比较脆弱，一旦遇到高爆发的法师，可能会被一套带走。',
+    reasonEn: '后羿自身比较脆弱，一旦遇到高爆发的法师，可能会被一套带走。'
+  },
+  'libai-houyi': {
+    reasonZh: '李白释放技能的时候，有一个短暂的不可选中的过程，可以轻松躲避后羿的关键技能。',
+    reasonEn: '李白释放技能的时候，有一个短暂的不可选中的过程，可以轻松躲避后羿的关键技能。'
+  },
+  'kai-houyi': {
+    reasonZh: '没位移的射手英雄要离铠远一点哦',
+    reasonEn: '没位移的射手英雄要离铠远一点哦'
+  },
+  'dunshan-houyi': {
+    reasonZh: '后羿不仅不太灵活容易被盾山抛回，并且后羿依赖的强大正面射击能力被盾山完美克制',
+    reasonEn: '后羿不仅不太灵活容易被盾山抛回，并且后羿依赖的强大正面射击能力被盾山完美克制'
+  },
+  'nezha-houyi': {
+    reasonZh: '后羿：后羿作为无位移的射手，极度依赖队友保护，而哪吒大招可以做到团战时无视后羿队友直接冲锋，大招的韧性加成以及二技能的减伤能够为哪吒提供续航能力，打出更多真实伤害，一技能提供的移动速度也能让后羿无所遁形。',
+    reasonEn: '后羿：后羿作为无位移的射手，极度依赖队友保护，而哪吒大招可以做到团战时无视后羿队友直接冲锋，大招的韧性加成以及二技能的减伤能够为哪吒提供续航能力，打出更多真实伤害，一技能提供的移动速度也能让后羿无所遁形。'
+  },
+  'nakelulu-houyi': {
+    reasonZh: '后羿：后羿作为无位移的射手，极易被游走的娜可露露gank，灵巧的娜可露露可以躲开其控制并高效率中击杀落单的后羿。',
+    reasonEn: '后羿：后羿作为无位移的射手，极易被游走的娜可露露gank，灵巧的娜可露露可以躲开其控制并高效率中击杀落单的后羿。'
+  },
+  'anqila-houyi': {
+    reasonZh: '后羿：针对后羿类型的后排无位移英雄，可以在草丛伏击，先手2技能打中后接1技能大招可以轻松秒杀敌方英雄。',
+    reasonEn: '后羿：针对后羿类型的后排无位移英雄，可以在草丛伏击，先手2技能打中后接1技能大招可以轻松秒杀敌方英雄。'
+  },
+  'zhuangzhou-houyi': {
+    reasonZh: '后羿：即使是出肉装的庄周，后期伤害也异常可怕，自身技能特点也让他根本不会被风筝。叠起被动的伤害能轻易击杀没有位移的脆皮，对此类英雄进行强力压制。',
+    reasonEn: '后羿：即使是出肉装的庄周，后期伤害也异常可怕，自身技能特点也让他根本不会被风筝。叠起被动的伤害能轻易击杀没有位移的脆皮，对此类英雄进行强力压制。'
+  },
+  'zhaoyun-houyi': {
+    reasonZh: '后羿：团战中，赵云只要找到后羿的位置，就可以先手大后羿，如果是没有闪现的后羿，那么后羿基本上就被赵云一套带走。gank时，在前中期，后羿没有位移的，并且在近距离后羿的大招也没有很好的发挥，所以我们可以优先选择gank后羿，配合边路英雄，一旦大招命中后羿就插翅难逃，很好的限制了后羿的发育。',
+    reasonEn: '后羿：团战中，赵云只要找到后羿的位置，就可以先手大后羿，如果是没有闪现的后羿，那么后羿基本上就被赵云一套带走。gank时，在前中期，后羿没有位移的，并且在近距离后羿的大招也没有很好的发挥，所以我们可以优先选择gank后羿，配合边路英雄，一旦大招命中后羿就插翅难逃，很好的限制了后羿的发育。'
+  },
+  'nvwa-luban7': {
+    reasonZh: '女娲拥有十分强大远程输出能力，对于移动能力欠缺的后排来说，威胁十分巨大',
+    reasonEn: '女娲拥有十分强大远程输出能力，对于移动能力欠缺的后排来说，威胁十分巨大'
+  },
+  'nvwa-wangzhaojun': {
+    reasonZh: '女娲的施法距离，可以轻松针对王昭君',
+    reasonEn: '女娲的施法距离，可以轻松针对王昭君'
+  },
+  'gongbenwuzang-nvwa': {
+    reasonZh: '宫本武藏可以轻松跨越矩阵空间，开始和女娲近身作战',
+    reasonEn: '宫本武藏可以轻松跨越矩阵空间，开始和女娲近身作战'
+  },
+  'lanlingwang-nvwa': {
+    reasonZh: '女娲无法预知兰陵王会从哪个方向进攻，其高额的爆发也会让女娲感受到压力',
+    reasonEn: '女娲无法预知兰陵王会从哪个方向进攻，其高额的爆发也会让女娲感受到压力'
+  },
+  'sulie-ake': {
+    reasonZh: '苏烈被动自带超高的护甲和魔抗，阿轲想近身与苏烈肉搏是基本没有胜算的。',
+    reasonEn: '苏烈被动自带超高的护甲和魔抗，阿轲想近身与苏烈肉搏是基本没有胜算的。'
+  },
+  'sulie-sunwukong': {
+    reasonZh: '苏烈拥有超强的控制技能，当孙悟空对脆皮英雄发起突袭时，苏烈可以轻松克制并保护队友。',
+    reasonEn: '苏烈拥有超强的控制技能，当孙悟空对脆皮英雄发起突袭时，苏烈可以轻松克制并保护队友。'
+  },
+  'damo-sulie': {
+    reasonZh: '苏烈进场释放大招的时候，达摩可以迅速打断他，并将他击飞到战场以外。',
+    reasonEn: '苏烈进场释放大招的时候，达摩可以迅速打断他，并将他击飞到战场以外。'
+  },
+  'sunshangxiang-sulie': {
+    reasonZh: '苏烈的控制技能都有一定的释放前摇，孙尚香可以快速频繁的位移躲开苏烈的攻击。',
+    reasonEn: '苏烈的控制技能都有一定的释放前摇，孙尚香可以快速频繁的位移躲开苏烈的攻击。'
+  },
+  'zhouyu-huangzhong': {
+    reasonZh: '没有人可以在周瑜的火区范围内进行站桩输出',
+    reasonEn: '没有人可以在周瑜的火区范围内进行站桩输出'
+  },
+  'zhouyu-laofuzi': {
+    reasonZh: '直来直去的英雄会被预判移动路线，面对他的会是刀山火海',
+    reasonEn: '直来直去的英雄会被预判移动路线，面对他的会是刀山火海'
+  },
+  'lanlingwang-zhouyu': {
+    reasonZh: '兰陵王大招的隐身近身和二段位移斩杀，十分克制需要布置战场的周瑜',
+    reasonEn: '兰陵王大招的隐身近身和二段位移斩杀，十分克制需要布置战场的周瑜'
+  },
+  'bailishouyue-zhouyu': {
+    reasonZh: '百里守约超远的攻击范围超出了周瑜作战半径',
+    reasonEn: '百里守约超远的攻击范围超出了周瑜作战半径'
+  },
+  'zhongkui-zhouyu': {
+    reasonZh: '周瑜：以周瑜为首的缺乏位移的中单英雄基础移速慢，机动性差。钟馗只要钩子命中就可以配合防御塔或是队友轻松秒掉，毫无反制手段。',
+    reasonEn: '周瑜：以周瑜为首的缺乏位移的中单英雄基础移速慢，机动性差。钟馗只要钩子命中就可以配合防御塔或是队友轻松秒掉，毫无反制手段。'
+  },
+  'bailixuance-luban7': {
+    reasonZh: '没有位移技能的射手被勾中几乎可以宣布死亡',
+    reasonEn: '没有位移技能的射手被勾中几乎可以宣布死亡'
+  },
+  'bailixuance-anqila': {
+    reasonZh: '安琪拉技能需要预判，而百里玄策灵活的狩猎技巧导致很难命中',
+    reasonEn: '安琪拉技能需要预判，而百里玄策灵活的狩猎技巧导致很难命中'
+  },
+  'donghuangtaiyi-bailixuance': {
+    reasonZh: '强力控制对于百里玄策来说是十分致命的威胁，几乎不敢先手入场',
+    reasonEn: '强力控制对于百里玄策来说是十分致命的威胁，几乎不敢先手入场'
+  },
+  'zhugeliang-bailixuance': {
+    reasonZh: '灵活的英雄可以轻松避免钩镰命中，而没有命中钩镰的玄策无法开启收割节奏',
+    reasonEn: '灵活的英雄可以轻松避免钩镰命中，而没有命中钩镰的玄策无法开启收割节奏'
+  },
+  'bailishouyue-dianwei': {
+    reasonZh: '没有多段位移的战士不会对百里守约造成太大的威胁',
+    reasonEn: '没有多段位移的战士不会对百里守约造成太大的威胁'
+  },
+  'bailishouyue-yase': {
+    reasonZh: '',
+    reasonEn: ''
+  },
+  'gongbenwuzang-bailishouyue': {
+    reasonZh: '大招的强突进会逼迫百里守约狙击位置',
+    reasonEn: '大招的强突进会逼迫百里守约狙击位置'
+  },
+  'daji-bailishouyue': {
+    reasonZh: '中后期妲己的强控和爆发足够秒杀百里守约',
+    reasonEn: '中后期妲己的强控和爆发足够秒杀百里守约'
+  },
+  'kai-luban7': {
+    reasonZh: '没位移的射手英雄要离铠远一点哦',
+    reasonEn: '没位移的射手英雄要离铠远一点哦'
+  },
+  'miyue-kai': {
+    reasonZh: '蒙恬的技能机制让铠这类高爆发英雄难以发挥',
+    reasonEn: '蒙恬的技能机制让铠这类高爆发英雄难以发挥'
+  },
+  'zhugeliang-kai': {
+    reasonZh: '铠是无法对公孙离造成太大的威胁的，无论自身位移还是击退，都可以反制大部分战士坦克突袭',
+    reasonEn: '铠是无法对公孙离造成太大的威胁的，无论自身位移还是击退，都可以反制大部分战士坦克突袭'
+  },
+  'miyue-wangzhaojun': {
+    reasonZh: '王昭君：芈月的大招拥有无法被选择的效果可以完美躲过王昭君的二技能，1技能也可逃离或接近王昭君。从而大大降低王昭君造成的伤害。',
+    reasonEn: '王昭君：芈月的大招拥有无法被选择的效果可以完美躲过王昭君的二技能，1技能也可逃离或接近王昭君。从而大大降低王昭君造成的伤害。'
+  },
+  'miyue-luna': {
+    reasonZh: '露娜，露娜的持续输出需要依赖连续的标记支持，而芈月大招可以免疫一切效果，导致露娜不能持续衔接技能，从而配合队友轻松击杀.',
+    reasonEn: '露娜，露娜的持续输出需要依赖连续的标记支持，而芈月大招可以免疫一切效果，导致露娜不能持续衔接技能，从而配合队友轻松击杀.'
+  },
+  'zhangliang-miyue': {
+    reasonZh: '张良：拥有硬控的英雄可以很好的控制住芈月让她无法随心所欲施放技能',
+    reasonEn: '张良：拥有硬控的英雄可以很好的控制住芈月让她无法随心所欲施放技能'
+  },
+  'donghuangtaiyi-miyue': {
+    reasonZh: '东皇太一：拥有硬控的英雄可以很好的控制住芈月让她无法随心所欲施放技能',
+    reasonEn: '东皇太一：拥有硬控的英雄可以很好的控制住芈月让她无法随心所欲施放技能'
+  },
+  'yase-hanxin': {
+    reasonZh: '韩信：韩信是个非常依赖技能的英雄，亚瑟的一技能沉默可以非常轻松的打断韩信的攻势，二技能和大招可以轻松将韩信的血量进行消耗。',
+    reasonEn: '韩信：韩信是个非常依赖技能的英雄，亚瑟的一技能沉默可以非常轻松的打断韩信的攻势，二技能和大招可以轻松将韩信的血量进行消耗。'
+  },
+  'yase-ake': {
+    reasonZh: '阿轲：根据阿轲的隐身标记来判断出阿轲的进攻目标，守株待兔等待阿轲的进攻，现身就立即打出沉默来保护己方脆弱目标，甚至可以直接使用大招配合队友控制击杀阿轲。',
+    reasonEn: '阿轲：根据阿轲的隐身标记来判断出阿轲的进攻目标，守株待兔等待阿轲的进攻，现身就立即打出沉默来保护己方脆弱目标，甚至可以直接使用大招配合队友控制击杀阿轲。'
+  },
+  'xiangyu-yase': {
+    reasonZh: '亚瑟入场后，项羽能将他推开或控制，限制对友方的输出与控制',
+    reasonEn: '亚瑟入场后，项羽能将他推开或控制，限制对友方的输出与控制'
+  },
+  'sunshangxiang-yase': {
+    reasonZh: '没有多段位移的战士不会对百里守约造成太大的威胁',
+    reasonEn: '没有多段位移的战士不会对百里守约造成太大的威胁'
+  },
+  'lvbu-dunshan': {
+    reasonZh: '吕布大招能够跳跃至盾山身后直接面对后排输出，配合刺客队友，能让盾山无法兼顾防御方向',
+    reasonEn: '吕布大招能够跳跃至盾山身后直接面对后排输出，配合刺客队友，能让盾山无法兼顾防御方向'
+  },
+  'zhouyu-dunshan': {
+    reasonZh: '周瑜具有强力的清理兵线能力，可以轻松化解正面推进，并且周瑜的技能也不会被盾山所抵挡',
+    reasonEn: '周瑜具有强力的清理兵线能力，可以轻松化解正面推进，并且周瑜的技能也不会被盾山所抵挡'
+  },
+  'shenmengxi-huangzhong': {
+    reasonZh: '架起炮台的黄忠在沈梦溪眼里就是一个静止的靶子',
+    reasonEn: '架起炮台的黄忠在沈梦溪眼里就是一个静止的靶子'
+  },
+  'shenmengxi-luban7': {
+    reasonZh: '虽然鲁班七号的射程很远伤害很高，但是缺乏位移技能的鲁班很容易被沈梦溪跨越双方战线直接用大招消灭',
+    reasonEn: '虽然鲁班七号的射程很远伤害很高，但是缺乏位移技能的鲁班很容易被沈梦溪跨越双方战线直接用大招消灭'
+  },
+  'lanlingwang-shenmengxi': {
+    reasonZh: '沈梦溪非常害怕爆发伤害，兰陵王足以在沈梦溪反应过来之前将其消灭。',
+    reasonEn: '沈梦溪非常害怕爆发伤害，兰陵王足以在沈梦溪反应过来之前将其消灭。'
+  },
+  'ake-shenmengxi': {
+    reasonZh: '同样具有隐身能力并且爆发超高的阿轲会对沈梦溪造成很大的威胁，令他不敢在战线后方慢慢蓄力。',
+    reasonEn: '同样具有隐身能力并且爆发超高的阿轲会对沈梦溪造成很大的威胁，令他不敢在战线后方慢慢蓄力。'
+  },
+  'jailuo-guanyu': {
+    reasonZh: '中后期的伽罗几乎每次攻击都会暴击并将敌人减速，关羽很难在伽罗面前驰骋起来',
+    reasonEn: '中后期的伽罗几乎每次攻击都会暴击并将敌人减速，关羽很难在伽罗面前驰骋起来'
+  },
+  'jailuo-zhangfei': {
+    reasonZh: '凭借巨额护盾称霸的张飞被伽罗的被动特性完美克制，会迅速的被伽罗将护盾击破',
+    reasonEn: '凭借巨额护盾称霸的张飞被伽罗的被动特性完美克制，会迅速的被伽罗将护盾击破'
+  },
+  'lanlingwang-jailuo': {
+    reasonZh: '暗中前来的兰陵王让伽罗的视野能力失去意义，突出的爆发能力更会直接将伽罗秒杀',
+    reasonEn: '暗中前来的兰陵王让伽罗的视野能力失去意义，突出的爆发能力更会直接将伽罗秒杀'
+  },
+  'ake-jailuo': {
+    reasonZh: '同样更加灵活的阿轲也能轻松收割伽罗',
+    reasonEn: '同样更加灵活的阿轲也能轻松收割伽罗'
+  },
+  'simayi-zhugeliang': {
+    reasonZh: '司马懿本身的法术伤害吸收能力就比较克制法系英雄，再加上其追击能力，可使得诸葛亮基本上无法发挥',
+    reasonEn: '司马懿本身的法术伤害吸收能力就比较克制法系英雄，再加上其追击能力，可使得诸葛亮基本上无法发挥'
+  },
+  'kai-simayi': {
+    reasonZh: '司马懿在突袭方面具有很大的优势，但是，如果敌方正在发愁如何开战的话，就是另外一种情况了，正如铠这样的近战具有统治力英雄就非常克制司懿',
+    reasonEn: '司马懿在突袭方面具有很大的优势，但是，如果敌方正在发愁如何开战的话，就是另外一种情况了，正如铠这样的近战具有统治力英雄就非常克制司懿'
+  },
+  'donghuangtaiyi-simayi': {
+    reasonZh: '硬控十分克制刺客的突袭，会让司马懿无法进场输出',
+    reasonEn: '硬控十分克制刺客的突袭，会让司马懿无法进场输出'
+  },
+  'sunce-chengyaojin': {
+    reasonZh: '程咬金非常强势，但是同样拥有不弱的消耗能力的孙策，还可以支援队友，击溃对面防线',
+    reasonEn: '程咬金非常强势，但是同样拥有不弱的消耗能力的孙策，还可以支援队友，击溃对面防线'
+  },
+  'sunce-wangzhaojun': {
+    reasonZh: '当孙策凭借霸体大招强行靠近时王昭君很难反制',
+    reasonEn: '当孙策凭借霸体大招强行靠近时王昭君很难反制'
+  },
+  'daqiao-sunce': {
+    reasonZh: '孙策有强势的支援能力但是没大乔快，大乔能够将被孙策强行控住的英雄传送回城保全其性命',
+    reasonEn: '孙策有强势的支援能力但是没大乔快，大乔能够将被孙策强行控住的英雄传送回城保全其性命'
+  },
+  'xiangyu-sunce': {
+    reasonZh: '项羽拥有强大的反手能力，就算孙策利用大招突进开团，项羽的技能打出满额伤害和控制',
+    reasonEn: '项羽拥有强大的反手能力，就算孙策利用大招突进开团，项羽的技能打出满额伤害和控制'
+  },
+  'ganjiangmoye-huangzhong': {
+    reasonZh: '黄忠大招需要在固定位置释放，干将莫邪也需要对方不做移动，好打出毁灭性伤害',
+    reasonEn: '黄忠大招需要在固定位置释放，干将莫邪也需要对方不做移动，好打出毁灭性伤害'
+  },
+  'ganjiangmoye-gaojianli': {
+    reasonZh: '高渐离正好与干将莫邪相反，虽然拥有高额伤害，但需要进场输出，却是被干将莫邪克制',
+    reasonEn: '高渐离正好与干将莫邪相反，虽然拥有高额伤害，但需要进场输出，却是被干将莫邪克制'
+  },
+  'lanlingwang-ganjiangmoye': {
+    reasonZh: '干将莫邪没有技能可以抵抗兰陵王的秒杀能力',
+    reasonEn: '干将莫邪没有技能可以抵抗兰陵王的秒杀能力'
+  },
+  'huamulan-ganjiangmoye': {
+    reasonZh: '当被花木兰近身后，是大部分法师的噩梦，当然也包括干将莫邪',
+    reasonEn: '当被花木兰近身后，是大部分法师的噩梦，当然也包括干将莫邪'
+  },
+  'nakelulu-ganjiangmoye': {
+    reasonZh: '干将莫邪：干将莫邪的机动性很差，且惧怕贴脸英雄，并且由于射程较远，所以位置极易落单。此时娜可露露使用大招绕后贴脸截杀干将莫邪。',
+    reasonEn: '干将莫邪：干将莫邪的机动性很差，且惧怕贴脸英雄，并且由于射程较远，所以位置极易落单。此时娜可露露使用大招绕后贴脸截杀干将莫邪。'
+  },
+  'guanyu-ganjiangmoye': {
+    reasonZh: '干将莫邪：关羽算是能够限制干将的少有几个英雄之一了。干将的一技能和闪现能够躲好多英雄的技能，但是关羽只需要绕后，到敌方二塔直接用大推出干将，然后把他顶到回不了塔，干将就必死。',
+    reasonEn: '干将莫邪：关羽算是能够限制干将的少有几个英雄之一了。干将的一技能和闪现能够躲好多英雄的技能，但是关羽只需要绕后，到敌方二塔直接用大推出干将，然后把他顶到回不了塔，干将就必死。'
+  },
+  'direnjie-luna': {
+    reasonZh: '露娜：狄仁杰的一旦控住露娜，配合高额输出能够瞬间击杀露娜，即使无法击杀也能压低血线，露娜已经入场1技能或者2技能标记狄仁杰时，狄仁杰使用二技能净化也能很容易让露娜断大',
+    reasonEn: '露娜：狄仁杰的一旦控住露娜，配合高额输出能够瞬间击杀露娜，即使无法击杀也能压低血线，露娜已经入场1技能或者2技能标记狄仁杰时，狄仁杰使用二技能净化也能很容易让露娜断大'
+  },
+  'direnjie-yuji': {
+    reasonZh: '虞姬：拥有物理免伤的虞姬会因为狄仁杰的伤害附加额外法术伤害而导致实用性降低，狄仁杰可以轻松利用2技能本身的净化效果来化解虞姬大招的控制和被动的减速，狄仁杰被动的移速加成也可以更加轻松地躲开虞姬的1技能。',
+    reasonEn: '虞姬：拥有物理免伤的虞姬会因为狄仁杰的伤害附加额外法术伤害而导致实用性降低，狄仁杰可以轻松利用2技能本身的净化效果来化解虞姬大招的控制和被动的减速，狄仁杰被动的移速加成也可以更加轻松地躲开虞姬的1技能。'
+  },
+  'lanlingwang-direnjie': {
+    reasonZh: '狄仁杰没有位移技能，兰陵王的隐身和秒杀能力很容易接近他将其秒杀',
+    reasonEn: '狄仁杰没有位移技能，兰陵王的隐身和秒杀能力很容易接近他将其秒杀'
+  },
+  'huamulan-direnjie': {
+    reasonZh: '花木兰的超高爆发输出能力能快速击杀走位不慎的狄仁杰',
+    reasonEn: '花木兰的超高爆发输出能力能快速击杀走位不慎的狄仁杰'
+  },
+  'liubei-luban7': {
+    reasonZh: '鲁班七号：刘备的大招免控可以破掉鲁班唯一的保命技能，同时2技能的突然晕眩和1技能的追人爆发，都可以让鲁班还未反应过来就失去团战能力或者被秒掉，相比较其他adc，刘备在面对鲁班时可以发挥出最大的压制能力',
+    reasonEn: '鲁班七号：刘备的大招免控可以破掉鲁班唯一的保命技能，同时2技能的突然晕眩和1技能的追人爆发，都可以让鲁班还未反应过来就失去团战能力或者被秒掉，相比较其他adc，刘备在面对鲁班时可以发挥出最大的压制能力'
+  },
+  'sunshangxiang-liubei': {
+    reasonZh: '孙尚香的高射程优势能很好的风筝刘备',
+    reasonEn: '孙尚香的高射程优势能很好的风筝刘备'
+  },
+  'xiangyu-liubei': {
+    reasonZh: '刘备在切入后排时可使用项羽将其推开作为保护',
+    reasonEn: '刘备在切入后排时可使用项羽将其推开作为保护'
+  },
+  'ake-wangzhaojun': {
+    reasonZh: '王昭君：王昭君是一个脆皮站桩输出英雄，等待王昭君使用2技能后的真空期后，可以快速贴近使用2技能背击，1技能配合普攻打出高额伤害，即使王昭君闪现，也可以用大招继续粘人追击，高额的暴击伤害能轻松收割秒杀王昭君。',
+    reasonEn: '王昭君：王昭君是一个脆皮站桩输出英雄，等待王昭君使用2技能后的真空期后，可以快速贴近使用2技能背击，1技能配合普攻打出高额伤害，即使王昭君闪现，也可以用大招继续粘人追击，高额的暴击伤害能轻松收割秒杀王昭君。'
+  },
+  'ake-luban7': {
+    reasonZh: '鲁班七号：面对鲁班七号需要注意躲避好鲁班七号的1技能命中眩晕效果，可以选择大招绕后利用暴击打出高额伤害，在鲁班七号选择闪现时用2技能跟进秒杀，如果鲁班七号选择站撸，可以在鲁班七号技能后的连射时使用2技能绕后可以轻松击杀。',
+    reasonEn: '鲁班七号：面对鲁班七号需要注意躲避好鲁班七号的1技能命中眩晕效果，可以选择大招绕后利用暴击打出高额伤害，在鲁班七号选择闪现时用2技能跟进秒杀，如果鲁班七号选择站撸，可以在鲁班七号技能后的连射时使用2技能绕后可以轻松击杀。'
+  },
+  'niumo-ake': {
+    reasonZh: '牛魔：强力的控制和坚硬的身板让阿轲无论是对他还是对他保护的英雄都难以下手',
+    reasonEn: '牛魔：强力的控制和坚硬的身板让阿轲无论是对他还是对他保护的英雄都难以下手'
+  },
+  'taiyizhenren-ake': {
+    reasonZh: '太乙真人：太乙真人的复活给到队友后即使阿轲击杀也无法刷新自己的大招逃命',
+    reasonEn: '太乙真人：太乙真人的复活给到队友后即使阿轲击杀也无法刷新自己的大招逃命'
+  },
+  'caiwenji-ake': {
+    reasonZh: '阿轲：阿轲需要一套技能秒人才能发挥最大的效果，团战时有一个蔡文姬保护后排加血加双抗，敌方的阿轲就很难一套直接秒掉后排，相反蔡文姬的眩晕还能让阿轲有来无回，配合后排的输出甚至能直接秒掉反杀阿轲。',
+    reasonEn: '阿轲：阿轲需要一套技能秒人才能发挥最大的效果，团战时有一个蔡文姬保护后排加血加双抗，敌方的阿轲就很难一套直接秒掉后排，相反蔡文姬的眩晕还能让阿轲有来无回，配合后排的输出甚至能直接秒掉反杀阿轲。'
+  },
+  'liyuanfang-ake': {
+    reasonZh: '阿轲：阿轲前期比较依赖野区资源需要发育，4级前很难有gank抓人能力，而李元芳可以快速清线支援，李元芳被动的监听效果也可以限制阿轲的大招隐身效果，在被阿轲gank时不光可以观察到敌方动向，还可以利用大招减速和2技能位移与阿轲拉开距离，1技能后的攻速提升可以让李元芳在短时间内打出高额伤害。',
+    reasonEn: '阿轲：阿轲前期比较依赖野区资源需要发育，4级前很难有gank抓人能力，而李元芳可以快速清线支援，李元芳被动的监听效果也可以限制阿轲的大招隐身效果，在被阿轲gank时不光可以观察到敌方动向，还可以利用大招减速和2技能位移与阿轲拉开距离，1技能后的攻速提升可以让李元芳在短时间内打出高额伤害。'
+  },
+  'liushan-ake': {
+    reasonZh: '阿轲：当前版本的阿轲多是刺客玩法，出装偏向输出摆法型，攻击力高的同时身板也很脆，当阿轲隐身突进结束，将会面对刘禅2秒左右的控制，在这两秒的时间内刘禅可以配合队友对阿轲进行毁灭性打击。即使阿轲隐身寻找机会切入己方核心输出位，刘禅也可以站在己方输出位利用1技能和2技能的连控轻松保护己方输出。',
+    reasonEn: '阿轲：当前版本的阿轲多是刺客玩法，出装偏向输出摆法型，攻击力高的同时身板也很脆，当阿轲隐身突进结束，将会面对刘禅2秒左右的控制，在这两秒的时间内刘禅可以配合队友对阿轲进行毁灭性打击。即使阿轲隐身寻找机会切入己方核心输出位，刘禅也可以站在己方输出位利用1技能和2技能的连控轻松保护己方输出。'
+  },
+  'liubang-lanlingwang': {
+    reasonZh: '兰陵王：兰陵王的输出手法是2技能后的一套组合技能秒杀，作为一个高强度的坦克，在中后期兰陵王很难有效击杀刘邦，在单带时可以利用技能减速和控制效果与兰陵王正面刚，在团战时可以用大招保护己方输出防止被兰陵王击杀，落地后的2技能可以控制敌方兰陵王，为己方输出争取逃生和反杀的机会，能克制兰陵王。',
+    reasonEn: '兰陵王：兰陵王的输出手法是2技能后的一套组合技能秒杀，作为一个高强度的坦克，在中后期兰陵王很难有效击杀刘邦，在单带时可以利用技能减速和控制效果与兰陵王正面刚，在团战时可以用大招保护己方输出防止被兰陵王击杀，落地后的2技能可以控制敌方兰陵王，为己方输出争取逃生和反杀的机会，能克制兰陵王。'
+  },
+  'niumo-liubang': {
+    reasonZh: '刘邦的大招会让队友尽可能与他站在一起，此时拥有范围控制的牛魔无论是强行开团还是控制敌人后撤都能起到很好的效果',
+    reasonEn: '刘邦的大招会让队友尽可能与他站在一起，此时拥有范围控制的牛魔无论是强行开团还是控制敌人后撤都能起到很好的效果'
+  },
+  'lvbu-liubang': {
+    reasonZh: '吕布的大招团控能对和刘邦紧紧抱团的队友造成控制和高额输出',
+    reasonEn: '吕布的大招团控能对和刘邦紧紧抱团的队友造成控制和高额输出'
+  },
+  'donghuangtaiyi-luna': {
+    reasonZh: '露娜：4级后的团战，己方队友都在时，露娜切入直接大招集火秒杀即可，有东皇太一时的团战，露娜很少有先手开团和poke的机会，也可以寻找时机强开露娜，即使自己牺牲，能换掉露娜也是大赚的。',
+    reasonEn: '露娜：4级后的团战，己方队友都在时，露娜切入直接大招集火秒杀即可，有东皇太一时的团战，露娜很少有先手开团和poke的机会，也可以寻找时机强开露娜，即使自己牺牲，能换掉露娜也是大赚的。'
+  },
+  'donghuangtaiyi-taiyizhenren': {
+    reasonZh: '太乙真人：东皇太一大招太乙真人的时候，太乙真人是不能释放大招的，初期游走对抗东皇太一的伤害和恢复能力不输太乙真人，面对AP太乙真人入侵野区也能很好的针对和克制，包括技能细节，太乙真人开1技能蓄力期间，东皇太一大招太乙真人后爆炸伤害都会施加给太乙真人，可以很好的克制太乙真人。',
+    reasonEn: '太乙真人：东皇太一大招太乙真人的时候，太乙真人是不能释放大招的，初期游走对抗东皇太一的伤害和恢复能力不输太乙真人，面对AP太乙真人入侵野区也能很好的针对和克制，包括技能细节，太乙真人开1技能蓄力期间，东皇太一大招太乙真人后爆炸伤害都会施加给太乙真人，可以很好的克制太乙真人。'
+  },
+  'caiwenji-donghuangtaiyi': {
+    reasonZh: '蔡文姬拥有短时间的强力回复能力，让东皇太一的大招伤敌500自损1000',
+    reasonEn: '蔡文姬拥有短时间的强力回复能力，让东皇太一的大招伤敌500自损1000'
+  },
+  'niumo-donghuangtaiyi': {
+    reasonZh: '敌方集火东皇大住的敌人时牛魔能很容易找准机会反打控制住多个英雄',
+    reasonEn: '敌方集火东皇大住的敌人时牛魔能很容易找准机会反打控制住多个英雄'
+  },
+  'bianque-donghuangtaiyi': {
+    reasonZh: '东皇太一：东皇太一初期具有较强的入侵野区能力，扁鹊和其他中单不同，扁鹊主要靠普攻叠被动来打更多输出的，所以当东皇太一来己方蓝buff时，扁鹊可以通过普攻和技能不断对他进行消耗，可以避免了近战英雄和东皇太一站撸的情况。使东皇太一初期入侵能力下降，避免敌方在初期拿到节奏。',
+    reasonEn: '东皇太一：东皇太一初期具有较强的入侵野区能力，扁鹊和其他中单不同，扁鹊主要靠普攻叠被动来打更多输出的，所以当东皇太一来己方蓝buff时，扁鹊可以通过普攻和技能不断对他进行消耗，可以避免了近战英雄和东皇太一站撸的情况。使东皇太一初期入侵能力下降，避免敌方在初期拿到节奏。'
+  },
+  'sunshangxiang-donghuangtaiyi': {
+    reasonZh: '东皇太一：东皇太一大招范围小，只有能量球触碰到敌方英雄才会回血，所以，孙尚香的超远射程就可以轻松克制他，东皇的二技能虽然控制长达一秒，但是延迟太高，面对拥有位移的孙尚香命中率低。大招作为强力控制，范围是硬伤，无法靠近孙尚香就会被消耗至死。',
+    reasonEn: '东皇太一：东皇太一大招范围小，只有能量球触碰到敌方英雄才会回血，所以，孙尚香的超远射程就可以轻松克制他，东皇的二技能虽然控制长达一秒，但是延迟太高，面对拥有位移的孙尚香命中率低。大招作为强力控制，范围是硬伤，无法靠近孙尚香就会被消耗至死。'
+  },
+  'xiaoqiao-donghuangtaiyi': {
+    reasonZh: '东皇太一：因为通过二技能命中之后的被动位移加速以及通过不断一技能骚扰，充分的拉开与东皇的距离，使得他身边的能量体无法贴近小乔进行回血，只能被迫放风筝。',
+    reasonEn: '东皇太一：因为通过二技能命中之后的被动位移加速以及通过不断一技能骚扰，充分的拉开与东皇的距离，使得他身边的能量体无法贴近小乔进行回血，只能被迫放风筝。'
+  },
+  'daqiao-luna': {
+    reasonZh: '露娜：露娜的技能衔接是非常关键的，在露娜即将释放技能的时候利用沉默可以有效的打断露娜的技能衔接，大部分露娜都会丢失节奏，从而被集火被秒。',
+    reasonEn: '露娜：露娜的技能衔接是非常关键的，在露娜即将释放技能的时候利用沉默可以有效的打断露娜的技能衔接，大部分露娜都会丢失节奏，从而被集火被秒。'
+  },
+  'daqiao-mozi': {
+    reasonZh: '墨子：墨子释放关键大招时，大乔可以用1技能和3技能进行打断，配合队友集火击杀。墨子是消耗型英雄，大乔的2技能大招配合可以帮助队友随时补满状态，大乔提供的移速加成可以让大家更方便躲避墨子的消耗技能。',
+    reasonEn: '墨子：墨子释放关键大招时，大乔可以用1技能和3技能进行打断，配合队友集火击杀。墨子是消耗型英雄，大乔的2技能大招配合可以帮助队友随时补满状态，大乔提供的移速加成可以让大家更方便躲避墨子的消耗技能。'
+  },
+  'ake-daqiao': {
+    reasonZh: '阿轲的快速收割能力很容易在法阵消失之前就击杀掉友军',
+    reasonEn: '阿轲的快速收割能力很容易在法阵消失之前就击杀掉友军'
+  },
+  'hanxin-daqiao': {
+    reasonZh: '韩信的高机动和爆发让大乔的技能很难起到关键作用',
+    reasonEn: '韩信的高机动和爆发让大乔的技能很难起到关键作用'
+  },
+  'huangzhong-hanxin': {
+    reasonZh: '韩信：韩信如果前期不能带起节奏尽快推掉水晶，后期的核心玩法就是带线偷塔，而黄忠是一个可以利用大招守家翻盘的英雄，能轻松把游戏节奏拖入后期，从而降低韩信的威胁让他失去作用，后期黄忠装备成型后也可以轻松击败韩信。',
+    reasonEn: '韩信：韩信如果前期不能带起节奏尽快推掉水晶，后期的核心玩法就是带线偷塔，而黄忠是一个可以利用大招守家翻盘的英雄，能轻松把游戏节奏拖入后期，从而降低韩信的威胁让他失去作用，后期黄忠装备成型后也可以轻松击败韩信。'
+  },
+  'huangzhong-zhugeliang': {
+    reasonZh: '诸葛亮：诸葛亮后期需要出半肉装切入敌方英雄身边才能打出高额的有效伤害，黄忠的超远射程令诸葛亮还没走到面前会被打的成残血，黄忠的双抗加成效果可以避免被诸葛亮秒杀，黄忠作为远程炮台会让诸葛亮很难有接近的机会。',
+    reasonEn: '诸葛亮：诸葛亮后期需要出半肉装切入敌方英雄身边才能打出高额的有效伤害，黄忠的超远射程令诸葛亮还没走到面前会被打的成残血，黄忠的双抗加成效果可以避免被诸葛亮秒杀，黄忠作为远程炮台会让诸葛亮很难有接近的机会。'
+  },
+  'lanlingwang-huangzhong': {
+    reasonZh: '黄忠容易被兰陵王抓住后秒掉',
+    reasonEn: '黄忠容易被兰陵王抓住后秒掉'
+  },
+  'huamulan-huangzhong': {
+    reasonZh: '花木兰的超高爆发输出能力能快速击杀走位不慎的黄忠',
+    reasonEn: '花木兰的超高爆发输出能力能快速击杀走位不慎的黄忠'
+  },
+  'taiyizhenren-huangzhong': {
+    reasonZh: '黄忠：太乙真人可以利用一技能的高移动速度和二技能的位移快速接近无法移动的黄忠打出完美控制效果，同时大招的复活能力也增加了协助队友抓掉黄忠的机会。',
+    reasonEn: '黄忠：太乙真人可以利用一技能的高移动速度和二技能的位移快速接近无法移动的黄忠打出完美控制效果，同时大招的复活能力也增加了协助队友抓掉黄忠的机会。'
+  },
+  'zhongkui-huangzhong': {
+    reasonZh: '黄忠：以黄忠为代表的缺乏位移的射手，例如成吉思汗，虞姬，狄仁杰等英雄，机动性差。面对钟馗的钩子无法做出相对应的位移，则会非常难以反制。同时这个思路符合各个段位的水平，都能达到不俗的效果。',
+    reasonEn: '黄忠：以黄忠为代表的缺乏位移的射手，例如成吉思汗，虞姬，狄仁杰等英雄，机动性差。面对钟馗的钩子无法做出相对应的位移，则会非常难以反制。同时这个思路符合各个段位的水平，都能达到不俗的效果。'
+  },
+  'guanyu-huangzhong': {
+    reasonZh: '黄忠：黄忠在中心战场之外开大招时候，输出会有很高的伤害，也有安全保障，正常英雄如果不能快速切到黄忠身边，很难近身切入，关羽可以凭借冲刺绕后配合技能快速切到黄忠身边，也可以用大招和一技能把黄忠推到战场中央而且造成高额伤害，没有位移的黄忠很难有反制手段。',
+    reasonEn: '黄忠：黄忠在中心战场之外开大招时候，输出会有很高的伤害，也有安全保障，正常英雄如果不能快速切到黄忠身边，很难近身切入，关羽可以凭借冲刺绕后配合技能快速切到黄忠身边，也可以用大招和一技能把黄忠推到战场中央而且造成高额伤害，没有位移的黄忠很难有反制手段。'
+  },
+  'lvbu-huangzhong': {
+    reasonZh: '黄忠：黄忠是个移动炮台，但开大后的黄忠无法移动，此时吕布使用大招，造成控制和伤害，配合队友轻松击杀黄忠。',
+    reasonEn: '黄忠：黄忠是个移动炮台，但开大后的黄忠无法移动，此时吕布使用大招，造成控制和伤害，配合队友轻松击杀黄忠。'
+  },
+  'gaojianli-huangzhong': {
+    reasonZh: '黄忠：黄忠是站桩输出型英雄，没有任何位移技能，而且开大时不能移动，虽然增加了一定的魔抗，但是对于穿透和爆发比较高的高渐离来说效果甚微，高渐离开大后使用技能靠近黄忠后受到的伤害也比较少，可以轻松秒掉黄忠。',
+    reasonEn: '黄忠：黄忠是站桩输出型英雄，没有任何位移技能，而且开大时不能移动，虽然增加了一定的魔抗，但是对于穿透和爆发比较高的高渐离来说效果甚微，高渐离开大后使用技能靠近黄忠后受到的伤害也比较少，可以轻松秒掉黄忠。'
+  },
+  'luban7-huangzhong': {
+    reasonZh: '黄忠：鲁班七号是一名后期强势的英雄，在后期装备成型后可以对很多英雄产生压制效果，黄忠开启大招后无法移动，鲁班七号可以先手大招对黄忠产生威胁，1技能后配合扫射2技能扫射可以轻松击杀黄忠。',
+    reasonEn: '黄忠：鲁班七号是一名后期强势的英雄，在后期装备成型后可以对很多英雄产生压制效果，黄忠开启大招后无法移动，鲁班七号可以先手大招对黄忠产生威胁，1技能后配合扫射2技能扫射可以轻松击杀黄忠。'
+  },
+  'yingzheng-huangzhong': {
+    reasonZh: '黄忠：嬴政大招超远射程可以在黄忠大招范围外命中黄忠，逼迫他收起炮台，方便队友进行击杀，若不收起炮台则可以直接单杀。',
+    reasonEn: '黄忠：嬴政大招超远射程可以在黄忠大招范围外命中黄忠，逼迫他收起炮台，方便队友进行击杀，若不收起炮台则可以直接单杀。'
+  },
+  'mozi-huangzhong': {
+    reasonZh: '黄忠：墨子的二技能可以击中刚刚开大架起炮台的黄忠。伤害高附带眩晕，此时队友即可上前击杀黄忠。',
+    reasonEn: '黄忠：墨子的二技能可以击中刚刚开大架起炮台的黄忠。伤害高附带眩晕，此时队友即可上前击杀黄忠。'
+  },
+  'zhugeliang-bianque': {
+    reasonZh: '扁鹊：扁鹊和诸葛同样作为法师，但在对战时候却没有诸葛亮强势。扁鹊没有位移技能，且需要叠加层数才能打出伤害。而诸葛可以通过二技能近身再通过一技能的配合快速打出伤害且叠加被动输出伤害，最后再通过三技能元气弹完美收场。在这个过程中，还可以躲避扁鹊的技能，使扁鹊无法打出最高伤害。',
+    reasonEn: '扁鹊：扁鹊和诸葛同样作为法师，但在对战时候却没有诸葛亮强势。扁鹊没有位移技能，且需要叠加层数才能打出伤害。而诸葛可以通过二技能近身再通过一技能的配合快速打出伤害且叠加被动输出伤害，最后再通过三技能元气弹完美收场。在这个过程中，还可以躲避扁鹊的技能，使扁鹊无法打出最高伤害。'
+  },
+  'zhugeliang-luban7': {
+    reasonZh: '鲁班七号：诸葛亮可以克制一些没有位移技能的英雄。诸葛亮可以使用二技能对鲁班七号技能进行躲避。鲁班七号移速较慢，且没有位移技能，诸葛亮可以利用二技能对鲁班七号进行追击，让其没有逃跑的可能。',
+    reasonEn: '鲁班七号：诸葛亮可以克制一些没有位移技能的英雄。诸葛亮可以使用二技能对鲁班七号技能进行躲避。鲁班七号移速较慢，且没有位移技能，诸葛亮可以利用二技能对鲁班七号进行追击，让其没有逃跑的可能。'
+  },
+  'lanlingwang-zhugeliang': {
+    reasonZh: '诸葛亮容易被兰陵王抓住后秒掉',
+    reasonEn: '诸葛亮容易被兰陵王抓住后秒掉'
+  },
+  'huamulan-zhugeliang': {
+    reasonZh: '花木兰的超高爆发输出能力能快速击杀走位不慎的诸葛亮',
+    reasonEn: '花木兰的超高爆发输出能力能快速击杀走位不慎的诸葛亮'
+  },
+  'libai-zhugeliang': {
+    reasonZh: '诸葛亮：诸葛亮的位移距离比较短，如果被李白切近身很难逃脱，本身身板也比较脆弱，一旦被李白的2技能配合大招攻击会降低血线甚至被击杀，同时李白的二技能和大招都可以完美躲诸葛亮的大招和技能，李白可以轻松应对诸葛亮。',
+    reasonEn: '诸葛亮：诸葛亮的位移距离比较短，如果被李白切近身很难逃脱，本身身板也比较脆弱，一旦被李白的2技能配合大招攻击会降低血线甚至被击杀，同时李白的二技能和大招都可以完美躲诸葛亮的大招和技能，李白可以轻松应对诸葛亮。'
+  },
+  'sunbin-zhugeliang': {
+    reasonZh: '诸葛亮：在残血队友暴露在诸葛亮面前时可以通过大招造成沉默限制诸葛亮技能，使得队友逃脱，也可以在残血诸葛亮逃脱时通过大招沉默阻止他用二技能离开。',
+    reasonEn: '诸葛亮：在残血队友暴露在诸葛亮面前时可以通过大招造成沉默限制诸葛亮技能，使得队友逃脱，也可以在残血诸葛亮逃脱时通过大招沉默阻止他用二技能离开。'
+  },
+  'nezha-chengyaojin': {
+    reasonZh: '程咬金：程咬金一般作为骚扰后排的存在，哪吒的被动有效的反制敌方程咬金对己方ADC，AP的骚扰，火种降低程咬金大招的回血量，真实伤害也能对程咬金造成较大的威胁，逼退或者配合输出击杀程咬金。',
+    reasonEn: '程咬金：程咬金一般作为骚扰后排的存在，哪吒的被动有效的反制敌方程咬金对己方ADC，AP的骚扰，火种降低程咬金大招的回血量，真实伤害也能对程咬金造成较大的威胁，逼退或者配合输出击杀程咬金。'
+  },
+  'zhangliang-nezha': {
+    reasonZh: '张良的大招效果可以无视哪吒的大招韧性效果',
+    reasonEn: '张良的大招效果可以无视哪吒的大招韧性效果'
+  },
+  'diaochan-nezha': {
+    reasonZh: '貂蝉能在躲避技能同时很好的风筝哪吒',
+    reasonEn: '貂蝉能在躲避技能同时很好的风筝哪吒'
+  },
+  'laofuzi-nezha': {
+    reasonZh: '哪吒：哪吒有一个核心玩法是41分推，既能牵制敌方英雄又可以及时支援战场，带线推进让人防不胜防，老夫子对抗哪吒是一个很好的选择，真实伤害可以无视哪吒的免伤能正面单挑战胜哪吒，在哪吒需要支援战场时，使用大招也可以组织哪吒发挥自己的作用。',
+    reasonEn: '哪吒：哪吒有一个核心玩法是41分推，既能牵制敌方英雄又可以及时支援战场，带线推进让人防不胜防，老夫子对抗哪吒是一个很好的选择，真实伤害可以无视哪吒的免伤能正面单挑战胜哪吒，在哪吒需要支援战场时，使用大招也可以组织哪吒发挥自己的作用。'
+  },
+  'taiyizhenren-lanlingwang': {
+    reasonZh: '兰陵王：面对只有一次切入机会的兰陵王，太乙真人的控制牵制能力（开一技能走在后排身边，二技能主动勾兰陵王）都可以降低被兰陵王切入的概率，同时大招所给予的复活也明显克制了兰陵王切入机会只有一次的设定，相比较同类辅助如刘邦孙膑，太乙真人可以更好的压制兰陵王，避免被切入。',
+    reasonEn: '兰陵王：面对只有一次切入机会的兰陵王，太乙真人的控制牵制能力（开一技能走在后排身边，二技能主动勾兰陵王）都可以降低被兰陵王切入的概率，同时大招所给予的复活也明显克制了兰陵王切入机会只有一次的设定，相比较同类辅助如刘邦孙膑，太乙真人可以更好的压制兰陵王，避免被切入。'
+  },
+  'sunshangxiang-taiyizhenren': {
+    reasonZh: '太乙真人的技能很难命中灵活的孙尚香',
+    reasonEn: '太乙真人的技能很难命中灵活的孙尚香'
+  },
+  'luna-taiyizhenren': {
+    reasonZh: '太乙真人很难抓住灵活的露娜',
+    reasonEn: '太乙真人很难抓住灵活的露娜'
+  },
+  'caiwenji-diaochan': {
+    reasonZh: '花木兰的超高爆发输出能力能快速击杀走位不慎的貂蝉',
+    reasonEn: '花木兰的超高爆发输出能力能快速击杀走位不慎的貂蝉'
+  },
+  'lanlingwang-caiwenji': {
+    reasonZh: '兰陵王的隐身和秒杀能力很容易接近蔡文姬将其秒杀',
+    reasonEn: '兰陵王的隐身和秒杀能力很容易接近蔡文姬将其秒杀'
+  },
+  'huamulan-caiwenji': {
+    reasonZh: '花木兰的超高爆发输出能力能快速击杀走位不慎的蔡文姬',
+    reasonEn: '花木兰的超高爆发输出能力能快速击杀走位不慎的蔡文姬'
+  },
+  'yadianna-damo': {
+    reasonZh: '达摩：雅典娜的免控属性让达摩非常难击飞她，从而无法解锁大招第二段伤害。雅典娜的一技能和三技能都是法术伤害，也使得达摩被动的物理防御无法减免这部分伤害，受到一定程度的克制。',
+    reasonEn: '达摩：雅典娜的免控属性让达摩非常难击飞她，从而无法解锁大招第二段伤害。雅典娜的一技能和三技能都是法术伤害，也使得达摩被动的物理防御无法减免这部分伤害，受到一定程度的克制。'
+  },
+  'yadianna-lanlingwang': {
+    reasonZh: '兰陵王：雅典娜的一技能和三技能都可以提供护盾和免控，运用得当可以抵挡兰陵王二技能的二段伤害，以及眩晕效果。在角色定位上，兰陵王属于刺客，身板较弱，而雅典娜是半肉战士，并且可以让兰陵王二技能大部分效果无效化。在机动性上，雅典娜的移速比兰陵王还快，位移技能也更多，从总体上对兰陵王进行克制。',
+    reasonEn: '兰陵王：雅典娜的一技能和三技能都可以提供护盾和免控，运用得当可以抵挡兰陵王二技能的二段伤害，以及眩晕效果。在角色定位上，兰陵王属于刺客，身板较弱，而雅典娜是半肉战士，并且可以让兰陵王二技能大部分效果无效化。在机动性上，雅典娜的移速比兰陵王还快，位移技能也更多，从总体上对兰陵王进行克制。'
+  },
+  'sunbin-yadianna': {
+    reasonZh: '孙膑的大招沉默效果和控制很可能使得雅典娜进场后放不出技能，从而毫无作为',
+    reasonEn: '孙膑的大招沉默效果和控制很可能使得雅典娜进场后放不出技能，从而毫无作为'
+  },
+  'guanyu-yadianna': {
+    reasonZh: '关羽可以快速推开团战入场后的雅典娜',
+    reasonEn: '关羽可以快速推开团战入场后的雅典娜'
+  },
+  'yangjian-luban7': {
+    reasonZh: '鲁班：对线上，杨戬作为上单英雄时，回复能力和控制效果强，抗压抗打。在面对鲁班时，不仅很难被鲁班击杀，而且还有反杀鲁班的情况。团战时，杨戬的一技能若是标中鲁班，没有位移的鲁班就很难逃脱，容易被被一套带走，很大程度上抑制了鲁班在团战中的发挥。',
+    reasonEn: '鲁班：对线上，杨戬作为上单英雄时，回复能力和控制效果强，抗压抗打。在面对鲁班时，不仅很难被鲁班击杀，而且还有反杀鲁班的情况。团战时，杨戬的一技能若是标中鲁班，没有位移的鲁班就很难逃脱，容易被被一套带走，很大程度上抑制了鲁班在团战中的发挥。'
+  },
+  'yangjian-guanyu': {
+    reasonZh: '关羽：在面对关羽时，利用二技能的减速或者眩晕可以很好的将关羽的加速效果打断，而且在面对残血奔跑中的关羽，一技能一旦标中，就可以瞬间位移到他身边将其击杀。',
+    reasonEn: '关羽：在面对关羽时，利用二技能的减速或者眩晕可以很好的将关羽的加速效果打断，而且在面对残血奔跑中的关羽，一技能一旦标中，就可以瞬间位移到他身边将其击杀。'
+  },
+  'sunshangxiang-yangjian': {
+    reasonZh: '孙尚香可以通过位移轻松躲过杨戬的技能',
+    reasonEn: '孙尚香可以通过位移轻松躲过杨戬的技能'
+  },
+  'diaochan-yangjian': {
+    reasonZh: '貂蝉能在躲避技能同时很好的风筝杨戬',
+    reasonEn: '貂蝉能在躲避技能同时很好的风筝杨戬'
+  },
+  'hanxin-zhongkui': {
+    reasonZh: '刺客（韩信、兰陵王）的爆发输出很容易击杀落单的钟馗',
+    reasonEn: '刺客（韩信、兰陵王）的爆发输出很容易击杀落单的钟馗'
+  },
+  'huamulan-zhongkui': {
+    reasonZh: '花木兰的超高爆发输出能力能快速击杀走位不慎的钟馗',
+    reasonEn: '花木兰的超高爆发输出能力能快速击杀走位不慎的钟馗'
+  },
+  'zhongwuyan-zhongkui': {
+    reasonZh: '钟馗：团战时，钟馗勾人技能十分厉害，但是对上钟无艳，把钟无艳勾过去，钟无艳一个大招基本可以让对面团灭。钟馗本身没有位移技能，面对钟无艳很是吃亏。即便钟无艳没有大招，被勾过去仍可以选择一技能逃跑 。',
+    reasonEn: '钟馗：团战时，钟馗勾人技能十分厉害，但是对上钟无艳，把钟无艳勾过去，钟无艳一个大招基本可以让对面团灭。钟馗本身没有位移技能，面对钟无艳很是吃亏。即便钟无艳没有大招，被勾过去仍可以选择一技能逃跑 。'
+  },
+  'yuji-hanxin': {
+    reasonZh: '韩信：韩信是个高机动性英雄，但是面对高爆发加技能指向性加免疫物理伤害的虞姬，被天然克制。虞姬三技能能很好的压制韩信的位移，因为即使韩信位移走了，一旦被锁定，也很有可能会被击杀。',
+    reasonEn: '韩信：韩信是个高机动性英雄，但是面对高爆发加技能指向性加免疫物理伤害的虞姬，被天然克制。虞姬三技能能很好的压制韩信的位移，因为即使韩信位移走了，一旦被锁定，也很有可能会被击杀。'
+  },
+  'luna-yuji': {
+    reasonZh: '虞姬：虞姬是一个身板比较脆的射手，2技能免疫物理攻击的效果对露娜0作用，面对露娜这种高机动性，有持续输出和追击能力的存在很难有逃生的能力，露娜的2技能也有高额的护盾，可以免疫很多持续伤害，大招可以轻松躲避虞姬的1技能poke。',
+    reasonEn: '虞姬：虞姬是一个身板比较脆的射手，2技能免疫物理攻击的效果对露娜0作用，面对露娜这种高机动性，有持续输出和追击能力的存在很难有逃生的能力，露娜的2技能也有高额的护盾，可以免疫很多持续伤害，大招可以轻松躲避虞姬的1技能poke。'
+  },
+  'diaochan-yuji': {
+    reasonZh: '貂蝉的超高法术伤害和突进能力是虞姬无法抵挡的',
+    reasonEn: '貂蝉的超高法术伤害和突进能力是虞姬无法抵挡的'
+  },
+  'ailin-yuji': {
+    reasonZh: '艾琳全法术伤害使虞姬的2技能无法免疫',
+    reasonEn: '艾琳全法术伤害使虞姬的2技能无法免疫'
+  },
+  'liyuanfang-lanlingwang': {
+    reasonZh: '兰陵王：兰陵王的核心玩法是隐身后先手秒杀敌方核心输出点，有李元芳的被动在可以轻松探测到敌方兰陵王的位置和动态，强大的反隐效果可以让兰陵王失去gank己方核心输出位的机会，躲避好兰陵王的2技能后站撸也可以轻松击杀兰陵王。',
+    reasonEn: '兰陵王：兰陵王的核心玩法是隐身后先手秒杀敌方核心输出点，有李元芳的被动在可以轻松探测到敌方兰陵王的位置和动态，强大的反隐效果可以让兰陵王失去gank己方核心输出位的机会，躲避好兰陵王的2技能后站撸也可以轻松击杀兰陵王。'
+  },
+  'lanlingwang-liyuanfang': {
+    reasonZh: '兰陵王的隐身和秒杀能力很容易接近李元芳将其秒杀',
+    reasonEn: '兰陵王的隐身和秒杀能力很容易接近李元芳将其秒杀'
+  },
+  'huamulan-liyuanfang': {
+    reasonZh: '花木兰的超高爆发输出能力能快速击杀走位不慎的元芳',
+    reasonEn: '花木兰的超高爆发输出能力能快速击杀走位不慎的元芳'
+  },
+  'zhangfei-wangzhaojun': {
+    reasonZh: '王昭君：拥有张飞的阵容不惧怕王昭君，因为张飞的所有技能都是为了打断王昭君大招而生。当王昭君放大的时候，张飞只需要跳进去击飞就行，如果没有击飞，还有大招的眩晕打断。',
+    reasonEn: '王昭君：拥有张飞的阵容不惧怕王昭君，因为张飞的所有技能都是为了打断王昭君大招而生。当王昭君放大的时候，张飞只需要跳进去击飞就行，如果没有击飞，还有大招的眩晕打断。'
+  },
+  'zhangfei-mozi': {
+    reasonZh: '墨子：墨子也是极其惧怕张飞打断的英雄之一，墨子开大，张飞只需要跳过去击飞，远距离情况下，也可以大招打断保护被控制的队友。',
+    reasonEn: '墨子：墨子也是极其惧怕张飞打断的英雄之一，墨子开大，张飞只需要跳过去击飞，远距离情况下，也可以大招打断保护被控制的队友。'
+  },
+  'huamulan-zhangfei': {
+    reasonZh: '张飞单人作战能力不强，遇到花木兰这种爆发刺客还是撤退吧',
+    reasonEn: '张飞单人作战能力不强，遇到花木兰这种爆发刺客还是撤退吧'
+  },
+  'zhuangzhou-zhangfei': {
+    reasonZh: '庄周的大招能缓解张飞技能的控制',
+    reasonEn: '庄周的大招能缓解张飞技能的控制'
+  },
+  'diaochan-zhangfei': {
+    reasonZh: '张飞：貂蝉在团战中的爆发很高（被动连爆），利用被动的真实伤害效果很好压制张飞这种技能的护盾的英雄，而且被动还带有减速效果，在单抓或者在团战中很好击杀或者压制住张飞，自身也不会遭受很高的伤害。',
+    reasonEn: '张飞：貂蝉在团战中的爆发很高（被动连爆），利用被动的真实伤害效果很好压制张飞这种技能的护盾的英雄，而且被动还带有减速效果，在单抓或者在团战中很好击杀或者压制住张飞，自身也不会遭受很高的伤害。'
+  },
+  'lvbu-zhangfei': {
+    reasonZh: '张飞：张飞大招变身和二技能都能为自己套上一个较厚的护盾，但附魔时的吕布为真实伤害无视护盾。',
+    reasonEn: '张飞：张飞大招变身和二技能都能为自己套上一个较厚的护盾，但附魔时的吕布为真实伤害无视护盾。'
+  },
+  'niumo-wangzhaojun': {
+    reasonZh: '王昭君：在团战中牛魔可以利用被动增加自己和一名队友的双抗，让王昭君的消耗能力降低，当敌方王昭君开大时牛魔可以利用2.3技能来打断王昭君，随后配合队友将其击杀。',
+    reasonEn: '王昭君：在团战中牛魔可以利用被动增加自己和一名队友的双抗，让王昭君的消耗能力降低，当敌方王昭君开大时牛魔可以利用2.3技能来打断王昭君，随后配合队友将其击杀。'
+  },
+  'niumo-mozi': {
+    reasonZh: '墨子：墨子虽是一位有控制有输出的英雄但其技能前摇较久，牛魔可通过二三技能的控制打断墨子的技能释放，之后配合队友完成击杀。',
+    reasonEn: '墨子：墨子虽是一位有控制有输出的英雄但其技能前摇较久，牛魔可通过二三技能的控制打断墨子的技能释放，之后配合队友完成击杀。'
+  },
+  'huamulan-niumo': {
+    reasonZh: '牛魔单人作战能力不强，遇到花木兰这种刺客简直没有还手之力',
+    reasonEn: '牛魔单人作战能力不强，遇到花木兰这种刺客简直没有还手之力'
+  },
+  'diaochan-niumo': {
+    reasonZh: '牛魔不能很容易控制到灵活的貂蝉',
+    reasonEn: '牛魔不能很容易控制到灵活的貂蝉'
+  },
+  'jvyoujing-sunwukong': {
+    reasonZh: '孙悟空：孙悟空的前期伤害比较低，即使被孙悟空打一套伤害，橘右京控制后释放大招就可以回很多血，但是孙悟空没有这么强的赖线能力只能选择回家补血。橘右京技能范围比较远，清兵能力也比较强，可以从初期就压制孙悟空，后期出半肉坦装也可以轻松对抗孙悟空。',
+    reasonEn: '孙悟空：孙悟空的前期伤害比较低，即使被孙悟空打一套伤害，橘右京控制后释放大招就可以回很多血，但是孙悟空没有这么强的赖线能力只能选择回家补血。橘右京技能范围比较远，清兵能力也比较强，可以从初期就压制孙悟空，后期出半肉坦装也可以轻松对抗孙悟空。'
+  },
+  'jvyoujing-luban7': {
+    reasonZh: '鲁班七号：前中期对线遇到鲁班，可以等技能冷却，打完一套231就撤退，利用恢复效果和鲁班对线，风筝效果追击或逃跑，4级可以正面刚配合减速轻松击杀鲁班。',
+    reasonEn: '鲁班七号：前中期对线遇到鲁班，可以等技能冷却，打完一套231就撤退，利用恢复效果和鲁班对线，风筝效果追击或逃跑，4级可以正面刚配合减速轻松击杀鲁班。'
+  },
+  'sunshangxiang-jvyoujing': {
+    reasonZh: '灵活的孙尚香令橘右京的控制不容易命中并且被远程消耗',
+    reasonEn: '灵活的孙尚香令橘右京的控制不容易命中并且被远程消耗'
+  },
+  'wangzhaojun-jvyoujing': {
+    reasonZh: '王昭君的大招令橘右京在突进时必须考虑能否活着出去',
+    reasonEn: '王昭君的大招令橘右京在突进时必须考虑能否活着出去'
+  },
+  'xiangyu-nakelulu': {
+    reasonZh: '娜可露露进场后，项羽可选择将其推开或控制限制其输出',
+    reasonEn: '娜可露露进场后，项羽可选择将其推开或控制限制其输出'
+  },
+  'zhangliang-nakelulu': {
+    reasonZh: '张良的硬控能控住娜可露露将其击杀',
+    reasonEn: '张良的硬控能控住娜可露露将其击杀'
+  },
+  'buzhihuowu-guanyu': {
+    reasonZh: '关羽：关羽比较依赖被动的冲锋，不知火舞的每个技能包括被动都能打断其冲锋状态，失去被动冲锋的关羽几乎和超级兵一样，所以不知火舞是天克关羽的。',
+    reasonEn: '关羽：关羽比较依赖被动的冲锋，不知火舞的每个技能包括被动都能打断其冲锋状态，失去被动冲锋的关羽几乎和超级兵一样，所以不知火舞是天克关羽的。'
+  },
+  'buzhihuowu-gaojianli': {
+    reasonZh: '高渐离：不知火舞与高渐离对线，前期可以用扇子无限消耗手短的高渐离。即使4级之后高渐离有一套爆发伤害，不知火的位移也可以完全避过，并且可以在高渐离没有大招的时候轻松秒掉高渐离。',
+    reasonEn: '高渐离：不知火舞与高渐离对线，前期可以用扇子无限消耗手短的高渐离。即使4级之后高渐离有一套爆发伤害，不知火的位移也可以完全避过，并且可以在高渐离没有大招的时候轻松秒掉高渐离。'
+  },
+  'hanxin-buzhihuowu': {
+    reasonZh: '刺客的爆发输出很容易击杀不知火舞',
+    reasonEn: '刺客的爆发输出很容易击杀不知火舞'
+  },
+  'huamulan-buzhihuowu': {
+    reasonZh: '花木兰的超高爆发输出能力能快速击杀走位不慎的不知火舞',
+    reasonEn: '花木兰的超高爆发输出能力能快速击杀走位不慎的不知火舞'
+  },
+  'huamulan-luban7': {
+    reasonZh: '鲁班七号：鲁班七号做为射手后期输出很高，但是自保能力太差，没有位移技能只能依靠闪现逃生，花木兰可以在草丛蹲着等到鲁班出现后先手2技能配合移打出沉默效果，切重剑控制一套伤害，可以轻松击杀鲁班七号。',
+    reasonEn: '鲁班七号：鲁班七号做为射手后期输出很高，但是自保能力太差，没有位移技能只能依靠闪现逃生，花木兰可以在草丛蹲着等到鲁班出现后先手2技能配合移打出沉默效果，切重剑控制一套伤害，可以轻松击杀鲁班七号。'
+  },
+  'huamulan-mozi': {
+    reasonZh: '花木兰的超高爆发输出能力能快速击杀走位不慎的墨子',
+    reasonEn: '花木兰的超高爆发输出能力能快速击杀走位不慎的墨子'
+  },
+  'niumo-huamulan': {
+    reasonZh: '带控制的坦克能让花木兰在双剑形态下很难发挥',
+    reasonEn: '带控制的坦克能让花木兰在双剑形态下很难发挥'
+  },
+  'zhugeliang-huamulan': {
+    reasonZh: '超高的爆发和灵活的技能让花木兰在哪个形态都难以应对',
+    reasonEn: '超高的爆发和灵活的技能让花木兰在哪个形态都难以应对'
+  },
+  'zhuangzhou-huamulan': {
+    reasonZh: '花木兰：对局进行到中期时，花木兰便无法和庄周正面交锋。庄周不受控制，让花木兰的多数输出技能无效使用，而自身被动结合二技能伤害能让身板较脆的花木兰无法接受。即使残血对线，庄周也能轻易脱逃。',
+    reasonEn: '花木兰：对局进行到中期时，花木兰便无法和庄周正面交锋。庄周不受控制，让花木兰的多数输出技能无效使用，而自身被动结合二技能伤害能让身板较脆的花木兰无法接受。即使残血对线，庄周也能轻易脱逃。'
+  },
+  'lanlingwang-luban7': {
+    reasonZh: '鲁班没有位移技能，兰陵王的隐身和秒杀能力很容易接近鲁班将其秒杀',
+    reasonEn: '鲁班没有位移技能，兰陵王的隐身和秒杀能力很容易接近鲁班将其秒杀'
+  },
+  'lanlingwang-libai': {
+    reasonZh: '李白：李白在初期的伤害能力比较差，单挑无法打赢兰陵王，被兰陵王2技能加1技能组合技能后会直接残血，兰陵王可以在野区抢李白的资源，压制李白无法发育，寻找机会击杀李白，在中后期2技能配合1技能控制大招也可以直接秒杀李白、',
+    reasonEn: '李白：李白在初期的伤害能力比较差，单挑无法打赢兰陵王，被兰陵王2技能加1技能组合技能后会直接残血，兰陵王可以在野区抢李白的资源，压制李白无法发育，寻找机会击杀李白，在中后期2技能配合1技能控制大招也可以直接秒杀李白、'
+  },
+  'xiangyu-lanlingwang': {
+    reasonZh: '项羽能在兰陵王切入后将其控制并推开，限制他的输出',
+    reasonEn: '项羽能在兰陵王切入后将其控制并推开，限制他的输出'
+  },
+  'zhangliang-lanlingwang': {
+    reasonZh: '张良的硬控能控住兰陵王将其击杀',
+    reasonEn: '张良的硬控能控住兰陵王将其击杀'
+  },
+  'zhongwuyan-lanlingwang': {
+    reasonZh: '兰陵王：兰陵王作为一个自身没有位移技能的刺客，虽然大招隐身非常厉害，钟无艳可以在兰陵王靠近时靠近我方后排，释放一二技能，不给兰陵王近身的机会。即便敌方兰陵王隐身秒掉我方后排，也会被钟无艳石化，以命换命。',
+    reasonEn: '兰陵王：兰陵王作为一个自身没有位移技能的刺客，虽然大招隐身非常厉害，钟无艳可以在兰陵王靠近时靠近我方后排，释放一二技能，不给兰陵王近身的机会。即便敌方兰陵王隐身秒掉我方后排，也会被钟无艳石化，以命换命。'
+  },
+  'wangzhaojun-luban7': {
+    reasonZh: '鲁班七号：鲁班七号没有位移技能，王昭君可以通过一二技能的连用，配合大招，一套带走鲁班七号。在经济相当的同时，鲁班除了闪现之外，没有更好的方式躲避王昭君二技能的冰冻效果，所以王昭君在对抗鲁班时很有优势甚至非常强势。',
+    reasonEn: '鲁班七号：鲁班七号没有位移技能，王昭君可以通过一二技能的连用，配合大招，一套带走鲁班七号。在经济相当的同时，鲁班除了闪现之外，没有更好的方式躲避王昭君二技能的冰冻效果，所以王昭君在对抗鲁班时很有优势甚至非常强势。'
+  },
+  'wangzhaojun-lvbu': {
+    reasonZh: '王昭君的减速和控制技能很好风筝吕布',
+    reasonEn: '王昭君的减速和控制技能很好风筝吕布'
+  },
+  'hanxin-wangzhaojun': {
+    reasonZh: '身为脆皮法师，王昭君害怕韩信等位移多伤害高的刺客英雄',
+    reasonEn: '身为脆皮法师，王昭君害怕韩信等位移多伤害高的刺客英雄'
+  },
+  'lanlingwang-wangzhaojun': {
+    reasonZh: '兰陵王在团战中能够一套技能直接带走王昭君',
+    reasonEn: '兰陵王在团战中能够一套技能直接带走王昭君'
+  },
+  'wuzetian-wangzhaojun': {
+    reasonZh: '王昭君：王昭君输出能力非常强，主要是依赖她大招的超高伤害，但是王昭君的大招可以被控制解除，而武则天技能全部带控制，任何一个技能都能打断王昭君的大招，让王昭君无法在团战中持续输出。',
+    reasonEn: '王昭君：王昭君输出能力非常强，主要是依赖她大招的超高伤害，但是王昭君的大招可以被控制解除，而武则天技能全部带控制，任何一个技能都能打断王昭君的大招，让王昭君无法在团战中持续输出。'
+  },
+  'xiangyu-wangzhaojun': {
+    reasonZh: '王昭君：项羽可以冲进王昭君的大招范围之内将王昭君的技能强制打断，大招因为超远的距离也可以达到这个效果。',
+    reasonEn: '王昭君：项羽可以冲进王昭君的大招范围之内将王昭君的技能强制打断，大招因为超远的距离也可以达到这个效果。'
+  },
+  'damo-wangzhaojun': {
+    reasonZh: '王昭君：王昭君是其非常惧怕能够打断自己大招的人，达摩就是其中之一，达摩的一技能能够完美躲避王昭君的2技能冰封，同时击飞属性又能打断王昭君的大招，而大招的将敌方位移和眩晕的属性，也是可以打断王昭君的，这些均是达摩克制王昭君的原因，而王昭君脆弱的身板又十分惧怕达摩一套技能过来秒杀。',
+    reasonEn: '王昭君：王昭君是其非常惧怕能够打断自己大招的人，达摩就是其中之一，达摩的一技能能够完美躲避王昭君的2技能冰封，同时击飞属性又能打断王昭君的大招，而大招的将敌方位移和眩晕的属性，也是可以打断王昭君的，这些均是达摩克制王昭君的原因，而王昭君脆弱的身板又十分惧怕达摩一套技能过来秒杀。'
+  },
+  'caocao-wangzhaojun': {
+    reasonZh: '王昭君：王昭君的关键点于2技能的冰冻效果，冻住英雄大招打出极高的爆发。曹操的大招能够增加韧性、再加上抵抗之靴的增加的韧性，不管冰冻还是减速对曹操来说都是没有太大威胁的，而且曹操1技能位移也可以轻松躲掉王昭君的2技能，突进击杀王昭君。',
+    reasonEn: '王昭君：王昭君的关键点于2技能的冰冻效果，冻住英雄大招打出极高的爆发。曹操的大招能够增加韧性、再加上抵抗之靴的增加的韧性，不管冰冻还是减速对曹操来说都是没有太大威胁的，而且曹操1技能位移也可以轻松躲掉王昭君的2技能，突进击杀王昭君。'
+  },
+  'luban7-wangzhaojun': {
+    reasonZh: '王昭君：王昭君比较依赖己身的2技能控制效果，身板比较脆皮，经常会被鲁班的扫射火力压制，2个技能打一套就能秒掉王昭君。',
+    reasonEn: '王昭君：王昭君比较依赖己身的2技能控制效果，身板比较脆皮，经常会被鲁班的扫射火力压制，2个技能打一套就能秒掉王昭君。'
+  },
+  'yingzheng-wangzhaojun': {
+    reasonZh: '王昭君：嬴政大招可以直接在王昭君大招范围外攻击王昭君，逼迫她交闪现或者断大走开，为队友击杀提供更安全的环境。',
+    reasonEn: '王昭君：嬴政大招可以直接在王昭君大招范围外攻击王昭君，逼迫她交闪现或者断大走开，为队友击杀提供更安全的环境。'
+  },
+  'hanxin-luna': {
+    reasonZh: '露娜：露娜是比较吃发育的中后期英雄，前期韩信是野区小霸王，带着红蓝双buff强制反野，露娜打野在韩信面前会持续被等级压制，无法升到4级完全没有gank能力，韩信的高机动性可以轻松干扰露娜的发育同时完成对己方队友的支援，后期面对露娜即使打不过也可以通过位移技能轻松逃生。',
+    reasonEn: '露娜：露娜是比较吃发育的中后期英雄，前期韩信是野区小霸王，带着红蓝双buff强制反野，露娜打野在韩信面前会持续被等级压制，无法升到4级完全没有gank能力，韩信的高机动性可以轻松干扰露娜的发育同时完成对己方队友的支援，后期面对露娜即使打不过也可以通过位移技能轻松逃生。'
+  },
+  'hanxin-libai': {
+    reasonZh: '李白：在对局的前中期两个人相遇几乎是五五开，都有高机动性的特点，但是后期的输出韩信，利用被动攻速和技能效果可以做到一套技能轻松秒掉李白，而韩信的追击能力可以轻松限制李白的位移。',
+    reasonEn: '李白：在对局的前中期两个人相遇几乎是五五开，都有高机动性的特点，但是后期的输出韩信，利用被动攻速和技能效果可以做到一套技能轻松秒掉李白，而韩信的追击能力可以轻松限制李白的位移。'
+  },
+  'xiangyu-hanxin': {
+    reasonZh: '韩信进场后，项羽可选择将其推开或控制限制其输出',
+    reasonEn: '韩信进场后，项羽可选择将其推开或控制限制其输出'
+  },
+  'zhangliang-hanxin': {
+    reasonZh: '张良的硬控能控住韩信将其击杀',
+    reasonEn: '张良的硬控能控住韩信将其击杀'
+  },
+  'damo-hanxin': {
+    reasonZh: '韩信：尽管韩信有多段位移技能，但是达摩大招的眩晕可以很完美的克制这一点，加上眩晕后的二段伤害可以轻松击杀。',
+    reasonEn: '韩信：尽管韩信有多段位移技能，但是达摩大招的眩晕可以很完美的克制这一点，加上眩晕后的二段伤害可以轻松击杀。'
+  },
+  'luna-luban7': {
+    reasonZh: '鲁班：鲁班没有逃生技能，唯一的控制技能又需要预判位置才能放中，在身板灵活的露娜面前很难控制住露娜，本身身板很脆，被露娜切到一套以后很难生存。',
+    reasonEn: '鲁班：鲁班没有逃生技能，唯一的控制技能又需要预判位置才能放中，在身板灵活的露娜面前很难控制住露娜，本身身板很脆，被露娜切到一套以后很难生存。'
+  },
+  'zhangliang-luna': {
+    reasonZh: '露娜很怕被控制秒杀，张良的长时间控制，足以配合队友将其击杀',
+    reasonEn: '露娜很怕被控制秒杀，张良的长时间控制，足以配合队友将其击杀'
+  },
+  'zhongkui-luna': {
+    reasonZh: '钟馗可以将露娜团战前拉回来将其秒杀',
+    reasonEn: '钟馗可以将露娜团战前拉回来将其秒杀'
+  },
+  'diaochan-luna': {
+    reasonZh: '露娜：貂蝉一般带净化居多，净化解控露娜成功断大一次都可以造成致命伤，貂蝉的2技能消失也可以完美躲避任何技能，把握好时机也能轻松断露娜的大降低他的威胁力，貂蝉在开大时的，2技能命中人后的cd是很快的，在团战中也有不输露娜的AOE输出。',
+    reasonEn: '露娜：貂蝉一般带净化居多，净化解控露娜成功断大一次都可以造成致命伤，貂蝉的2技能消失也可以完美躲避任何技能，把握好时机也能轻松断露娜的大降低他的威胁力，貂蝉在开大时的，2技能命中人后的cd是很快的，在团战中也有不输露娜的AOE输出。'
+  },
+  'daji-luna': {
+    reasonZh: '露娜：露娜4级后比较强，建立优势后很难针对，妲己的2技能控制无法躲避，可以见到露娜就231打一套消耗，在己方塔下完全不用担心被露娜强杀，注意不要强推线，在后期打团高额伤害也可以让露娜很难受。',
+    reasonEn: '露娜：露娜4级后比较强，建立优势后很难针对，妲己的2技能控制无法躲避，可以见到露娜就231打一套消耗，在己方塔下完全不用担心被露娜强杀，注意不要强推线，在后期打团高额伤害也可以让露娜很难受。'
+  },
+  'chengyaojin-luban7': {
+    reasonZh: '鲁班七号：鲁班七号没有位移，爆发伤害对程咬金无法构成威胁，程咬金可以利用低血量高伤害能力站撸鲁班，血量比较低也可以开启大招恢复生命值，移速快即使打不过也可以轻松逃生。',
+    reasonEn: '鲁班七号：鲁班七号没有位移，爆发伤害对程咬金无法构成威胁，程咬金可以利用低血量高伤害能力站撸鲁班，血量比较低也可以开启大招恢复生命值，移速快即使打不过也可以轻松逃生。'
+  },
+  'chengyaojin-daji': {
+    reasonZh: '妲己：高爆发秒人英雄妲己在面对程咬金的超强坦克能力和高恢复能力非常的难受，经济同等情况下一套技能也无法把程咬金带走，因为只有2技能控制效果比较薄弱，很容易会被程咬金近身击败。',
+    reasonEn: '妲己：高爆发秒人英雄妲己在面对程咬金的超强坦克能力和高恢复能力非常的难受，经济同等情况下一套技能也无法把程咬金带走，因为只有2技能控制效果比较薄弱，很容易会被程咬金近身击败。'
+  },
+  'huamulan-chengyaojin': {
+    reasonZh: '程咬金单人作战能力不强，遇到花木兰这种刺客简直没有还手之力',
+    reasonEn: '程咬金单人作战能力不强，遇到花木兰这种刺客简直没有还手之力'
+  },
+  'sunshangxiang-chengyaojin': {
+    reasonZh: '机动性很高的孙尚香很容易风筝程咬金',
+    reasonEn: '机动性很高的孙尚香很容易风筝程咬金'
+  },
+  'anqila-luban7': {
+    reasonZh: '鲁班七号：针对鲁班七号类型的后排无位移英雄，可以在草丛伏击，先手2技能打中后接1技能大招可以轻松秒杀敌方英雄。',
+    reasonEn: '鲁班七号：针对鲁班七号类型的后排无位移英雄，可以在草丛伏击，先手2技能打中后接1技能大招可以轻松秒杀敌方英雄。'
+  },
+  'hanxin-anqila': {
+    reasonZh: '身为脆皮法师，安琪拉害怕韩信等位移多伤害高的刺客英雄',
+    reasonEn: '身为脆皮法师，安琪拉害怕韩信等位移多伤害高的刺客英雄'
+  },
+  'lanlingwang-anqila': {
+    reasonZh: '兰陵王在团战中能够一套技能直接带走安琪拉',
+    reasonEn: '兰陵王在团战中能够一套技能直接带走安琪拉'
+  },
+  'zhenji-diaochan': {
+    reasonZh: '貂蝉：甄姬特点是团控，远程消耗，团战时甄姬能在安全的地方对交战区使用技能，二技能的弹射以及三技能的范围持续伤害，让甄姬极容易打出被动。一般貂蝉带净化，过了这两秒，甄姬在远处就能控住貂蝉，让我方输出击杀貂蝉。优势就在于，甄姬能远程消耗，而貂蝉必须近身打伤害。',
+    reasonEn: '貂蝉：甄姬特点是团控，远程消耗，团战时甄姬能在安全的地方对交战区使用技能，二技能的弹射以及三技能的范围持续伤害，让甄姬极容易打出被动。一般貂蝉带净化，过了这两秒，甄姬在远处就能控住貂蝉，让我方输出击杀貂蝉。优势就在于，甄姬能远程消耗，而貂蝉必须近身打伤害。'
+  },
+  'gaojianli-diaochan': {
+    reasonZh: '貂蝉：高渐离有非常强的瞬间爆发输出能力，可以利用大招状态下的免伤效果提升自己的生存环境，配合被动伤害效果可以在短时间内成为一个恐怖的输出点。貂蝉更偏向于持续输出，利用位移和回复效果维持生存的同时打出高额的伤害。在对线或者团战的时候，貂蝉很难和高渐离对抗，经常都会被高渐离一套带走。',
+    reasonEn: '貂蝉：高渐离有非常强的瞬间爆发输出能力，可以利用大招状态下的免伤效果提升自己的生存环境，配合被动伤害效果可以在短时间内成为一个恐怖的输出点。貂蝉更偏向于持续输出，利用位移和回复效果维持生存的同时打出高额的伤害。在对线或者团战的时候，貂蝉很难和高渐离对抗，经常都会被高渐离一套带走。'
+  },
+  'daji-diaochan': {
+    reasonZh: '貂蝉：貂蝉比较怕硬控和集火秒杀，妲己的单体爆发比较高，可以在貂蝉秀起来之前一套231连招秒掉，注意在貂蝉交出2技能消失后在眩晕打出一套连招（中后期妲己经济碾压的情况下，即使貂蝉满血也可以秒掉）。',
+    reasonEn: '貂蝉：貂蝉比较怕硬控和集火秒杀，妲己的单体爆发比较高，可以在貂蝉秀起来之前一套231连招秒掉，注意在貂蝉交出2技能消失后在眩晕打出一套连招（中后期妲己经济碾压的情况下，即使貂蝉满血也可以秒掉）。'
+  },
+  'sunshangxiang-guanyu': {
+    reasonZh: '孙尚香可以很好躲过关羽的技能，从而进行风筝',
+    reasonEn: '孙尚香可以很好躲过关羽的技能，从而进行风筝'
+  },
+  'sunbin-guanyu': {
+    reasonZh: '孙膑大招的沉默可以让关羽进场时无事可做',
+    reasonEn: '孙膑大招的沉默可以让关羽进场时无事可做'
+  },
+  'laofuzi-guanyu': {
+    reasonZh: '关羽：关羽是一个依赖冲锋后技能收益的英雄，最害怕控制和减速类技能针对，老夫子使用大招命中关羽后，就像绳子拴住了马，关羽很难有效发挥自己的AOE伤害和控制，老夫子的1技能也可以打断，被控到单路或者配合队友集火可以轻松压制关羽。',
+    reasonEn: '关羽：关羽是一个依赖冲锋后技能收益的英雄，最害怕控制和减速类技能针对，老夫子使用大招命中关羽后，就像绳子拴住了马，关羽很难有效发挥自己的AOE伤害和控制，老夫子的1技能也可以打断，被控到单路或者配合队友集火可以轻松压制关羽。'
+  },
+  'wuzetian-guanyu': {
+    reasonZh: '关羽：武则天自身拥有许多的控制能力，关羽如果强切进入，武则天可以利用二技能瓦解他的被动再利用技能持续控制让关羽无法触发被动。',
+    reasonEn: '关羽：武则天自身拥有许多的控制能力，关羽如果强切进入，武则天可以利用二技能瓦解他的被动再利用技能持续控制让关羽无法触发被动。'
+  },
+  'xiangyu-laofuzi': {
+    reasonZh: '老夫子在进入战场切入后排时很容易被项羽推走',
+    reasonEn: '老夫子在进入战场切入后排时很容易被项羽推走'
+  },
+  'sunshangxiang-laofuzi': {
+    reasonZh: '孙尚香的机动性可以很好的风筝老夫子',
+    reasonEn: '孙尚香的机动性可以很好的风筝老夫子'
+  },
+  'hanxin-wuzetian': {
+    reasonZh: '身为脆皮法师，武则天害怕韩信等位移多伤害高的刺客英雄',
+    reasonEn: '身为脆皮法师，武则天害怕韩信等位移多伤害高的刺客英雄'
+  },
+  'lanlingwang-wuzetian': {
+    reasonZh: '兰陵王在团战中能够一套技能直接带走武则天',
+    reasonEn: '兰陵王在团战中能够一套技能直接带走武则天'
+  },
+  'huamulan-xiangyu': {
+    reasonZh: '项羽单人作战能力不强，遇到花木兰这种刺客简直没有还手之力',
+    reasonEn: '项羽单人作战能力不强，遇到花木兰这种刺客简直没有还手之力'
+  },
+  'diaochan-xiangyu': {
+    reasonZh: '项羽不能很容易控制到灵活的貂蝉',
+    reasonEn: '项羽不能很容易控制到灵活的貂蝉'
+  },
+  'xiangyu-damo': {
+    reasonZh: '项羽可以即时将入场的达摩推走，保护后排',
+    reasonEn: '项羽可以即时将入场的达摩推走，保护后排'
+  },
+  'diaochan-damo': {
+    reasonZh: '貂蝉能在躲避技能同时很好的风筝达摩',
+    reasonEn: '貂蝉能在躲避技能同时很好的风筝达摩'
+  },
+  'libai-daji': {
+    reasonZh: '妲己：妲己是一个操作简单的英雄，直接释放技能231，即使不能将敌方英雄击杀也可以做到残血降低威胁的效果，但是李白拥有灵活的位移和免疫伤害技能，面对妲己时可以解封大招后2技能大招poke，也可以1技能先手控制妲己，在妲己准备释放技能时用2技能或者大招抵消，李白可以轻松对妲己进行压制。',
+    reasonEn: '妲己：妲己是一个操作简单的英雄，直接释放技能231，即使不能将敌方英雄击杀也可以做到残血降低威胁的效果，但是李白拥有灵活的位移和免疫伤害技能，面对妲己时可以解封大招后2技能大招poke，也可以1技能先手控制妲己，在妲己准备释放技能时用2技能或者大招抵消，李白可以轻松对妲己进行压制。'
+  },
+  'sunbin-libai': {
+    reasonZh: '李白：李白通过一技能切入之后孙斌的大招沉默可以阻止李白的离开，使得李白留在人群中，让队友能做出足够的输出，进行压制。',
+    reasonEn: '李白：李白通过一技能切入之后孙斌的大招沉默可以阻止李白的离开，使得李白留在人群中，让队友能做出足够的输出，进行压制。'
+  },
+  'zhangliang-libai': {
+    reasonZh: '张良的硬控能控住李白将其击杀',
+    reasonEn: '张良的硬控能控住李白将其击杀'
+  },
+  'sunbin-dianwei': {
+    reasonZh: '敌方的孙膑能利用加速和控制配合输出很好的风筝典韦',
+    reasonEn: '敌方的孙膑能利用加速和控制配合输出很好的风筝典韦'
+  },
+  'diaochan-dianwei': {
+    reasonZh: '貂蝉的灵活和减速会使得典韦没有太多击杀办法',
+    reasonEn: '貂蝉的灵活和减速会使得典韦没有太多击杀办法'
+  },
+  'sunshangxiang-dianwei': {
+    reasonZh: '典韦：在前中期，典韦的输出不足以秒掉孙尚香，而孙尚香面对近身的典韦也可以利用一技能加速效果轻松跑路。后期，典韦的反伤刺甲和不祥征兆对于多段攻击的射手可能不太友好，但是面对孙尚香的强化普攻仍容易被压制。',
+    reasonEn: '典韦：在前中期，典韦的输出不足以秒掉孙尚香，而孙尚香面对近身的典韦也可以利用一技能加速效果轻松跑路。后期，典韦的反伤刺甲和不祥征兆对于多段攻击的射手可能不太友好，但是面对孙尚香的强化普攻仍容易被压制。'
+  },
+  'caocao-luban7': {
+    reasonZh: '鲁班七号：曹操的一套技能很少有脆皮能够承受的住。他的高机动性和强大控制能力，也让没有位移的脆皮十分头疼，即使鲁班的高伤害可以给予他一定的自保能力，曹操强大的大招回血效果也能抵消这个优势，可以轻松压制近乎无解。',
+    reasonEn: '鲁班七号：曹操的一套技能很少有脆皮能够承受的住。他的高机动性和强大控制能力，也让没有位移的脆皮十分头疼，即使鲁班的高伤害可以给予他一定的自保能力，曹操强大的大招回血效果也能抵消这个优势，可以轻松压制近乎无解。'
+  },
+  'liubang-caocao': {
+    reasonZh: '刘邦的2技能能有效的控制曹操输出',
+    reasonEn: '刘邦的2技能能有效的控制曹操输出'
+  },
+  'wangzhaojun-caocao': {
+    reasonZh: '王昭君的减速和控制技能限制曹操的输出能力',
+    reasonEn: '王昭君的减速和控制技能限制曹操的输出能力'
+  },
+  'zhenji-luban7': {
+    reasonZh: '鲁班七号：鲁班七号作为没有位移的射手，团战时甄姬能把大招放在他脚下，为了规避伤害，鲁班必定会离开，大招带减速，鲁班离开也需要一定时间，限制了敌方射手的输出时间，若是鲁班交了闪现，也有利于我方刺客战士击杀敌方射手。',
+    reasonEn: '鲁班七号：鲁班七号作为没有位移的射手，团战时甄姬能把大招放在他脚下，为了规避伤害，鲁班必定会离开，大招带减速，鲁班离开也需要一定时间，限制了敌方射手的输出时间，若是鲁班交了闪现，也有利于我方刺客战士击杀敌方射手。'
+  },
+  'hanxin-zhenji': {
+    reasonZh: '身为脆皮法师，甄姬害怕韩信等位移多伤害高的刺客英雄',
+    reasonEn: '身为脆皮法师，甄姬害怕韩信等位移多伤害高的刺客英雄'
+  },
+  'diaochan-zhenji': {
+    reasonZh: '甄姬的技能并不能很好的限制貂蝉',
+    reasonEn: '甄姬的技能并不能很好的限制貂蝉'
+  },
+  'xiahoudun-luban7': {
+    reasonZh: '鲁班七号：夏侯惇虽然是个坦克，但是全肉的夏侯惇依然有着不俗是伤害，而且二技能之后有着真实伤害，大招位移可进可退，可攻可守，面对鲁班七号这种脆脆皮短腿英雄有着很大优势。',
+    reasonEn: '鲁班七号：夏侯惇虽然是个坦克，但是全肉的夏侯惇依然有着不俗是伤害，而且二技能之后有着真实伤害，大招位移可进可退，可攻可守，面对鲁班七号这种脆脆皮短腿英雄有着很大优势。'
+  },
+  'xiahoudun-zhongwuyan': {
+    reasonZh: '钟无艳：钟无艳虽然有控制有位移，但是如果打到后期装备成型，钟无艳将完全不是夏侯惇的对手。钟无艳控制有着时间限制且输出不足，而夏侯惇有真实伤害和被动回血，较有优势。',
+    reasonEn: '钟无艳：钟无艳虽然有控制有位移，但是如果打到后期装备成型，钟无艳将完全不是夏侯惇的对手。钟无艳控制有着时间限制且输出不足，而夏侯惇有真实伤害和被动回血，较有优势。'
+  },
+  'sunshangxiang-xiahoudun': {
+    reasonZh: '孙尚香可以通过位移轻松躲过夏侯惇的技能',
+    reasonEn: '孙尚香可以通过位移轻松躲过夏侯惇的技能'
+  },
+  'diaochan-xiahoudun': {
+    reasonZh: '貂蝉能在躲避技能同时很好的风筝夏侯惇',
+    reasonEn: '貂蝉能在躲避技能同时很好的风筝夏侯惇'
+  },
+  'xiangyu-lvbu': {
+    reasonZh: '项羽的1技能可以有效打断吕布施放大招',
+    reasonEn: '项羽的1技能可以有效打断吕布施放大招'
+  },
+  'yalian-lvbu': {
+    reasonZh: '吕布比较笨重，亚连的技能能够轻松命中吕布并积攒怒气',
+    reasonEn: '吕布比较笨重，亚连的技能能够轻松命中吕布并积攒怒气'
+  },
+  'bianque-daji': {
+    reasonZh: '妲己：妲己初期清理兵线能力比较弱，扁鹊强的AOE清理兵线能力会更强一些，可以使经济和等级领先；在前中期妲己的伤害比较低无法一套技能秒发扁鹊，技能冷却时间内又是妲己的真空期，扁鹊利用比较强的恢复和赖线能力，可以轻松和妲己对线压制。',
+    reasonEn: '妲己：妲己初期清理兵线能力比较弱，扁鹊强的AOE清理兵线能力会更强一些，可以使经济和等级领先；在前中期妲己的伤害比较低无法一套技能秒发扁鹊，技能冷却时间内又是妲己的真空期，扁鹊利用比较强的恢复和赖线能力，可以轻松和妲己对线压制。'
+  },
+  'lanlingwang-bianque': {
+    reasonZh: '兰陵王的隐身和秒杀能力很容易接近扁鹊将其秒杀',
+    reasonEn: '兰陵王的隐身和秒杀能力很容易接近扁鹊将其秒杀'
+  },
+  'huamulan-bianque': {
+    reasonZh: '花木兰的超高爆发输出能力能快速击杀走位不慎的扁鹊',
+    reasonEn: '花木兰的超高爆发输出能力能快速击杀走位不慎的扁鹊'
+  },
+  'lanlingwang-sunbin': {
+    reasonZh: '兰陵王的隐身和秒杀能力很容易接近孙膑将其秒杀',
+    reasonEn: '兰陵王的隐身和秒杀能力很容易接近孙膑将其秒杀'
+  },
+  'huamulan-sunbin': {
+    reasonZh: '刺客的爆发输出很容易击杀持续伤害型的孙膑',
+    reasonEn: '刺客的爆发输出很容易击杀持续伤害型的孙膑'
+  },
+  'xiangyu-zhongwuyan': {
+    reasonZh: '钟无艳在大招期间，项羽能将她推开限制她对友方的输出与控制',
+    reasonEn: '钟无艳在大招期间，项羽能将她推开限制她对友方的输出与控制'
+  },
+  'diaochan-zhongwuyan': {
+    reasonZh: '灵活的貂蝉会让钟无艳的技能很难打中她',
+    reasonEn: '灵活的貂蝉会让钟无艳的技能很难打中她'
+  },
+  'hanxin-gaojianli': {
+    reasonZh: '刺客的爆发输出很容易切入击杀高渐离',
+    reasonEn: '刺客的爆发输出很容易切入击杀高渐离'
+  },
+  'huamulan-gaojianli': {
+    reasonZh: '花木兰的超高爆发输出能力能快速击杀走位不慎的高渐离',
+    reasonEn: '花木兰的超高爆发输出能力能快速击杀走位不慎的高渐离'
+  },
+  'xiaoqiao-gaojianli': {
+    reasonZh: '高渐离：高渐离在团战时想要发挥优势，就必须进到人群中，才能充分利用减伤以及技能的范围伤害，但是小乔可以通过二技能的短暂击飞使队友可以和他拉开一定的距离，能有一定的时间做出反制。',
+    reasonEn: '高渐离：高渐离在团战时想要发挥优势，就必须进到人群中，才能充分利用减伤以及技能的范围伤害，但是小乔可以通过二技能的短暂击飞使队友可以和他拉开一定的距离，能有一定的时间做出反制。'
+  },
+  'liushan-luban7': {
+    reasonZh: '鲁班：刘禅可以利用技能控制效果轻松打断鲁班扫射，鲁班的被动效果承担了鲁班大部分的输出，每次鲁班在扫射被动时，刘禅都可以用1技能配合2技能轮次打断，使鲁班输出最低化，而且鲁班的技能CD比刘禅长，鲁班在被刘禅这样的坦克贴脸时，很难打出有效伤害，合理的使用技能甚至可以轻松把鲁班击杀。',
+    reasonEn: '鲁班：刘禅可以利用技能控制效果轻松打断鲁班扫射，鲁班的被动效果承担了鲁班大部分的输出，每次鲁班在扫射被动时，刘禅都可以用1技能配合2技能轮次打断，使鲁班输出最低化，而且鲁班的技能CD比刘禅长，鲁班在被刘禅这样的坦克贴脸时，很难打出有效伤害，合理的使用技能甚至可以轻松把鲁班击杀。'
+  },
+  'hanxin-liushan': {
+    reasonZh: '刘禅很害怕孤军作战，所以单独遇到输出型刺客会被一顿暴打',
+    reasonEn: '刘禅很害怕孤军作战，所以单独遇到输出型刺客会被一顿暴打'
+  },
+  'diaochan-liushan': {
+    reasonZh: '由于灵活的貂蝉附带真实伤害，使得刘禅的控制技能不容易控制到貂蝉',
+    reasonEn: '由于灵活的貂蝉附带真实伤害，使得刘禅的控制技能不容易控制到貂蝉'
+  },
+  'mozi-liushan': {
+    reasonZh: '刘禅：刘禅的一二技能有较长的前摇，并且施法距离较短，墨子可使用二技能进行击晕和消耗，配合队友进行压制。',
+    reasonEn: '刘禅：刘禅的一二技能有较长的前摇，并且施法距离较短，墨子可使用二技能进行击晕和消耗，配合队友进行压制。'
+  },
+  'hanxin-zhuangzhou': {
+    reasonZh: '庄周很害怕孤军作战，所以单独遇到输出型刺客会被一顿暴打',
+    reasonEn: '庄周很害怕孤军作战，所以单独遇到输出型刺客会被一顿暴打'
+  },
+  'diaochan-zhuangzhou': {
+    reasonZh: '由于灵活的貂蝉附带真实伤害，所以庄周在血量较低时需要注意貂蝉的追击',
+    reasonEn: '由于灵活的貂蝉附带真实伤害，所以庄周在血量较低时需要注意貂蝉的追击'
+  },
+  'yalian-zhuangzhou': {
+    reasonZh: '庄周缺乏控制和爆发，对亚连缺乏威胁',
+    reasonEn: '庄周缺乏控制和爆发，对亚连缺乏威胁'
+  },
+  'libai-luban7': {
+    reasonZh: '李白超高的伤害能力能快速击杀走位不慎的鲁班并安然离开',
+    reasonEn: '李白超高的伤害能力能快速击杀走位不慎的鲁班并安然离开'
+  },
+  'lanlingwang-sunshangxiang': {
+    reasonZh: '兰陵王的隐身和秒杀能力很容易接近孙尚香将其秒杀',
+    reasonEn: '兰陵王的隐身和秒杀能力很容易接近孙尚香将其秒杀'
+  },
+  'huamulan-sunshangxiang': {
+    reasonZh: '花木兰的超高爆发输出能力能快速击杀走位不慎的孙尚香',
+    reasonEn: '花木兰的超高爆发输出能力能快速击杀走位不慎的孙尚香'
+  },
+  'lanlingwang-yingzheng': {
+    reasonZh: '兰陵王的隐身和秒杀能力很容易接近嬴政将其秒杀',
+    reasonEn: '兰陵王的隐身和秒杀能力很容易接近嬴政将其秒杀'
+  },
+  'huamulan-yingzheng': {
+    reasonZh: '花木兰的超高爆发输出能力能快速击杀走位不慎的嬴政',
+    reasonEn: '花木兰的超高爆发输出能力能快速击杀走位不慎的嬴政'
+  },
+  'lanlingwang-daji': {
+    reasonZh: '兰陵王的隐身和秒杀能力很容易接近妲己将其秒杀',
+    reasonEn: '兰陵王的隐身和秒杀能力很容易接近妲己将其秒杀'
+  },
+  'huamulan-daji': {
+    reasonZh: '花木兰的超高爆发输出能力能快速击杀走位不慎的妲己',
+    reasonEn: '花木兰的超高爆发输出能力能快速击杀走位不慎的妲己'
+  },
+  'xiangyu-mozi': {
+    reasonZh: '项羽的技能能有效打断墨子的大招',
+    reasonEn: '项羽的技能能有效打断墨子的大招'
+  },
+  'zhaoyun-xiaoqiao': {
+    reasonZh: '小乔：团战中，在团战中小乔作为敌方法师，猥琐在后面，赵云需要找准时机，等待小乔出现，利用大招直接果断先手开团，在装备成型的赵云，相当能抗大，并且具有不错的伤害量，所以既能切死小乔，又可以保证了自己的生存。所以赵云在抓小乔时，一旦大招命中则可以配合中路英雄将小乔带走。',
+    reasonEn: '小乔：团战中，在团战中小乔作为敌方法师，猥琐在后面，赵云需要找准时机，等待小乔出现，利用大招直接果断先手开团，在装备成型的赵云，相当能抗大，并且具有不错的伤害量，所以既能切死小乔，又可以保证了自己的生存。所以赵云在抓小乔时，一旦大招命中则可以配合中路英雄将小乔带走。'
+  },
+  'liubang-zhaoyun': {
+    reasonZh: '刘邦的嘲讽技能能有效控制赵云输出或击杀赵云',
+    reasonEn: '刘邦的嘲讽技能能有效控制赵云输出或击杀赵云'
+  },
+  'wangzhaojun-zhaoyun': {
+    reasonZh: '王昭君的减速和控制技能限制赵云的输出能力',
+    reasonEn: '王昭君的减速和控制技能限制赵云的输出能力'
+  },
+  'hanxin-xiaoqiao': {
+    reasonZh: '身为脆皮法师，小乔害怕韩信等位移多伤害高的刺客英雄',
+    reasonEn: '身为脆皮法师，小乔害怕韩信等位移多伤害高的刺客英雄'
+  },
+  'lanlingwang-xiaoqiao': {
+    reasonZh: '兰陵王在团战中能够一套技能直接带走小乔',
+    reasonEn: '兰陵王在团战中能够一套技能直接带走小乔'
+  },
+  'simayi-yalian': {
+    reasonZh: '司马懿爆发能力极强，能趁亚连怒气不足时快速击败亚连',
+    reasonEn: '司马懿爆发能力极强，能趁亚连怒气不足时快速击败亚连'
+  },
+  'makeboluo-yalian': {
+    reasonZh: '马可波罗位移能力强，能让亚连难以接近',
+    reasonEn: '马可波罗位移能力强，能让亚连难以接近'
+  },
+  'jailuo-ailin': {
+    reasonZh: '伽罗的长射程使艾琳在对线中无法应对，且艾琳的灵活性受到伽罗减速的克制。',
+    reasonEn: '伽罗的长射程使艾琳在对线中无法应对，且艾琳的灵活性受到伽罗减速的克制。'
+  },
+  'houyi-ailin': {
+    reasonZh: '后羿可以先手控制艾琳，且站桩输出能力高于艾琳。',
+    reasonEn: '后羿可以先手控制艾琳，且站桩输出能力高于艾琳。'
   }
+};
 
-  const abilityZh = sourceAbility.abilityZh;
-  const abilityEn = sourceAbility.abilityEn;
-  const weaknessZh = targetWeakness.weaknessZh;
-  const weaknessEn = targetWeakness.weaknessEn;
-
-  switch (language) {
-    case 'zh':
-      return `${abilityZh} → ${weaknessZh}`;
-    case 'zh-TW':
-      return `${abilityZh} → ${weaknessZh}`;
-    default:
-      return `${abilityEn} → ${weaknessEn}`;
-  }
+// 获取被克制理由的辅助函数
+export function getCounterReason(sourceId: string, targetId: string, language: Language = 'zh'): string {
+  const key = `${sourceId}-${targetId}`;
+  const data = counterReasons[key];
+  if (!data) return '';
+  return language === 'zh' ? data.reasonZh : data.reasonEn;
 }

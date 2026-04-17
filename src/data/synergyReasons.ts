@@ -1,5 +1,5 @@
-// 最佳拍档理由数据 - 详细的、英雄特定的配合描述
-import type { CounterLanguage } from './counterReasons';
+// 最佳拍档理由数据 - 基于王者荣耀官网数据生成
+import type { Language } from '@/i18n';
 
 // 拍档原因数据 - key 为 "source-target" 格式
 export interface SynergyReasonData {
@@ -7,928 +7,1038 @@ export interface SynergyReasonData {
   reasonEn: string;
 }
 
-// 最佳拍档理由数据 - 详细且符合每个英雄特点的描述
-// 格式: "拍档英雄ID-被配对英雄ID"
+// 最佳拍档理由数据 - 从官网英雄关系模块抓取
 export const synergyReasons: Record<string, SynergyReasonData> = {
-  // ========== Tank heroes 最佳拍档理由 ==========
-  // D.Va 的最佳拍档
-  'kiriko-dva': { 
-    reasonZh: '雾子的治愈之水和瞬移能让D.Va放心冲锋，生存能力大幅提升', 
-    reasonEn: 'Kiriko\'s healing and teleport allow D.Va to push confidently' 
-  },
-  'zenyatta-dva': { 
-    reasonZh: '禅雅塔的增伤和弦能显著提升D.Va的矩阵消耗效率', 
-    reasonEn: 'Zenyatta\'s Harmony orb boosts D.Va\'s matrix pressure' 
-  },
-  'sojourn-dva': { 
-    reasonZh: 'D.Va的高机动性配合索杰恩的右键高爆发，能快速集火秒杀', 
-    reasonEn: 'D.Va\'s mobility pairs with Sojourn\'s railgun for quick picks' 
-  },
-  'baptiste-dva': {
-    reasonZh: '巴蒂斯特的群体治疗和免死能保护D.Va的持续作战', 
-    reasonEn: 'Baptiste\'s AOE healing and immortality protect D.Va\'s sustained fight' 
-  },
-  'genji-dva': {
-    reasonZh: 'D.Va矩阵保护源氏切入，两者高机动形成交叉火力', 
-    reasonEn: 'D.Va matrix protects Genji, both highly mobile create crossfire' 
-  },
-  'tracer-dva': {
-    reasonZh: 'D.Va矩阵保护猎空切入，快速建立人数优势', 
-    reasonEn: 'D.Va matrix protects Tracer dives for quick number advantage' 
-  },
-  'echo-dva': {
-    reasonZh: 'D.Va的矩阵能保护回声飞行时的脆弱期', 
-    reasonEn: 'D.Va\'s matrix protects Echo while flying' 
-  },
-
-  // 末日铁拳的最佳拍档
-  'kiriko-doomfist': { 
-    reasonZh: '雾子的免死技能保护铁拳突进后不会被秒，容错率极高', 
-    reasonEn: 'Kiriko\'s Suzu protects Doomfist after diving in' 
-  },
-  'zarya-doomfist': { 
-    reasonZh: '重力弹道配合铁拳的控制，能打出完美Combo连招', 
-    reasonEn: 'Graviton Surge + Rocket Punch creates guaranteed kills' 
-  },
-  'reaper-doomfist': { 
-    reasonZh: '两者都是近战高爆发，铁拳先手控住，死神瞬间补足伤害', 
-    reasonEn: 'Both melee burst - Fist sets up, Reaper finishes' 
-  },
-  'ana-doomfist': {
-    reasonZh: '安娜的纳米激素能增强铁拳的伤害，大招配合击杀效率极高', 
-    reasonEn: 'Ana\'s Nano boosts Doomfist\'s damage for lethal combos' 
-  },
-  'genji-doomfist': {
-    reasonZh: '源氏和铁拳都是高机动近战，能快速切入秒杀', 
-    reasonEn: 'Both highly mobile melees - quick dive kills' 
-  },
-  'baptiste-doomfist': {
-    reasonZh: '巴蒂斯特的免死保护铁拳入场后的生存', 
-    reasonEn: 'Baptiste\'s immortality protects Doomfist after engaging' 
-  },
-
-  // 骇灾的最佳拍档
-  'kiriko-hazard': { 
-    reasonZh: '骇灾需要前排压制，雾子的治疗和位移能保障其持续作战能力', 
-    reasonEn: 'Kiriko enables Hazard\'s sustained front-line pressure' 
-  },
-  'cassidy-hazard': { 
-    reasonZh: '卡西迪的中距离输出和控场与骇灾的毒素区域形成交叉火力', 
-    reasonEn: 'Cassidy\'s mid-range pressure complements Hazard\'s zone control' 
-  },
-  'ashe-hazard': { 
-    reasonZh: '艾什的狙击和视野优势能帮助骇灾发现侧面切入的敌人', 
-    reasonEn: 'Ashe\'s long-range vision helps Hazard track flankers' 
-  },
-  'genji-hazard': {
-    reasonZh: '源氏高机动配合骇灾的控制能快速建立优势', 
-    reasonEn: 'Genji\'s mobility pairs well with Hazard\'s control' 
-  },
-
-  // 渣客女王的最佳拍档
-  'kiriko-junker_queen': { 
-    reasonZh: '雾子的免死是近战坦克的标配，防止被集火秒杀', 
-    reasonEn: 'Kiriko\'s Suzu is essential for melee tanks like Junker Queen' 
-  },
-  'ashe-junker_queen': { 
-    reasonZh: '艾什的炸弹和渣客女王的冲锋形成Combo，大招联动效果极佳', 
-    reasonEn: 'Ashe\'s dynamite + Junker Queen\'s shout creates combo potential' 
-  },
-  'cassidy-junker_queen': { 
-    reasonZh: '卡西迪的磁雷能留住敌人，为女王的近战输出创造机会', 
-    reasonEn: 'Cassidy\'s grenade sets up Junker Queen\'s melee damage' 
-  },
-  'zarya-junker_queen': {
-    reasonZh: '查莉娅的能量配合女王的冲锋能快速击杀', 
-    reasonEn: 'Zarya\'s energy + Junker Queen\'s charge = quick kills' 
-  },
-  'reaper-junker_queen': {
-    reasonZh: '死神配合女王的近战能快速建立优势', 
-    reasonEn: 'Reaper pairs well with Junker Queen\'s melee aggression' 
-  },
-
-  // 毛加的最佳拍档
-  'kiriko-mauga': { 
-    reasonZh: '毛加需要持续治疗来维持高输出，雾子是最好的选择', 
-    reasonEn: 'Mauga needs sustained healing to maintain high DPS - Kiriko excels' 
-  },
-  'baptiste-mauga': { 
-    reasonZh: '巴蒂斯特的群体治疗和免死与毛加的大范围输出完美契合', 
-    reasonEn: 'Baptiste\'s AOE healing matches Mauga\'s area damage' 
-  },
-  'cassidy-mauga': { 
-    reasonZh: '卡西迪的远程支援能补充毛加的中距离输出空缺', 
-    reasonEn: 'Cassidy fills Mauga\'s mid-range gap with reliable damage' 
-  },
-  'zarya-mauga': {
-    reasonZh: '查莉娅的护盾保护毛加的持续输出', 
-    reasonEn: 'Zarya\'s bubble protects Mauga\'s sustained damage' 
-  },
-  'reaper-mauga': {
-    reasonZh: '死神配合毛加的高输出能快速击杀', 
-    reasonEn: 'Reaper pairs well with Mauga\'s high damage output' 
-  },
-
-  // 奥丽莎的最佳拍档
-  'kiriko-orisa': { 
-    reasonZh: '奥丽莎定点输出时需要位移治疗保障，雾子完美适配', 
-    reasonEn: 'Kiriko\'s mobility supports Orisa\'s stationary playstyle' 
-  },
-  'zenyatta-orisa': { 
-    reasonZh: '禅雅塔的增伤让奥丽莎的输出更具威胁性', 
-    reasonEn: 'Zenyatta\'s damage boost makes Orisa\'s damage more threatening' 
-  },
-  'junkrat-orisa': { 
-    reasonZh: '狂鼠的范围伤害配合奥丽莎的定点控制，形成封锁阵线', 
-    reasonEn: 'Junkrat\'s area denial + Orisa\'s hold creates defensive line' 
-  },
-  'sigma-orisa': {
-    reasonZh: '西格玛的护盾配合奥丽莎的控制能形成坚固防线', 
-    reasonEn: 'Sigma\'s shield + Orisa\'s control = solid defense' 
-  },
-  'baptiste-orisa': {
-    reasonZh: '巴蒂斯特的免死保护奥丽莎的架枪位置', 
-    reasonEn: 'Baptiste\'s immortality protects Orisa\'s set-up position' 
-  },
-  'hanzo-orisa': {
-    reasonZh: '半藏的视野箭帮助奥丽莎发现远处目标', 
-    reasonEn: 'Hanzo\'s sonar helps Orisa spot distant targets' 
-  },
-
-  // 拉玛刹的最佳拍档
-  'kiriko-ramattra': { 
-    reasonZh: '拉玛刹开启涅槃形态时需要快速治疗，雾子及时支援', 
-    reasonEn: 'Kiriko provides quick healing during Ramattra\'s Nemesis form' 
-  },
-  'zenyatta-ramattra': { 
-    reasonZh: '禅雅塔的增伤让拉玛刹的AOE伤害更致命', 
-    reasonEn: 'Zenyatta\'s boost makes Ramattra\'s AOE damage lethal' 
-  },
-  'hanzo-ramattra': { 
-    reasonZh: '半藏的视野箭能帮助拉玛刹发现远处的威胁', 
-    reasonEn: 'Hanzo\'s sonar arrow helps Ramattra spot distant threats' 
-  },
-  'zarya-ramattra': {
-    reasonZh: '查莉娅配合拉玛刹形成强力前排', 
-    reasonEn: 'Zarya pairs well with Ramattra for strong frontline' 
-  },
-
-  // 莱因哈特的最佳拍档
-  'zarya-reinhardt': { 
-    reasonZh: '查莉娅的能量越高伤害越高，大锤冲锋后接引力弹能秒人', 
-    reasonEn: 'High-energy Zarya + Reinhardt charge = guaranteed eliminations' 
-  },
-  'kiriko-reinhardt': { 
-    reasonZh: '雾子的免死保护冲锋后的大锤不被秒倒', 
-    reasonEn: 'Kiriko\'s Suzu protects Reinhardt after charging in' 
-  },
-  'baptiste-reinhardt': { 
-    reasonZh: '巴蒂斯特的护盾矩阵能保护大锤冲锋时的安全', 
-    reasonEn: 'Baptiste\'s matrix protects Reinhardt during charges' 
-  },
-  'brigitte-reinhardt': {
-    reasonZh: '布丽吉塔的击晕配合大锤冲锋能打出完美Combo', 
-    reasonEn: 'Brigitte\'s stun + Reinhardt charge = perfect combo' 
-  },
-  'reaper-reinhardt': {
-    reasonZh: '死神配合大锤冲锋能快速击杀', 
-    reasonEn: 'Reaper follows Reinhardt charge for quick kills' 
-  },
-
-  // 路霸的最佳拍档
-  'kiriko-roadhog': { 
-    reasonZh: '路霸的钩子需要治疗保障才有信心持续先手', 
-    reasonEn: 'Kiriko enables Roadhog\'s aggressive hook plays' 
-  },
-  'junkrat-roadhog': { 
-    reasonZh: '狂鼠的地雷配合路霸的钩子，能打出意想不到的Combo', 
-    reasonEn: 'Junkrat\'s mines + Roadhog\'s hook creates unexpected combos' 
-  },
-  'cassidy-roadhog': { 
-    reasonZh: '卡西迪的磁雷能留住被路霸钩中的敌人', 
-    reasonEn: 'Cassidy\'s grenade secures Roadhog\'s hook targets' 
-  },
-  'zarya-roadhog': {
-    reasonZh: '查莉娅的护盾保护路霸的钩子先手', 
-    reasonEn: 'Zarya\'s bubble protects Roadhog\'s hook plays' 
-  },
-
-  // 西格玛的最佳拍档
-  'kiriko-sigma': { 
-    reasonZh: '西格玛需要位移来调整位置，雾子提供灵活支援', 
-    reasonEn: 'Kiriko enables Sigma\'s repositioning playstyle' 
-  },
-  'zenyatta-sigma': { 
-    reasonZh: '禅雅塔的增伤让西格玛的实验性伤害更具威胁', 
-    reasonEn: 'Zenyatta\'s boost makes Sigma\'s damage more threatening' 
-  },
-  'cassidy-sigma': { 
-    reasonZh: '卡西迪的中距离输出弥补西格玛的输出空窗期', 
-    reasonEn: 'Cassidy covers Sigma\'s damage gaps at mid-range' 
-  },
-  'baptiste-sigma': {
-    reasonZh: '巴蒂斯特的免死保护西格玛的输出位置', 
-    reasonEn: 'Baptiste\'s immortality protects Sigma\'s positioning' 
-  },
-  'bastion-sigma': {
-    reasonZh: '西格玛护盾保护架枪状态的堡垒', 
-    reasonEn: 'Sigma\'s shield protects stationary Bastion' 
-  },
-
-  // 温斯顿的最佳拍档
-  'kiriko-winston': { 
-    reasonZh: '温斯顿跳入敌阵时，雾子的治疗和位移能保障生存', 
-    reasonEn: 'Kiriko enables Winston\'s diving strategy' 
-  },
-  'genji-winston': { 
-    reasonZh: '源氏和温斯顿都是高机动切入，配合集火效果极佳', 
-    reasonEn: 'Both divers - Winston dives, Genji cleans up' 
-  },
-  'tracer-winston': { 
-    reasonZh: '猎空的高机动配合温斯顿的跳跃，能快速转移战场', 
-    reasonEn: 'Both highly mobile - Winston jumps, Tracer blinks' 
-  },
-  'zarya-winston': {
-    reasonZh: '查莉娅的护盾保护温斯顿的切入', 
-    reasonEn: 'Zarya\'s bubble protects Winston\'s dives' 
-  },
-  'dva-winston': {
-    reasonZh: 'D.Va配合温斯顿形成双跳，敌方后排难以应对', 
-    reasonEn: 'D.Va + Winston double dive overwhelms backline' 
-  },
-
-  // 破坏球的最佳拍档
-  'kiriko-wrecking_ball': { 
-    reasonZh: '破坏球需要持续位移和治疗来维持高机动性骚扰', 
-    reasonEn: 'Kiriko enables Wrecking Ball\'s ballsy plays' 
-  },
-  'zenyatta-wrecking_ball': { 
-    reasonZh: '禅雅塔的增伤让破坏球的AOE伤害更可观', 
-    reasonEn: 'Zenyatta\'s boost makes Wrecking Ball\'s AOE impactful' 
-  },
-  'genji-wrecking_ball': { 
-    reasonZh: '源氏能跟进破坏球的入场进行收割', 
-    reasonEn: 'Genji can follow Wrecking Ball\'s engage for cleanup' 
-  },
-  'zarya-wrecking_ball': {
-    reasonZh: '查莉娅的护盾保护破坏球的入场', 
-    reasonEn: 'Zarya\'s bubble protects Wrecking Ball\'s engage' 
-  },
-
-  // 查莉娅的最佳拍档
-  'kiriko-zarya': { 
-    reasonZh: '查莉娅需要治疗来维持高能量，雾子提供稳定支援', 
-    reasonEn: 'Kiriko maintains Zarya\'s high energy with consistent healing' 
-  },
-  'genji-zarya': { 
-    reasonZh: '引力弹道控住敌人后，源氏跟进输出完成收割', 
-    reasonEn: 'Graviton Surge + Genji dash = eliminations' 
-  },
-  'reaper-zarya': { 
-    reasonZh: '查莉娅控场，死神入场收割，配合简单高效', 
-    reasonEn: 'Zarya sets up, Reaper cleans up - simple and effective' 
-  },
-
-  // 金驭的最佳拍档
-  'kiriko-jinyu': { 
-    reasonZh: '金驭需要前排治疗保障，雾子提供及时位移支援', 
-    reasonEn: 'Kiriko provides mobile healing for Domina\'s front-line play' 
-  },
-  'genji-jinyu': { 
-    reasonZh: '高机动的Genji配合金驭的控制能快速建立优势', 
-    reasonEn: 'High mobility Genji + Domina\'s control = quick advantages' 
-  },
-  'cassidy-jinyu': { 
-    reasonZh: '卡西迪的远程输出弥补金驭的输出空缺', 
-    reasonEn: 'Cassidy covers Domina\'s damage gaps at range' 
-  },
-
-  // ========== Damage heroes 最佳拍档理由 ==========
-  // 艾什的最佳拍档
-  'zarya-ashe': { 
-    reasonZh: '查莉娅的护盾能保护艾什架枪时的安全', 
-    reasonEn: 'Zarya\'s bubble protects Ashe while she\'s set up' 
-  },
-  'baptiste-ashe': { 
-    reasonZh: '巴蒂斯特的免死保护艾什不被切入秒杀', 
-    reasonEn: 'Baptiste\'s immortality protects Ashe from flankers' 
-  },
-  'zenyatta-ashe': { 
-    reasonZh: '禅雅塔的增伤让艾什的狙击伤害更致命', 
-    reasonEn: 'Zenyatta\'s Discord makes Ashe\'s snipes lethal' 
-  },
-  'sigma-ashe': {
-    reasonZh: '西格玛的护盾保护艾什的架枪位置', 
-    reasonEn: 'Sigma\'s shield protects Ashe\'s positioning' 
-  },
-  'orisa-ashe': {
-    reasonZh: '奥丽莎的保护配合艾什的高点输出', 
-    reasonEn: 'Orisa\'s protection enables Ashe\'s high ground dominance' 
-  },
-
-  // 堡垒的最佳拍档
-  'sigma-bastion': { 
-    reasonZh: '西格玛的护盾能保护架枪状态的堡垒', 
-    reasonEn: 'Sigma\'s shield protects stationary Bastion' 
-  },
-  'orisa-bastion': { 
-    reasonZh: '奥丽莎的坚毅挡控保护堡垒架枪时的安全', 
-    reasonEn: 'Orisa\'s Fortify protects Bastion while turreted' 
-  },
-  'baptiste-bastion': { 
-    reasonZh: '巴蒂斯特的免死矩阵能让堡垒完成架枪输出的关键时机', 
-    reasonEn: 'Baptiste\'s matrix gives Bastion crucial setup time' 
-  },
-  'zarya-bastion': {
-    reasonZh: '查莉娅的护盾保护堡垒的架枪位置', 
-    reasonEn: 'Zarya\'s bubble protects Bastion\'s positioning' 
-  },
-
-  // 卡西迪的最佳拍档
-  'zarya-cassidy': { 
-    reasonZh: '查莉娅的能量高时配合卡西迪能快速击杀前排', 
-    reasonEn: 'High-energy Zarya + Cassidy = quick tank kills' 
-  },
-  'kiriko-cassidy': { 
-    reasonZh: '雾子的治疗保护中距离输出的卡西迪', 
-    reasonEn: 'Kiriko protects Cassidy\'s mid-range positioning' 
-  },
-  'baptiste-cassidy': { 
-    reasonZh: '巴蒂斯特的治疗和位移让卡西迪更敢主动出击', 
-    reasonEn: 'Baptiste enables Cassidy\'s aggressive plays' 
-  },
-  'ana-cassidy': {
-    reasonZh: '安娜的纳米激素增强卡西迪的输出', 
-    reasonEn: 'Ana\'s Nano boosts Cassidy\'s damage' 
-  },
-  'brigitte-cassidy': {
-    reasonZh: '布丽吉塔的击晕帮助卡西迪留住敌人', 
-    reasonEn: 'Brigitte\'s stun helps Cassidy secure kills' 
-  },
-
-  // 回声的最佳拍档
-  'dva-echo': { 
-    reasonZh: 'D.Va的矩阵能保护回声飞行时的脆弱期', 
-    reasonEn: 'D.Va\'s matrix protects Echo while flying' 
-  },
-  'kiriko-echo': { 
-    reasonZh: '雾子和回声都是高机动，配合切入收割效果极佳', 
-    reasonEn: 'Both highly mobile - Kiriko enables Echo\'s dives' 
-  },
-  'zenyatta-echo': { 
-    reasonZh: '禅雅塔的增伤让回声的爆发伤害更高', 
-    reasonEn: 'Zenyatta\'s boost makes Echo\'s burst damage lethal' 
-  },
-  'genji-echo': {
-    reasonZh: '源氏配合回声高机动切入收割', 
-    reasonEn: 'Genji follows Echo\'s high mobility for cleanup' 
-  },
-
-  // 源氏的最佳拍档
-  'zarya-genji': { 
-    reasonZh: '查莉娅的引力弹道控住后，源氏跟进龙刃收割', 
-    reasonEn: 'Graviton Surge + Genji blade = ultimate combo' 
-  },
-  'zenyatta-genji': { 
-    reasonZh: '禅雅塔的增伤让源氏的龙刃伤害爆表', 
-    reasonEn: 'Zenyatta\'s Discord makes Genji\'s blade lethal' 
-  },
-  'kiriko-genji': { 
-    reasonZh: '雾子的治疗和位移与源氏的高机动完美契合', 
-    reasonEn: 'Kiriko enables Genji\'s aggressive dive strategy' 
-  },
-  'ana-genji': {
-    reasonZh: '安娜的纳米激素增强源氏龙刃伤害', 
-    reasonEn: 'Ana\'s Nano boosts Genji\'s blade damage' 
-  },
-  'dva-genji': {
-    reasonZh: 'D.Va矩阵保护源氏的切入', 
-    reasonEn: 'D.Va matrix protects Genji\'s dives' 
-  },
-
-  // 半藏的最佳拍档
-  'zarya-hanzo': { 
-    reasonZh: '半藏的视野箭配合查莉娅的能量能快速充能', 
-    reasonEn: 'Hanzo\'s sonic + Zarya\'s energy = fast ultimate charge' 
-  },
-  'zenyatta-hanzo': { 
-    reasonZh: '禅雅塔的增伤显著提升半藏的爆发伤害', 
-    reasonEn: 'Zenyatta\'s Discord makes Hanzo\'s burst devastating' 
-  },
-  'kiriko-hanzo': { 
-    reasonZh: '雾子保护半藏在中远距离的输出位置', 
-    reasonEn: 'Kiriko protects Hanzo\'s long-range position' 
-  },
-  'widowmaker-hanzo': {
-    reasonZh: '黑百合和半藏形成双狙击，压制力极强', 
-    reasonEn: 'Widow + Hanzo double sniper = overwhelming pressure' 
-  },
-
-  // 狂鼠的最佳拍档
-  'zarya-junkrat': { 
-    reasonZh: '查莉娅控场后，狂鼠的轮胎能造成巨额AOE伤害', 
-    reasonEn: 'Zarya\'s Graviton + Junkrat\'s tire = massive AOE' 
-  },
-  'kiriko-junkrat': { 
-    reasonZh: '雾子的治疗保障狂鼠在前排的持续输出', 
-    reasonEn: 'Kiriko enables Junkrat\'s aggressive positioning' 
-  },
-  'baptiste-junkrat': { 
-    reasonZh: '巴蒂斯特的免死让狂鼠完成关键埋雷', 
-    reasonEn: 'Baptiste\'s immortality protects Junkrat\'s mine plays' 
-  },
-
-  // 法老之鹰的最佳拍档
-  'mercy-pharah': { 
-    reasonZh: '天使的升降和增伤是法老之鹰的经典标配组合', 
-    reasonEn: 'Mercy\'s mobility and boost are Pharah\'s classic synergy' 
-  },
-  'kiriko-pharah': { 
-    reasonZh: '雾子的位移能跟上法老之鹰的飞行节奏', 
-    reasonEn: 'Kiriko can keep up with Pharah\'s flight path' 
-  },
-  'zenyatta-pharah': { 
-    reasonZh: '禅雅塔的增伤让法老之鹰的火箭伤害爆表', 
-    reasonEn: 'Zenyatta\'s Discord makes Pharah\'s rockets lethal' 
-  },
-  'baptiste-pharah': {
-    reasonZh: '巴蒂斯特的免死保护法老之鹰的飞行', 
-    reasonEn: 'Baptiste\'s immortality protects Pharah in air' 
-  },
-
-  // 死神的最佳拍档
-  'zarya-reaper': { 
-    reasonZh: '查莉娅控场后，死神入场收割残血', 
-    reasonEn: 'Zarya sets up, Reaper cleans up low HP targets' 
-  },
-  'kiriko-reaper': { 
-    reasonZh: '雾子的免死保护死神入场后的生存', 
-    reasonEn: 'Kiriko\'s Suzu protects Reaper after wraith in' 
-  },
-  'zenyatta-reaper': { 
-    reasonZh: '禅雅塔的增伤让死神的近战爆发更高', 
-    reasonEn: 'Zenyatta\'s Discord makes Reaper\'s melee lethal' 
-  },
-  'moira-reaper': {
-    reasonZh: '莫伊拉的治疗保障死神的持续作战', 
-    reasonEn: 'Moira\'s healing enables Reaper\'s sustained fights' 
-  },
-
-  // 士兵76的最佳拍档
-  'kiriko-soldier76': { 
-    reasonZh: '雾子的位移能让士兵76保持灵活游击', 
-    reasonEn: 'Kiriko enables Soldier\'s hit-and-run tactics' 
-  },
-  'baptiste-soldier76': { 
-    reasonZh: '巴蒂斯特的治疗和免死保障士兵76的持续作战', 
-    reasonEn: 'Baptiste enables Soldier\'s sustained fighting' 
-  },
-  'zenyatta-soldier76': { 
-    reasonZh: '禅雅塔的增伤提升士兵76的T裸射伤害', 
-    reasonEn: 'Zenyatta\'s Discord boosts Soldier\'s rifle damage' 
-  },
-  'ana-soldier76': {
-    reasonZh: '安娜的纳米激素增强士兵76的输出', 
-    reasonEn: 'Ana\'s Nano boosts Soldier\'s damage' 
-  },
-
-  // 索杰恩的最佳拍档
-  'dva-sojourn': { 
-    reasonZh: 'D.Va的矩阵能保护索杰恩充能右键', 
-    reasonEn: 'D.Va\'s matrix protects Sojourn charging railgun' 
-  },
-  'kiriko-sojourn': { 
-    reasonZh: '雾子的治疗保护索杰恩的侧面输出位置', 
-    reasonEn: 'Kiriko protects Sojourn\'s flank positioning' 
-  },
-  'zenyatta-sojourn': { 
-    reasonZh: '禅雅塔的增伤让索杰恩的右键秒杀线更高', 
-    reasonEn: 'Zenyatta\'s Discord raises Sojourn\'s one-shot threshold' 
-  },
-  'zarya-sojourn': {
-    reasonZh: '查莉娅配合索杰恩能快速充能', 
-    reasonEn: 'Zarya helps Sojourn charge railgun quickly' 
-  },
-
-  // 秩序之光的最佳拍档
-  'zarya-symmetra': { 
-    reasonZh: '秩序之光需要前排保护，查莉娅的护盾刚好合适', 
-    reasonEn: 'Zarya\'s bubble protects Symmetra\'s setup' 
-  },
-  'kiriko-symmetra': { 
-    reasonZh: '雾子保护秩序之光架设传送门时的安全', 
-    reasonEn: 'Kiriko protects Symmetra while setting up' 
-  },
-  'zenyatta-symmetra': { 
-    reasonZh: '禅雅塔增伤秩序之光的光子球伤害', 
-    reasonEn: 'Zenyatta\'s Discord boosts Symmetra\'s orb damage' 
-  },
-
-  // 托比昂的最佳拍档
-  'zarya-torbjorn': { 
-    reasonZh: '查莉娅的护盾能保护托比昂架设炮台', 
-    reasonEn: 'Zarya\'s bubble protects Torbjorn\'s turret setup' 
-  },
-  'kiriko-torbjorn': { 
-    reasonZh: '雾子的治疗保护托比昂的近战骚扰打法', 
-    reasonEn: 'Kiriko protects Torbjorn\'s aggressive playstyle' 
-  },
-  'baptiste-torbjorn': { 
-    reasonZh: '巴蒂斯特的免死保护托比昂的关键炮台', 
-    reasonEn: 'Baptiste\'s matrix protects critical turrets' 
-  },
-
-  // 猎空的最佳拍档
-  'zarya-tracer': { 
-    reasonZh: '查莉娅的引力弹道能帮助猎空完成定点秒杀', 
-    reasonEn: 'Graviton Surge + Tracer blink = guaranteed picks' 
-  },
-  'zenyatta-tracer': { 
-    reasonZh: '禅雅塔的增伤让猎空的爆发更高', 
-    reasonEn: 'Zenyatta\'s Discord makes Tracer\'s burst lethal' 
-  },
-  'kiriko-tracer': { 
-    reasonZh: '雾子的治疗和位移与猎空的高机动完美配合', 
-    reasonEn: 'Kiriko enables Tracer\'s aggressive blink plays' 
-  },
-
-  // 探奇的最佳拍档
-  'kiriko-venture': { 
-    reasonZh: '雾子保护探奇切入后的脆弱期', 
-    reasonEn: 'Kiriko protects Venture after burrowing in' 
-  },
-  'zenyatta-venture': { 
-    reasonZh: '禅雅塔增伤探奇的爆发伤害', 
-    reasonEn: 'Zenyatta\'s Discord boosts Venture\'s burst' 
-  },
-  'genji-venture': { 
-    reasonZh: '源氏能跟进探奇的入场进行双切入', 
-    reasonEn: 'Genji follows Venture\'s engage for double dive' 
-  },
-
-  // 黑百合的最佳拍档
-  'zarya-widowmaker': { 
-    reasonZh: '查莉娅的护盾能保护黑百合架枪时的安全', 
-    reasonEn: 'Zarya\'s bubble protects Widowmaker while scoped' 
-  },
-  'kiriko-widowmaker': { 
-    reasonZh: '雾子治疗和保护黑百合的远距离狙击位置', 
-    reasonEn: 'Kiriko protects Widowmaker\'s long-range position' 
-  },
-  'zenyatta-widowmaker': { 
-    reasonZh: '禅雅塔的增伤让黑百合的秒杀线更高', 
-    reasonEn: 'Zenyatta\'s Discord raises Widowmaker\'s one-shot threshold' 
-  },
-
-  // 芙蕾雅的最佳拍档
-  'kiriko-freja': { 
-    reasonZh: '雾子帮助滞空输出的芙蕾雅保持生存', 
-    reasonEn: 'Kiriko enables Freja\'s aerial DPS strategy' 
-  },
-  'zenyatta-freja': { 
-    reasonZh: '禅雅塔增伤芙蕾雅的十字弩伤害', 
-    reasonEn: 'Zenyatta\'s Discord boosts Freja\'s crossbow damage' 
-  },
-  'genji-freja': { 
-    reasonZh: '源氏能保护滞空的芙蕾雅免受敌方切入', 
-    reasonEn: 'Genji protects aerial Freja from flankers' 
-  },
-
-  // 斩仇的最佳拍档
-  'dva-vendetta': { 
-    reasonZh: 'D.Va矩阵能保护斩仇入场后的安全', 
-    reasonEn: 'D.Va\'s matrix protects Vendetta after diving in' 
-  },
-  'widowmaker-vendetta': { 
-    reasonZh: '黑百合远距离狙击压低血线，斩仇收割', 
-    reasonEn: 'Widowmaker weakens targets, Vendetta cleans up' 
-  },
-  'hanzo-vendetta': { 
-    reasonZh: '半藏的视野箭发现远处目标，斩仇快速切入', 
-    reasonEn: 'Hanzo\'s sonar reveals targets, Vendetta dives' 
-  },
-
-  // 安燃的最佳拍档
-  'dva-anran': { 
-    reasonZh: 'D.Va的高机动性能让安燃安全转移位置', 
-    reasonEn: 'D.Va enables Anran\'s aggressive repositioning' 
-  },
-  'genji-anran': { 
-    reasonZh: '源氏和安燃都是高机动，能形成交叉火力', 
-    reasonEn: 'Both divers - Genji and Anran create crossfire' 
-  },
-  'tracer-anran': { 
-    reasonZh: '猎空和安燃的高机动配合能快速建立人数优势', 
-    reasonEn: 'Both highly mobile - quick number advantage' 
-  },
-
-  // 埃姆雷的最佳拍档
-  'kiriko-emrey': { 
-    reasonZh: '雾子保护埃姆雷的近战打法', 
-    reasonEn: 'Kiriko enables Emrey\'s aggressive playstyle' 
-  },
-  'zenyatta-emrey': { 
-    reasonZh: '禅雅塔增伤埃姆雷的AOE伤害', 
-    reasonEn: 'Zenyatta\'s Discord boosts Emrey\'s AOE damage' 
-  },
-  'genji-emrey': { 
-    reasonZh: '源氏能配合埃姆雷的双切入战术', 
-    reasonEn: 'Genji complements Emrey\'s double-dive strategy' 
-  },
-
-  // 安娜的最佳拍档
-  'dva-ana': { 
-    reasonZh: 'D.Va的高机动性能让安娜安全转移位置', 
-    reasonEn: 'D.Va enables Ana\'s safe repositioning' 
-  },
-  'reinhardt-ana': { 
-    reasonZh: '莱因哈特的护盾能保护安娜的安全狙击环境', 
-    reasonEn: 'Reinhardt\'s shield creates safe sniping space' 
-  },
-  'zarya-ana': { 
-    reasonZh: '查莉娅的护盾能保护安娜不被秒倒', 
-    reasonEn: 'Zarya\'s bubble protects Ana from being picked' 
-  },
-  'sigma-ana': {
-    reasonZh: '西格玛的护盾保护安娜的狙击位置', 
-    reasonEn: 'Sigma\'s shield protects Ana\'s sniping position' 
-  },
-
-  // 巴蒂斯特的最佳拍档
-  'dva-baptiste': { 
-    reasonZh: 'D.Va的矩阵能保护巴蒂斯特开大时的安全', 
-    reasonEn: 'D.Va protects Baptiste during his ultimate' 
-  },
-  'reinhardt-baptiste': { 
-    reasonZh: '莱因哈特的冲锋配合巴蒂斯特的高塔输出', 
-    reasonEn: 'Reinhardt charges in, Baptiste provides high ground DPS' 
-  },
-  'cassidy-baptiste': { 
-    reasonZh: '卡西迪的中距离输出弥补巴蒂斯特的输出空缺', 
-    reasonEn: 'Cassidy covers Baptiste\'s mid-range gaps' 
-  },
-  'soldier76-baptiste': {
-    reasonZh: '士兵76配合巴蒂斯特形成双DPS', 
-    reasonEn: 'Soldier pairs with Baptiste for double DPS' 
-  },
-  'orisa-baptiste': {
-    reasonZh: '奥丽莎配合巴蒂斯特形成双前排', 
-    reasonEn: 'Orisa pairs with Baptiste for double tank' 
-  },
-
-  // 布丽吉塔的最佳拍档
-  'dva-brigitte': { 
-    reasonZh: 'D.Va配合布丽吉塔的前排压制', 
-    reasonEn: 'D.Va enables Brigitte\'s aggressive frontline play' 
-  },
-  'reinhardt-brigitte': { 
-    reasonZh: '大锤冲锋后布丽吉塔跟进击晕，完成Combo', 
-    reasonEn: 'Reinhardt charges, Brigitte follows for stun combo' 
-  },
-  'zarya-brigitte': { 
-    reasonZh: '查莉娅和布丽吉塔都是前排，形成强力阵线', 
-    reasonEn: 'Zarya + Brigitte create strong frontline' 
-  },
-  'tracer-brigitte': {
-    reasonZh: '猎空配合布丽吉塔的前排压制', 
-    reasonEn: 'Tracer pairs with Brigitte for aggressive frontline' 
-  },
-
-  // 雾子的最佳拍档
-  'dva-kiriko': { 
-    reasonZh: 'D.Va的高机动配合雾子，能快速支援各路', 
-    reasonEn: 'D.Va + Kiriko enables rapid rotation support' 
-  },
-  'genji-kiriko': { 
-    reasonZh: '源氏和雾子都是高机动，配合切入效果极佳', 
-    reasonEn: 'Both highly mobile - Genji dives, Kiriko heals' 
-  },
-  'tracer-kiriko': { 
-    reasonZh: '猎空和雾子的高机动组合能快速建立优势', 
-    reasonEn: 'High mobility duo - quick advantage generation' 
-  },
-  'winston-kiriko': {
-    reasonZh: '温斯顿跳入敌阵时雾子能及时治疗', 
-    reasonEn: 'Kiriko enables Winston\'s diving strategy' 
-  },
-  'doomfist-kiriko': {
-    reasonZh: '雾子保护铁拳的突进', 
-    reasonEn: 'Kiriko protects Doomfist\'s engages' 
-  },
-
-  // 生命之梭的最佳拍档
-  'dva-lifeweaver': { 
-    reasonZh: 'D.Va保护生命之梭的站位，花男安心辅助', 
-    reasonEn: 'D.Va protects Lifeweaver\'s positioning' 
-  },
-  'genji-lifeweaver': { 
-    reasonZh: '源氏切入后，生命之梭能及时拉人', 
-    reasonEn: 'Lifeweaver can rez Genji after aggressive dives' 
-  },
-  'cassidy-lifeweaver': { 
-    reasonZh: '卡西迪的中距离压制配合生命之梭的远程辅助', 
-    reasonEn: 'Cassidy pressure + Lifeweaver range support' 
-  },
-  'mei-lifeweaver': {
-    reasonZh: '小美的冰墙配合花男的花瓣平台能创造超高狙击点', 
-    reasonEn: 'Mei ice wall + Lifeweaver platform = ultra high ground' 
-  },
-
-  // 卢西奥的最佳拍档
-  'dva-lucio': { 
-    reasonZh: 'D.Va配合卢西奥的加速，能快速转场', 
-    reasonEn: 'D.Va + Lucio speed = rapid repositioning' 
-  },
-  'genji-lucio': { 
-    reasonZh: '源氏和卢西奥的高机动，能形成快速支援', 
-    reasonEn: 'High mobility duo - Genji + Lucio speed' 
-  },
-  'tracer-lucio': { 
-    reasonZh: '猎空和卢西奥的加速能打出灵活的游击战', 
-    reasonEn: 'Speed combo - Tracer + Lucio hit-and-run' 
-  },
-  'winston-lucio': {
-    reasonZh: '温斯顿配合卢西奥加速能快速转移', 
-    reasonEn: 'Winston + Lucio speed = rapid rotation' 
-  },
-
-  // 天使的最佳拍档
-  'pharah-mercy': { 
-    reasonZh: '天使的升降是法老之鹰的经典标配', 
-    reasonEn: 'Mercy\'s mobility is Pharah\'s classic synergy' 
-  },
-  'echo-mercy': { 
-    reasonZh: '回声飞行时，天使能安全跟进增伤', 
-    reasonEn: 'Mercy can keep up with Echo\'s flight' 
-  },
-  'widowmaker-mercy': { 
-    reasonZh: '天使保护黑百合的狙击位置不被切入', 
-    reasonEn: 'Mercy protects Widowmaker\'s sniping position' 
-  },
-  'genji-mercy': {
-    reasonZh: '天使保护源氏的切入位置', 
-    reasonEn: 'Mercy protects Genji\'s positioning' 
-  },
-  'tracer-mercy': {
-    reasonZh: '天使保护猎空的侧翼', 
-    reasonEn: 'Mercy protects Tracer\'s flanks' 
-  },
-
-  // 莫伊拉的最佳拍档
-  'dva-moira': { 
-    reasonZh: 'D.Va配合莫伊拉的高机动治疗，能持续作战', 
-    reasonEn: 'D.Va + Moira enables sustained fighting' 
-  },
-  'reinhardt-moira': { 
-    reasonZh: '大锤冲锋时，莫伊拉能及时提供治疗', 
-    reasonEn: 'Moira heals Reinhardt during charges' 
-  },
-  'zarya-moira': { 
-    reasonZh: '查莉娅需要持续治疗来维持高能量', 
-    reasonEn: 'Moira maintains Zarya\'s high energy' 
-  },
-  'roadhog-moira': {
-    reasonZh: '路霸配合莫伊拉形成强力前排', 
-    reasonEn: 'Roadhog + Moira = strong frontline' 
-  },
-
-  // 禅雅塔的最佳拍档
-  'genji-zenyatta': { 
-    reasonZh: '源氏的龙刃配合禅雅塔的增伤，能瞬间清场', 
-    reasonEn: 'Genji blade + Discord orb = team wipe' 
-  },
-  'tracer-zenyatta': { 
-    reasonZh: '禅雅塔的增伤让猎空的爆发更高', 
-    reasonEn: 'Zenyatta\'s Discord makes Tracer burst lethal' 
-  },
-  'dva-zenyatta': { 
-    reasonZh: 'D.Va保护禅雅塔的站位，矩阵吸收伤害', 
-    reasonEn: 'D.Va protects Zenyatta\'s positioning' 
-  },
-  'winston-zenyatta': {
-    reasonZh: '温斯顿配合禅雅塔能保护后排', 
-    reasonEn: 'Winston + Zenyatta protects backline' 
-  },
-
-  // 无漾的最佳拍档
-  'dva-wuyang': { 
-    reasonZh: 'D.Va配合无漾的控制，能快速先手', 
-    reasonEn: 'D.Va enables Wuyang\'s aggressive CC plays' 
-  },
-  'widowmaker-wuyang': { 
-    reasonZh: '黑百合远距离狙击压血线，无漾跟进控制', 
-    reasonEn: 'Widowmaker weakens, Wuyang follows with CC' 
-  },
-  'hanzo-wuyang': { 
-    reasonZh: '半藏视野箭发现目标，无漾快速切入', 
-    reasonEn: 'Hanzo reveals, Wuyang quickly follows up' 
-  },
-
-  // 瑞稀的最佳拍档
-  'dva-ruixi': { 
-    reasonZh: 'D.Va高机动配合瑞稀的位移，能快速转场', 
-    reasonEn: 'D.Va + Ruixi enables rapid rotation' 
-  },
-  'genji-ruixi': { 
-    reasonZh: '源氏和瑞稀双切入，能快速秒杀后排', 
-    reasonEn: 'Genji + Ruixi double dive = quick backline picks' 
-  },
-  'tracer-ruixi': { 
-    reasonZh: '猎空和瑞稀的高机动配合能建立人数优势', 
-    reasonEn: 'High mobility duo - quick number advantage' 
-  },
-
-  // 黑影的最佳拍档
-  'zarya-sombra': {
-    reasonZh: '查莉娅配合黑影的黑客入侵能快速击杀', 
-    reasonEn: 'Zarya + Sombra hack = quick eliminations' 
-  },
-  'genji-sombra': {
-    reasonZh: '源氏配合黑影的黑客入侵能形成双重威胁', 
-    reasonEn: 'Genji + Sombra double threat' 
-  },
-  'tracer-sombra': {
-    reasonZh: '猎空配合黑影形成双侧翼', 
-    reasonEn: 'Tracer + Sombra double flank' 
-  },
-
-  // 小美的最佳拍档
-  'zarya-mei': {
-    reasonZh: '查莉娅配合小美的控制能形成Combo', 
-    reasonEn: 'Zarya + Mei control combo' 
-  },
-  'baptiste-mei': {
-    reasonZh: '巴蒂斯特的免死保护小美的关键技能', 
-    reasonEn: 'Baptiste immortality protects Mei\'s key abilities' 
-  },
-
-  // 伊拉锐的最佳拍档
-  'dva-illari': { 
-    reasonZh: 'D.Va保护伊拉锐的太阳能位置', 
-    reasonEn: 'D.Va protects Illari\'s sun spot positioning' 
-  },
-  'zarya-illari': { 
-    reasonZh: '查莉娅的护盾能保护伊拉锐架设太阳能', 
-    reasonEn: 'Zarya\'s bubble protects Illari while setting up' 
-  },
-  'genji-illari': { 
-    reasonZh: '源氏能保护伊拉锐的侧翼安全', 
-    reasonEn: 'Genji protects Illari\'s flank positioning' 
-  },
-
-  // 朱诺的最佳拍档
-  'dva-juno': { 
-    reasonZh: 'D.Va配合朱诺的加速圈，能快速转场', 
-    reasonEn: 'D.Va + Juno speed ring = rapid repositioning' 
-  },
-  'genji-juno': { 
-    reasonZh: '源氏配合朱诺的加速，能快速切入收割', 
-    reasonEn: 'Genji + Juno speed = quick dive cleanup' 
-  },
-  'tracer-juno': { 
-    reasonZh: '猎空配合朱诺的加速能达到超高机动', 
-    reasonEn: 'Tracer + Juno speed ring = extreme mobility' 
-  },
-  'winston-juno': {
-    reasonZh: '温斯顿配合朱诺加速能快速转移战场', 
-    reasonEn: 'Winston + Juno speed = rapid rotation' 
-  },
-
-  // 飞天猫的最佳拍档
-  'kiriko-feitianmao': { 
-    reasonZh: '两位都是支援高机动，能快速互相支援', 
-    reasonEn: 'Both mobile supports - mutual protection' 
-  },
-  'zenyatta-feitianmao': { 
-    reasonZh: '禅雅塔增伤飞天猫的输出', 
-    reasonEn: 'Zenyatta\'s Discord boosts Feitianmao\'s damage' 
-  },
-  'genji-feitianmao': { 
-    reasonZh: '源氏能配合飞天猫进行双切入', 
-    reasonEn: 'Genji follows Feitianmao for double dive' 
-  },
-
-};
-
-/**
- * 获取最佳拍档理由
- * @param sourceHeroId 拍档方英雄ID
- * @param targetHeroId 被配对英雄ID
- * @param language 语言
- * @returns 拍档理由
- */
-export const getSynergyReason = (
-  sourceHeroId: string,
-  targetHeroId: string,
-  language: CounterLanguage = 'zh'
-): string => {
-  const key = `${sourceHeroId}-${targetHeroId}`;
-  const reason = synergyReasons[key];
-  
-  if (!reason) {
-    // 默认返回通用配合描述
-    return language === 'zh' ? '配合默契，协同作战' : 'Great synergy and teamwork';
+  'yao-yuanliuzhizi_assassin': {
+    reasonZh: '瑶的大招附身可以稳定为元流之子-刺客提供额外的"流"，并且能跟上元刺的位移速度',
+    reasonEn: '瑶的大招附身可以稳定为元流之子-刺客提供额外的"流"，并且能跟上元刺的位移速度'
+  },
+  'kongkonger-yuanliuzhizi_assassin': {
+    reasonZh: '空空儿的分身可以为元流之子-刺客提供大量的"流"，还能提供元刺所需的视野和开团能力',
+    reasonEn: '空空儿的分身可以为元流之子-刺客提供大量的"流"，还能提供元刺所需的视野和开团能力'
+  },
+  'direnjie-dayu': {
+    reasonZh: '狄仁杰线上压制力很强，大禹为其提供高额续航以及1技能的关键控制能够再次提升其压制能力',
+    reasonEn: '狄仁杰线上压制力很强，大禹为其提供高额续航以及1技能的关键控制能够再次提升其压制能力'
+  },
+  'damo-dayu': {
+    reasonZh: '达摩能够将敌人踢到大禹的鼎上 在团战中能够打出出奇效果',
+    reasonEn: '达摩能够将敌人踢到大禹的鼎上 在团战中能够打出出奇效果'
+  },
+  'jailuo-yuanliuzhizi_support': {
+    reasonZh: '伽罗自带的射程增加配合元流之子-辅助的增益能更好的在线上压制对手',
+    reasonEn: '伽罗自带的射程增加配合元流之子-辅助的增益能更好的在线上压制对手'
+  },
+  'huangzhong-yuanliuzhizi_support': {
+    reasonZh: '黄忠在架炮时有高额的双抗，配合上元流之子-辅助的护盾和射程增加，同时兼具一定坦度和压制力',
+    reasonEn: '黄忠在架炮时有高额的双抗，配合上元流之子-辅助的护盾和射程增加，同时兼具一定坦度和压制力'
+  },
+  'yao-chicha': {
+    reasonZh: '瑶可以为蚩奼提供生存能力，并补充控制能力',
+    reasonEn: '瑶可以为蚩奼提供生存能力，并补充控制能力'
+  },
+  'duoliya-chicha': {
+    reasonZh: '朵莉亚的大招刷新在蚩奼的身上，可以为蚩奼再提供一次突破攻速上限的能力。',
+    reasonEn: '朵莉亚的大招刷新在蚩奼的身上，可以为蚩奼再提供一次突破攻速上限的能力。'
+  },
+  'mingshiyin-sunquan': {
+    reasonZh: '明世隐的额外属性可放大孙权的伤害能力，回复可以帮孙权入场时提升容错。',
+    reasonEn: '明世隐的额外属性可放大孙权的伤害能力，回复可以帮孙权入场时提升容错。'
+  },
+  'niumo-sunquan': {
+    reasonZh: '孙权自身控制能力薄弱，牛魔的控制效果和双抗可协助孙权留人并提供生存保障。',
+    reasonEn: '孙权自身控制能力薄弱，牛魔的控制效果和双抗可协助孙权留人并提供生存保障。'
+  },
+  'kongkonger-yuanliuzhizi_archer': {
+    reasonZh: '利用空空儿的分身更多集流，提升技能组收益',
+    reasonEn: '利用空空儿的分身更多集流，提升技能组收益'
+  },
+  'duoliya-yuanliuzhizi_archer': {
+    reasonZh: '朵莉亚的大招刷新在元流射手的身上，可以获得更多的流，提升攻击频率',
+    reasonEn: '朵莉亚的大招刷新在元流射手的身上，可以获得更多的流，提升攻击频率'
+  },
+  'yangyuhuan-kongkonger': {
+    reasonZh: '空空儿得到更多回复能够更多地尝试夺取敌人装备，增强骚扰能力',
+    reasonEn: '空空儿得到更多回复能够更多地尝试夺取敌人装备，增强骚扰能力'
+  },
+  'gongsunli-kongkonger': {
+    reasonZh: '搭配线上强势的射手能够更加放大空空儿夺取装备对己方的增益',
+    reasonEn: '搭配线上强势的射手能够更加放大空空儿夺取装备对己方的增益'
+  },
+  'sangqi-cang': {
+    reasonZh: '桑启提供草丛并且可以回复能力，能够提升苍的输出能力以及更容易触发被动',
+    reasonEn: '桑启提供草丛并且可以回复能力，能够提升苍的输出能力以及更容易触发被动'
+  },
+  'duoliya-cang': {
+    reasonZh: '朵莉亚的大招刷新在苍的身上，可为苍多提供一次大招狼群',
+    reasonEn: '朵莉亚的大招刷新在苍的身上，可为苍多提供一次大招狼群'
+  },
+  'duoliya-ying': {
+    reasonZh: '朵莉亚的大招刷新在影的身上，可为影多提供一次复活机会',
+    reasonEn: '朵莉亚的大招刷新在影的身上，可为影多提供一次复活机会'
+  },
+  'niumo-ying': {
+    reasonZh: '影自身控制能力薄弱，牛魔的双抗与控制效果可为影提供更多的击杀机会',
+    reasonEn: '影自身控制能力薄弱，牛魔的双抗与控制效果可为影提供更多的击杀机会'
+  },
+  'makeboluo-shaosiyuan': {
+    reasonZh: '少司缘的定身效果可以帮助马可波罗更加稳定地打满一技能伤害',
+    reasonEn: '少司缘的定身效果可以帮助马可波罗更加稳定地打满一技能伤害'
+  },
+  'gaya-shaosiyuan': {
+    reasonZh: '少司缘的增加移速效果可以帮助戈娅更灵活地进行消耗和躲避技能，戈娅的大招吸附效果可以增加少司缘大招的命中率',
+    reasonEn: '少司缘的增加移速效果可以帮助戈娅更灵活地进行消耗和躲避技能，戈娅的大招吸附效果可以增加少司缘大招的命中率'
+  },
+  'guiguzi-yuanliuzhizi_tank': {
+    reasonZh: '鬼谷子的加速和隐身能够让元流之子-坦克快速且出其不意地接近敌方并打出连环控制',
+    reasonEn: '鬼谷子的加速和隐身能够让元流之子-坦克快速且出其不意地接近敌方并打出连环控制'
+  },
+  'sunbin-yuanliuzhizi_tank': {
+    reasonZh: '孙膑的爆发加速能够让元流之子-坦克快速地接近敌方并打出连环控制',
+    reasonEn: '孙膑的爆发加速能够让元流之子-坦克快速地接近敌方并打出连环控制'
+  },
+  'zhuangzhou-yuanliuzhizi_magic': {
+    reasonZh: '庄周的大招可以有效保护脆弱的元流之子-法师，规避其怕控怕被切的短板。',
+    reasonEn: '庄周的大招可以有效保护脆弱的元流之子-法师，规避其怕控怕被切的短板。'
+  },
+  'sunbin-yuanliuzhizi_magic': {
+    reasonZh: '孙膑的加速可以让元流之子-法师的大招更容易完整命中敌人。',
+    reasonEn: '孙膑的加速可以让元流之子-法师的大招更容易完整命中敌人。'
+  },
+  'niumo-aoyin': {
+    reasonZh: '牛魔的被动能为敖隐提供双抗，增加线上对抗能力，并且敖隐可以快速触发牛魔一技能被动提升伤害，同时牛魔二三技能能快速跟进敖隐并配合其进一步分裂战场',
+    reasonEn: '牛魔的被动能为敖隐提供双抗，增加线上对抗能力，并且敖隐可以快速触发牛魔一技能被动提升伤害，同时牛魔二三技能能快速跟进敖隐并配合其进一步分裂战场'
+  },
+  'taiyizhenren-aoyin': {
+    reasonZh: '太乙的被动能加速敖隐的发育使其快速成型，同时太乙的控制能配合敖隐在中期打开全队优势，大招的复活机制，能有效防止敖隐大招落地被敌方集火。',
+    reasonEn: '太乙的被动能加速敖隐的发育使其快速成型，同时太乙的控制能配合敖隐在中期打开全队优势，大招的复活机制，能有效防止敖隐大招落地被敌方集火。'
+  },
+  'jinchan-dasiming': {
+    reasonZh: '金蝉紧箍的限制能力可以帮助大司命获得更好的输出环境',
+    reasonEn: '金蝉紧箍的限制能力可以帮助大司命获得更好的输出环境'
+  },
+  'sunbin-dasiming': {
+    reasonZh: '孙膑的二技能能为大司命提供更强的游走支援能力，并且可以增强大司命的拉扯能力，避免敌人位移后快速挣脱魂链，同时孙膑大招开团的沉默效果可以有效帮助大司命大招进场，打出敌方灵体帮助作战',
+    reasonEn: '孙膑的二技能能为大司命提供更强的游走支援能力，并且可以增强大司命的拉扯能力，避免敌人位移后快速挣脱魂链，同时孙膑大招开团的沉默效果可以有效帮助大司命大招进场，打出敌方灵体帮助作战'
+  },
+  'yao-yunzhongjun': {
+    reasonZh: '瑶可以为云中君提供大量生存和控制能力',
+    reasonEn: '瑶可以为云中君提供大量生存和控制能力'
+  },
+  'baiqi-yunzhongjun': {
+    reasonZh: '白起可以提供先手控制，便于云中君输出和卷人',
+    reasonEn: '白起可以提供先手控制，便于云中君输出和卷人'
+  },
+  'duoliya-hainuo': {
+    reasonZh: '平时可以刷新海诺的1技能，满级后可以配合海诺刷出隐藏大招',
+    reasonEn: '平时可以刷新海诺的1技能，满级后可以配合海诺刷出隐藏大招'
+  },
+  'niumo-hainuo': {
+    reasonZh: '提升海诺生存，且两个控制技能方便海诺1技能命中更多直线目标',
+    reasonEn: '提升海诺生存，且两个控制技能方便海诺1技能命中更多直线目标'
+  },
+  'hainuo-duoliya': {
+    reasonZh: '平时可以刷新海诺的1技能，满级后可以配合海诺刷出隐藏大招',
+    reasonEn: '平时可以刷新海诺的1技能，满级后可以配合海诺刷出隐藏大招'
+  },
+  'lvbu-duoliya': {
+    reasonZh: '吕布的大招可以综合提升吕布的团战能力',
+    reasonEn: '吕布的大招可以综合提升吕布的团战能力'
+  },
+  'guiguzi-jixiaoman': {
+    reasonZh: '将敌人聚拢后快速打出aoe爆发',
+    reasonEn: '将敌人聚拢后快速打出aoe爆发'
+  },
+  'lubandashi-jixiaoman': {
+    reasonZh: '将敌人聚拢后快速打出aoe爆发',
+    reasonEn: '将敌人聚拢后快速打出aoe爆发'
+  },
+  'guiguzi-kuangtie': {
+    reasonZh: '狂铁自身较为笨重，需要队友为其创造作战环境',
+    reasonEn: '狂铁自身较为笨重，需要队友为其创造作战环境'
+  },
+  'liubang-kuangtie': {
+    reasonZh: '当狂铁陷入包围时，刘邦大招的支援会让狂铁拥有一个绝佳反击状态',
+    reasonEn: '当狂铁陷入包围时，刘邦大招的支援会让狂铁拥有一个绝佳反击状态'
+  },
+  'yao-laixiao': {
+    reasonZh: '鬼谷子能够聚拢敌人方便莱西奥进行范围输出',
+    reasonEn: '鬼谷子能够聚拢敌人方便莱西奥进行范围输出'
+  },
+  'guiguzi-laixiao': {
+    reasonZh: '',
+    reasonEn: ''
+  },
+  'yao-zhaohuaizhen': {
+    reasonZh: '赵怀真的技能攻守兼备，但在技能冷却和普攻充能期间较为脆弱，瑶可以弥补这个空档期。',
+    reasonEn: '赵怀真的技能攻守兼备，但在技能冷却和普攻充能期间较为脆弱，瑶可以弥补这个空档期。'
+  },
+  'houyi-zhaohuaizhen': {
+    reasonZh: '赵怀真缺乏持续输出，后羿的稳定远程伤害可以防止敌人残血逃走。',
+    reasonEn: '赵怀真缺乏持续输出，后羿的稳定远程伤害可以防止敌人残血逃走。'
+  },
+  'jailuo-haiyue': {
+    reasonZh: '利用海月的禁锢为伽罗创造输出环境，且海月的幻境可以把威胁到伽罗的目标隔离。 伽罗的减速效果也可以让海月的技能更容易命中。',
+    reasonEn: '利用海月的禁锢为伽罗创造输出环境，且海月的幻境可以把威胁到伽罗的目标隔离。 伽罗的减速效果也可以让海月的技能更容易命中。'
+  },
+  'niumo-haiyue': {
+    reasonZh: '牛魔可以提供生存和控制能力，也可以在海月从幻境出来时进行守护。',
+    reasonEn: '牛魔可以提供生存和控制能力，也可以在海月从幻境出来时进行守护。'
+  },
+  'sunbin-gaya': {
+    reasonZh: '提供生存能力和控制能力',
+    reasonEn: '提供生存能力和控制能力'
+  },
+  'yao-gaya': {
+    reasonZh: '',
+    reasonEn: ''
+  },
+  'yao-gongbenwuzang': {
+    reasonZh: '瑶可以跟上宫本的高机动性并增强其生存能力。同时瑶的1技能可以弥补宫本小技能缺少硬控的缺陷',
+    reasonEn: '瑶可以跟上宫本的高机动性并增强其生存能力。同时瑶的1技能可以弥补宫本小技能缺少硬控的缺陷'
+  },
+  'liubang-gongbenwuzang': {
+    reasonZh: '宫本需要在人群中进行持续作战，但他自身的生存能力并不强，刘邦可以帮他弥补这一短板',
+    reasonEn: '宫本需要在人群中进行持续作战，但他自身的生存能力并不强，刘邦可以帮他弥补这一短板'
+  },
+  'houyi-sangqi': {
+    reasonZh: '',
+    reasonEn: ''
+  },
+  'jailuo-sangqi': {
+    reasonZh: '',
+    reasonEn: ''
+  },
+  'yao-fei': {
+    reasonZh: '瑶可以跟上暃的高机动性并增强其生存能力，实现迅速支援',
+    reasonEn: '瑶可以跟上暃的高机动性并增强其生存能力，实现迅速支援'
+  },
+  'liubang-fei': {
+    reasonZh: '刘邦可以在暃入场收割时提供快速支援和保护',
+    reasonEn: '刘邦可以在暃入场收割时提供快速支援和保护'
+  },
+  'mengya-jinchan': {
+    reasonZh: '蒙犽需要追着敌人持续输出，很难命中高机动性的英雄，金蝉的紧箍咒可以对这类英雄进行限制，使得蒙犽可以对这些高机动性英雄进行持续输出',
+    reasonEn: '蒙犽需要追着敌人持续输出，很难命中高机动性的英雄，金蝉的紧箍咒可以对这类英雄进行限制，使得蒙犽可以对这些高机动性英雄进行持续输出'
+  },
+  'guiguzi-jinchan': {
+    reasonZh: '鬼谷子可以将敌人聚到一起，使金蝉的2、3技能的伤害覆盖面提高',
+    reasonEn: '鬼谷子可以将敌人聚到一起，使金蝉的2、3技能的伤害覆盖面提高'
+  },
+  'taiyizhenren-jiangziya': {
+    reasonZh: '太乙真人可以为姜子牙提供稳定的控制效果，帮助姜子牙技能命中，提升姜子牙的支援游走能力。',
+    reasonEn: '太乙真人可以为姜子牙提供稳定的控制效果，帮助姜子牙技能命中，提升姜子牙的支援游走能力。'
+  },
+  'lan-jiangziya': {
+    reasonZh: '姜子牙可以为澜赐封神力，配合澜的刷钱能力使得等级提升更快，让澜切入时伤害更高，承伤能力更强。',
+    reasonEn: '姜子牙可以为澜赐封神力，配合澜的刷钱能力使得等级提升更快，让澜切入时伤害更高，承伤能力更强。'
+  },
+  'liushan-yixing': {
+    reasonZh: '刘禅可以很好的保护弈星，提供输出空间；同时也可以开团，提高弈星大招的命中率',
+    reasonEn: '刘禅可以很好的保护弈星，提供输出空间；同时也可以开团，提高弈星大招的命中率'
+  },
+  'nakelulu-yixing': {
+    reasonZh: '当弈星的大招棋盘关住敌人后，娜可露露可以有效弥补输出',
+    reasonEn: '当弈星的大招棋盘关住敌人后，娜可露露可以有效弥补输出'
+  },
+  'lianpo-mengqi': {
+    reasonZh: '梦奇缺少控制，并且打足输出需要一定时间。廉颇可以为梦奇创造输出的空间和时间',
+    reasonEn: '梦奇缺少控制，并且打足输出需要一定时间。廉颇可以为梦奇创造输出的空间和时间'
+  },
+  'sunbin-mengqi': {
+    reasonZh: '孙膑的加速可以让梦奇更有效的延长梦力泡泡的飞行时间',
+    reasonEn: '孙膑的加速可以让梦奇更有效的延长梦力泡泡的飞行时间'
+  },
+  'yao-yunying': {
+    reasonZh: '瑶可以提供先手控制和一定的坦度，提高云缨的游走成功率和生存能力',
+    reasonEn: '瑶可以提供先手控制和一定的坦度，提高云缨的游走成功率和生存能力'
+  },
+  'baiqi-yunying': {
+    reasonZh: '白起可以提供先手控制与前排坦度，提高云缨的技能命中率，同时让她更好的在团战中生存下来',
+    reasonEn: '白起可以提供先手控制与前排坦度，提高云缨的技能命中率，同时让她更好的在团战中生存下来'
+  },
+  'niumo-sikongzhen': {
+    reasonZh: '牛魔可以提供控制和坦度，为司空震创造输出空间。',
+    reasonEn: '牛魔可以提供控制和坦度，为司空震创造输出空间。'
+  },
+  'lan-sikongzhen': {
+    reasonZh: '澜可以深入敌阵，吸引敌人的技能，并聚集敌人，让司空震的群体输出能力得到发挥。',
+    reasonEn: '澜可以深入敌阵，吸引敌人的技能，并聚集敌人，让司空震的群体输出能力得到发挥。'
+  },
+  'sunbin-lan': {
+    reasonZh: '提供移速加成，帮助澜进一步提高机动性，极速穿行于峡谷之中。',
+    reasonEn: '提供移速加成，帮助澜进一步提高机动性，极速穿行于峡谷之中。'
+  },
+  'zhangfei-lan': {
+    reasonZh: '提供护盾加成，提高澜的对拼容错率，不易被集火秒杀。',
+    reasonEn: '提供护盾加成，提高澜的对拼容错率，不易被集火秒杀。'
+  },
+  'buzhihuowu-xialuote': {
+    reasonZh: '提供控制和坦度，为夏洛特的技能增大命中概率并提供有效承伤',
+    reasonEn: '提供控制和坦度，为夏洛特的技能增大命中概率并提供有效承伤'
+  },
+  'niumo-xialuote': {
+    reasonZh: '提供控制和爆发，为夏洛特的技能增大命中概率，并制造低血量目标',
+    reasonEn: '提供控制和爆发，为夏洛特的技能增大命中概率，并制造低血量目标'
+  },
+  'bianque-agudo': {
+    reasonZh: '阿古朵战斗主要依赖召唤出的球球和多只野怪，因此适合与有群体增益能力的队友配合例如扁鹊，让球球和召唤的野怪获得他们的增益效果',
+    reasonEn: '阿古朵战斗主要依赖召唤出的球球和多只野怪，因此适合与有群体增益能力的队友配合例如扁鹊，让球球和召唤的野怪获得他们的增益效果'
+  },
+  'liushan-agudo': {
+    reasonZh: '刘婵出色的追击控制能力可以给阿古朵野怪提供输出环境',
+    reasonEn: '刘婵出色的追击控制能力可以给阿古朵野怪提供输出环境'
+  },
+  'guiguzi-mengtian': {
+    reasonZh: '鬼谷子可以先手压缩对方阵容，让蒙恬12技能的控制效果打足',
+    reasonEn: '鬼谷子可以先手压缩对方阵容，让蒙恬12技能的控制效果打足'
+  },
+  'sunbin-mengtian': {
+    reasonZh: '孙膑的加速和回溯能力可以让蒙恬更好的开团、生存',
+    reasonEn: '孙膑的加速和回溯能力可以让蒙恬更好的开团、生存'
+  },
+  'ake-lianpo': {
+    reasonZh: '阿轲：廉颇拥有比较强的坦克能力，在团战和对线时都可以主动利用1技能开团后2技能消耗找敌方英雄换血，等到敌方英雄交出关键技能后，可以利用自己的13技能控制配合阿轲完成击杀和收割。',
+    reasonEn: '阿轲：廉颇拥有比较强的坦克能力，在团战和对线时都可以主动利用1技能开团后2技能消耗找敌方英雄换血，等到敌方英雄交出关键技能后，可以利用自己的13技能控制配合阿轲完成击杀和收割。'
+  },
+  'makeboluo-lianpo': {
+    reasonZh: '马可波罗：马可波罗拥有比较强的远程poke能力，2技能的突进也可以快速跟上廉颇的1技能突进，对线时廉颇可以利用1技能和3技能控制限制敌方刺客对己方马可波罗的刺杀，也可以主动利用1技能开团，3技能配合闪现打出双段控制，为马可波罗创造良好的输出环境。',
+    reasonEn: '马可波罗：马可波罗拥有比较强的远程poke能力，2技能的突进也可以快速跟上廉颇的1技能突进，对线时廉颇可以利用1技能和3技能控制限制敌方刺客对己方马可波罗的刺杀，也可以主动利用1技能开团，3技能配合闪现打出双段控制，为马可波罗创造良好的输出环境。'
+  },
+  'guiguzi-jing': {
+    reasonZh: '镜的爆发会是一个小范围的伤害组合，当对手被鬼谷子拉在一起时可以打出巨量的伤害',
+    reasonEn: '镜的爆发会是一个小范围的伤害组合，当对手被鬼谷子拉在一起时可以打出巨量的伤害'
+  },
+  'yao-jing': {
+    reasonZh: '镜作为刺客，自身在突进时也会面临着威胁，瑶提供的辅助能力可以帮助镜更加轻松安全的作战',
+    reasonEn: '镜作为刺客，自身在突进时也会面临着威胁，瑶提供的辅助能力可以帮助镜更加轻松安全的作战'
+  },
+  'caiwenji-baiqi': {
+    reasonZh: '蔡文姬：蔡文姬的治疗能力能够让白起的回复能力更上一层楼',
+    reasonEn: '蔡文姬：蔡文姬的治疗能力能够让白起的回复能力更上一层楼'
+  },
+  'sunbin-baiqi': {
+    reasonZh: '孙膑：孙膑的时光流转以及加速效果能让白起在团战中对敌方阵型和后排输出的威胁进一步',
+    reasonEn: '孙膑：孙膑的时光流转以及加速效果能让白起在团战中对敌方阵型和后排输出的威胁进一步'
+  },
+  'zhangfei-mengya': {
+    reasonZh: '蒙犽需要很结实的前排顶住压力才能有空间自由输出',
+    reasonEn: '蒙犽需要很结实的前排顶住压力才能有空间自由输出'
+  },
+  'lubandashi-mengya': {
+    reasonZh: '无位移的射手都需要一个可以信赖的鲁班大师保护',
+    reasonEn: '无位移的射手都需要一个可以信赖的鲁班大师保护'
+  },
+  'luban7-lubandashi': {
+    reasonZh: '鲁班大师能帮助短腿脆皮队友位移，提高其生存能力',
+    reasonEn: '鲁班大师能帮助短腿脆皮队友位移，提高其生存能力'
+  },
+  'sulie-lubandashi': {
+    reasonZh: '对于有近身强力爆发或持续输出能力的队友，鲁班大师可以帮助他们高效到达理想位置',
+    reasonEn: '对于有近身强力爆发或持续输出能力的队友，鲁班大师可以帮助他们高效到达理想位置'
+  },
+  'huangzhong-xishi': {
+    reasonZh: '西施作为中单，不仅仅有足够的伤害，还有强力保护队友输出的能力，配合黄忠可以将零星的来犯之敌一一击败',
+    reasonEn: '西施作为中单，不仅仅有足够的伤害，还有强力保护队友输出的能力，配合黄忠可以将零星的来犯之敌一一击败'
+  },
+  'mozi-xishi': {
+    reasonZh: '墨子和西施可以组成双Poke阵容，都有强力控制技能的他们还可以打出连控效果',
+    reasonEn: '墨子和西施可以组成双Poke阵容，都有强力控制技能的他们还可以打出连控效果'
+  },
+  'zhuangzhou-machao': {
+    reasonZh: '帮助马超解控，让其可以在战场上杀个三进三出',
+    reasonEn: '帮助马超解控，让其可以在战场上杀个三进三出'
+  },
+  'sunbin-machao': {
+    reasonZh: '加速能让马超伤害更猛，时光逆流能让马超更加安全',
+    reasonEn: '加速能让马超伤害更猛，时光逆流能让马超更加安全'
+  },
+  'guiguzi-yao_fighter': {
+    reasonZh: '曜虽然自身也能够快速接近对手，但就容易失去其爆发力，在鬼谷子的帮助下，情况就会有所不同',
+    reasonEn: '曜虽然自身也能够快速接近对手，但就容易失去其爆发力，在鬼谷子的帮助下，情况就会有所不同'
+  },
+  'libai-yao_fighter': {
+    reasonZh: '通过李白的大招，可以将敌方血量压低，作为偏向技巧和收割的曜来说，李白可以帮其创造出一定的收割空间',
+    reasonEn: '通过李白的大招，可以将敌方血量压低，作为偏向技巧和收割的曜来说，李白可以帮其创造出一定的收割空间'
+  },
+  'houyi-yao': {
+    reasonZh: '持续输出的射手在瑶附身后，全力输出伤害并不用担心突袭',
+    reasonEn: '持续输出的射手在瑶附身后，全力输出伤害并不用担心突袭'
+  },
+  'nakelulu-yao': {
+    reasonZh: '瑶有较为稳定的控制能力，配合高速移动的打野队友时，往往能够形成多打少的有利局面',
+    reasonEn: '瑶有较为稳定的控制能力，配合高速移动的打野队友时，往往能够形成多打少的有利局面'
+  },
+  'guiguzi-pangu': {
+    reasonZh: '将敌人聚拢后快速打出aoe爆发',
+    reasonEn: '将敌人聚拢后快速打出aoe爆发'
+  },
+  'yixing-pangu': {
+    reasonZh: '将敌人圈起来后，盘古可以通过拳头形态进行持续的aoe输出',
+    reasonEn: '将敌人圈起来后，盘古可以通过拳头形态进行持续的aoe输出'
+  },
+  'change-zhubajie': {
+    reasonZh: '嫦娥拥有强力爆发伤害，但开团能力较弱，搭配猪八戒可以轻易的将团战开启并为嫦娥吸收第一轮敌方伤害',
+    reasonEn: '嫦娥拥有强力爆发伤害，但开团能力较弱，搭配猪八戒可以轻易的将团战开启并为嫦娥吸收第一轮敌方伤害'
+  },
+  'diaochan-zhubajie': {
+    reasonZh: '猪八戒凭借众多的控制效果和吸收伤害能力，能为貂蝉提供良好的输出空间',
+    reasonEn: '猪八戒凭借众多的控制效果和吸收伤害能力，能为貂蝉提供良好的输出空间'
+  },
+  'guiguzi-change': {
+    reasonZh: '嫦娥大招爆发范围不小，但作为法师来说还是太近了，需要鬼谷子的帮助，让其靠近敌人',
+    reasonEn: '嫦娥大招爆发范围不小，但作为法师来说还是太近了，需要鬼谷子的帮助，让其靠近敌人'
+  },
+  'baiqi-change': {
+    reasonZh: '嫦娥虽然坦度不错，但是并不能作为主动吸收伤害的角色，在团队里最好在配置一位坦克英雄进行开团和吸收伤害',
+    reasonEn: '嫦娥虽然坦度不错，但是并不能作为主动吸收伤害的角色，在团队里最好在配置一位坦克英雄进行开团和吸收伤害'
+  },
+  'gaojianli-guiguzi': {
+    reasonZh: '高渐离：推荐的原因是高渐离和鬼谷子的技能搭配爆发配合满分，鬼谷子游走或者团战时，使用1技能可以添加减抗性效果，3技能可以获得加速和群体隐身效果，2技能可以把敌人拉在一起并眩晕。和高渐离配合时用3技能隐身迅速贴近被1技能减少抗性的敌人，利用2技能硬控晕住的敌人，可以让高渐离有良好的输出环境。',
+    reasonEn: '高渐离：推荐的原因是高渐离和鬼谷子的技能搭配爆发配合满分，鬼谷子游走或者团战时，使用1技能可以添加减抗性效果，3技能可以获得加速和群体隐身效果，2技能可以把敌人拉在一起并眩晕。和高渐离配合时用3技能隐身迅速贴近被1技能减少抗性的敌人，利用2技能硬控晕住的敌人，可以让高渐离有良好的输出环境。'
+  },
+  'libai-guiguzi': {
+    reasonZh: '李白：鬼谷子和李白可以产生很好的联动效果，李白2技能减伤后大招可以伤害爆炸，鬼谷子的1技能可以减少敌方抗性，配合李白的2技能大招会让伤害最大化，大招隐身技能也可以让李白的行踪难以被掌控。',
+    reasonEn: '李白：鬼谷子和李白可以产生很好的联动效果，李白2技能减伤后大招可以伤害爆炸，鬼谷子的1技能可以减少敌方抗性，配合李白的2技能大招会让伤害最大化，大招隐身技能也可以让李白的行踪难以被掌控。'
+  },
+  'zhangfei-lixin': {
+    reasonZh: '李信在蓄力或挥舞剑气时，非常需要张飞的击退帮助缓解被突袭的压力',
+    reasonEn: '李信在蓄力或挥舞剑气时，非常需要张飞的击退帮助缓解被突袭的压力'
+  },
+  'sunbin-lixin': {
+    reasonZh: '李信突袭时，孙膑不仅仅可以给予加速，还能让突袭过程中受到的伤害减少',
+    reasonEn: '李信突袭时，孙膑不仅仅可以给予加速，还能让突袭过程中受到的伤害减少'
+  },
+  'guiguzi-shangguanwaner': {
+    reasonZh: '鬼谷子能帮助上官婉儿不用在远处累积冲刺次数，并且给出的控制效果能帮助上官婉儿完成积累释放',
+    reasonEn: '鬼谷子能帮助上官婉儿不用在远处累积冲刺次数，并且给出的控制效果能帮助上官婉儿完成积累释放'
+  },
+  'liubang-shangguanwaner': {
+    reasonZh: '上官婉儿需要突入阵内进行刺杀，刘邦能够借助上官婉儿的高机动性顺势突入，上官婉儿也能在刘邦的保护下安全的展开刺杀行动',
+    reasonEn: '上官婉儿需要突入阵内进行刺杀，刘邦能够借助上官婉儿的高机动性顺势突入，上官婉儿也能在刘邦的保护下安全的展开刺杀行动'
+  },
+  'baiqi-yuange': {
+    reasonZh: '元歌唯一的问题是傀儡的控制有延迟性，较难控制有防备的敌人，白起能够解决这一问题',
+    reasonEn: '元歌唯一的问题是傀儡的控制有延迟性，较难控制有防备的敌人，白起能够解决这一问题'
+  },
+  'guiguzi-yuange': {
+    reasonZh: '鬼谷子的2技能能够创造出方便元歌打出群体控制和成吨伤害的环境',
+    reasonEn: '鬼谷子的2技能能够创造出方便元歌打出群体控制和成吨伤害的环境'
+  },
+  'jvyoujing-milaidi': {
+    reasonZh: '米莱狄指定目标的控制效果，配合橘右京的爆发力和控制手段，可以让敌人在控制链中被击杀',
+    reasonEn: '米莱狄指定目标的控制效果，配合橘右京的爆发力和控制手段，可以让敌人在控制链中被击杀'
+  },
+  'libai-milaidi': {
+    reasonZh: '李白可以限制敌人移动，让其无法躲避机械仆从的攻击，又能补足米莱狄爆发伤害不足的弱点',
+    reasonEn: '李白可以限制敌人移动，让其无法躲避机械仆从的攻击，又能补足米莱狄爆发伤害不足的弱点'
+  },
+  'zhongwuyan-makeboluo': {
+    reasonZh: '钟无艳：钟无艳的石化能力，能让马可波罗轻松的累积攻击次数打出真实伤害',
+    reasonEn: '钟无艳：钟无艳的石化能力，能让马可波罗轻松的累积攻击次数打出真实伤害'
+  },
+  'niumo-makeboluo': {
+    reasonZh: '牛魔：牛魔在团战中，能为马可波罗提供防御能力，同时减速击飞附近的敌人，提供输出环境',
+    reasonEn: '牛魔：牛魔在团战中，能为马可波罗提供防御能力，同时减速击飞附近的敌人，提供输出环境'
+  },
+  'houyi-zhangliang': {
+    reasonZh: '张良的先手能力和长时间控制，给后羿提供了黏住敌人并且持续输出的环境',
+    reasonEn: '张良的先手能力和长时间控制，给后羿提供了黏住敌人并且持续输出的环境'
+  },
+  'baiqi-zhangliang': {
+    reasonZh: '张良和白起大招的衔接可以形成长时间的控制链，为张良2技能以及其它队友的输出创造环境',
+    reasonEn: '张良和白起大招的衔接可以形成长时间的控制链，为张良2技能以及其它队友的输出创造环境'
+  },
+  'xiahoudun-peiqinhu': {
+    reasonZh: '裴擒虎较高的爆发能力足以独立完成击杀，但在团战时更倾向第二时间入场，夏侯惇能够提供裴擒虎的入场空间以及一定的控制',
+    reasonEn: '裴擒虎较高的爆发能力足以独立完成击杀，但在团战时更倾向第二时间入场，夏侯惇能够提供裴擒虎的入场空间以及一定的控制'
+  },
+  'yingzheng-peiqinhu': {
+    reasonZh: '快速的清线能力，让嬴政能够快速的支援野区，帮助裴擒虎压制对方打野',
+    reasonEn: '快速的清线能力，让嬴政能够快速的支援野区，帮助裴擒虎压制对方打野'
+  },
+  'luban7-yangyuhuan': {
+    reasonZh: '小短腿鲁班七号拥有无与伦比的输出能力，在杨玉环提供了一定的输出空间后，可以毫无顾虑的横扫战场',
+    reasonEn: '小短腿鲁班七号拥有无与伦比的输出能力，在杨玉环提供了一定的输出空间后，可以毫无顾虑的横扫战场'
+  },
+  'chengyaojin-yangyuhuan': {
+    reasonZh: '杨玉环可以为常常游走在生死边缘的程咬金提供一定的保障，基于已损生命值百分比的回复机制，可以让程咬金放心的维持一个较高的攻击力加成，持续的于敌方作战',
+    reasonEn: '杨玉环可以为常常游走在生死边缘的程咬金提供一定的保障，基于已损生命值百分比的回复机制，可以让程咬金放心的维持一个较高的攻击力加成，持续的于敌方作战'
+  },
+  'baiqi-gongsunli': {
+    reasonZh: '白起可以稳定的开启团战，并给予阿离一定的输出环境',
+    reasonEn: '白起可以稳定的开启团战，并给予阿离一定的输出环境'
+  },
+  'zhangfei-gongsunli': {
+    reasonZh: '在阿离前期较为弱势时，张飞可以提供给团队很大的支持，避免前期弱势导致崩盘，后期张飞的大招可以给予阿离提供安全的输出收割环境',
+    reasonEn: '在阿离前期较为弱势时，张飞可以提供给团队很大的支持，避免前期弱势导致崩盘，后期张飞的大招可以给予阿离提供安全的输出收割环境'
+  },
+  'direnjie-mingshiyin': {
+    reasonZh: '进一步提升狄仁杰输出，同时狄仁杰具有一定自保能力，弥补明世隐保人能力的不足',
+    reasonEn: '进一步提升狄仁杰输出，同时狄仁杰具有一定自保能力，弥补明世隐保人能力的不足'
+  },
+  'baiqi-mingshiyin': {
+    reasonZh: '明世隐的治疗能力能在白起被动技能的作用下得以放大',
+    reasonEn: '明世隐的治疗能力能在白起被动技能的作用下得以放大'
+  },
+  'zhongkui-houyi': {
+    reasonZh: '一旦敌人被后羿的大招命中，那么钟馗的钩子几乎是百发百中。',
+    reasonEn: '一旦敌人被后羿的大招命中，那么钟馗的钩子几乎是百发百中。'
+  },
+  'niumo-houyi': {
+    reasonZh: '后羿是没有位移的射手，在团战中比较依赖队友的保护，牛魔的被动可以给后羿提供防御属性，而他极强的控制技能，可以帮助后羿逃离对手的攻击范围。',
+    reasonEn: '后羿是没有位移的射手，在团战中比较依赖队友的保护，牛魔的被动可以给后羿提供防御属性，而他极强的控制技能，可以帮助后羿逃离对手的攻击范围。'
+  },
+  'mengqi-nvwa': {
+    reasonZh: '当梦奇入侵时，女娲可以提供战术支援；当在团战时，可以配合梦奇分割战场，把控战局',
+    reasonEn: '当梦奇入侵时，女娲可以提供战术支援；当在团战时，可以配合梦奇分割战场，把控战局'
+  },
+  'huangzhong-nvwa': {
+    reasonZh: '作为被集火的优先目标，女娲可以为其提供多重的保护',
+    reasonEn: '作为被集火的优先目标，女娲可以为其提供多重的保护'
+  },
+  'guiguzi-sulie': {
+    reasonZh: '大招隐身加速帮助苏烈进场。配合2技能，让苏烈的大招发挥最大效果。',
+    reasonEn: '大招隐身加速帮助苏烈进场。配合2技能，让苏烈的大招发挥最大效果。'
+  },
+  'zhuangzhou-sulie': {
+    reasonZh: '配合庄周大招的免控效果，苏烈可以更好的选择释放大招的位置和时机。',
+    reasonEn: '配合庄周大招的免控效果，苏烈可以更好的选择释放大招的位置和时机。'
+  },
+  'laofuzi-zhouyu': {
+    reasonZh: '配合老夫子大招可以让敌人承受满额的火区伤害',
+    reasonEn: '配合老夫子大招可以让敌人承受满额的火区伤害'
+  },
+  'lvbu-zhouyu': {
+    reasonZh: '配合吕布可以预先判断出战场位置，轻松让火区布满战场',
+    reasonEn: '配合吕布可以预先判断出战场位置，轻松让火区布满战场'
+  },
+  'zhuangzhou-bailixuance': {
+    reasonZh: '庄周可以让百里玄策团战时更加安全',
+    reasonEn: '庄周可以让百里玄策团战时更加安全'
+  },
+  'gaojianli-bailixuance': {
+    reasonZh: '高渐离可以在团战中压低对方血线，以便百里玄策进场收割',
+    reasonEn: '高渐离可以在团战中压低对方血线，以便百里玄策进场收割'
+  },
+  'lianpo-bailishouyue': {
+    reasonZh: '拥有霸体的廉颇随时能够扰乱对手突进节奏，为百里守约创造安全的输出环境',
+    reasonEn: '拥有霸体的廉颇随时能够扰乱对手突进节奏，为百里守约创造安全的输出环境'
+  },
+  'niumo-bailishouyue': {
+    reasonZh: '百里守约可以与牛魔的控制技能打出致命的先手连招',
+    reasonEn: '百里守约可以与牛魔的控制技能打出致命的先手连招'
+  },
+  'gongbenwuzang-kai': {
+    reasonZh: '铠配合宫本小团战战斗力爆表',
+    reasonEn: '铠配合宫本小团战战斗力爆表'
+  },
+  'huamulan-kai': {
+    reasonZh: '铠配合花木兰小团战战斗力爆表',
+    reasonEn: '铠配合花木兰小团战战斗力爆表'
+  },
+  'liubang-miyue': {
+    reasonZh: '刘邦：刘邦自身拥有一身控制，能弥补芈月控制方面的不足。而刘邦落地后的双抗加成可以让芈月更加肆无忌惮地冲进人群里输出，一个偏肉的法坦和一个偏输出的法坦一起相得益彰。',
+    reasonEn: '刘邦：刘邦自身拥有一身控制，能弥补芈月控制方面的不足。而刘邦落地后的双抗加成可以让芈月更加肆无忌惮地冲进人群里输出，一个偏肉的法坦和一个偏输出的法坦一起相得益彰。'
+  },
+  'zhongwuyan-miyue': {
+    reasonZh: '钟无艳，芈月是一个持续输出的法师，但控制方面薄弱，钟无艳的石化控制，可以为芈月留住敌方英雄。',
+    reasonEn: '钟无艳，芈月是一个持续输出的法师，但控制方面薄弱，钟无艳的石化控制，可以为芈月留住敌方英雄。'
+  },
+  'luban7-yase': {
+    reasonZh: '所有己方ADC：当己方ADC遭到敌方干扰进攻时，亚瑟的沉默等控制可以配合我方ADC击杀敌方，技能效果非常适合保护己方ADC。',
+    reasonEn: '所有己方ADC：当己方ADC遭到敌方干扰进攻时，亚瑟的沉默等控制可以配合我方ADC击杀敌方，技能效果非常适合保护己方ADC。'
+  },
+  'ake-yase': {
+    reasonZh: '阿轲：亚瑟的一技能非常频繁，对敌方单体的沉默能力非常突出，而阿轲正好也是对单体输出非常强的英雄，且机动性很高，配合亚瑟的控制可以轻松的击杀目标。',
+    reasonEn: '阿轲：亚瑟的一技能非常频繁，对敌方单体的沉默能力非常突出，而阿轲正好也是对单体输出非常强的英雄，且机动性很高，配合亚瑟的控制可以轻松的击杀目标。'
+  },
+  'luban7-dunshan': {
+    reasonZh: '大部分站桩射手都可以在盾山的身后轻松输出，打出不俗的伤害',
+    reasonEn: '大部分站桩射手都可以在盾山的身后轻松输出，打出不俗的伤害'
+  },
+  'nvwa-dunshan': {
+    reasonZh: '配合女娲的矩阵空间，敌方近战轻易无法靠近盾山，远程消耗会被盾山完全阻挡，形成几乎无法正面阻挡的推进组合',
+    reasonEn: '配合女娲的矩阵空间，敌方近战轻易无法靠近盾山，远程消耗会被盾山完全阻挡，形成几乎无法正面阻挡的推进组合'
+  },
+  'guiguzi-shenmengxi': {
+    reasonZh: '鬼谷子的2技能能够创造出方便沈梦溪打出群体伤害的环境',
+    reasonEn: '鬼谷子的2技能能够创造出方便沈梦溪打出群体伤害的环境'
+  },
+  'baiqi-shenmengxi': {
+    reasonZh: '白起大招的控制期间沈梦溪可以直接扔出两颗大炸弹对敌方造成成吨伤害',
+    reasonEn: '白起大招的控制期间沈梦溪可以直接扔出两颗大炸弹对敌方造成成吨伤害'
+  },
+  'caiwenji-jailuo': {
+    reasonZh: '伽罗在初期对线时，具有压倒性的消耗能力，配合蔡文姬能够迅速针对1塔进行压迫',
+    reasonEn: '伽罗在初期对线时，具有压倒性的消耗能力，配合蔡文姬能够迅速针对1塔进行压迫'
+  },
+  'taiyizhenren-jailuo': {
+    reasonZh: '不仅仅能帮助伽罗迅速发育成型，还能为容易阵亡的伽罗提供一次复活的机会',
+    reasonEn: '不仅仅能帮助伽罗迅速发育成型，还能为容易阵亡的伽罗提供一次复活的机会'
+  },
+  'xiangyu-simayi': {
+    reasonZh: '项羽有优秀的开团能力，并且随后可以通过技能降低敌方输出，为司马懿进场输出创造条件',
+    reasonEn: '项羽有优秀的开团能力，并且随后可以通过技能降低敌方输出，为司马懿进场输出创造条件'
+  },
+  'ganjiangmoye-simayi': {
+    reasonZh: '干将的超远消耗能力，能让司马懿能在一次命中大量飞剑后，选择直接突进开启团战',
+    reasonEn: '干将的超远消耗能力，能让司马懿能在一次命中大量飞剑后，选择直接突进开启团战'
+  },
+  'nezha-sunce': {
+    reasonZh: '当哪吒和孙策两个乱战高手一起开团时，敌方很难同时防备他们并被他们两带入混战节奏',
+    reasonEn: '当哪吒和孙策两个乱战高手一起开团时，敌方很难同时防备他们并被他们两带入混战节奏'
+  },
+  'niumo-sunce': {
+    reasonZh: '当孙策带头冲锋之后，牛魔适时的追加控制，不仅提高孙策技能命中率，还能提高生存',
+    reasonEn: '当孙策带头冲锋之后，牛魔适时的追加控制，不仅提高孙策技能命中率，还能提高生存'
+  },
+  'zhuangzhou-ganjiangmoye': {
+    reasonZh: '干将莫邪的自保能力较差，需要队友能提供一定帮助',
+    reasonEn: '干将莫邪的自保能力较差，需要队友能提供一定帮助'
+  },
+  'zhongwuyan-ganjiangmoye': {
+    reasonZh: '钟无艳：钟无艳有着不俗的控制能力，所以他和干将莫邪搭配时就能很大程度上保证干将莫邪的技能命中率，同时钟无艳也能很好的保护干将莫邪。',
+    reasonEn: '钟无艳：钟无艳有着不俗的控制能力，所以他和干将莫邪搭配时就能很大程度上保证干将莫邪的技能命中率，同时钟无艳也能很好的保护干将莫邪。'
+  },
+  'niumo-direnjie': {
+    reasonZh: '牛魔：牛魔强大的控制能力能够让狄仁杰的技能更容易命中目标，牛魔提供的双抗和控制也能够起到很好的保护作用，2技能减速后可以让狄仁杰有更好的输出环境。',
+    reasonEn: '牛魔：牛魔强大的控制能力能够让狄仁杰的技能更容易命中目标，牛魔提供的双抗和控制也能够起到很好的保护作用，2技能减速后可以让狄仁杰有更好的输出环境。'
+  },
+  'sunbin-direnjie': {
+    reasonZh: '孙膑：狄仁杰需要利用走位输出，孙膑的2技能可以让狄仁杰加速，1技能和3技能可以让对面减速和沉默，能给狄仁杰制造很好的输出环境。',
+    reasonEn: '孙膑：狄仁杰需要利用走位输出，孙膑的2技能可以让狄仁杰加速，1技能和3技能可以让对面减速和沉默，能给狄仁杰制造很好的输出环境。'
+  },
+  'taiyizhenren-liubei': {
+    reasonZh: '太乙真人：太乙真人1技能的大范围晕眩和2技能的定点晕眩都可以增加刘备的抓人能力，大招可以提高刘备的容错率，避免出现刘备刚进场就被集火秒掉的问题，太乙真人在前期就可以造成高额法术伤害，配合刘备双人游走可以大大提升成功率。',
+    reasonEn: '太乙真人：太乙真人1技能的大范围晕眩和2技能的定点晕眩都可以增加刘备的抓人能力，大招可以提高刘备的容错率，避免出现刘备刚进场就被集火秒掉的问题，太乙真人在前期就可以造成高额法术伤害，配合刘备双人游走可以大大提升成功率。'
+  },
+  'zhangliang-liubei': {
+    reasonZh: '张良（类似的强控英雄）：刘备不缺输出，但是比较怕对手拉开距离，远距离攻击时刘备的伤害会很低，非常需要输出环境，类似张良的3技能控制配合张良的伤害，可以提高GANK几率。在打团的时，张良能可以有效的控制对方突进英雄，争取时间，刘备可以寻找时机进入敌方后排分割战场。',
+    reasonEn: '张良（类似的强控英雄）：刘备不缺输出，但是比较怕对手拉开距离，远距离攻击时刘备的伤害会很低，非常需要输出环境，类似张良的3技能控制配合张良的伤害，可以提高GANK几率。在打团的时，张良能可以有效的控制对方突进英雄，争取时间，刘备可以寻找时机进入敌方后排分割战场。'
+  },
+  'zhuangzhou-ake': {
+    reasonZh: '庄周：作为刺客阿轲的身板比较脆，经常会出现被敌方针对，先手控制集火秒杀的情况，庄周的大招解控和免伤效果可以大大提升阿轲的生存能力，可以帮助阿轲轻松击灭后排，收割战场，同时庄周1技能的减速留人，2技能的提升移速也可以给阿轲追击敌方带来很大方便。',
+    reasonEn: '庄周：作为刺客阿轲的身板比较脆，经常会出现被敌方针对，先手控制集火秒杀的情况，庄周的大招解控和免伤效果可以大大提升阿轲的生存能力，可以帮助阿轲轻松击灭后排，收割战场，同时庄周1技能的减速留人，2技能的提升移速也可以给阿轲追击敌方带来很大方便。'
+  },
+  'mozi-ake': {
+    reasonZh: '墨子：墨子在中后期应有很强的poke输出和AOE控制能力，和墨子抓人gank时，墨子利用控制可以帮助阿轲轻松完成背击刺杀，团战时墨子的2技能poke输出制造残血也可以给阿轲带来很多收割战场的机会。',
+    reasonEn: '墨子：墨子在中后期应有很强的poke输出和AOE控制能力，和墨子抓人gank时，墨子利用控制可以帮助阿轲轻松完成背击刺杀，团战时墨子的2技能poke输出制造残血也可以给阿轲带来很多收割战场的机会。'
+  },
+  'diaochan-liubang': {
+    reasonZh: '貂蝉：貂蝉是持续输出型英雄，在团战时刘邦的大招可以提高貂蝉的生存能力，正面团战时貂蝉开启大招配合刘邦大招的双抗和二技能的控制效果，可以拥有非常良好的输出环境，能轻松打出多段输出。',
+    reasonEn: '貂蝉：貂蝉是持续输出型英雄，在团战时刘邦的大招可以提高貂蝉的生存能力，正面团战时貂蝉开启大招配合刘邦大招的双抗和二技能的控制效果，可以拥有非常良好的输出环境，能轻松打出多段输出。'
+  },
+  'gaojianli-liubang': {
+    reasonZh: '高渐离：高渐离拥有超高的AOE爆发输出能力，己身在开启大招后使用技能有一定的免伤能力，刘邦开启大招为高渐离提升双抗后可以让高渐离生存环境得到进一步提升，2技能控制效果也可以帮助高渐离追击或者撤退。',
+    reasonEn: '高渐离：高渐离拥有超高的AOE爆发输出能力，己身在开启大招后使用技能有一定的免伤能力，刘邦开启大招为高渐离提升双抗后可以让高渐离生存环境得到进一步提升，2技能控制效果也可以帮助高渐离追击或者撤退。'
+  },
+  'makeboluo-donghuangtaiyi': {
+    reasonZh: '马可波罗：东皇太一的大招能够很好的保护己方核心输出，敌方输出突进过来时，东皇太一开大可以轻松压制，马可波罗的1技能爆炸输出伤害也很高，可以配合东皇太一轻松秒杀敌方刺客，由于刺客切入身板比较脆，血量会比东皇太一低很多，在减员敌方一名成员后依旧可以发挥自己的作用在团战中吸收伤害做前排。',
+    reasonEn: '马可波罗：东皇太一的大招能够很好的保护己方核心输出，敌方输出突进过来时，东皇太一开大可以轻松压制，马可波罗的1技能爆炸输出伤害也很高，可以配合东皇太一轻松秒杀敌方刺客，由于刺客切入身板比较脆，血量会比东皇太一低很多，在减员敌方一名成员后依旧可以发挥自己的作用在团战中吸收伤害做前排。'
+  },
+  'ake-donghuangtaiyi': {
+    reasonZh: '阿轲：东皇太一长时间的稳定控制，可以让阿轲轻松完成背击，造成大量伤害击败一名成员并刷新技能产生收割的效果。',
+    reasonEn: '阿轲：东皇太一长时间的稳定控制，可以让阿轲轻松完成背击，造成大量伤害击败一名成员并刷新技能产生收割的效果。'
+  },
+  'direnjie-daqiao': {
+    reasonZh: '狄仁杰：狄仁杰主要靠风筝普攻伤害，没有位移是短板，大乔的移动速度提升可以帮狄仁杰更好的风筝敌方英雄，大乔的控制技能也可以帮助狄仁杰完成追击和逃生，可以为狄仁杰提供更好的输出环境。狄仁杰的金牌控制释放很容易命中，配合大乔的沉默技能与击飞技能，可以更容易衔接控制。',
+    reasonEn: '狄仁杰：狄仁杰主要靠风筝普攻伤害，没有位移是短板，大乔的移动速度提升可以帮狄仁杰更好的风筝敌方英雄，大乔的控制技能也可以帮助狄仁杰完成追击和逃生，可以为狄仁杰提供更好的输出环境。狄仁杰的金牌控制释放很容易命中，配合大乔的沉默技能与击飞技能，可以更容易衔接控制。'
+  },
+  'huamulan-daqiao': {
+    reasonZh: '花木兰：大乔的沉默、移速提升可以给花木兰更多接近敌方核心输出的机会，1技能控制也可以用来配合花木兰把敌方关键技能打断或者留人，花木兰进行一套技能伤害后配合大乔2技能大招，回家后再返战场可以最大发挥自己短CD多技能优势。',
+    reasonEn: '花木兰：大乔的沉默、移速提升可以给花木兰更多接近敌方核心输出的机会，1技能控制也可以用来配合花木兰把敌方关键技能打断或者留人，花木兰进行一套技能伤害后配合大乔2技能大招，回家后再返战场可以最大发挥自己短CD多技能优势。'
+  },
+  'baiqi-huangzhong': {
+    reasonZh: '黄忠作为后期站桩输出的射手，不能移动和高输出注定是敌方主要切入和针对的对象，白起的二技能和大招组合控制技能，可以很好的对黄忠进行保护，就算是被集火也可以给黄忠争取停止撤退的时间，白起二技能拉人聚在一起开大招后，配合黄忠开大后的aoe普攻可以打出爆炸输出 。',
+    reasonEn: '黄忠作为后期站桩输出的射手，不能移动和高输出注定是敌方主要切入和针对的对象，白起的二技能和大招组合控制技能，可以很好的对黄忠进行保护，就算是被集火也可以给黄忠争取停止撤退的时间，白起二技能拉人聚在一起开大招后，配合黄忠开大后的aoe普攻可以打出爆炸输出 。'
+  },
+  'xiangyu-huangzhong': {
+    reasonZh: '黄忠后期开启大招后就不能移动，很容易被切，项羽可以利用一技能把敌方英雄推远，保护黄忠输出，也可以把敌方英雄推到一起，方便黄忠输出，而且项羽本身非常肉的特性可以帮助队伍吸收非常多的伤害，为黄忠提供更长输出的时间。',
+    reasonEn: '黄忠后期开启大招后就不能移动，很容易被切，项羽可以利用一技能把敌方英雄推远，保护黄忠输出，也可以把敌方英雄推到一起，方便黄忠输出，而且项羽本身非常肉的特性可以帮助队伍吸收非常多的伤害，为黄忠提供更长输出的时间。'
+  },
+  'xiahoudun-zhugeliang': {
+    reasonZh: '夏侯惇：作为法师的诸葛必须要有一个能够在前方抗伤害的肉盾，而夏侯作为战士，一技能减速命中敌人能够触发二段技能造成短控，可以为诸葛提供良好的输出环境。而二技能的盾也增加了夏侯惇抗伤能力。在对战或逃跑时，都可以通过三技能长距离的突进且造成眩晕的控制来保护诸葛或进行对敌。',
+    reasonEn: '夏侯惇：作为法师的诸葛必须要有一个能够在前方抗伤害的肉盾，而夏侯作为战士，一技能减速命中敌人能够触发二段技能造成短控，可以为诸葛提供良好的输出环境。而二技能的盾也增加了夏侯惇抗伤能力。在对战或逃跑时，都可以通过三技能长距离的突进且造成眩晕的控制来保护诸葛或进行对敌。'
+  },
+  'zhaoyun-zhugeliang': {
+    reasonZh: '赵云：赵云搭配诸葛是一对机动性强，能打能跑能输出的组合。赵云作为一个能抗能打的战士，机动性强。对敌时通过三技能的控制效果和减速效果，不仅能够打出输出，也能为诸葛吸引火力，让诸葛打出全额伤害。即使发现打不过对方，赵云和诸葛亮也可以利用技能的位移快速逃离。',
+    reasonEn: '赵云：赵云搭配诸葛是一对机动性强，能打能跑能输出的组合。赵云作为一个能抗能打的战士，机动性强。对敌时通过三技能的控制效果和减速效果，不仅能够打出输出，也能为诸葛吸引火力，让诸葛打出全额伤害。即使发现打不过对方，赵云和诸葛亮也可以利用技能的位移快速逃离。'
+  },
+  'liubang-nezha': {
+    reasonZh: '刘邦：辅助刘邦和上单哪吒拥有最强的开团能力，开团前，哪吒锁定对方脆皮先手放大招，刘邦后手大招，哪吒本身的免伤加上刘邦的提高抗性效果在团战中轻松的七进七出。',
+    reasonEn: '刘邦：辅助刘邦和上单哪吒拥有最强的开团能力，开团前，哪吒锁定对方脆皮先手放大招，刘邦后手大招，哪吒本身的免伤加上刘邦的提高抗性效果在团战中轻松的七进七出。'
+  },
+  'taiyizhenren-nezha': {
+    reasonZh: '太乙真人：太乙真人的一二技能的眩晕可以保护开大后被集火的哪吒，同时大招也可以为哪吒提供更好的续航能力。',
+    reasonEn: '太乙真人：太乙真人的一二技能的眩晕可以保护开大后被集火的哪吒，同时大招也可以为哪吒提供更好的续航能力。'
+  },
+  'makeboluo-taiyizhenren': {
+    reasonZh: '马可波罗：在前期太乙真人的高额输出和控制为马可波罗提供了更多gank的机会，同时大招的复活可以避免在团战中因为马克被切而全盘崩溃的可能性，被动的额外收益可以让马克在前期打到更多金币，缩短了马克的成长周期。一二技能的硬控补充了马克本身没有控制能力的缺点。',
+    reasonEn: '马可波罗：在前期太乙真人的高额输出和控制为马可波罗提供了更多gank的机会，同时大招的复活可以避免在团战中因为马克被切而全盘崩溃的可能性，被动的额外收益可以让马克在前期打到更多金币，缩短了马克的成长周期。一二技能的硬控补充了马克本身没有控制能力的缺点。'
+  },
+  'liubei-taiyizhenren': {
+    reasonZh: '刘备：一技能的大范围晕眩和二技能的定点晕眩都可以增加刘备的抓人能力，同时大招可以提高刘备的容错率，避免出现刘备刚进场就被集火秒掉的几率，相比较其他英雄，太乙真人可以在前期就打出高额法术伤害，在前期帮助刘备反野或者守野时增加了成功的几率。',
+    reasonEn: '刘备：一技能的大范围晕眩和二技能的定点晕眩都可以增加刘备的抓人能力，同时大招可以提高刘备的容错率，避免出现刘备刚进场就被集火秒掉的几率，相比较其他英雄，太乙真人可以在前期就打出高额法术伤害，在前期帮助刘备反野或者守野时增加了成功的几率。'
+  },
+  'gaojianli-caiwenji': {
+    reasonZh: '高渐离：高渐离作为版本最强的AOE爆发输出流法师之一，开启大招免伤配合蔡文姬的大招加血加双抗能在团战中起到一个2打5的作用，蔡文姬二技能的稳定控制也能配合高渐离打出更好的输出环境。',
+    reasonEn: '高渐离：高渐离作为版本最强的AOE爆发输出流法师之一，开启大招免伤配合蔡文姬的大招加血加双抗能在团战中起到一个2打5的作用，蔡文姬二技能的稳定控制也能配合高渐离打出更好的输出环境。'
+  },
+  'direnjie-caiwenji': {
+    reasonZh: '狄仁杰：狄仁杰站桩近距离输出是相当强势的，二技能的解控使狄仁杰在团战中不会出现被控制直接秒掉的情况，蔡文姬的回血和二技能的眩晕以及大招的加双抗，能使狄仁杰在面对敌方刺客的针对时有更好的输出环境。',
+    reasonEn: '狄仁杰：狄仁杰站桩近距离输出是相当强势的，二技能的解控使狄仁杰在团战中不会出现被控制直接秒掉的情况，蔡文姬的回血和二技能的眩晕以及大招的加双抗，能使狄仁杰在面对敌方刺客的针对时有更好的输出环境。'
+  },
+  'damo-yadianna': {
+    reasonZh: '达摩：雅典娜如果要打出完整的连招，需要冗长的操作，期间控制较少，并且大招是个固定不动的技能，因此如果能配合一个有强力长时间控制的近战英雄，将会有非常好的gank效率。达摩的控制很足，控制时间很长，符合雅典娜的需求，达摩的大招虽然会改变敌人的位置，但对雅典娜的超高移动性来说不是问题。',
+    reasonEn: '达摩：雅典娜如果要打出完整的连招，需要冗长的操作，期间控制较少，并且大招是个固定不动的技能，因此如果能配合一个有强力长时间控制的近战英雄，将会有非常好的gank效率。达摩的控制很足，控制时间很长，符合雅典娜的需求，达摩的大招虽然会改变敌人的位置，但对雅典娜的超高移动性来说不是问题。'
+  },
+  'jvyoujing-yadianna': {
+    reasonZh: '橘右京：雅典娜的机动性很强，两者配合时可让雅典娜先追上敌人，用一技能反推，此时进入橘右京距离攻击范围内，接上控制期间雅典娜开出大招，打出完整连招，从而击杀敌人。两人的爆发力很强，控制时间虽然不长，但是衔接起来很流畅，很容易打出很好的配合效果。',
+    reasonEn: '橘右京：雅典娜的机动性很强，两者配合时可让雅典娜先追上敌人，用一技能反推，此时进入橘右京距离攻击范围内，接上控制期间雅典娜开出大招，打出完整连招，从而击杀敌人。两人的爆发力很强，控制时间虽然不长，但是衔接起来很流畅，很容易打出很好的配合效果。'
+  },
+  'gaojianli-yangjian': {
+    reasonZh: '高渐离：团战处理上，这两个英雄都可以打先手和打后手，而且都具有较高的AOE伤害，并且都可以进行战场收割。所以在团战胜率上有很好的的提高。在技能配合上，在gank时，杨戬的二技能可以对敌方英雄造成减速或者眩晕，这样使得高渐离大招的有效伤害更加可观，最后杨戬的一技能将敌方英雄带走。',
+    reasonEn: '高渐离：团战处理上，这两个英雄都可以打先手和打后手，而且都具有较高的AOE伤害，并且都可以进行战场收割。所以在团战胜率上有很好的的提高。在技能配合上，在gank时，杨戬的二技能可以对敌方英雄造成减速或者眩晕，这样使得高渐离大招的有效伤害更加可观，最后杨戬的一技能将敌方英雄带走。'
+  },
+  'libai-yangjian': {
+    reasonZh: '李白：团战处理上，首先靠李白大招伤害打出一波输出，然后杨戬利用一技能的斩杀效果，配合队友可以成功将其击杀。技能配合上，杨戬和李白游走gank能力是很强，李白的两段一技能和二技能的减速，配合杨戬的二技能，可以打出很好的技能combo，从而在留人的效果上非常明显，并且使得李白大招更容易解锁。',
+    reasonEn: '李白：团战处理上，首先靠李白大招伤害打出一波输出，然后杨戬利用一技能的斩杀效果，配合队友可以成功将其击杀。技能配合上，杨戬和李白游走gank能力是很强，李白的两段一技能和二技能的减速，配合杨戬的二技能，可以打出很好的技能combo，从而在留人的效果上非常明显，并且使得李白大招更容易解锁。'
+  },
+  'liubei-zhongkui': {
+    reasonZh: '打野战士（刘备、木兰）：钟馗依赖二技能的钩子，如果命中敌人，则可以瞬间配合刘备、木兰等爆发高的英雄秒掉。同时基本上是无伤抓人，这一点是任何的抓人套路都无法比拟的。',
+    reasonEn: '打野战士（刘备、木兰）：钟馗依赖二技能的钩子，如果命中敌人，则可以瞬间配合刘备、木兰等爆发高的英雄秒掉。同时基本上是无伤抓人，这一点是任何的抓人套路都无法比拟的。'
+  },
+  'wangzhaojun-zhongkui': {
+    reasonZh: '中单法师（昭君、妲己）：昭君的二技能命中几率较低，需要配合队友，而妲己的输出又过于风险大。所以配合钟馗的技能打出控制技能的连招，一套控到死。同时，对手很少会有反制手段，这一点是能够给团战带来极大收益的。',
+    reasonEn: '中单法师（昭君、妲己）：昭君的二技能命中几率较低，需要配合队友，而妲己的输出又过于风险大。所以配合钟馗的技能打出控制技能的连招，一套控到死。同时，对手很少会有反制手段，这一点是能够给团战带来极大收益的。'
+  },
+  'donghuangtaiyi-yuji': {
+    reasonZh: '东皇太一：虞姬的特性，非常害怕刺客型法师切入，所以她需要一个能让她免于法师切入的英雄，而东皇太一就是这样一个非常合适的英雄。由于东皇太一大招的的特性，意味着只要有法师切入，一定会被控制住，而虞姬的高爆发伤害，几乎肯定能击杀来切入的脆皮法师，更能让虞姬在团战中更加肆无忌惮的输出。',
+    reasonEn: '东皇太一：虞姬的特性，非常害怕刺客型法师切入，所以她需要一个能让她免于法师切入的英雄，而东皇太一就是这样一个非常合适的英雄。由于东皇太一大招的的特性，意味着只要有法师切入，一定会被控制住，而虞姬的高爆发伤害，几乎肯定能击杀来切入的脆皮法师，更能让虞姬在团战中更加肆无忌惮的输出。'
+  },
+  'daji-yuji': {
+    reasonZh: '妲己：二者都是高爆发英雄，几乎没有任何脆皮刺客能在两者的一套存活，而且两者都有指向性的控制技能，如果两个人同时行动，在后期几乎是见一个秒一个，就算是坦克，在两人技能的轮番轰炸之下也极容易被击杀，可以说一旦碰到这两个组合，就千万不要让游戏拖到后期。',
+    reasonEn: '妲己：二者都是高爆发英雄，几乎没有任何脆皮刺客能在两者的一套存活，而且两者都有指向性的控制技能，如果两个人同时行动，在后期几乎是见一个秒一个，就算是坦克，在两人技能的轮番轰炸之下也极容易被击杀，可以说一旦碰到这两个组合，就千万不要让游戏拖到后期。'
+  },
+  'baiqi-liyuanfang': {
+    reasonZh: '白起：作为目前版本唯一有嘲讽技能的英雄，白起的控制和坦克效果极强，李元芳的一技能飞镖拥有AOE爆炸效果，如果敌方英雄聚在一起，很容易打出较高的爆炸伤害，元芳的大招也有比较强的AOE伤害，白起如果2技能配合大招同时嘲讽控制敌方多名英雄，李元芳1技能接大招可以轻松打出爆炸伤害。',
+    reasonEn: '白起：作为目前版本唯一有嘲讽技能的英雄，白起的控制和坦克效果极强，李元芳的一技能飞镖拥有AOE爆炸效果，如果敌方英雄聚在一起，很容易打出较高的爆炸伤害，元芳的大招也有比较强的AOE伤害，白起如果2技能配合大招同时嘲讽控制敌方多名英雄，李元芳1技能接大招可以轻松打出爆炸伤害。'
+  },
+  'mozi-liyuanfang': {
+    reasonZh: '墨子：李元芳到了后期，他的输出和射程相对其他射手会差一些，拥有高额伤害和远程poke控制能力的墨子可以为李元芳补足短板，墨子的大招同时控制多人也可以配合李元芳完成爆炸输出。',
+    reasonEn: '墨子：李元芳到了后期，他的输出和射程相对其他射手会差一些，拥有高额伤害和远程poke控制能力的墨子可以为李元芳补足短板，墨子的大招同时控制多人也可以配合李元芳完成爆炸输出。'
+  },
+  'huangzhong-zhangfei': {
+    reasonZh: '黄忠：黄忠较脆，需要队友对其施加保护，而张飞就是保护黄忠免受伤害的不二人选，当黄忠开大的时候最害怕的就是对手的突进以及集火，而由于张飞的存在，能够为其提供护盾并击飞对手，开大后更能将对手击晕退散，帮助黄忠打出最高输出并保证黄忠免受伤害。',
+    reasonEn: '黄忠：黄忠较脆，需要队友对其施加保护，而张飞就是保护黄忠免受伤害的不二人选，当黄忠开大的时候最害怕的就是对手的突进以及集火，而由于张飞的存在，能够为其提供护盾并击飞对手，开大后更能将对手击晕退散，帮助黄忠打出最高输出并保证黄忠免受伤害。'
+  },
+  'houyi-zhangfei': {
+    reasonZh: '后羿：后羿也是依赖队友保护的英雄之一，同时也是最具嘲讽特色的英雄，所有刺客都想要第一时间击杀后羿，因为后羿的输出极为恐怖。张飞为后羿提供的护盾至少可以抵挡对面刺客的一个技能，同时一技能能够将对手与后羿保持一定距离，而大招更能够帮助后羿提供更好的输出环境，最大化后羿的输出。',
+    reasonEn: '后羿：后羿也是依赖队友保护的英雄之一，同时也是最具嘲讽特色的英雄，所有刺客都想要第一时间击杀后羿，因为后羿的输出极为恐怖。张飞为后羿提供的护盾至少可以抵挡对面刺客的一个技能，同时一技能能够将对手与后羿保持一定距离，而大招更能够帮助后羿提供更好的输出环境，最大化后羿的输出。'
+  },
+  'makeboluo-niumo': {
+    reasonZh: '马可波罗：牛魔的被动可以提供200点护甲魔抗，同时一技能的虚弱效果能够降低敌方输出，二技能和大招的控制能力和持续伤害，能够为马可波罗的进场提供良好的输出环境。',
+    reasonEn: '马可波罗：牛魔的被动可以提供200点护甲魔抗，同时一技能的虚弱效果能够降低敌方输出，二技能和大招的控制能力和持续伤害，能够为马可波罗的进场提供良好的输出环境。'
+  },
+  'gaojianli-niumo': {
+    reasonZh: '高渐离：牛魔强力的被动效果，能够为高渐离的进场提供护甲魔抗，配合高渐离的大招免伤效果，能够使高渐离更为稳固的在战场中央站稳脚跟输出。',
+    reasonEn: '高渐离：牛魔强力的被动效果，能够为高渐离的进场提供护甲魔抗，配合高渐离的大招免伤效果，能够使高渐离更为稳固的在战场中央站稳脚跟输出。'
+  },
+  'zhaoyun-jvyoujing': {
+    reasonZh: '赵云：两个人都是能抗能打的英雄，有位移，有爆发，有控制，有吸血，技能cd短。配合抓人，无论战士还是射手，互相配合一套技能都可以轻松带走对手。',
+    reasonEn: '赵云：两个人都是能抗能打的英雄，有位移，有爆发，有控制，有吸血，技能cd短。配合抓人，无论战士还是射手，互相配合一套技能都可以轻松带走对手。'
+  },
+  'yangjian-jvyoujing': {
+    reasonZh: '杨戬：杨戬打野或者橘右京打野都可以，是经典的上野组合，利用两个人技能的配合去游走gank，高爆发加控制很多英雄都难以阻挡，高强度的恢复能力也会让敌方英雄不得不牺牲经济提前做制裁类装备限制2人组的能力。',
+    reasonEn: '杨戬：杨戬打野或者橘右京打野都可以，是经典的上野组合，利用两个人技能的配合去游走gank，高爆发加控制很多英雄都难以阻挡，高强度的恢复能力也会让敌方英雄不得不牺牲经济提前做制裁类装备限制2人组的能力。'
+  },
+  'zhongkui-nakelulu': {
+    reasonZh: '钟馗：钟馗具备的控制能力，是娜可露露这种高爆发却没有硬控能力英雄的最佳搭档，控制后娜可露露即可放心输出，打出成吨伤害。',
+    reasonEn: '钟馗：钟馗具备的控制能力，是娜可露露这种高爆发却没有硬控能力英雄的最佳搭档，控制后娜可露露即可放心输出，打出成吨伤害。'
+  },
+  'baiqi-nakelulu': {
+    reasonZh: '白起：娜可露露的伤害非常高，但攻击范围较小，而白起的大招和2技能可帮助娜可露露留人，留住人后娜可露露即可利用大招跟上，一套技能击杀敌方。',
+    reasonEn: '白起：娜可露露的伤害非常高，但攻击范围较小，而白起的大招和2技能可帮助娜可露露留人，留住人后娜可露露即可利用大招跟上，一套技能击杀敌方。'
+  },
+  'damo-buzhihuowu': {
+    reasonZh: '达摩：不知火舞4级后可以配合达摩游走gank，不知火舞2技能减速，达摩大招贴墙一套秒杀的套路，不管先手还是后手都很强，在小规模团战中2个人的AOE控制伤害也可以达到很高收益。',
+    reasonEn: '达摩：不知火舞4级后可以配合达摩游走gank，不知火舞2技能减速，达摩大招贴墙一套秒杀的套路，不管先手还是后手都很强，在小规模团战中2个人的AOE控制伤害也可以达到很高收益。'
+  },
+  'yuji-buzhihuowu': {
+    reasonZh: '虞姬：不知火舞的二技能与虞姬的一技能都属于长距离的强消耗技能，不知火舞的二技能的减速效果可以很好的弥补虞姬的一技能前摇，提高其命中率，对敌方造成很大的消耗，在我方劣势守塔时，虞姬的一技能配合火舞的二技能能很快的清理兵线，从而保护我方建筑物。同样，在我方优势进攻时也可以达到推进的目的。',
+    reasonEn: '虞姬：不知火舞的二技能与虞姬的一技能都属于长距离的强消耗技能，不知火舞的二技能的减速效果可以很好的弥补虞姬的一技能前摇，提高其命中率，对敌方造成很大的消耗，在我方劣势守塔时，虞姬的一技能配合火舞的二技能能很快的清理兵线，从而保护我方建筑物。同样，在我方优势进攻时也可以达到推进的目的。'
+  },
+  'zhuangzhou-huamulan': {
+    reasonZh: '庄周：庄周的大招拥有免控效果加免伤，而花木兰也有免伤技能，两个技能双叠加可以保证自己团战存活能力，免控可以保证花木兰可以打出很好的输出（轻松切入敌方后排）。',
+    reasonEn: '庄周：庄周的大招拥有免控效果加免伤，而花木兰也有免伤技能，两个技能双叠加可以保证自己团战存活能力，免控可以保证花木兰可以打出很好的输出（轻松切入敌方后排）。'
+  },
+  'liubang-huamulan': {
+    reasonZh: '刘邦：花木兰是需要深入敌后的战士，自身硬度并不够，极易被集火秒杀。而有了刘邦的大招保护，可以有多种打法。不管是先手开团切后排，还是进行重剑控制，甚至用轻剑形态下对多个敌人打出沉默效果，都能获得很高的收益。',
+    reasonEn: '刘邦：花木兰是需要深入敌后的战士，自身硬度并不够，极易被集火秒杀。而有了刘邦的大招保护，可以有多种打法。不管是先手开团切后排，还是进行重剑控制，甚至用轻剑形态下对多个敌人打出沉默效果，都能获得很高的收益。'
+  },
+  'gongbenwuzang-lanlingwang': {
+    reasonZh: '宫本武藏：兰陵王独立作战能力比较强，前期可以频繁游走抓人。宫本武藏拥有指向留人的控制，能先手快速留住敌方英雄，提高兰陵王连招刺杀的容错率；宫本武藏的特性是高伤害，高爆发，短期高伤害可以快速压低目标血线，让兰陵王的2技能收益更高。',
+    reasonEn: '宫本武藏：兰陵王独立作战能力比较强，前期可以频繁游走抓人。宫本武藏拥有指向留人的控制，能先手快速留住敌方英雄，提高兰陵王连招刺杀的容错率；宫本武藏的特性是高伤害，高爆发，短期高伤害可以快速压低目标血线，让兰陵王的2技能收益更高。'
+  },
+  'zhugeliang-lanlingwang': {
+    reasonZh: '诸葛亮：兰陵王游走抓人的时候，经常会让敌人残血闪现逃走，诸葛的大招就可以远程收割敌方残血英雄，诸葛有位移很适合与兰陵王中野联动的打法；团战的时候，兰陵王是单体高爆发伤害英雄，诸葛的被动加1技能可以弥补兰陵王作为刺客的不足，可以消耗敌方英雄，为兰陵王创造单杀条件或者创造切入时机。',
+    reasonEn: '诸葛亮：兰陵王游走抓人的时候，经常会让敌人残血闪现逃走，诸葛的大招就可以远程收割敌方残血英雄，诸葛有位移很适合与兰陵王中野联动的打法；团战的时候，兰陵王是单体高爆发伤害英雄，诸葛的被动加1技能可以弥补兰陵王作为刺客的不足，可以消耗敌方英雄，为兰陵王创造单杀条件或者创造切入时机。'
+  },
+  'zhuangzhou-wangzhaojun': {
+    reasonZh: '庄周：昭君的大招太多英雄可以解掉，而庄周的大是起到一个净化的作用，昭君放大时，庄周放大，可以保证了昭君的大招持续不会被断掉。或者庄周先放大，尤其面对宫本武藏、吕布等对王昭君开大，可以解控保护王昭君，帮助王昭君寻找合适位置控制加放大，进行收割。',
+    reasonEn: '庄周：昭君的大招太多英雄可以解掉，而庄周的大是起到一个净化的作用，昭君放大时，庄周放大，可以保证了昭君的大招持续不会被断掉。或者庄周先放大，尤其面对宫本武藏、吕布等对王昭君开大，可以解控保护王昭君，帮助王昭君寻找合适位置控制加放大，进行收割。'
+  },
+  'ake-wangzhaojun': {
+    reasonZh: '阿轲：王昭君放大招时的范围大且伤害高，在团战的过程中，很难同时控住五个人，或者很难带走半肉纯肉出装的英雄，但是却可以大范围打成残血，这个时候阿轲可以利用她的被动，可以更好地收割。',
+    reasonEn: '阿轲：王昭君放大招时的范围大且伤害高，在团战的过程中，很难同时控住五个人，或者很难带走半肉纯肉出装的英雄，但是却可以大范围打成残血，这个时候阿轲可以利用她的被动，可以更好地收割。'
+  },
+  'zhaoyun-hanxin': {
+    reasonZh: '赵云：赵云大招通常是需要预判敌方走位的，而韩信的一技能挑飞可以极大的提高赵云大招的命中率，且这样的配合无论是前中期抓人、反野还是后期团战切后排都是非常实用并且难以反制的。',
+    reasonEn: '赵云：赵云大招通常是需要预判敌方走位的，而韩信的一技能挑飞可以极大的提高赵云大招的命中率，且这样的配合无论是前中期抓人、反野还是后期团战切后排都是非常实用并且难以反制的。'
+  },
+  'mozi-hanxin': {
+    reasonZh: '墨子：墨子的控制能力和poke能力非常突出，但是墨子的技能需要比较好的预判。韩信挑飞后，墨子可以和韩信更好的衔接组合技能，在追击敌方英雄时，墨子可以2技能远程控制人，韩信可以2技能瞬间拉进距离进行击杀。墨子的大招轻松控制敌方给予韩信充足的输出空间。',
+    reasonEn: '墨子：墨子的控制能力和poke能力非常突出，但是墨子的技能需要比较好的预判。韩信挑飞后，墨子可以和韩信更好的衔接组合技能，在追击敌方英雄时，墨子可以2技能远程控制人，韩信可以2技能瞬间拉进距离进行击杀。墨子的大招轻松控制敌方给予韩信充足的输出空间。'
+  },
+  'zhuangzhou-luna': {
+    reasonZh: '庄周：露娜最怕张良、妲己、达摩这类硬控英雄，庄周的大可以让露娜有良好的环境确保至少打出一套技能连招，1技能的减速效果可以2技能加速效果可以帮露娜更好的追击与逃生，大招免伤也可以增加露娜的生存能力。',
+    reasonEn: '庄周：露娜最怕张良、妲己、达摩这类硬控英雄，庄周的大可以让露娜有良好的环境确保至少打出一套技能连招，1技能的减速效果可以2技能加速效果可以帮露娜更好的追击与逃生，大招免伤也可以增加露娜的生存能力。'
+  },
+  'sunbin-luna': {
+    reasonZh: '孙膑：孙膑的1技能减速可以帮露娜更好的追击敌人，2技能冷却能恢复露娜的技能CD，即使出现失误大招断掉也可以很快冷却，大招的沉默效果可以配合露娜进场，避免被敌方集火瞬秒的情况出现。',
+    reasonEn: '孙膑：孙膑的1技能减速可以帮露娜更好的追击敌人，2技能冷却能恢复露娜的技能CD，即使出现失误大招断掉也可以很快冷却，大招的沉默效果可以配合露娜进场，避免被敌方集火瞬秒的情况出现。'
+  },
+  'huamulan-chengyaojin': {
+    reasonZh: '花木兰：在野外地形时作为突进开团玩法进行配合，程咬金可以在前排承受高额伤害，黏住敌方核心输出位交出关键技能，花木兰把握时机突进配合程咬金完成击杀或者收割，面对程咬金不交技能很难打出有效伤害，交技能就无法有效针对花木兰，依次作为配合战术效果会很好。',
+    reasonEn: '花木兰：在野外地形时作为突进开团玩法进行配合，程咬金可以在前排承受高额伤害，黏住敌方核心输出位交出关键技能，花木兰把握时机突进配合程咬金完成击杀或者收割，面对程咬金不交技能很难打出有效伤害，交技能就无法有效针对花木兰，依次作为配合战术效果会很好。'
+  },
+  'gaojianli-chengyaojin': {
+    reasonZh: '高渐离；高渐离拥有比较高的AOE爆发输出能力，有程咬金吸引敌方火力，骗敌方交出关键技能，由高渐离进场大招收割是最好的，程咬金可以视血量情况返场去追击敌方核心输出位，利用大招恢复黏住敌方核心输出位无法脱离战场。',
+    reasonEn: '高渐离；高渐离拥有比较高的AOE爆发输出能力，有程咬金吸引敌方火力，骗敌方交出关键技能，由高渐离进场大招收割是最好的，程咬金可以视血量情况返场去追击敌方核心输出位，利用大招恢复黏住敌方核心输出位无法脱离战场。'
+  },
+  'zhongkui-anqila': {
+    reasonZh: '钟馗：安琪拉的技能是AOE可以同时对多人造成伤害的，钟馗利用大招闪现把敌方3-5人控制住，安琪拉接21技能配合大招可以轻松将敌方团灭。',
+    reasonEn: '钟馗：安琪拉的技能是AOE可以同时对多人造成伤害的，钟馗利用大招闪现把敌方3-5人控制住，安琪拉接21技能配合大招可以轻松将敌方团灭。'
+  },
+  'baiqi-anqila': {
+    reasonZh: '白起：白起闪现2技能家大招可以轻松把敌方英雄聚拢，配合安琪拉21技能家大招可以轻松将敌方团灭。',
+    reasonEn: '白起：白起闪现2技能家大招可以轻松把敌方英雄聚拢，配合安琪拉21技能家大招可以轻松将敌方团灭。'
+  },
+  'zhuangzhou-guanyu': {
+    reasonZh: '庄周：关羽需要不停脱离控制达到冲刺状态才能打出伤害，如果团队中有庄周，加上自身的净化和二技能，关羽在一次团战中很轻松就可以打出3-4次冲刺，如果对手想控制关羽，就需要浪费大量控制技能，因此庄周对于关羽可以起到锦上添花的作用。',
+    reasonEn: '庄周：关羽需要不停脱离控制达到冲刺状态才能打出伤害，如果团队中有庄周，加上自身的净化和二技能，关羽在一次团战中很轻松就可以打出3-4次冲刺，如果对手想控制关羽，就需要浪费大量控制技能，因此庄周对于关羽可以起到锦上添花的作用。'
+  },
+  'daqiao-guanyu': {
+    reasonZh: '大乔：大乔的1技能可以为关羽冲锋进行加速配合，靠技能伤害的关羽经常需要回家补充状态，大乔的回城能够很好的帮助关羽续航，而且大乔的沉默可以使关羽前去冲锋的时候降低被技能控制的风险。',
+    reasonEn: '大乔：大乔的1技能可以为关羽冲锋进行加速配合，靠技能伤害的关羽经常需要回家补充状态，大乔的回城能够很好的帮助关羽续航，而且大乔的沉默可以使关羽前去冲锋的时候降低被技能控制的风险。'
+  },
+  'daqiao-laofuzi': {
+    reasonZh: '大乔：老夫子是一个单挑能力很强的英雄，可以选择与大乔进行41分推的玩法配合，敌方来一个英雄守线很难战胜老夫子，来2个其他战场就会形成4打2的局面，大乔的大招也可以及时召唤老夫子或帮老夫子逃生。',
+    reasonEn: '大乔：老夫子是一个单挑能力很强的英雄，可以选择与大乔进行41分推的玩法配合，敌方来一个英雄守线很难战胜老夫子，来2个其他战场就会形成4打2的局面，大乔的大招也可以及时召唤老夫子或帮老夫子逃生。'
+  },
+  'libai-laofuzi': {
+    reasonZh: '李白：老夫子属于单挑带线十分强势的英雄，一般选择上单位置抗压，老夫子达到4级后就有足够的控制，但是前中期输出能力不足以轻松击杀敌方英雄，可以防守的形式在塔下清兵线，配合李白抓敌方推进英雄，老夫子大招后李白可以轻松打出2技能大招配合老夫子秒杀敌方英雄。',
+    reasonEn: '李白：老夫子属于单挑带线十分强势的英雄，一般选择上单位置抗压，老夫子达到4级后就有足够的控制，但是前中期输出能力不足以轻松击杀敌方英雄，可以防守的形式在塔下清兵线，配合李白抓敌方推进英雄，老夫子大招后李白可以轻松打出2技能大招配合老夫子秒杀敌方英雄。'
+  },
+  'zhuangzhou-wuzetian': {
+    reasonZh: '庄周：庄周这个英雄有着团体免控减伤的效果，如果庄周配合武则天，对面没有团战免控能力，可以依赖武则天的控制配合庄周的大招让队友可以安全输出。',
+    reasonEn: '庄周：庄周这个英雄有着团体免控减伤的效果，如果庄周配合武则天，对面没有团战免控能力，可以依赖武则天的控制配合庄周的大招让队友可以安全输出。'
+  },
+  'damo-wuzetian': {
+    reasonZh: '达摩：达摩拥有强控制能力，可以配合武则天。在团战中，达摩先手踢对方的英雄，武则天再开大配合，可以打出非常高的伤害。',
+    reasonEn: '达摩：达摩拥有强控制能力，可以配合武则天。在团战中，达摩先手踢对方的英雄，武则天再开大配合，可以打出非常高的伤害。'
+  },
+  'luban7-xiangyu': {
+    reasonZh: '鲁班七号：鲁班七号由于本身机动性不高，被一些高爆发的英雄近身后很难逃脱，项羽的一技能既可以保护鲁班七号的安全让敌方刺客远离我方射手，又可以用一技能将敌方推入鲁班七号的大招范围之内并用二技能减速的同时降低敌方的输出，让鲁班进行完美的输出。',
+    reasonEn: '鲁班七号：鲁班七号由于本身机动性不高，被一些高爆发的英雄近身后很难逃脱，项羽的一技能既可以保护鲁班七号的安全让敌方刺客远离我方射手，又可以用一技能将敌方推入鲁班七号的大招范围之内并用二技能减速的同时降低敌方的输出，让鲁班进行完美的输出。'
+  },
+  'huamulan-xiangyu': {
+    reasonZh: '花木兰：花木兰由于本身缺乏强力的控制技能，所以导致伤害并不稳定，项羽的一技能的推人，和大招的眩晕效果可以让花木兰打出很好的伤害，另外项羽的二技能削弱敌方伤害效果，配合花木兰的重剑放技能时的免伤有不错的效果。',
+    reasonEn: '花木兰：花木兰由于本身缺乏强力的控制技能，所以导致伤害并不稳定，项羽的一技能的推人，和大招的眩晕效果可以让花木兰打出很好的伤害，另外项羽的二技能削弱敌方伤害效果，配合花木兰的重剑放技能时的免伤有不错的效果。'
+  },
+  'zhaoyun-damo': {
+    reasonZh: '赵云：赵云的定位和达摩类似，都是半肉战士，自身带控和技能回血，又同时具备突进技能。二人搭配起来抓人成功率是非常高的，技能combo是达摩一技能突进击飞，然后赵云大招打上击飞，达摩寻找好的角度一脚踢大，二人同时释放二技能，达摩减甲，赵云刺出高额物理伤害接普攻，这二人组几乎可以杀掉任何英雄。',
+    reasonEn: '赵云：赵云的定位和达摩类似，都是半肉战士，自身带控和技能回血，又同时具备突进技能。二人搭配起来抓人成功率是非常高的，技能combo是达摩一技能突进击飞，然后赵云大招打上击飞，达摩寻找好的角度一脚踢大，二人同时释放二技能，达摩减甲，赵云刺出高额物理伤害接普攻，这二人组几乎可以杀掉任何英雄。'
+  },
+  'libai-damo': {
+    reasonZh: '李白：在这二人组中，达摩如果先手一技能突进，李白跟上一技能眩晕，这眩晕的时间能够给达摩有充足的选择大招位置的空间，当达摩大招晕到敌方时，李白可以接上二技能减甲，同时达摩二技能继续减甲，达摩大招眩晕的时间同时又为李白刷大减少了难度，二人同时减甲之后，由李白大招收尾，完成击杀。',
+    reasonEn: '李白：在这二人组中，达摩如果先手一技能突进，李白跟上一技能眩晕，这眩晕的时间能够给达摩有充足的选择大招位置的空间，当达摩大招晕到敌方时，李白可以接上二技能减甲，同时达摩二技能继续减甲，达摩大招眩晕的时间同时又为李白刷大减少了难度，二人同时减甲之后，由李白大招收尾，完成击杀。'
+  },
+  'guiguzi-libai': {
+    reasonZh: '鬼谷子：鬼谷子和李白可以产生很好的联动效果，李白2技能减伤后大招可以伤害爆炸，鬼谷子的1技能可以减少敌方抗性，配合李白的2技能大招会让伤害最大化，大招隐身技能也可以让李白的行踪难以被掌控。',
+    reasonEn: '鬼谷子：鬼谷子和李白可以产生很好的联动效果，李白2技能减伤后大招可以伤害爆炸，鬼谷子的1技能可以减少敌方抗性，配合李白的2技能大招会让伤害最大化，大招隐身技能也可以让李白的行踪难以被掌控。'
+  },
+  'huangzhong-libai': {
+    reasonZh: '黄忠：在初期黄忠的2技能减破甲和减速效果可以配合李白轻松完成gank，双破甲效果在前中期可以轻松秒杀敌方脆皮英雄为己方建立优势，李白在中后期身板比较脆皮，经常会出现不敢去攻击兵线或者野怪解封大招的现象，在黄忠大招的范围内可以轻松解封大招消耗敌方，不管是防守还是进攻都可以玩出很多战术。',
+    reasonEn: '黄忠：在初期黄忠的2技能减破甲和减速效果可以配合李白轻松完成gank，双破甲效果在前中期可以轻松秒杀敌方脆皮英雄为己方建立优势，李白在中后期身板比较脆皮，经常会出现不敢去攻击兵线或者野怪解封大招的现象，在黄忠大招的范围内可以轻松解封大招消耗敌方，不管是防守还是进攻都可以玩出很多战术。'
+  },
+  'zhuangzhou-dianwei': {
+    reasonZh: '庄周：跟典韦进行组合的时候可以利用2技能增加移动速度，增加己方突进的机动性，还能使用1技能为敌人施加减速效果，这样更能帮助典韦留住敌人。在进行团战时，典韦直接开启大招配合反伤甲吸收伤害的同时对敌方造成成吨伤害，庄周同步开启大招免疫控制以及提高伤害减免效果，可以为典韦提供以少打多的环境。',
+    reasonEn: '庄周：跟典韦进行组合的时候可以利用2技能增加移动速度，增加己方突进的机动性，还能使用1技能为敌人施加减速效果，这样更能帮助典韦留住敌人。在进行团战时，典韦直接开启大招配合反伤甲吸收伤害的同时对敌方造成成吨伤害，庄周同步开启大招免疫控制以及提高伤害减免效果，可以为典韦提供以少打多的环境。'
+  },
+  'sunbin-dianwei': {
+    reasonZh: '孙膑：典韦与孙膑的配合主要体现在中后期的团战中，典韦一般是半肉承担伤害时对敌方核心输出造成伤害的英雄，自身经常会被集火斩杀，孙膑的2技能可以为典韦恢复生命，大招控制和沉默也可以在关键时刻为典韦争取逃生和输出环境，1技能延迟爆炸伤害和减速也能在小规模团战中发挥至关重要的作用。',
+    reasonEn: '孙膑：典韦与孙膑的配合主要体现在中后期的团战中，典韦一般是半肉承担伤害时对敌方核心输出造成伤害的英雄，自身经常会被集火斩杀，孙膑的2技能可以为典韦恢复生命，大招控制和沉默也可以在关键时刻为典韦争取逃生和输出环境，1技能延迟爆炸伤害和减速也能在小规模团战中发挥至关重要的作用。'
+  },
+  'zhuangzhou-caocao': {
+    reasonZh: '庄周：利用2技能增加移动速度，增加己方突进的机动性，在gank的时候除了有加速增益外，还能使用1技能为敌人施加减速效果，这样更能帮助曹操留住敌人。在进行团战时，这时候庄周的大招天人合一可以完美的解决曹操控制的烦恼，并且还有持续2秒的免疫控制以及提高伤害减免效果，可以让曹操更加放心的冲锋陷阵。',
+    reasonEn: '庄周：利用2技能增加移动速度，增加己方突进的机动性，在gank的时候除了有加速增益外，还能使用1技能为敌人施加减速效果，这样更能帮助曹操留住敌人。在进行团战时，这时候庄周的大招天人合一可以完美的解决曹操控制的烦恼，并且还有持续2秒的免疫控制以及提高伤害减免效果，可以让曹操更加放心的冲锋陷阵。'
+  },
+  'sunbin-caocao': {
+    reasonZh: '孙膑：孙膑在和曹操打配合时可以为他增加技能冷却以及移动速度加成。使用2技能加速可以让曹操贴近敌人进行打击，生命恢复可以很好的提高曹操的生存能力。在曹操进行突进切入敌军后排时可以开启大招，能帮助曹操对后排输出英雄进行大范围沉默以及减速效果，曹操利用技能突进配合孙膑可以达到1+1＞2的效果。',
+    reasonEn: '孙膑：孙膑在和曹操打配合时可以为他增加技能冷却以及移动速度加成。使用2技能加速可以让曹操贴近敌人进行打击，生命恢复可以很好的提高曹操的生存能力。在曹操进行突进切入敌军后排时可以开启大招，能帮助曹操对后排输出英雄进行大范围沉默以及减速效果，曹操利用技能突进配合孙膑可以达到1+1＞2的效果。'
+  },
+  'zhangfei-zhenji': {
+    reasonZh: '张飞：张飞开大前的一二技能能保护甄姬，让甄姬能用出技能对敌方造成伤害及控制。大招也能保护甄姬，开大后一二技能对敌方造成伤害和减速，甄姬也能在安全的距离用出技能对敌方造成伤害。',
+    reasonEn: '张飞：张飞开大前的一二技能能保护甄姬，让甄姬能用出技能对敌方造成伤害及控制。大招也能保护甄姬，开大后一二技能对敌方造成伤害和减速，甄姬也能在安全的距离用出技能对敌方造成伤害。'
+  },
+  'huangzhong-zhenji': {
+    reasonZh: '黄忠：黄忠架炮后通常会成为敌方目标，当敌方进攻黄忠时，甄姬的大招过去，能打到更多敌人，输出的同时被动控制，为黄忠缓一波压力，在辅助的保护下，和黄忠一起击杀敌方英雄。',
+    reasonEn: '黄忠：黄忠架炮后通常会成为敌方目标，当敌方进攻黄忠时，甄姬的大招过去，能打到更多敌人，输出的同时被动控制，为黄忠缓一波压力，在辅助的保护下，和黄忠一起击杀敌方英雄。'
+  },
+  'luban7-xiahoudun': {
+    reasonZh: '鲁班七号：鲁班七号搭配辅助走下路，一级点一技能之后的二段控住非常容易控住敌人，配合带红buff的鲁班七号可以给对面上单很大压力甚至拿下人头，后期同样如此，配合鲁班七号抓人非常方便。',
+    reasonEn: '鲁班七号：鲁班七号搭配辅助走下路，一级点一技能之后的二段控住非常容易控住敌人，配合带红buff的鲁班七号可以给对面上单很大压力甚至拿下人头，后期同样如此，配合鲁班七号抓人非常方便。'
+  },
+  'libai-xiahoudun': {
+    reasonZh: '李白：夏侯惇在团战之中可以制造很大的混乱，配合一三技能的控制可以打乱敌人阵型并拖延时间给李白刷大招的机会。',
+    reasonEn: '李白：夏侯惇在团战之中可以制造很大的混乱，配合一三技能的控制可以打乱敌人阵型并拖延时间给李白刷大招的机会。'
+  },
+  'wuzetian-lvbu': {
+    reasonZh: '武则天：武则天的连续控制及伤害可以较好的配合吕布进行输出。团战中吕布先手开大控制敌方后排，武则天在再开大造成控制和成吨输出。',
+    reasonEn: '武则天：武则天的连续控制及伤害可以较好的配合吕布进行输出。团战中吕布先手开大控制敌方后排，武则天在再开大造成控制和成吨输出。'
+  },
+  'baiqi-lvbu': {
+    reasonZh: '白起：白起在团战中是一个主坦的位置，主要在团战中承受伤害、控制敌方英雄，而吕布这样一个偏进攻型的战士则是非常需要一个控制留人的英雄打配合。',
+    reasonEn: '白起：白起在团战中是一个主坦的位置，主要在团战中承受伤害、控制敌方英雄，而吕布这样一个偏进攻型的战士则是非常需要一个控制留人的英雄打配合。'
+  },
+  'caiwenji-bianque': {
+    reasonZh: '蔡文姬：①团战处理：这两个英雄具有较好的恢复能力，称为奶妈奶爸，在团战中给队友足够回血效果，使队友的血量处于一个较为健康的状态，可以保证团战的容错率。②技能配合：蔡文姬的2技能弹弹乐给扁鹊提供了很好的留人效果，配合扁鹊的1，2技能加普攻，可以轻松打出5层被动，辅助用大招可以打出高额的输出量。',
+    reasonEn: '蔡文姬：①团战处理：这两个英雄具有较好的恢复能力，称为奶妈奶爸，在团战中给队友足够回血效果，使队友的血量处于一个较为健康的状态，可以保证团战的容错率。②技能配合：蔡文姬的2技能弹弹乐给扁鹊提供了很好的留人效果，配合扁鹊的1，2技能加普攻，可以轻松打出5层被动，辅助用大招可以打出高额的输出量。'
+  },
+  'xiangyu-bianque': {
+    reasonZh: '项羽：项羽拥有很强的坦度与控制能力，可以把敌方突进英雄推远，让敌人无法接近，大招的控制效果也可以让敌方失去反制能力。项羽的时刻保护，配合扁鹊减速叠毒，会让敌方英雄很痛苦。',
+    reasonEn: '项羽：项羽拥有很强的坦度与控制能力，可以把敌方突进英雄推远，让敌人无法接近，大招的控制效果也可以让敌方失去反制能力。项羽的时刻保护，配合扁鹊减速叠毒，会让敌方英雄很痛苦。'
+  },
+  'makeboluo-sunbin': {
+    reasonZh: '马可波罗：马可波罗的一技能弹道是一条直线，对于有位移的英雄容易躲避，但在躲开时孙斌通过二技能的小加速可以使马可进行技能弹道的平移来追击敌人。并且在马可需要进团放大时，孙斌可以通过大招沉默给马可提供良好输出环境。',
+    reasonEn: '马可波罗：马可波罗的一技能弹道是一条直线，对于有位移的英雄容易躲避，但在躲开时孙斌通过二技能的小加速可以使马可进行技能弹道的平移来追击敌人。并且在马可需要进团放大时，孙斌可以通过大招沉默给马可提供良好输出环境。'
+  },
+  'gaojianli-sunbin': {
+    reasonZh: '高渐离：通过孙斌的二技能加速来弥补高渐离机动性的不足，并且可以在团战时充分利用时机，放出大招沉默敌人帮助高渐离进团输出。',
+    reasonEn: '高渐离：通过孙斌的二技能加速来弥补高渐离机动性的不足，并且可以在团战时充分利用时机，放出大招沉默敌人帮助高渐离进团输出。'
+  },
+  'yuji-zhongwuyan': {
+    reasonZh: '虞姬：虞姬自身被动带有减速效果，二技能也能一定的保全自己前期，虞姬的被动减速配合钟无艳的石化可以对敌方上单英雄有效的压制。即便被抓，钟无艳的一技能也可以很好的护住虞姬。后期团战中，钟无艳石化技能更好的是去前排抗伤害而不是保护后排，虞姬的二技能也有一定自保能力，可以在刺客手中逃过一劫。',
+    reasonEn: '虞姬：虞姬自身被动带有减速效果，二技能也能一定的保全自己前期，虞姬的被动减速配合钟无艳的石化可以对敌方上单英雄有效的压制。即便被抓，钟无艳的一技能也可以很好的护住虞姬。后期团战中，钟无艳石化技能更好的是去前排抗伤害而不是保护后排，虞姬的二技能也有一定自保能力，可以在刺客手中逃过一劫。'
+  },
+  'makeboluo-zhongwuyan': {
+    reasonZh: '马可波罗：马可子弹有粘人效果，二技能可以位移也在一定程度上可以保护自己，钟无艳石化敌方，马可输出。团战中，钟无艳开启大招，作为先手，马可作为后手 ，是一个很强力的可以控可以输出的组合。',
+    reasonEn: '马可波罗：马可子弹有粘人效果，二技能可以位移也在一定程度上可以保护自己，钟无艳石化敌方，马可输出。团战中，钟无艳开启大招，作为先手，马可作为后手 ，是一个很强力的可以控可以输出的组合。'
+  },
+  'baiqi-gaojianli': {
+    reasonZh: '白起：白起钩子和嘲讽技能能够让对方全部聚集到一起，高渐离这时候开大进场能够打出恐怖的伤害，这一套往往能够击杀对面多人，取得巨大的优势。',
+    reasonEn: '白起：白起钩子和嘲讽技能能够让对方全部聚集到一起，高渐离这时候开大进场能够打出恐怖的伤害，这一套往往能够击杀对面多人，取得巨大的优势。'
+  },
+  'zhuangzhou-gaojianli': {
+    reasonZh: '庄周：高渐离最怕开大进场时候被对面控住，打不出输出，庄周可以很好的避免这个问题，大招的解控和免控可以有效提升高渐离的输出环境，庄周大招免伤配合高渐离大招时使用技能的免伤效果也可以让高渐离生存能力满值。',
+    reasonEn: '庄周：高渐离最怕开大进场时候被对面控住，打不出输出，庄周可以很好的避免这个问题，大招的解控和免控可以有效提升高渐离的输出环境，庄周大招免伤配合高渐离大招时使用技能的免伤效果也可以让高渐离生存能力满值。'
+  },
+  'huangzhong-liushan': {
+    reasonZh: '黄忠：这两个英雄在一起玩的就是速推流。刘禅的被动和一二技能的干扰，加上大招对塔的高额伤害，配上黄忠的炮台，能够以极短的时间推掉一座防御塔。并且刘禅的一二技能控制时间较长，能够很好的保护好黄忠，敌人在黄忠的大招圈内越久受到的伤害越高。',
+    reasonEn: '黄忠：这两个英雄在一起玩的就是速推流。刘禅的被动和一二技能的干扰，加上大招对塔的高额伤害，配上黄忠的炮台，能够以极短的时间推掉一座防御塔。并且刘禅的一二技能控制时间较长，能够很好的保护好黄忠，敌人在黄忠的大招圈内越久受到的伤害越高。'
+  },
+  'gaojianli-liushan': {
+    reasonZh: '高渐离：刘禅和高渐离可以产生很好的联动，刘禅的控制技能比较多，在用一技能配合二技能时不光可以开团，也可以干扰防御塔无法攻击，高渐离可以直接大招进场，释放出高额的爆发输出击杀对方英雄，是正面开团和越塔强杀的利器。',
+    reasonEn: '高渐离：刘禅和高渐离可以产生很好的联动，刘禅的控制技能比较多，在用一技能配合二技能时不光可以开团，也可以干扰防御塔无法攻击，高渐离可以直接大招进场，释放出高额的爆发输出击杀对方英雄，是正面开团和越塔强杀的利器。'
+  },
+  'buzhihuowu-zhuangzhou': {
+    reasonZh: '不知火舞：不知火舞作为法刺，常常需要切入敌方后排，但是自身较脆的特点让她非常惧怕控制，很容易被集火秒杀。而庄周提供的免伤免控能让她的输出环境安全很多，大招解控，让火舞能够轻易进团，打出爆炸伤害。',
+    reasonEn: '不知火舞：不知火舞作为法刺，常常需要切入敌方后排，但是自身较脆的特点让她非常惧怕控制，很容易被集火秒杀。而庄周提供的免伤免控能让她的输出环境安全很多，大招解控，让火舞能够轻易进团，打出爆炸伤害。'
+  },
+  'huangzhong-zhuangzhou': {
+    reasonZh: '黄忠：庄周可以为黄忠提供很好的输出环境。在高端局对战中，庄周提供的免控免伤能够让黄忠不会被迅速击杀。黄忠在架起状态下，敌方突进如果强行切入，同时会进入庄周的攻击范围。不仅无法击杀黄忠，还会受到黄忠和庄周的双重伤害。',
+    reasonEn: '黄忠：庄周可以为黄忠提供很好的输出环境。在高端局对战中，庄周提供的免控免伤能够让黄忠不会被迅速击杀。黄忠在架起状态下，敌方突进如果强行切入，同时会进入庄周的攻击范围。不仅无法击杀黄忠，还会受到黄忠和庄周的双重伤害。'
+  },
+  'taiyizhenren-luban7': {
+    reasonZh: '太乙真人：鲁班七号本身没有位移，是敌方英雄主要针对目标，太乙真人的双控制技能与大招可以保障鲁班的输出环境，在追击时群眩晕稳定控制伤害也能配合鲁班轻松完成击杀。',
+    reasonEn: '太乙真人：鲁班七号本身没有位移，是敌方英雄主要针对目标，太乙真人的双控制技能与大招可以保障鲁班的输出环境，在追击时群眩晕稳定控制伤害也能配合鲁班轻松完成击杀。'
+  },
+  'niumo-luban7': {
+    reasonZh: '牛魔：牛魔的被动效果可以为鲁班七号提供超高的双抗收益，鲁班是一个后期英雄，需要减少前期被gank针对的机会，牛魔的1技能降低敌方英雄伤害，2技能减速控制和大招的AOE控制都可以有效的保护鲁班，在一些有利地形强势开团也可以配合鲁班七号打出爆炸伤害。',
+    reasonEn: '牛魔：牛魔的被动效果可以为鲁班七号提供超高的双抗收益，鲁班是一个后期英雄，需要减少前期被gank针对的机会，牛魔的1技能降低敌方英雄伤害，2技能减速控制和大招的AOE控制都可以有效的保护鲁班，在一些有利地形强势开团也可以配合鲁班七号打出爆炸伤害。'
+  },
+  'zhuangzhou-sunshangxiang': {
+    reasonZh: '庄周：孙尚香是比较灵活的射手类英雄，但是如果被控制怎么也灵活不起来，所以推荐庄周作为孙尚香的搭档，在携带净化的情况下，无论是单抓还是团战，孙尚香都不在畏惧敌方的控制性技能，轻松打出成吨的输出。',
+    reasonEn: '庄周：孙尚香是比较灵活的射手类英雄，但是如果被控制怎么也灵活不起来，所以推荐庄周作为孙尚香的搭档，在携带净化的情况下，无论是单抓还是团战，孙尚香都不在畏惧敌方的控制性技能，轻松打出成吨的输出。'
+  },
+  'donghuangtaiyi-sunshangxiang': {
+    reasonZh: '东皇太一：东皇太一的大招可以控制敌方英雄，是应对敌方突进英雄的不二选择，东皇的超强回复能力注定了东皇也是一名合格的坦克，有东皇在前排吸收敌方火力，后排的孙尚香就可以安心输出。',
+    reasonEn: '东皇太一：东皇太一的大招可以控制敌方英雄，是应对敌方突进英雄的不二选择，东皇的超强回复能力注定了东皇也是一名合格的坦克，有东皇在前排吸收敌方火力，后排的孙尚香就可以安心输出。'
+  },
+  'mozi-yingzheng': {
+    reasonZh: '墨子：墨子频繁的控制可以让嬴政技能命中率提高，大招群控更是完美的配合嬴政一技能打出极高的aoe伤害。',
+    reasonEn: '墨子：墨子频繁的控制可以让嬴政技能命中率提高，大招群控更是完美的配合嬴政一技能打出极高的aoe伤害。'
+  },
+  'baiqi-yingzheng': {
+    reasonZh: '白起：白起二技能可以调整敌方位置，帮助缺乏控制技能的嬴政留人，开大嘲讽住敌人也可以帮助嬴政更安全的进行输出，打出成吨伤害。',
+    reasonEn: '白起：白起二技能可以调整敌方位置，帮助缺乏控制技能的嬴政留人，开大嘲讽住敌人也可以帮助嬴政更安全的进行输出，打出成吨伤害。'
+  },
+  'sunwukong-daji': {
+    reasonZh: '孙悟空：猴子是高爆发英雄，和妲己配合双重控制爆发，妲己先手控制，231技能跟上，猴子一技能接平A，敌人就算不死也是残血，猴子大招控制跟上，再接平A，即使是坦克也很难生存，游走抓人效率极高。',
+    reasonEn: '孙悟空：猴子是高爆发英雄，和妲己配合双重控制爆发，妲己先手控制，231技能跟上，猴子一技能接平A，敌人就算不死也是残血，猴子大招控制跟上，再接平A，即使是坦克也很难生存，游走抓人效率极高。'
+  },
+  'ake-daji': {
+    reasonZh: '阿轲：阿轲的埋伏和绕后能力强，妲己蹲草伏击爆发秒人能力强，两人配合埋伏蹲人可以达到瞬秒的效果。配合游走gank 能力非常很强。',
+    reasonEn: '阿轲：阿轲的埋伏和绕后能力强，妲己蹲草伏击爆发秒人能力强，两人配合埋伏蹲人可以达到瞬秒的效果。配合游走gank 能力非常很强。'
+  },
+  'guiguzi-mozi': {
+    reasonZh: '鬼谷子：鬼谷子的强势开团能力控制可以无缝衔接墨子的2、3技能控制，墨子虽然有位移但是技能释放大多有抬手动作，鬼谷子提供的加速可以有效的降低墨子在释放技能的容错率。',
+    reasonEn: '鬼谷子：鬼谷子的强势开团能力控制可以无缝衔接墨子的2、3技能控制，墨子虽然有位移但是技能释放大多有抬手动作，鬼谷子提供的加速可以有效的降低墨子在释放技能的容错率。'
+  },
+  'gongbenwuzang-mozi': {
+    reasonZh: '宫本武藏：团战中墨子先行二技能命中后可以完美配合宫本大招，而后墨子接大招控制，宫本输出敌方英雄。',
+    reasonEn: '宫本武藏：团战中墨子先行二技能命中后可以完美配合宫本大招，而后墨子接大招控制，宫本输出敌方英雄。'
+  },
+  'damo-zhaoyun': {
+    reasonZh: '达摩：团战处理上，都具有较强的先手开团能力，对于对面的后排威胁较大，并且技能的连环combo可以起到很好的控制效果。游走gank上，依靠达摩的大招将敌方英雄踢到墙上，紧接着赵云大招命中，可以打出很高的输出。',
+    reasonEn: '达摩：团战处理上，都具有较强的先手开团能力，对于对面的后排威胁较大，并且技能的连环combo可以起到很好的控制效果。游走gank上，依靠达摩的大招将敌方英雄踢到墙上，紧接着赵云大招命中，可以打出很高的输出。'
+  },
+  'gongbenwuzang-zhaoyun': {
+    reasonZh: '宫本武藏：团战处理上，都有较强的先手开团能力，宫本先手跳大，大中对面后排，此时赵云就可以接大招，将对面后排直接一套带走。游走gank上，赵云打野，宫本武藏边路，在野区入侵时，利用宫本先手开大，然后赵云再开大，这样保证了赵云大招的命中率，从而提高了赵云的输出能力，有着较强的技能combo。',
+    reasonEn: '宫本武藏：团战处理上，都有较强的先手开团能力，宫本先手跳大，大中对面后排，此时赵云就可以接大招，将对面后排直接一套带走。游走gank上，赵云打野，宫本武藏边路，在野区入侵时，利用宫本先手开大，然后赵云再开大，这样保证了赵云大招的命中率，从而提高了赵云的输出能力，有着较强的技能combo。'
+  },
+  'hanxin-xiaoqiao': {
+    reasonZh: '韩信：在通过二技能击飞之后，韩信可以通过一技能的第一段挑飞来进行二次控制，增加队友的输出时间，可以让小乔的大招更好的命中敌人。',
+    reasonEn: '韩信：在通过二技能击飞之后，韩信可以通过一技能的第一段挑飞来进行二次控制，增加队友的输出时间，可以让小乔的大招更好的命中敌人。'
+  },
+  'ake-xiaoqiao': {
+    reasonZh: '阿轲：在团战时，阿轲通过隐身要接近敌人时，对方通过阿轲隐身时的红色位置提示，可能做出走位，但是通过小乔二技能的辅助，完全可以使得限制对方走位，给阿轲一个输出的位置。',
+    reasonEn: '阿轲：在团战时，阿轲通过隐身要接近敌人时，对方通过阿轲隐身时的红色位置提示，可能做出走位，但是通过小乔二技能的辅助，完全可以使得限制对方走位，给阿轲一个输出的位置。'
+  },
+  'lan-yalian': {
+    reasonZh: '大招可以锁定澜一起协同进场',
+    reasonEn: '大招可以锁定澜一起协同进场'
+  },
+  'yao-yalian': {
+    reasonZh: '瑶的护盾和控制可以为亚连提供大量生存和输出能力',
+    reasonEn: '瑶的护盾和控制可以为亚连提供大量生存和输出能力'
+  },
+  'niumo-ailin': {
+    reasonZh: '牛魔可以提供控制和坦度，为艾琳创造输出空间。且被动可以提高艾琳的生存能力。',
+    reasonEn: '牛魔可以提供控制和坦度，为艾琳创造输出空间。且被动可以提高艾琳的生存能力。'
+  },
+  'yao-ailin': {
+    reasonZh: '瑶可以提高艾琳的生存能力',
+    reasonEn: '瑶可以提高艾琳的生存能力'
   }
-  
-  return language === 'zh' ? reason.reasonZh : reason.reasonEn;
 };
+
+// 获取最佳拍档理由的辅助函数
+export function getSynergyReason(sourceId: string, targetId: string, language: Language = 'zh'): string {
+  const key = `${sourceId}-${targetId}`;
+  const data = synergyReasons[key];
+  if (!data) return '';
+  return language === 'zh' ? data.reasonZh : data.reasonEn;
+}

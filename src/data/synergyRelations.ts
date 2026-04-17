@@ -1,6 +1,6 @@
-// 最佳拍档关系数据 - 基于2025-2026最新数据
+// 最佳拍档关系数据 - 基于王者荣耀官网数据生成
 // 配合强度: strength = 3 (核心搭档/Must Pick), 2 (优秀配合/Good Synergy), 1 (良好配合/Decent)
-// 数据来源: overpicker.com synergy chart + 2025-2026 meta
+// 数据来源: https://pvp.qq.com/web201605/herolist.shtml
 
 import type { CounterStrength, OwHeroId } from './heroData';
 
@@ -10,326 +10,262 @@ export interface SynergyRelation {
   strength?: CounterStrength;
 }
 
-// 最佳拍档关系数据 - 根据实际配合效果设置，非固定数量
+// 最佳拍档关系数据 - 从官网英雄关系模块抓取
 export const synergyRelations: SynergyRelation[] = [
-  // ========== Tank 英雄的最佳拍档 ==========
-  // D.Va - 高机动坦克，与高机动DPS和支援配合最佳
-  { source: 'kiriko', target: 'dva', strength: 3 },     // 核心搭档
-  { source: 'dva', target: 'dva', strength: 3 },       // 自保能力
-  { source: 'zarya', target: 'dva', strength: 3 },
-  { source: 'baptiste', target: 'dva', strength: 2 },
-  { source: 'zenyatta', target: 'dva', strength: 2 },
-  { source: 'genji', target: 'dva', strength: 2 },
-  { source: 'tracer', target: 'dva', strength: 2 },
-  { source: 'sojourn', target: 'dva', strength: 2 },
-  { source: 'echo', target: 'dva', strength: 2 },
-
-  // 末日铁拳 - 需要治疗保护
-  { source: 'kiriko', target: 'doomfist', strength: 3 },  // 核心搭档
-  { source: 'ana', target: 'doomfist', strength: 3 },      // 核心搭档
-  { source: 'zarya', target: 'doomfist', strength: 2 },
-  { source: 'reaper', target: 'doomfist', strength: 2 },
-  { source: 'genji', target: 'doomfist', strength: 2 },
-  { source: 'baptiste', target: 'doomfist', strength: 2 },
-
-  // 骇灾 - 新兴坦克
-  { source: 'kiriko', target: 'hazard', strength: 3 },
-  { source: 'zarya', target: 'hazard', strength: 3 },
-  { source: 'cassidy', target: 'hazard', strength: 2 },
-  { source: 'ashe', target: 'hazard', strength: 2 },
-  { source: 'genji', target: 'hazard', strength: 2 },
-
-  // 渣客女王 - 需要治疗和输出
-  { source: 'kiriko', target: 'junker_queen', strength: 3 },
-  { source: 'zarya', target: 'junker_queen', strength: 3 },
-  { source: 'cassidy', target: 'junker_queen', strength: 2 },
-  { source: 'ashe', target: 'junker_queen', strength: 2 },
-  { source: 'reaper', target: 'junker_queen', strength: 2 },
-
-  // 毛加 - 高输出坦克
-  { source: 'kiriko', target: 'mauga', strength: 3 },
-  { source: 'zarya', target: 'mauga', strength: 3 },
-  { source: 'baptiste', target: 'mauga', strength: 2 },
-  { source: 'cassidy', target: 'mauga', strength: 2 },
-  { source: 'reaper', target: 'mauga', strength: 2 },
-
-  // 奥丽莎 - 副T定位
-  { source: 'kiriko', target: 'orisa', strength: 2 },
-  { source: 'zenyatta', target: 'orisa', strength: 3 },
-  { source: 'sigma', target: 'orisa', strength: 3 },
-  { source: 'baptiste', target: 'orisa', strength: 2 },
-  { source: 'junkrat', target: 'orisa', strength: 2 },
-  { source: 'hanzo', target: 'orisa', strength: 2 },
-
-  // 拉玛刹 - 副T
-  { source: 'kiriko', target: 'ramattra', strength: 2 },
-  { source: 'zenyatta', target: 'ramattra', strength: 2 },
-  { source: 'zarya', target: 'ramattra', strength: 2 },
-  { source: 'hanzo', target: 'ramattra', strength: 2 },
-
-  // 莱因哈特 - 需要副T保护
-  { source: 'zarya', target: 'reinhardt', strength: 3 },
-  { source: 'kiriko', target: 'reinhardt', strength: 3 },
-  { source: 'baptiste', target: 'reinhardt', strength: 3 },
-  { source: 'brigitte', target: 'reinhardt', strength: 2 },
-  { source: 'reaper', target: 'reinhardt', strength: 2 },
-
-  // 路霸 - 需要治疗
-  { source: 'kiriko', target: 'roadhog', strength: 3 },
-  { source: 'zarya', target: 'roadhog', strength: 2 },
-  { source: 'junkrat', target: 'roadhog', strength: 2 },
-  { source: 'cassidy', target: 'roadhog', strength: 2 },
-
-  // 西格玛 - 副T
-  { source: 'kiriko', target: 'sigma', strength: 2 },
-  { source: 'zenyatta', target: 'sigma', strength: 3 },
-  { source: 'baptiste', target: 'sigma', strength: 2 },
-  { source: 'cassidy', target: 'sigma', strength: 2 },
-  { source: 'bastion', target: 'sigma', strength: 2 },
-
-  // 温斯顿 - 核心坦克
-  { source: 'kiriko', target: 'winston', strength: 3 },
-  { source: 'zarya', target: 'winston', strength: 2 },
-  { source: 'genji', target: 'winston', strength: 3 },
-  { source: 'tracer', target: 'winston', strength: 3 },
-  { source: 'dva', target: 'winston', strength: 2 },
-
-  // 破坏球 - 需要治疗
-  { source: 'kiriko', target: 'wrecking_ball', strength: 3 },
-  { source: 'zenyatta', target: 'wrecking_ball', strength: 2 },
-  { source: 'zarya', target: 'wrecking_ball', strength: 2 },
-  { source: 'genji', target: 'wrecking_ball', strength: 2 },
-
-  // 查莉娅 - 核心输出坦克
-  { source: 'kiriko', target: 'zarya', strength: 3 },
-  { source: 'zarya', target: 'zarya', strength: 3 },      // 自保
-  { source: 'genji', target: 'zarya', strength: 2 },
-  { source: 'reaper', target: 'zarya', strength: 3 },
-  { source: 'soldier76', target: 'zarya', strength: 2 },
-
-  //  domina - 新英雄
-  { source: 'kiriko', target: 'domina', strength: 2 },
-  { source: 'zarya', target: 'domina', strength: 2 },
-  { source: 'reaper', target: 'domina', strength: 2 },
-
-  // 金驭
-  { source: 'kiriko', target: 'jinyu', strength: 3 },
-  { source: 'zarya', target: 'jinyu', strength: 2 },
-  { source: 'genji', target: 'jinyu', strength: 2 },
-
-  // ========== DPS 英雄的最佳拍档 ==========
-  // 艾什 - 需要保护
-  { source: 'zarya', target: 'ashe', strength: 2 },
-  { source: 'baptiste', target: 'ashe', strength: 3 },
-  { source: 'zenyatta', target: 'ashe', strength: 3 },
-  { source: 'sigma', target: 'ashe', strength: 2 },
-  { source: 'orisa', target: 'ashe', strength: 2 },
-
-  // 堡垒 - 需要保护
-  { source: 'sigma', target: 'bastion', strength: 3 },
-  { source: 'orisa', target: 'bastion', strength: 3 },
-  { source: 'baptiste', target: 'bastion', strength: 2 },
-  { source: 'zarya', target: 'bastion', strength: 2 },
-
-  // 卡西迪 - 万金油DPS
-  { source: 'zarya', target: 'cassidy', strength: 2 },
-  { source: 'kiriko', target: 'cassidy', strength: 2 },
-  { source: 'baptiste', target: 'cassidy', strength: 2 },
-  { source: 'ana', target: 'cassidy', strength: 2 },
-  { source: 'brigitte', target: 'cassidy', strength: 2 },
-
-  // 回声 - 高机动DPS
-  { source: 'dva', target: 'echo', strength: 3 },
-  { source: 'kiriko', target: 'echo', strength: 3 },
-  { source: 'zenyatta', target: 'echo', strength: 2 },
-  { source: 'genji', target: 'echo', strength: 2 },
-
-  // 源氏 - 核心DPS
-  { source: 'zarya', target: 'genji', strength: 3 },
-  { source: 'zenyatta', target: 'genji', strength: 3 },   // 核心搭档
-  { source: 'kiriko', target: 'genji', strength: 3 },     // 核心搭档
-  { source: 'ana', target: 'genji', strength: 2 },
-  { source: 'dva', target: 'genji', strength: 2 },
-
-  // 半藏 - 需要视野
-  { source: 'zarya', target: 'hanzo', strength: 2 },
-  { source: 'zenyatta', target: 'hanzo', strength: 2 },
-  { source: 'kiriko', target: 'hanzo', strength: 2 },
-  { source: 'widowmaker', target: 'hanzo', strength: 2 },
-
-  // 狂鼠 - AOE输出
-  { source: 'zarya', target: 'junkrat', strength: 3 },
-  { source: 'kiriko', target: 'junkrat', strength: 2 },
-  { source: 'baptiste', target: 'junkrat', strength: 2 },
-
-  // 法老之鹰 - 需要天使
-  { source: 'mercy', target: 'pharah', strength: 3 },     // 核心搭档
-  { source: 'kiriko', target: 'pharah', strength: 2 },
-  { source: 'zenyatta', target: 'pharah', strength: 2 },
-  { source: 'baptiste', target: 'pharah', strength: 2 },
-
-  // 死神 - 近战DPS
-  { source: 'zarya', target: 'reaper', strength: 3 },
-  { source: 'kiriko', target: 'reaper', strength: 2 },
-  { source: 'zenyatta', target: 'reaper', strength: 2 },
-  { source: 'moira', target: 'reaper', strength: 2 },
-
-  // 士兵76 - 万金油
-  { source: 'kiriko', target: 'soldier76', strength: 2 },
-  { source: 'baptiste', target: 'soldier76', strength: 3 },
-  { source: 'zenyatta', target: 'soldier76', strength: 2 },
-  { source: 'ana', target: 'soldier76', strength: 2 },
-
-  // 索杰恩 - 高机动DPS
-  { source: 'dva', target: 'sojourn', strength: 3 },
-  { source: 'kiriko', target: 'sojourn', strength: 3 },
-  { source: 'zenyatta', target: 'sojourn', strength: 2 },
-  { source: 'zarya', target: 'sojourn', strength: 2 },
-
-  // 秩序之光 - 防守型
-  { source: 'zarya', target: 'symmetra', strength: 2 },
-  { source: 'kiriko', target: 'symmetra', strength: 2 },
-  { source: 'zenyatta', target: 'symmetra', strength: 2 },
-
-  // 托比昂 - 防守型
-  { source: 'zarya', target: 'torbjorn', strength: 2 },
-  { source: 'kiriko', target: 'torbjorn', strength: 2 },
-  { source: 'baptiste', target: 'torbjorn', strength: 2 },
-
-  // 猎空 - 核心DPS
-  { source: 'zarya', target: 'tracer', strength: 3 },
-  { source: 'zenyatta', target: 'tracer', strength: 3 },  // 核心搭档
-  { source: 'kiriko', target: 'tracer', strength: 3 },      // 核心搭档
-  { source: 'dva', target: 'tracer', strength: 2 },
-
-  // 探奇 - 新英雄
-  { source: 'kiriko', target: 'venture', strength: 3 },
-  { source: 'zenyatta', target: 'venture', strength: 2 },
-  { source: 'genji', target: 'venture', strength: 2 },
-  { source: 'zarya', target: 'venture', strength: 2 },
-
-  // 黑百合 - 狙击
-  { source: 'zarya', target: 'widowmaker', strength: 2 },
-  { source: 'kiriko', target: 'widowmaker', strength: 2 },
-  { source: 'zenyatta', target: 'widowmaker', strength: 2 },
-
-  // 芙蕾雅 - 新英雄
-  { source: 'kiriko', target: 'freja', strength: 2 },
-  { source: 'zenyatta', target: 'freja', strength: 2 },
-  { source: 'genji', target: 'freja', strength: 2 },
-
-  // 斩仇 - 新英雄
-  { source: 'dva', target: 'vendetta', strength: 3 },
-  { source: 'widowmaker', target: 'vendetta', strength: 2 },
-  { source: 'hanzo', target: 'vendetta', strength: 2 },
-
-  // 安燃 - 新英雄
-  { source: 'dva', target: 'anran', strength: 3 },
-  { source: 'genji', target: 'anran', strength: 3 },
-  { source: 'tracer', target: 'anran', strength: 3 },
-  { source: 'kiriko', target: 'anran', strength: 2 },
-
-  // 埃姆雷 - 新英雄
-  { source: 'kiriko', target: 'emrey', strength: 3 },
-  { source: 'zenyatta', target: 'emrey', strength: 2 },
-  { source: 'genji', target: 'emrey', strength: 2 },
-
-  // 黑影 - 黑客
-  { source: 'zarya', target: 'sombra', strength: 2 },
-  { source: 'genji', target: 'sombra', strength: 2 },
-  { source: 'tracer', target: 'sombra', strength: 2 },
-
-  // 小美 - 控制
-  { source: 'zarya', target: 'mei', strength: 2 },
-  { source: 'baptiste', target: 'mei', strength: 2 },
-  { source: 'lifeweaver', target: 'mei', strength: 3 },    // 经典配合
-
-  // ========== Support 英雄的最佳拍档 ==========
-  // 安娜 - 需要前排保护
-  { source: 'dva', target: 'ana', strength: 3 },
-  { source: 'reinhardt', target: 'ana', strength: 3 },
-  { source: 'zarya', target: 'ana', strength: 2 },
-  { source: 'sigma', target: 'ana', strength: 2 },
-
-  // 巴蒂斯特 - 万金油支援
-  { source: 'dva', target: 'baptiste', strength: 3 },
-  { source: 'reinhardt', target: 'baptiste', strength: 2 },
-  { source: 'cassidy', target: 'baptiste', strength: 2 },
-  { source: 'soldier76', target: 'baptiste', strength: 2 },
-  { source: 'orisa', target: 'baptiste', strength: 2 },
-
-  // 布丽吉塔 - 副支援
-  { source: 'dva', target: 'brigitte', strength: 3 },
-  { source: 'reinhardt', target: 'brigitte', strength: 3 },
-  { source: 'zarya', target: 'brigitte', strength: 2 },
-  { source: 'tracer', target: 'brigitte', strength: 2 },
-
-  // 雾子 - 核心支援
-  { source: 'dva', target: 'kiriko', strength: 3 },
-  { source: 'genji', target: 'kiriko', strength: 3 },    // 核心搭档
-  { source: 'tracer', target: 'kiriko', strength: 3 },    // 核心搭档
-  { source: 'winston', target: 'kiriko', strength: 2 },
-  { source: 'doomfist', target: 'kiriko', strength: 2 },
-
-  // 生命之梭 - 需要保护
-  { source: 'dva', target: 'lifeweaver', strength: 3 },
-  { source: 'genji', target: 'lifeweaver', strength: 2 },
-  { source: 'cassidy', target: 'lifeweaver', strength: 2 },
-  { source: 'mei', target: 'lifeweaver', strength: 3 },   // 经典配合
-
-  // 卢西奥 - 加速支援
-  { source: 'dva', target: 'lucio', strength: 2 },
-  { source: 'genji', target: 'lucio', strength: 3 },
-  { source: 'tracer', target: 'lucio', strength: 3 },
-  { source: 'winston', target: 'lucio', strength: 2 },
-
-  // 天使 - 核心DPS挂件
-  { source: 'pharah', target: 'mercy', strength: 3 },    // 核心搭档
-  { source: 'echo', target: 'mercy', strength: 3 },      // 核心搭档
-  { source: 'widowmaker', target: 'mercy', strength: 2 },
-  { source: 'genji', target: 'mercy', strength: 2 },
-  { source: 'tracer', target: 'mercy', strength: 2 },
-
-  // 莫伊拉 - 需要前排
-  { source: 'dva', target: 'moira', strength: 2 },
-  { source: 'reinhardt', target: 'moira', strength: 3 },
-  { source: 'zarya', target: 'moira', strength: 2 },
-  { source: 'roadhog', target: 'moira', strength: 2 },
-
-  // 禅雅塔 - 增伤核心
-  { source: 'genji', target: 'zenyatta', strength: 3 },   // 核心搭档
-  { source: 'tracer', target: 'zenyatta', strength: 3 },  // 核心搭档
-  { source: 'dva', target: 'zenyatta', strength: 2 },
-  { source: 'winston', target: 'zenyatta', strength: 2 },
-
-  // 无漾 - 新支援
-  { source: 'dva', target: 'wuyang', strength: 3 },
-  { source: 'widowmaker', target: 'wuyang', strength: 2 },
-  { source: 'hanzo', target: 'wuyang', strength: 2 },
-
-  // 瑞稀 - 新支援
-  { source: 'dva', target: 'ruixi', strength: 3 },
-  { source: 'genji', target: 'ruixi', strength: 2 },
-  { source: 'tracer', target: 'ruixi', strength: 2 },
-
-  // 飞天猫 - 新支援
-  { source: 'kiriko', target: 'feitianmao', strength: 2 },
-  { source: 'zenyatta', target: 'feitianmao', strength: 2 },
-  { source: 'genji', target: 'feitianmao', strength: 2 },
-
-  // 伊拉锐 - 高输出支援
-  { source: 'dva', target: 'illari', strength: 3 },
-  { source: 'zarya', target: 'illari', strength: 2 },
-  { source: 'genji', target: 'illari', strength: 2 },
-
-  // 朱诺 - 新支援
-  { source: 'dva', target: 'juno', strength: 3 },
-  { source: 'genji', target: 'juno', strength: 3 },
-  { source: 'tracer', target: 'juno', strength: 3 },
-  { source: 'winston', target: 'juno', strength: 2 },
-
-  // Mizuki - 新支援
-  { source: 'dva', target: 'mizuki', strength: 2 },
-  { source: 'zarya', target: 'mizuki', strength: 2 },
-  { source: 'genji', target: 'mizuki', strength: 2 },
+  { source: 'yao', target: 'yuanliuzhizi_assassin', strength: 3 },
+  { source: 'kongkonger', target: 'yuanliuzhizi_assassin', strength: 3 },
+  { source: 'direnjie', target: 'dayu', strength: 3 },
+  { source: 'damo', target: 'dayu', strength: 3 },
+  { source: 'jailuo', target: 'yuanliuzhizi_support', strength: 3 },
+  { source: 'huangzhong', target: 'yuanliuzhizi_support', strength: 3 },
+  { source: 'yao', target: 'chicha', strength: 3 },
+  { source: 'duoliya', target: 'chicha', strength: 3 },
+  { source: 'mingshiyin', target: 'sunquan', strength: 3 },
+  { source: 'niumo', target: 'sunquan', strength: 3 },
+  { source: 'kongkonger', target: 'yuanliuzhizi_archer', strength: 3 },
+  { source: 'duoliya', target: 'yuanliuzhizi_archer', strength: 3 },
+  { source: 'yangyuhuan', target: 'kongkonger', strength: 3 },
+  { source: 'gongsunli', target: 'kongkonger', strength: 3 },
+  { source: 'sangqi', target: 'cang', strength: 3 },
+  { source: 'duoliya', target: 'cang', strength: 3 },
+  { source: 'duoliya', target: 'ying', strength: 3 },
+  { source: 'niumo', target: 'ying', strength: 3 },
+  { source: 'makeboluo', target: 'shaosiyuan', strength: 3 },
+  { source: 'gaya', target: 'shaosiyuan', strength: 3 },
+  { source: 'guiguzi', target: 'yuanliuzhizi_tank', strength: 3 },
+  { source: 'sunbin', target: 'yuanliuzhizi_tank', strength: 3 },
+  { source: 'zhuangzhou', target: 'yuanliuzhizi_magic', strength: 3 },
+  { source: 'sunbin', target: 'yuanliuzhizi_magic', strength: 3 },
+  { source: 'niumo', target: 'aoyin', strength: 3 },
+  { source: 'taiyizhenren', target: 'aoyin', strength: 3 },
+  { source: 'jinchan', target: 'dasiming', strength: 3 },
+  { source: 'sunbin', target: 'dasiming', strength: 3 },
+  { source: 'yao', target: 'yunzhongjun', strength: 3 },
+  { source: 'baiqi', target: 'yunzhongjun', strength: 3 },
+  { source: 'duoliya', target: 'hainuo', strength: 3 },
+  { source: 'niumo', target: 'hainuo', strength: 3 },
+  { source: 'hainuo', target: 'duoliya', strength: 3 },
+  { source: 'lvbu', target: 'duoliya', strength: 3 },
+  { source: 'guiguzi', target: 'jixiaoman', strength: 3 },
+  { source: 'lubandashi', target: 'jixiaoman', strength: 3 },
+  { source: 'guiguzi', target: 'kuangtie', strength: 3 },
+  { source: 'liubang', target: 'kuangtie', strength: 3 },
+  { source: 'yao', target: 'laixiao', strength: 3 },
+  { source: 'guiguzi', target: 'laixiao', strength: 3 },
+  { source: 'yao', target: 'zhaohuaizhen', strength: 3 },
+  { source: 'houyi', target: 'zhaohuaizhen', strength: 3 },
+  { source: 'jailuo', target: 'haiyue', strength: 3 },
+  { source: 'niumo', target: 'haiyue', strength: 3 },
+  { source: 'sunbin', target: 'gaya', strength: 3 },
+  { source: 'yao', target: 'gaya', strength: 3 },
+  { source: 'yao', target: 'gongbenwuzang', strength: 3 },
+  { source: 'liubang', target: 'gongbenwuzang', strength: 3 },
+  { source: 'houyi', target: 'sangqi', strength: 3 },
+  { source: 'jailuo', target: 'sangqi', strength: 3 },
+  { source: 'yao', target: 'fei', strength: 3 },
+  { source: 'liubang', target: 'fei', strength: 3 },
+  { source: 'mengya', target: 'jinchan', strength: 3 },
+  { source: 'guiguzi', target: 'jinchan', strength: 3 },
+  { source: 'taiyizhenren', target: 'jiangziya', strength: 3 },
+  { source: 'lan', target: 'jiangziya', strength: 3 },
+  { source: 'liushan', target: 'yixing', strength: 3 },
+  { source: 'nakelulu', target: 'yixing', strength: 3 },
+  { source: 'lianpo', target: 'mengqi', strength: 3 },
+  { source: 'sunbin', target: 'mengqi', strength: 3 },
+  { source: 'yao', target: 'yunying', strength: 3 },
+  { source: 'baiqi', target: 'yunying', strength: 3 },
+  { source: 'niumo', target: 'sikongzhen', strength: 3 },
+  { source: 'lan', target: 'sikongzhen', strength: 3 },
+  { source: 'sunbin', target: 'lan', strength: 3 },
+  { source: 'zhangfei', target: 'lan', strength: 3 },
+  { source: 'buzhihuowu', target: 'xialuote', strength: 3 },
+  { source: 'niumo', target: 'xialuote', strength: 3 },
+  { source: 'bianque', target: 'agudo', strength: 3 },
+  { source: 'liushan', target: 'agudo', strength: 3 },
+  { source: 'guiguzi', target: 'mengtian', strength: 3 },
+  { source: 'sunbin', target: 'mengtian', strength: 3 },
+  { source: 'ake', target: 'lianpo', strength: 3 },
+  { source: 'makeboluo', target: 'lianpo', strength: 3 },
+  { source: 'guiguzi', target: 'jing', strength: 3 },
+  { source: 'yao', target: 'jing', strength: 3 },
+  { source: 'caiwenji', target: 'baiqi', strength: 3 },
+  { source: 'sunbin', target: 'baiqi', strength: 3 },
+  { source: 'zhangfei', target: 'mengya', strength: 3 },
+  { source: 'lubandashi', target: 'mengya', strength: 3 },
+  { source: 'luban7', target: 'lubandashi', strength: 3 },
+  { source: 'sulie', target: 'lubandashi', strength: 3 },
+  { source: 'huangzhong', target: 'xishi', strength: 3 },
+  { source: 'mozi', target: 'xishi', strength: 3 },
+  { source: 'zhuangzhou', target: 'machao', strength: 3 },
+  { source: 'sunbin', target: 'machao', strength: 3 },
+  { source: 'guiguzi', target: 'yao_fighter', strength: 3 },
+  { source: 'libai', target: 'yao_fighter', strength: 3 },
+  { source: 'houyi', target: 'yao', strength: 3 },
+  { source: 'nakelulu', target: 'yao', strength: 3 },
+  { source: 'guiguzi', target: 'pangu', strength: 3 },
+  { source: 'yixing', target: 'pangu', strength: 3 },
+  { source: 'change', target: 'zhubajie', strength: 3 },
+  { source: 'diaochan', target: 'zhubajie', strength: 3 },
+  { source: 'guiguzi', target: 'change', strength: 3 },
+  { source: 'baiqi', target: 'change', strength: 3 },
+  { source: 'gaojianli', target: 'guiguzi', strength: 3 },
+  { source: 'libai', target: 'guiguzi', strength: 3 },
+  { source: 'zhangfei', target: 'lixin', strength: 3 },
+  { source: 'sunbin', target: 'lixin', strength: 3 },
+  { source: 'guiguzi', target: 'shangguanwaner', strength: 3 },
+  { source: 'liubang', target: 'shangguanwaner', strength: 3 },
+  { source: 'baiqi', target: 'yuange', strength: 3 },
+  { source: 'guiguzi', target: 'yuange', strength: 3 },
+  { source: 'jvyoujing', target: 'milaidi', strength: 3 },
+  { source: 'libai', target: 'milaidi', strength: 3 },
+  { source: 'zhongwuyan', target: 'makeboluo', strength: 3 },
+  { source: 'niumo', target: 'makeboluo', strength: 3 },
+  { source: 'houyi', target: 'zhangliang', strength: 3 },
+  { source: 'baiqi', target: 'zhangliang', strength: 3 },
+  { source: 'xiahoudun', target: 'peiqinhu', strength: 3 },
+  { source: 'yingzheng', target: 'peiqinhu', strength: 3 },
+  { source: 'luban7', target: 'yangyuhuan', strength: 3 },
+  { source: 'chengyaojin', target: 'yangyuhuan', strength: 3 },
+  { source: 'baiqi', target: 'gongsunli', strength: 3 },
+  { source: 'zhangfei', target: 'gongsunli', strength: 3 },
+  { source: 'direnjie', target: 'mingshiyin', strength: 3 },
+  { source: 'baiqi', target: 'mingshiyin', strength: 3 },
+  { source: 'zhongkui', target: 'houyi', strength: 3 },
+  { source: 'niumo', target: 'houyi', strength: 3 },
+  { source: 'mengqi', target: 'nvwa', strength: 3 },
+  { source: 'huangzhong', target: 'nvwa', strength: 3 },
+  { source: 'guiguzi', target: 'sulie', strength: 3 },
+  { source: 'zhuangzhou', target: 'sulie', strength: 3 },
+  { source: 'laofuzi', target: 'zhouyu', strength: 3 },
+  { source: 'lvbu', target: 'zhouyu', strength: 3 },
+  { source: 'zhuangzhou', target: 'bailixuance', strength: 3 },
+  { source: 'gaojianli', target: 'bailixuance', strength: 3 },
+  { source: 'lianpo', target: 'bailishouyue', strength: 3 },
+  { source: 'niumo', target: 'bailishouyue', strength: 3 },
+  { source: 'gongbenwuzang', target: 'kai', strength: 3 },
+  { source: 'huamulan', target: 'kai', strength: 3 },
+  { source: 'liubang', target: 'miyue', strength: 3 },
+  { source: 'zhongwuyan', target: 'miyue', strength: 3 },
+  { source: 'luban7', target: 'yase', strength: 3 },
+  { source: 'ake', target: 'yase', strength: 3 },
+  { source: 'luban7', target: 'dunshan', strength: 3 },
+  { source: 'nvwa', target: 'dunshan', strength: 3 },
+  { source: 'guiguzi', target: 'shenmengxi', strength: 3 },
+  { source: 'baiqi', target: 'shenmengxi', strength: 3 },
+  { source: 'caiwenji', target: 'jailuo', strength: 3 },
+  { source: 'taiyizhenren', target: 'jailuo', strength: 3 },
+  { source: 'xiangyu', target: 'simayi', strength: 3 },
+  { source: 'ganjiangmoye', target: 'simayi', strength: 3 },
+  { source: 'nezha', target: 'sunce', strength: 3 },
+  { source: 'niumo', target: 'sunce', strength: 3 },
+  { source: 'zhuangzhou', target: 'ganjiangmoye', strength: 3 },
+  { source: 'zhongwuyan', target: 'ganjiangmoye', strength: 3 },
+  { source: 'niumo', target: 'direnjie', strength: 3 },
+  { source: 'sunbin', target: 'direnjie', strength: 3 },
+  { source: 'taiyizhenren', target: 'liubei', strength: 3 },
+  { source: 'zhangliang', target: 'liubei', strength: 3 },
+  { source: 'zhuangzhou', target: 'ake', strength: 3 },
+  { source: 'mozi', target: 'ake', strength: 3 },
+  { source: 'diaochan', target: 'liubang', strength: 3 },
+  { source: 'gaojianli', target: 'liubang', strength: 3 },
+  { source: 'makeboluo', target: 'donghuangtaiyi', strength: 3 },
+  { source: 'ake', target: 'donghuangtaiyi', strength: 3 },
+  { source: 'direnjie', target: 'daqiao', strength: 3 },
+  { source: 'huamulan', target: 'daqiao', strength: 3 },
+  { source: 'baiqi', target: 'huangzhong', strength: 3 },
+  { source: 'xiangyu', target: 'huangzhong', strength: 3 },
+  { source: 'xiahoudun', target: 'zhugeliang', strength: 3 },
+  { source: 'zhaoyun', target: 'zhugeliang', strength: 3 },
+  { source: 'liubang', target: 'nezha', strength: 3 },
+  { source: 'taiyizhenren', target: 'nezha', strength: 3 },
+  { source: 'makeboluo', target: 'taiyizhenren', strength: 3 },
+  { source: 'liubei', target: 'taiyizhenren', strength: 3 },
+  { source: 'gaojianli', target: 'caiwenji', strength: 3 },
+  { source: 'direnjie', target: 'caiwenji', strength: 3 },
+  { source: 'damo', target: 'yadianna', strength: 3 },
+  { source: 'jvyoujing', target: 'yadianna', strength: 3 },
+  { source: 'gaojianli', target: 'yangjian', strength: 3 },
+  { source: 'libai', target: 'yangjian', strength: 3 },
+  { source: 'liubei', target: 'zhongkui', strength: 3 },
+  { source: 'wangzhaojun', target: 'zhongkui', strength: 3 },
+  { source: 'donghuangtaiyi', target: 'yuji', strength: 3 },
+  { source: 'daji', target: 'yuji', strength: 3 },
+  { source: 'baiqi', target: 'liyuanfang', strength: 3 },
+  { source: 'mozi', target: 'liyuanfang', strength: 3 },
+  { source: 'huangzhong', target: 'zhangfei', strength: 3 },
+  { source: 'houyi', target: 'zhangfei', strength: 3 },
+  { source: 'makeboluo', target: 'niumo', strength: 3 },
+  { source: 'gaojianli', target: 'niumo', strength: 3 },
+  { source: 'zhaoyun', target: 'jvyoujing', strength: 3 },
+  { source: 'yangjian', target: 'jvyoujing', strength: 3 },
+  { source: 'zhongkui', target: 'nakelulu', strength: 3 },
+  { source: 'baiqi', target: 'nakelulu', strength: 3 },
+  { source: 'damo', target: 'buzhihuowu', strength: 3 },
+  { source: 'yuji', target: 'buzhihuowu', strength: 3 },
+  { source: 'zhuangzhou', target: 'huamulan', strength: 3 },
+  { source: 'liubang', target: 'huamulan', strength: 3 },
+  { source: 'gongbenwuzang', target: 'lanlingwang', strength: 3 },
+  { source: 'zhugeliang', target: 'lanlingwang', strength: 3 },
+  { source: 'zhuangzhou', target: 'wangzhaojun', strength: 3 },
+  { source: 'ake', target: 'wangzhaojun', strength: 3 },
+  { source: 'zhaoyun', target: 'hanxin', strength: 3 },
+  { source: 'mozi', target: 'hanxin', strength: 3 },
+  { source: 'zhuangzhou', target: 'luna', strength: 3 },
+  { source: 'sunbin', target: 'luna', strength: 3 },
+  { source: 'huamulan', target: 'chengyaojin', strength: 3 },
+  { source: 'gaojianli', target: 'chengyaojin', strength: 3 },
+  { source: 'zhongkui', target: 'anqila', strength: 3 },
+  { source: 'baiqi', target: 'anqila', strength: 3 },
+  { source: 'zhuangzhou', target: 'guanyu', strength: 3 },
+  { source: 'daqiao', target: 'guanyu', strength: 3 },
+  { source: 'daqiao', target: 'laofuzi', strength: 3 },
+  { source: 'libai', target: 'laofuzi', strength: 3 },
+  { source: 'zhuangzhou', target: 'wuzetian', strength: 3 },
+  { source: 'damo', target: 'wuzetian', strength: 3 },
+  { source: 'luban7', target: 'xiangyu', strength: 3 },
+  { source: 'huamulan', target: 'xiangyu', strength: 3 },
+  { source: 'zhaoyun', target: 'damo', strength: 3 },
+  { source: 'libai', target: 'damo', strength: 3 },
+  { source: 'guiguzi', target: 'libai', strength: 3 },
+  { source: 'huangzhong', target: 'libai', strength: 3 },
+  { source: 'zhuangzhou', target: 'dianwei', strength: 3 },
+  { source: 'sunbin', target: 'dianwei', strength: 3 },
+  { source: 'zhuangzhou', target: 'caocao', strength: 3 },
+  { source: 'sunbin', target: 'caocao', strength: 3 },
+  { source: 'zhangfei', target: 'zhenji', strength: 3 },
+  { source: 'huangzhong', target: 'zhenji', strength: 3 },
+  { source: 'luban7', target: 'xiahoudun', strength: 3 },
+  { source: 'libai', target: 'xiahoudun', strength: 3 },
+  { source: 'wuzetian', target: 'lvbu', strength: 3 },
+  { source: 'baiqi', target: 'lvbu', strength: 3 },
+  { source: 'caiwenji', target: 'bianque', strength: 3 },
+  { source: 'xiangyu', target: 'bianque', strength: 3 },
+  { source: 'makeboluo', target: 'sunbin', strength: 3 },
+  { source: 'gaojianli', target: 'sunbin', strength: 3 },
+  { source: 'yuji', target: 'zhongwuyan', strength: 3 },
+  { source: 'makeboluo', target: 'zhongwuyan', strength: 3 },
+  { source: 'baiqi', target: 'gaojianli', strength: 3 },
+  { source: 'zhuangzhou', target: 'gaojianli', strength: 3 },
+  { source: 'huangzhong', target: 'liushan', strength: 3 },
+  { source: 'gaojianli', target: 'liushan', strength: 3 },
+  { source: 'buzhihuowu', target: 'zhuangzhou', strength: 3 },
+  { source: 'huangzhong', target: 'zhuangzhou', strength: 3 },
+  { source: 'taiyizhenren', target: 'luban7', strength: 3 },
+  { source: 'niumo', target: 'luban7', strength: 3 },
+  { source: 'zhuangzhou', target: 'sunshangxiang', strength: 3 },
+  { source: 'donghuangtaiyi', target: 'sunshangxiang', strength: 3 },
+  { source: 'mozi', target: 'yingzheng', strength: 3 },
+  { source: 'baiqi', target: 'yingzheng', strength: 3 },
+  { source: 'sunwukong', target: 'daji', strength: 3 },
+  { source: 'ake', target: 'daji', strength: 3 },
+  { source: 'guiguzi', target: 'mozi', strength: 3 },
+  { source: 'gongbenwuzang', target: 'mozi', strength: 3 },
+  { source: 'damo', target: 'zhaoyun', strength: 3 },
+  { source: 'gongbenwuzang', target: 'zhaoyun', strength: 3 },
+  { source: 'hanxin', target: 'xiaoqiao', strength: 3 },
+  { source: 'ake', target: 'xiaoqiao', strength: 3 },
+  { source: 'lan', target: 'yalian', strength: 3 },
+  { source: 'yao', target: 'yalian', strength: 3 },
+  { source: 'niumo', target: 'ailin', strength: 3 },
+  { source: 'yao', target: 'ailin', strength: 3 }
 ];
