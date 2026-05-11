@@ -74,7 +74,7 @@ interface LinkDatum extends d3.SimulationLinkDatum<NodeDatum> {
 }
 
 interface CustomMapHero {
-  heroId: OwHeroId;
+  heroId: HeroId;
   reason: string;
 }
 
@@ -391,7 +391,7 @@ const ForceGraph = ({
           source: r.source,
           target: r.target
         }))
-        .filter((item): item is { hero: Hero; strength: CounterStrength; isCustom: boolean; source: OwHeroId; target: OwHeroId } => item.hero !== undefined)
+        .filter((item): item is { hero: Hero; strength: CounterStrength; isCustom: boolean; source: HeroId; target: HeroId } => item.hero !== undefined)
         .sort((a, b) => b.strength - a.strength);
     }
     return getCommonSynergies(selectedHeroes);

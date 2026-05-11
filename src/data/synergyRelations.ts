@@ -2,11 +2,11 @@
 // 配合强度: strength = 3 (核心搭档/Must Pick), 2 (优秀配合/Good Synergy), 1 (良好配合/Decent)
 // 数据来源: https://pvp.qq.com/web201605/herolist.shtml
 
-import type { CounterStrength, OwHeroId } from './heroData';
+import type { CounterStrength, HeroId } from './heroData';
 
 export interface SynergyRelation {
-  source: OwHeroId;
-  target: OwHeroId;
+  source: HeroId;
+  target: HeroId;
   strength?: CounterStrength;
 }
 

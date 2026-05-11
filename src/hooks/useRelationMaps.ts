@@ -1,20 +1,20 @@
-import type { CounterStrength } from '@/data/heroData';
+import type { CounterStrength, HeroId } from '@/data/heroData';
 import { useMemo } from 'react';
 
 /**
  * 关系数据接口 - 本地定义避免循环导入
  */
 interface RelationData {
-  source: string;
-  target: string;
+  source: HeroId;
+  target: HeroId;
   strength: CounterStrength;
   isCustom: boolean;
 }
 
 /** 克制/协同关系输入格式 */
 export type RelationInput = {
-  source: string;
-  target: string;
+  source: HeroId;
+  target: HeroId;
   strength?: CounterStrength;
   isCustom?: boolean;
 };
@@ -55,28 +55,28 @@ export function useRelationMaps(
   /**
    * O(1) 查找克制关系强度，返回 undefined 表示不存在
    */
-  const getCounterStrength = (sourceId: string, targetId: string): CounterStrength | undefined => {
+  const getCounterStrength = (sourceId: HeroId, targetId: HeroId): CounterStrength | undefined => {
     return counterMap.get(`${sourceId}-${targetId}`)?.strength;
   };
 
   /**
    * O(1) 判断克制关系是否存在
    */
-  const hasCounterRelation = (sourceId: string, targetId: string): boolean => {
+  const hasCounterRelation = (sourceId: HeroId, targetId: HeroId): boolean => {
     return counterMap.has(`${sourceId}-${targetId}`);
   };
 
   /**
    * O(1) 查找协同关系强度
    */
-  const getSynergyStrength = (sourceId: string, targetId: string): CounterStrength | undefined => {
+  const getSynergyStrength = (sourceId: HeroId, targetId: HeroId): CounterStrength | undefined => {
     return synergyMap.get(`${sourceId}-${targetId}`)?.strength;
   };
 
   /**
    * O(1) 判断协同关系是否存在
    */
-  const hasSynergyRelation = (sourceId: string, targetId: string): boolean => {
+  const hasSynergyRelation = (sourceId: HeroId, targetId: HeroId): boolean => {
     return synergyMap.has(`${sourceId}-${targetId}`);
   };
 

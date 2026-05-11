@@ -49,7 +49,7 @@ import './App.css';
 const ForceGraph = lazy(() => import('@/components/ForceGraph').then(m => ({ default: m.default })));
 
 interface CustomMapHero {
-  heroId: OwHeroId;
+  heroId: HeroId;
   reason: string;
 }
 
@@ -260,7 +260,7 @@ const [isMapCopied, setIsMapCopied] = useState(false);
 
   const [customMapHeroes, setCustomMapHeroes] = useState<Record<string, CustomMapHero[]>>({});
   const [deletedDefaultHeroes, setDeletedDefaultHeroes] = useState<Record<string, OwHeroId[]>>({});
-  const [newHeroId, setNewHeroId] = useState<OwHeroId | ''>('');
+  const [newHeroId, setNewHeroId] = useState<HeroId | ''>('');
   const [newHeroReason, setNewHeroReason] = useState<string>('');
   const [addingHeroMapId, setAddingHeroMapId] = useState<string | null>(null);
   const addHeroFormRef = useRef<HTMLDivElement>(null);
@@ -286,7 +286,7 @@ const [isMapCopied, setIsMapCopied] = useState(false);
 
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
 
-  const addCustomHero = (mapId: string, heroId: OwHeroId, reason: string) => {
+  const addCustomHero = (mapId: string, heroId: HeroId, reason: string) => {
     if (!heroId.trim()) return;
     setCustomMapHeroes(prev => {
       const updated: Record<string, CustomMapHero[]> = {
@@ -900,7 +900,7 @@ const [isMapCopied, setIsMapCopied] = useState(false);
                               })}
                               {addingHeroMapId === map.id ? (
                                 <div ref={addHeroFormRef} data-prevent-map-toggle className="flex flex-col gap-2 p-3 rounded-lg bg-slate-700/50 border border-cyan-500/30">
-                                  <Select value={newHeroId} onValueChange={(v) => setNewHeroId(v as OwHeroId)}>
+                                  <Select value={newHeroId} onValueChange={(v) => setNewHeroId(v as HeroId)}>
                                     <SelectTrigger className="h-8 bg-slate-800 border-slate-600 text-sm w-full">
                                       <span className={newHeroId ? 'text-white' : 'text-slate-400'}>
                                         {newHeroId ? (language === 'zh' ? getHero(newHeroId)!.name : getHero(newHeroId)!.nameEn) : t('selectHero')}

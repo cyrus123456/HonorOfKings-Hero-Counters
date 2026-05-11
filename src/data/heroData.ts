@@ -1,4 +1,4 @@
-﻿// 王者荣耀英雄数据 - 基于被克制关系数据库 v1 整理
+// 王者荣耀英雄数据 - 基于被克制关系数据库 v1 整理
 
 
 /** 王者荣耀英雄职业类型 - 官方六种职业 */
@@ -1168,8 +1168,10 @@ export const counterRelations: CounterRelation[] = [
 
 
 
+import type { Language } from '@/i18n';
+
 // 获取角色颜色
-export const getRoleColor = (role: string): string => {
+export const getRoleColor = (role: HeroRole): string => {
   switch (role) {
     case 'tank': return '#eab308';
     case 'fighter': return '#ef4444';
@@ -1182,8 +1184,8 @@ export const getRoleColor = (role: string): string => {
 };
 
 // 获取角色名称
-export const getRoleName = (role: string, language: string = 'zh'): string => {
-  const roleNames: Record<string, Record<string, string>> = {
+export const getRoleName = (role: HeroRole, language: Language = 'zh'): string => {
+  const roleNames: Record<HeroRole, Record<Language, string>> = {
     tank: { zh: '坦克', en: 'Tank', ja: 'タンク', ko: '탱커', 'zh-TW': '坦克', es: 'Tanque', fr: 'Tank', de: 'Panzer', pt: 'Tanque', ru: 'Танк', it: 'Carro' },
     fighter: { zh: '战士', en: 'Fighter', ja: 'ウォリアー', ko: '전사', 'zh-TW': '戰士', es: 'Guerrero', fr: 'Guerrier', de: 'Krieger', pt: 'Guerreiro', ru: 'Воин', it: 'Guerriero' },
     assassin: { zh: '刺客', en: 'Assassin', ja: 'アサシン', ko: '암살자', 'zh-TW': '刺客', es: 'Asesino', fr: 'Assassin', de: 'Assassine', pt: 'Assassino', ru: 'Убийца', it: 'Assassino' },
@@ -1195,13 +1197,13 @@ export const getRoleName = (role: string, language: string = 'zh'): string => {
 };
 
 /** 获取多个职业名称（用斜杠分隔） */
-export const getRoleNames = (roles: HeroRole[], language: string = 'zh'): string => {
+export const getRoleNames = (roles: HeroRole[], language: Language = 'zh'): string => {
   const separator = language === 'zh' || language === 'zh-TW' || language === 'ja' ? '/' : '/';
   return roles.map(r => getRoleName(r, language)).join(separator);
 };
 
 // 获取角色英文名称
-export const getRoleNameEn = (role: string): string => {
+export const getRoleNameEn = (role: HeroRole): string => {
   switch (role) {
     case 'tank': return 'Tank';
     case 'fighter': return 'fighter';
@@ -1214,7 +1216,7 @@ export const getRoleNameEn = (role: string): string => {
 };
 
 // 获取英雄名称（根据语言）
-export const getHeroName = (hero: Hero | undefined | null, language: string = 'zh'): string => {
+export const getHeroName = (hero: Hero | undefined | null, language: Language = 'zh'): string => {
   if (!hero) return '';
   return language === 'zh' ? hero.name : hero.nameEn;
 };
