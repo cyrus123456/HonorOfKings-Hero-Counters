@@ -2577,7 +2577,7 @@ const ForceGraph = ({
       <svg ref={svgRef} className="w-full h-full cursor-move force-graph-container" style={{ background: 'transparent' }} onWheel={(e) => e.stopPropagation()} onMouseDown={(e) => { if (e.button === 1) { e.preventDefault(); } }} />
 
       {/* 历史记录按钮 - 英雄克制面板左下角外侧 */}
-      <div className="absolute bottom-24 right-[25.625rem] z-10 flex flex-row gap-2 pointer-events-auto">
+      <div className="absolute bottom-6 right-[40.5rem] z-10 flex flex-row gap-2 pointer-events-auto">
         <Popover open={isHistoryOpen} onOpenChange={setIsHistoryOpen}>
           <PopoverTrigger asChild>
             <Button
