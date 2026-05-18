@@ -7,8 +7,8 @@ An interactive visualization application built with React + TypeScript + Vite to
 
 ## Live Demo
 
-- **GitHub Pages**: [View Deployed Site](https://cyrus123456.github.io/HonorOfKings-Hero-Counters/)
-- **Cloudflare Workers**: [View Deployed Site](https://honorofkingsherocounters.b8c72dzp5t.workers.dev/)
+- **GitHub Pages**: [https://cyrus123456.github.io/HonorOfKings-Hero-Counters/](https://cyrus123456.github.io/HonorOfKings-Hero-Counters/)
+- **Cloudflare Workers(国内可访问)**: [https://honorofkings-hero-counters.pages.dev/](https://honorofkings-hero-counters.pages.dev/)
 
 You can access the link above directly to experience the full hero counter visualization without local installation!
 
