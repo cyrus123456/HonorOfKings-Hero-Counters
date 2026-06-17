@@ -1858,7 +1858,7 @@ const ForceGraph = ({
                                 }}
                               >
                                 <Plus className="w-4 h-4" />
-                                <span className="text-xs">{t('addCustomCounter')}</span>
+                                <span className="text-xs">{t('addCounteredByRelation')}</span>
                               </button>
                             ) : (
                               <div ref={addRelationFormRef} data-prevent-map-toggle className="flex flex-col gap-2 p-3 rounded-lg bg-slate-700/50 border border-red-500/30">
