@@ -472,11 +472,16 @@ const [isMapCopied, setIsMapCopied] = useState(false);
       result = result.filter(m => m.type === activeMapType);
     }
     if (mapSearch) {
-      const search = mapSearch.toLowerCase();
-      result = result.filter(m => 
-        m.name.toLowerCase().includes(search) || 
-        m.nameEn.toLowerCase().includes(search)
-      );
+      const search = mapSearch.toLowerCase().replace(/\s/g, '');
+      result = result.filter(m => {
+        if (m.name.toLowerCase().includes(search) || m.nameEn.toLowerCase().includes(search)) return true;
+        if (m.pinyin) {
+          const pinyinNoSpace = m.pinyin.replace(/\s/g, '');
+          const initials = m.pinyin.split(/\s+/).map(s => s[0]).join('');
+          return pinyinNoSpace.includes(search) || initials.includes(search);
+        }
+        return false;
+      });
     }
     return result;
   }, [mapSearch, activeMapType]);
