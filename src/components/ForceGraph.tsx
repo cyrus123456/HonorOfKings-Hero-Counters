@@ -2655,12 +2655,12 @@ const ForceGraph = ({
           <PopoverTrigger asChild>
             <Button
               variant="secondary"
-              size="icon"
-              className="bg-slate-800/60 backdrop-blur-md hover:bg-slate-700 border border-slate-700 shadow-lg w-9 h-9"
+              className="bg-slate-800/60 backdrop-blur-md hover:bg-slate-700 border border-slate-700 shadow-lg h-9 gap-2 px-3"
               disabled={heroSnapshots.length === 0}
               onMouseEnter={() => setIsHistoryOpen(true)}
             >
               <History className="w-4 h-4 text-yellow-400" />
+              <span className="text-xs text-slate-200">{t('historySnapshotShort')}</span>
             </Button>
           </PopoverTrigger>
           <PopoverContent
