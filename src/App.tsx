@@ -256,7 +256,10 @@ function AppContent() {
   const [activeMapType, setActiveMapType] = useState<string>('all');
 const [isMapCopied, setIsMapCopied] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(true);
-  const [isDrawerPinnedOpen, setIsDrawerPinnedOpen] = useState(true);
+  const [isDrawerPinnedOpen, setIsDrawerPinnedOpen] = useState<boolean>(() => {
+    const stored = localStorage.getItem('hok-drawer-pinned-open');
+    return stored !== null ? stored === 'true' : true;
+  });
   const [hoverTimer, setHoverTimer] = useState<ReturnType<typeof setTimeout> | null>(null);
 
   const [customMapHeroes, setCustomMapHeroes] = useState<Record<string, CustomMapHero[]>>({});
@@ -268,13 +271,27 @@ const [isMapCopied, setIsMapCopied] = useState(false);
 
   const handleDrawerMouseEnter = () => {
     if (!isDrawerPinnedOpen) {
-      setIsDrawerOpen(true);
+      if (drawerHoverTimerRef.current) {
+        clearTimeout(drawerHoverTimerRef.current);
+        drawerHoverTimerRef.current = null;
+      }
+      drawerHoverTimerRef.current = setTimeout(() => {
+        setIsDrawerOpen(true);
+        drawerHoverTimerRef.current = null;
+      }, 150);
     }
   };
 
   const handleDrawerMouseLeave = () => {
     if (!isDrawerPinnedOpen) {
-      setIsDrawerOpen(false);
+      if (drawerHoverTimerRef.current) {
+        clearTimeout(drawerHoverTimerRef.current);
+        drawerHoverTimerRef.current = null;
+      }
+      drawerHoverTimerRef.current = setTimeout(() => {
+        setIsDrawerOpen(false);
+        drawerHoverTimerRef.current = null;
+      }, 150);
     }
   };
 
@@ -288,6 +305,10 @@ const [isMapCopied, setIsMapCopied] = useState(false);
       }
     }
   }, [selectedMap]);
+
+  useEffect(() => {
+    localStorage.setItem('hok-drawer-pinned-open', String(isDrawerPinnedOpen));
+  }, [isDrawerPinnedOpen]);
 
   useEffect(() => {
     const loaded = loadCustomMapHeroes();
