@@ -2,6 +2,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from "@/components/ui/input";
+import { cn } from '@/lib/utils';
 import {
   Popover,
   PopoverContent,
@@ -33,6 +34,7 @@ import { useI18n } from '@/i18n';
 import * as d3 from 'd3';
 import {
   Check,
+  ChevronLeft,
   ChevronRight,
   Copy,
   FileText,
@@ -182,6 +184,9 @@ const ForceGraph = ({
   const [isHistoryOpen, setIsHistoryOpen] = useState(false);
   const [isDetailOpen, setIsDetailOpen] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
+  const [isCounterPanelCollapsed, setIsCounterPanelCollapsed] = useState(false);
+  const [isCounterPanelPinnedCollapsed, setIsCounterPanelPinnedCollapsed] = useState(false);
+  const [isHeroStatsOpen, setIsHeroStatsOpen] = useState(false);
   const debouncedSearchQuery = useDebounce(searchQuery, 300);
   const isMultiSelect = selectedHeroes.length > 1;
 
@@ -1605,6 +1610,19 @@ const ForceGraph = ({
       .translate(w * (1 - MOBILE_INITIAL_SCALE) / 2, h * (1 - MOBILE_INITIAL_SCALE) / 2)
       .scale(MOBILE_INITIAL_SCALE);
   }, [isTouchDevice]);
+
+  const handleCounterPanelMouseEnter = () => {
+    if (isCounterPanelPinnedCollapsed) {
+      setIsCounterPanelCollapsed(false);
+    }
+  };
+
+  const handleCounterPanelMouseLeave = () => {
+    if (isCounterPanelPinnedCollapsed) {
+      setIsCounterPanelCollapsed(true);
+    }
+  };
+
   const handleZoomIn = () => svgRef.current && d3.select(svgRef.current).transition().duration(300).call(zoomRef.current!.scaleBy, 1.3);
   const handleZoomOut = () => svgRef.current && d3.select(svgRef.current).transition().duration(300).call(zoomRef.current!.scaleBy, 0.7);
   const handleReset = () => { if (svgRef.current) d3.select(svgRef.current).transition().duration(500).call(zoomRef.current!.transform, getInitialZoomTransform()); onHeroSelect([]); };
@@ -1712,14 +1730,35 @@ const ForceGraph = ({
       </div>
 
       {/* 英雄详情面板 */}
-      <div className={`absolute z-10 flex flex-col transition-transform duration-300 ease-in-out ${isDetailOpen ? 'translate-x-0' : 'translate-x-[calc(100%-5rem)]'}`} style={{ top: '1rem', right: '1rem', bottom: '1rem' }}>
-        <button
-          onClick={() => setIsDetailOpen(!isDetailOpen)}
-          className="absolute -left-[2.375rem] top-1/2 -translate-y-1/2 z-20 w-7 h-14 bg-slate-800/60 backdrop-blur-md hover:bg-slate-700 border border-slate-700 rounded-lg flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-200 group pointer-events-auto"
+      <div className={cn(
+        "absolute z-10 w-96 flex flex-col transition-transform duration-300",
+        isCounterPanelCollapsed ? "translate-x-80" : "translate-x-0"
+      )} style={{ top: '1rem', right: '1rem', bottom: '1rem' }}>
+        {/* 折叠按钮 - 放在面板左侧外面 */}
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <button
+              onClick={() => {
+                const next = !isCounterPanelPinnedCollapsed;
+                setIsCounterPanelPinnedCollapsed(next);
+                setIsCounterPanelCollapsed(next);
+              }}
+              onMouseEnter={handleCounterPanelMouseEnter}
+              onMouseLeave={handleCounterPanelMouseLeave}
+              className="absolute -left-[2.375rem] top-1/2 -translate-y-1/2 z-20 w-7 h-14 bg-slate-800/60 backdrop-blur-md hover:bg-slate-700 border border-slate-700 rounded-lg flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-200 group pointer-events-auto"
+            >
+              <ChevronLeft className={`w-4 h-4 text-slate-300 group-hover:text-cyan-400 transition-transform duration-200 ${isCounterPanelCollapsed ? '' : 'rotate-180'}`} />
+            </button>
+          </TooltipTrigger>
+          <TooltipContent side="left">
+            <p>{isCounterPanelPinnedCollapsed ? '展开面板' : '收起面板'}</p>
+          </TooltipContent>
+        </Tooltip>
+        <div
+          className="flex-1 overflow-hidden pointer-events-auto h-full relative"
+          onMouseEnter={handleCounterPanelMouseEnter}
+          onMouseLeave={handleCounterPanelMouseLeave}
         >
-          <ChevronRight className={`w-4 h-4 text-slate-300 group-hover:text-cyan-400 transition-transform duration-200 ${isDetailOpen ? '' : 'rotate-180'}`} />
-        </button>
-        <div className="w-96 overflow-hidden pointer-events-auto h-full">
           <Card className="p-3 bg-slate-800/60 border-slate-700 backdrop-blur-md shadow-xl h-full flex flex-col gap-1">
             <div className="flex items-center gap-2 mb-3 pb-2 border-b border-slate-700/50 flex-shrink-0">
               <ShieldAlert className="w-5 h-5 text-cyan-400 flex-shrink-0" />
