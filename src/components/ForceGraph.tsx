@@ -1,3 +1,4 @@
+import React from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -35,7 +36,6 @@ import * as d3 from 'd3';
 import {
   Check,
   ChevronLeft,
-  ChevronRight,
   Copy,
   FileText,
   HelpCircle,
@@ -183,7 +183,6 @@ const ForceGraph = ({
   const [isIntroOpen, setIsIntroOpen] = useState(false);
   const [heroSnapshots, setHeroSnapshots] = useState<{ id: string; heroIds: string[]; timestamp: number }[]>([]);
   const [isHistoryOpen, setIsHistoryOpen] = useState(false);
-  const [isDetailOpen, setIsDetailOpen] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [isCounterPanelCollapsed, setIsCounterPanelCollapsed] = useState<boolean>(() => {
     const stored = localStorage.getItem('hok-counter-panel-pinned-collapsed');
@@ -194,7 +193,6 @@ const ForceGraph = ({
     const stored = localStorage.getItem('hok-counter-panel-pinned-collapsed');
     return stored !== null ? stored === 'true' : false;
   });
-  const [isHeroStatsOpen, setIsHeroStatsOpen] = useState(false);
   const debouncedSearchQuery = useDebounce(searchQuery, 300);
   const isMultiSelect = selectedHeroes.length > 1;
 

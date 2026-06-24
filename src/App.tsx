@@ -261,6 +261,7 @@ const [isMapCopied, setIsMapCopied] = useState(false);
     const stored = localStorage.getItem('hok-drawer-pinned-open');
     return stored !== null ? stored === 'true' : true;
   });
+  const drawerHoverTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [hoverTimer, setHoverTimer] = useState<ReturnType<typeof setTimeout> | null>(null);
 
   const [customMapHeroes, setCustomMapHeroes] = useState<Record<string, CustomMapHero[]>>({});
