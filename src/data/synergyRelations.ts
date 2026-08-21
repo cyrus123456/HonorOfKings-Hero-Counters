@@ -267,5 +267,10 @@ export const synergyRelations: SynergyRelation[] = [
   { source: 'lan', target: 'yalian', strength: 3 },
   { source: 'yao', target: 'yalian', strength: 3 },
   { source: 'niumo', target: 'ailin', strength: 3 },
-  { source: 'yao', target: 'ailin', strength: 3 }
+  { source: 'yao', target: 'ailin', strength: 3 },
+  // 新英雄最佳搭档
+  { source: 'mingshiyin', target: 'luyana', strength: 3 },
+  { source: 'niumo', target: 'luyana', strength: 3 },
+  { source: 'yao', target: 'xinmoliuer', strength: 3 },
+  { source: 'donghuangtaiyi', target: 'xinmoliuer', strength: 3 }
 ];

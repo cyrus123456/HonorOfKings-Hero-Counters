@@ -53,7 +53,9 @@ export type HeroId =
   | 'yangyuhuan' | 'mingshiyin' | 'nvwa' | 'zhouyu' | 'miyue' | 'shenmengxi' | 'simayi'
   | 'ganjiangmoye' | 'liubang' | 'donghuangtaiyi' | 'daqiao' | 'zhugeliang'
   | 'buzhihuowu' | 'wangzhaojun' | 'luna' | 'anqila' | 'diaochan' | 'wuzetian'
-  | 'zhenji' | 'bianque' | 'sunbin' | 'gaojianli' | 'yingzheng' | 'daji' | 'mozi' | 'xiaoqiao';
+  | 'zhenji' | 'bianque' | 'sunbin' | 'gaojianli' | 'yingzheng' | 'daji' | 'mozi' | 'xiaoqiao'
+  // 新英雄
+  | 'luyana' | 'xinmoliuer';
 
 /** 守望先锋英雄ID（包含王者荣耀） */
 export type OwHeroId = HeroId
@@ -112,6 +114,10 @@ const heroImages: Record<OwHeroId, string> = {
   zhaoyun: `https://game.gtimg.cn/images/yxzj/img201606/heroimg/107/107.jpg`,             // 赵云 107
   mozi: `https://game.gtimg.cn/images/yxzj/img201606/heroimg/108/108.jpg`,               // 墨子 108
   liubang: `https://game.gtimg.cn/images/yxzj/img201606/heroimg/149/149.jpg`,            // 刘邦 149
+
+  // ========== 新英雄 ==========
+  luyana: `https://game.gtimg.cn/images/yxzj/img201606/heroimg/547/547.jpg`,             // 卢雅那 547
+  xinmoliuer: `https://game.gtimg.cn/images/yxzj/img201606/heroimg/549/549.jpg`,          // 心魔六耳 549
 
   // ========== 辅助（游走）- Support ==========
   dunshan: `https://game.gtimg.cn/images/yxzj/img201606/heroimg/509/509.jpg`,            // 盾山 509
@@ -380,6 +386,10 @@ export const heroes: Hero[] = [
   { id: 'ying', name: '影', nameEn: 'Ying', pinyin: 'ying', role: ['fighter'], color: roleColors, image: heroImages.ying },
   { id: 'yunying', name: '云缨', nameEn: 'Yun Ying', pinyin: 'yun ying', role: ['fighter', 'assassin'], color: roleColors, image: heroImages.yunying },
   { id: 'yuanliuzhizi_tank', name: '元流之子(坦克)', nameEn: 'Source Child (Tank)', pinyin: 'yuan liu zhi zi tan ke', role: ['fighter', 'tank'], color: roleColors, image: heroImages.yuanliuzhizi_tank },
+
+  // ========== 新英雄 ==========
+  { id: 'luyana', name: '卢雅那', nameEn: 'Luyana', pinyin: 'lu ya na', role: ['marksman'], color: roleColors, image: heroImages.luyana },
+  { id: 'xinmoliuer', name: '心魔六耳', nameEn: 'Xinmo Liuer', pinyin: 'xin mo liu er', role: ['assassin', 'fighter'], color: roleColors, image: heroImages.xinmoliuer },
 ];
 
 // ============================================================
@@ -1148,7 +1158,18 @@ export const counterRelations: CounterRelation[] = [
   { source: 'ailin', target: 'makeboluo', strength: 3 },
   { source: 'ailin', target: 'yuji', strength: 3 },
   { source: 'jailuo', target: 'ailin', strength: 3 },
-  { source: 'houyi', target: 'ailin', strength: 3 }
+  { source: 'houyi', target: 'ailin', strength: 3 },
+  // ========== 新英雄克制关系 ==========
+  // 卢雅那
+  { source: 'luyana', target: 'yingzheng', strength: 3 },
+  { source: 'luyana', target: 'houyi', strength: 3 },
+  { source: 'ailin', target: 'luyana', strength: 3 },
+  { source: 'buzhihuowu', target: 'luyana', strength: 3 },
+  // 心魔六耳
+  { source: 'xinmoliuer', target: 'houyi', strength: 3 },
+  { source: 'xinmoliuer', target: 'ganjiangmoye', strength: 3 },
+  { source: 'jinchan', target: 'xinmoliuer', strength: 3 },
+  { source: 'kai', target: 'xinmoliuer', strength: 3 }
 ];
 
 
